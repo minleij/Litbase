@@ -1,0 +1,88 @@
+{
+  "article_id": "fortmann_2013_supervisory_guide_uav_swarm",
+  "citation": {
+    "authors": "Florian Fortmann",
+    "year": 2013,
+    "title": "SA-Based Guidance to Aid UAV Swarm Supervisory Control: What do Experts Say?",
+    "source_file": "articles/Fortmann_2013.md"
+  },
+  "extraction_metadata": {
+    "date_extracted": "2026-07-10",
+    "codebook_versions": {
+      "study_type": "0.3",
+      "task_environment": "0.8"
+    },
+    "model": "claude-sonnet-5"
+  },
+  "study_type": {
+    "primary": "User Study",
+    "secondary": "System/Architecture Paper",
+    "sub_attributes": {
+      "setting": "Simulated/Remote (incl. VR)",
+      "measured_constructs": ["Situation Awareness (SA)", "Workload"],
+      "modality_flags": []
+    },
+    "justification": "Three Subject Matter Experts each performed a real supervisory-control task with and without the prototype active, rating SA/workload (SART-3) and giving interview feedback — real, measured (if small-N) human data that makes User Study Primary. The article also presents a named, generalizable attention-assistance architecture (Supervisory Guide, its six-step SA-gap detection/elimination model) as a comparably-weighted contribution, warranting System/Architecture Paper as Secondary."
+  },
+  "summary": {
+    "template": "user_study",
+    "task": "Each of three SME participants individually supervised a simulated swarm of three highly autonomous UAVs across two 20-minute fire-fighting scenarios (extinguishing fires in an area inaccessible to human firefighters) via a 2-D map HMI. At random times, participants had to manually handle two event types: UAV malfunctions (detect and click 'Repair UAV') and airspace intruders (classify as civil vs. firefighting aircraft, then either 'Allocate Target' to a fire source or 'Detour Flight'); UAV task selection (loading/unloading water) was fully autonomous and not operator-controllable. One scenario ran with the Supervisory Guide attention-guidance system active, the other deactivated (control condition).",
+    "control": "Participants issued discrete point-and-click commands per detected event (repair, allocate-target, detour-flight); there was no continuous or navigational control over the UAVs, and UAV task selection could not be influenced by the operator at all. In the experimental condition, Supervisory Guide additionally used a head-mounted eye tracker to infer the operator's real-time Level-1 situation awareness from gaze, compare it against a formal objective situation model, and highlight information objects (green/yellow/red) associated with detected SA-gaps to guide the operator's visual attention.",
+    "participants": "Three Subject Matter Experts, one each from human factors/safety-critical systems research, usability engineering/interactive HMI research, and UAV manufacturing/aerospace engineering; each completed one ~1-hour individual session.",
+    "results": "SART-3 self-ratings (descriptive only, given n=3) suggested Supervisory Guide increased perceived mental demand (M=2.3 with vs. M=4 without, on a 1='strongly agree' to 5='strongly disagree' scale) and decreased perceived spare capacity ('could have managed more UAVs': M=1.7 without vs. M=2 with), but improved perceived ability to keep track of the situation (M=1.3 with vs. M=2.3 without). All three SMEs agreed in post-session interviews that SA-based visual guidance is a promising and useful concept meriting further research.",
+    "issues": "With only three participants the authors themselves caution the SART results cannot support a strong statistical claim. The head-mounted eye tracker was reported as uncomfortable and potentially distracting, and was initially an 'unpleasant feeling,' though participants said they adjusted over time. Poor eye-tracker calibration was flagged as a trust risk (a potential 'cry-wolf' false-alarm effect). The three-colour (red/yellow/green) criticality highlighting was criticized as inaccessible to colour-blind users (red/green indistinguishable by shape alone) and as visually cluttering the display with unnecessary 'safe' (green) markers. Fast transitions between criticality levels were reported as increasing perceived workload.",
+    "recommendations": "Replace the head-mounted eye tracker with a screen-based eye-tracking system to improve comfort and reduce distraction. Invest in reliable, low-effort eye-tracker calibration, since calibration quality directly affects user trust and false-alarm risk. Redesign the visual cueing scheme: drop unnecessary 'safe' (green) highlighting to reduce clutter, colourize information icons directly rather than surrounding rectangles, and consider halo effects instead of solid colour blocks to increase alert salience without increasing perceived workload, while also addressing colour-blindness accessibility. Tune criticality-transition thresholds to reduce perceived workload from overly fast state changes. Proceed to a properly powered user study with the target user group to formally investigate SA effects, and monitor eye-tracking hardware cost as a driver of commercial viability.",
+    "autonomous_capabilities": "The three simulated UAVs are 'highly automated and autonomous,' independently selecting and executing their own fire-fighting tasks (traveling to load water at a water source, unloading it at a fire source, and periodically returning to base to recharge) with no operator input into task selection. Supervisory Guide itself autonomously and continuously infers the operator's subjective situation awareness from real-time eye-tracking data, compares it against a formal objective situation model, computes per-information-element SA-gap criticality, and adapts the HMI (colour-coded highlighting) to guide the operator's attention to detected gaps."
+  },
+  "classification": {
+    "task_environment_v0.8": {
+      "task_object_spatiotemporal_dynamics": [
+        { "code": "Not Applicable", "justification": "UAV malfunction events concern the UAV's own internal status rather than an external task-object, so per the codebook's own rule this dimension is Not Applicable whenever Monitoring/Maintenance Task applies.", "condition": "UAV malfunction events" },
+        { "code": "Moving Task Object", "justification": "Intruder aircraft (civil or firefighting) fly into and through the mission area at random times and must be classified and, in the civil case, actively redirected in flight ('Detour Flight'), indicating an ongoing, trackable, translating entity rather than a single static one.", "condition": "airspace intruders" }
+      ],
+      "behavioral_relation_to_task_object": [
+        { "code": "Monitoring/Maintenance Task", "justification": "Operators must detect and resolve a UAV's own malfunction (an internal-status event), the codebook's own source example for this code.", "condition": "UAV malfunction events" },
+        { "code": "Unclear / Candidate New Code", "justification": "Classifying a newly-detected intruder aircraft and then either integrating it into the mission ('Allocate Target' for a firefighting aircraft) or excluding it ('Detour Flight' for a civil aircraft) does not cleanly fit Avoidance (no stated negative consequence for contact), Search (the intruder's presence is already flagged, not hidden/undiscovered), Engagement (no decisive/neutralizing action), or Defend/Block (no adversarial-agent-vs-valued-asset framing).", "condition": "airspace intruders" }
+      ],
+      "team_size": [
+        { "code": "Single-human - Multi-robot", "justification": "Each SME individually supervises a swarm of three UAVs in a session.", "condition": null }
+      ],
+      "team_composition": [
+        { "code": "Homogeneous", "justification": "The three UAVs are identical in role, all performing the same water-load/unload fire-fighting task.", "condition": "robot side" },
+        { "code": "Not Applicable", "justification": "Each session involves a single operator working alone, so human-side composition does not apply.", "condition": "human side" }
+      ],
+      "interaction_model": [
+        { "code": "One-to-many", "justification": "A single operator handles malfunction and intruder events arising across all three UAVs through one shared map-based HMI.", "condition": null }
+      ],
+      "interaction_directness": [
+        { "code": "Direct", "justification": "All operator actions (repair, allocate-target, detour-flight) are explicit clicks addressed to a specific UAV or aircraft icon and command button.", "condition": null }
+      ],
+      "communication_proximity": [
+        { "code": "Remote", "justification": "The operator interacts entirely through a screen-based 2-D map HMI, with no physical co-location with the (simulated) UAVs.", "condition": null }
+      ],
+      "coordination_architecture": [
+        { "code": "Not Described", "justification": "Multiple UAVs are present and must jointly decide who loads/unloads water where, but the article states only that task selection is autonomous and operator-uninfluenceable, without describing the underlying coordination mechanism (leader-based, distributed, etc.) among the three UAVs.", "condition": null }
+      ],
+      "computational_characteristics": [
+        { "code": "Not Described", "justification": "The article states UAV task selection is 'highly automated and autonomous' and not operator-influenceable, but does not name or describe the underlying algorithm governing how each UAV's motion/task is computed.", "condition": null },
+        { "code": "Unclear / Candidate New Code", "justification": "Supervisory Guide's own mechanism (threshold-based comparison of subjective vs. objective situation-model instances, driving colour-coded HMI cueing) is a computational mechanism directed at guiding the human operator's own attention, not at computing a robot's motion (8.1-8.5) or robot-to-task assignment (8.6) — the same kind of operator-directed-computation gap flagged in jo_2025_awac_mhmr_teams and cummings_2008_mauve_controller_capacity.", "condition": "Supervisory Guide's own SA-gap-detection/guidance mechanism" }
+      ],
+      "human_involvement_level": [
+        { "code": "Human-on-the-loop (HOnL)", "justification": "UAV fire-fighting task execution delivers its output (fires extinguished) without needing operator input — the operator cannot even influence task selection — while still being visually monitored via the HMI.", "condition": "autonomous UAV fire-fighting/task-selection function" },
+        { "code": "Human-in-the-loop (HInL)", "justification": "Malfunction resolution and intruder classification/response explicitly require the operator to manually detect and act ('had to be handled manually'); the function does not proceed without this human intervention.", "condition": "malfunction and intruder handling" }
+      ],
+      "level_of_human_control_abstraction": [
+        { "code": "Goal-Oriented (LHCA 4)", "justification": "Each operator action is a single discrete directive toward a specific goal (repair this UAV, allocate this aircraft to this fire, detour this aircraft) that the system then autonomously executes in full, with the operator's role limited to issuing the next directive and monitoring for further events.", "condition": null }
+      ],
+      "operational_domain": [
+        { "code": "Air", "justification": "Both the managed swarm (UAVs) and the task-relevant intruders (aircraft) operate in the air domain.", "condition": null }
+      ]
+    }
+  },
+  "flags": [
+    { "dimension": "task_environment_v0.8 / behavioral_relation_to_task_object", "type": "Unclear / Candidate New Code", "note": "Classifying and then integrating ('Allocate Target') or excluding ('Detour Flight') a newly-detected intruder aircraft does not fit any of the six existing behavioral-relation codes.", "proposed_code": "Intruder Classification & Deconfliction Task — classifying a newly-detected non-mission agent and taking an integrative (task-assign) or exclusionary (reroute/detour) action based on that classification, distinct from Avoidance, Engagement, and Defend/Block." },
+    { "dimension": "task_environment_v0.8 / coordination_architecture", "type": "Not Described", "note": "The mechanism by which the three UAVs jointly decide who services which fire source is not described beyond 'autonomous.'" },
+    { "dimension": "task_environment_v0.8 / computational_characteristics", "type": "Not Described", "note": "No specific algorithm is named for how UAV task selection/motion is computed." },
+    { "dimension": "task_environment_v0.8 / computational_characteristics", "type": "Unclear / Candidate New Code", "note": "Supervisory Guide's threshold-based SA-gap detection and HMI-cueing mechanism targets the human operator's attention, not robot control, echoing a recurring gap in Section 8's scope seen in other corpus articles.", "proposed_code": "See cummings_2008_mauve_controller_capacity and jo_2025_awac_mhmr_teams flags for the same proposed 'operator-directed computation' gap." }
+  ]
+}

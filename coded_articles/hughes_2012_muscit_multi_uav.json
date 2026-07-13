@@ -1,0 +1,179 @@
+{
+  "article_id": "hughes_2012_muscit_multi_uav",
+  "citation": {
+    "authors": "Hughes, T. C., Flach, J. K., Squire, M. P., Whalen, J., Zimmer, D. J., Patzek, M. J., & Miller, B. A.",
+    "year": 2012,
+    "title": "Multi-UAV Supervisory Control Interface Technology (MUSCIT)",
+    "source_file": "articles/MUSCIT_Hughes_2012.md"
+  },
+  "extraction_metadata": {
+    "date_extracted": "2026-07-10",
+    "codebook_versions": {
+      "study_type": "0.2",
+      "task_environment": "0.8"
+    },
+    "model": "claude-sonnet-5",
+    "notes": "AFRL Spiral 3 report combining a lab simulation study (8 participants, formal 2x2 design) and a real-hardware flight test (6 participants, 2 real UAVs, descriptive statistics only) — both settings (Lab and Field) are coded, following the same dual-setting approach used for Williamson et al. (2023)'s FX4/FX6 field experiments earlier this session. Re-coded 2026-07-10 against Task-Environment v0.8: this article is the codebook's own cited source example for the new Pursuit Task (4.4) code (HVT/squirter tracking); the overwatch/distractor/IED search behaviors now map onto Search Task (4.2). Both replace the original Unclear / Candidate New Code flags."
+  },
+  "study_type": {
+    "primary": "User Study",
+    "secondary": "System/Architecture Paper",
+    "sub_attributes": {
+      "setting": "Lab",
+      "measured_constructs": ["Performance", "Workload", "Situation Awareness (SA)"],
+      "modality_flags": []
+    },
+    "justification": "Formal within-subjects lab simulation testing (8 participants; NASA-TLX, China Lake SA, extensive performance metrics) plus a complementary real-hardware flight test (6 participants) constitute the article's central empirical contribution, so User Study is Primary; the Vigilant Spirit Control Station enhancements (Sensor Slaved mode, integrated auto-tracker) are described as generalizable control-station technology and are a comparably significant contribution, so System/Architecture Paper is Secondary."
+  },
+  "summary": {
+    "template": "user_study",
+    "task": "Single or dual-operator crews performed a realistic special-operations RSTA mission ('Operation LOOKOUT/OVERLOOK') using the Vigilant Spirit Control Station (VSCS) to supervise 2 or 4 UAVs (simulation) or 2 real UAVs (flight test): maintaining overwatch on two high-value-target compounds, dynamically tracking HVTs as they traveled to a rendezvous, responding to a radio-cued 'forced distractor' search task and (simulation only) an IED attack, and tracking fleeing personnel ('squirters') during a simulated compound assault.",
+    "control": "Operators used VSCS's map/sensor/vehicle-management displays, with vehicles placed in autonomous loiter and either a 'Loiter Slave' mode (sensor centers on the vehicle's loiter point) or a 'Sensor Slaved' mode (the vehicle's loiter position instead continuously updates to keep it positioned for the sensor's current view — particularly useful for tracking moving targets), plus an automatic pixel-processing target tracker that could steer the sensor to hold a designated target in view with the operator largely 'hands off' once engaged. In the 2-operator condition, participants freely divided vehicle/sensor responsibilities and had to explicitly request and be granted control of a given vehicle/sensor from their partner.",
+    "participants": "Simulation: 8 individuals in a 2 (1 vs. 2 operators) x 2 (2 vs. 4 UAVs) within-subjects design, each completing 4 ~45-minute trials (~8 hours total per participant including training/debrief). Flight test: 6 individuals (2 experienced sensor operators from the simulation study plus 4 additional AFRL personnel with piloting/UAV-development backgrounds) at Camp Atterbury, Indiana, each completing a 1-operator and a 2-operator trial (~6 hours total) with 2 real MLB BAT 3 UAVs; flight-test data were analyzed only descriptively due to the small number of runs and uncontrolled real-world variability.",
+    "results": "In simulation, a 2x2 repeated-measures MANOVA found no significant main effects or interaction of operator count or UAV count on core performance measures (HVT tracking coverage, forced-distractor response time, IED response times, squirter tracking), though descriptive trends showed more UAVs slowed the forced-distractor task, 2-operator/4-UAV crews responded fastest to the IED event, and squirter-tracking coverage was driven mainly by UAV count rather than operator count; reported NASA-TLX workload and (poorer) China Lake SA were both worst in the 2-operator/2-UAV condition. In the flight test, descriptive comparisons favored the 2-operator crew on every reported measure: higher HVT tracking coverage for both compounds, an 80-second-faster forced-distractor response, better squirter-tracking coverage, substantially lower reported workload (48 vs. 80 on NASA-TLX), and better self-rated SA.",
+    "issues": "HVT tracking coverage was consistently much lower for one of the two compounds (Steelers) than the other even in the best-performing 2-operator flight-test condition, an unexplained asymmetry. Statistical power was limited in both sub-studies (8 participants in simulation, only 6 in the flight test, with flight-test data analyzed descriptively only). Earlier program spirals (referenced but not detailed here) found operators' ability to execute sound strategies was often limited by incomplete familiarity with the control station's mechanics rather than poor judgment, and that unreliable/simulated automation actively degraded rather than helped performance. The auto-tracker's variable reliability required operators to judge when to revert to manual tracking, an added cognitive burden not separately quantified.",
+    "recommendations": "Continue integrating vehicle and sensor control into a single coupled function (Sensor Slaved mode) rather than treating them as separate pilot/sensor-operator roles, since this was rated the most desirable feature. Pair automatic target tracking with Sensor Slaved mode to let operators go largely 'hands off' during dynamic tracking. Ensure any introduced automation is genuinely reliable, since unreliable automation in earlier spirals increased operator difficulty rather than reducing it. Prioritize thorough operator training/familiarization with control-station mechanics before assessing capacity limits. Continue investigating the trade-off between the overhead of managing additional vehicles and the value of additional sensor resources, since more vehicles sometimes helped (squirter tracking, IED response) and sometimes hurt (forced-distractor response time).",
+    "autonomous_capabilities": "UAVs could be placed in autonomous loiter mode and, in 'Sensor Slaved' mode, autonomously adjusted their own loiter position to keep the vehicle positioned for optimal sensor coverage as the operator redirected the sensor, without requiring the operator to separately fly the vehicle. A pixel-processing automatic target tracker could autonomously steer the sensor to keep a designated moving target within the field of view once engaged, alerting the operator only when tracking quality degraded. Terrain clearance and mid-air deconfliction between MUSCIT vehicles were handled through fixed altitude separation rather than an onboard sense-and-avoid capability, and vehicles were constrained to a pre-defined 'Keep In Box' airspace boundary that had to be established before Sensor Slaved mode could be activated."
+  },
+  "classification": {
+    "task_environment_v0.8": {
+      "task_object_spatiotemporal_dynamics": [
+        {
+          "code": "Moving Task Object",
+          "justification": "HVTs travel continuously by motorcycle/bicycle between compounds, and fleeing 'squirters' move away from the assault compound, both requiring continuous re-acquisition and tracking rather than a one-off detection.",
+          "condition": "HVT and squirter tracking"
+        },
+        {
+          "code": "Distributed Task Object",
+          "justification": "Armed personnel sightings ('pattern of life'), the forced-distractor suspicious-activity report, and the IED attack are each separate, scattered task-relevant events arising intermittently at different points/times across the mission.",
+          "condition": "overwatch/forced-distractor/IED events"
+        }
+      ],
+      "behavioral_relation_to_task_object": [
+        {
+          "code": "Search Task",
+          "justification": "Detecting/reporting armed personnel, locating the forced-distractor activity, and finding the IED event are all search/identification relations, not avoidance — matching Section 4.2 (Search Task), added in v0.8.",
+          "condition": "overwatch/forced-distractor/IED search behaviors"
+        },
+        {
+          "code": "Pursuit Task",
+          "justification": "Continuously following an already-identified HVT or squirter to maintain visual custody as it moves is a distinct relation from search (the target is already found) and from avoidance — matching Section 4.4 (Pursuit Task), added in v0.8, for which this article is the codebook's own cited source example.",
+          "condition": "HVT and squirter tracking"
+        }
+      ],
+      "team_size": [
+        {
+          "code": "Single-human - Multi-robot",
+          "justification": "The 1-operator conditions pair a single operator with 2 or 4 UAVs.",
+          "condition": "1-operator conditions"
+        },
+        {
+          "code": "Multi-human - Multi-robot",
+          "justification": "The 2-operator conditions pair two operators with 2 or 4 UAVs, freely dividing responsibilities.",
+          "condition": "2-operator conditions"
+        }
+      ],
+      "team_composition": [
+        {
+          "code": "Homogeneous",
+          "justification": "All UAVs within a given trial are the same MUSCIT-type asset with no described difference in role or capability.",
+          "condition": "robot side"
+        },
+        {
+          "code": "Homogeneous",
+          "justification": "Both control stations had identical features and capabilities, and participants freely assigned responsibilities rather than being given fixed, distinct standing roles.",
+          "condition": "human side, 2-operator conditions"
+        }
+      ],
+      "interaction_model": [
+        {
+          "code": "One-to-one",
+          "justification": "An operator must explicitly request and be granted control of a specific vehicle/sensor before directing it; attempting to control an unassigned vehicle is rejected by the system.",
+          "condition": null
+        },
+        {
+          "code": "Many-to-many",
+          "justification": "In 2-operator/4-UAV trials, two human operators and multiple UAVs are all connected through the same shared VSCS network simultaneously.",
+          "condition": "2-operator, 4-UAV conditions"
+        }
+      ],
+      "interaction_directness": [
+        {
+          "code": "Direct",
+          "justification": "Operators issue explicit, addressed commands to specific vehicles/sensors via the control station.",
+          "condition": null
+        }
+      ],
+      "communication_proximity": [
+        {
+          "code": "Remote",
+          "justification": "Operator-to-vehicle interaction is entirely through the VSCS console/screen interface, with no physical co-location with the UAVs.",
+          "condition": "operator-vehicle channel"
+        },
+        {
+          "code": "Proximate",
+          "justification": "In the 2-operator conditions, the two participants are co-located at adjacent control stations and coordinate verbally during the mission.",
+          "condition": "operator-operator channel, 2-operator conditions"
+        }
+      ],
+      "coordination_architecture": [
+        {
+          "code": "Not Applicable",
+          "justification": "No coordination or negotiation mechanism among the UAVs themselves is described; each vehicle independently loiters/executes its own assigned task, with the human operator(s) as the sole coordinating agents.",
+          "condition": null
+        }
+      ],
+      "computational_characteristics": [
+        {
+          "code": "Predefined / Rule-Based Control",
+          "justification": "Sensor Slaved mode couples the vehicle's loiter position to the sensor's current view through a fixed control-loop rule, not a computed optimization or learned model.",
+          "condition": "Sensor Slaved coupling"
+        },
+        {
+          "code": "Classical Geometric / Sampling-Based Control",
+          "justification": "The automatic target tracker uses pixel processing to steer the sensor toward a designated target, a deterministic image-based tracking computation rather than a named learned or population-based method.",
+          "condition": "auto-tracker"
+        }
+      ],
+      "human_involvement_level": [
+        {
+          "code": "Human-in-the-loop (HInL)",
+          "justification": "Manual vehicle/sensor steering (when Sensor Slaved and the auto-tracker are not engaged) requires continuous operator input to operate as intended.",
+          "condition": "manual steering"
+        },
+        {
+          "code": "Human-on-the-loop (HOnL)",
+          "justification": "Once engaged, Sensor Slaved mode and the auto-tracker both operate without continuous operator input, with the operator monitoring and able to re-engage/intervene as needed.",
+          "condition": "Sensor Slaved mode and auto-tracker"
+        }
+      ],
+      "level_of_human_control_abstraction": [
+        {
+          "code": "Direct (LHCA 1)",
+          "justification": "Manual sensor/vehicle steering is continuous operator input directly setting sensor/vehicle position.",
+          "condition": "manual steering state"
+        },
+        {
+          "code": "Goal-Oriented (LHCA 4)",
+          "justification": "Engaging the auto-tracker is a discrete, one-off input (a Shift-click on the target) after which the system autonomously maintains track.",
+          "condition": "auto-tracker engagement state"
+        }
+      ],
+      "operational_domain": [
+        {
+          "code": "Air",
+          "justification": "All vehicles studied are UAVs operating in the air domain.",
+          "condition": null
+        }
+      ]
+    }
+  },
+  "flags": [
+    {
+      "dimension": "coordination_architecture",
+      "type": "Not Applicable",
+      "note": "No robot-to-robot coordination mechanism is described; coordination resides entirely with the human operator(s).",
+      "proposed_code": null
+    }
+  ]
+}

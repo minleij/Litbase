@@ -1,0 +1,170 @@
+{
+  "article_id": "zhou_2025_ooda_uav_swarm_hsi",
+  "citation": {
+    "authors": "Zhou, Z., Wei, P., Wang, Z., Duan, L., Hai, S., Zhang, Z., Sun, Y., & Feng, F.",
+    "year": 2025,
+    "title": "Towards human-centered interaction with UAV swarms: Framework, system design, and user study",
+    "source_file": "articles/Zhou.md"
+  },
+  "extraction_metadata": {
+    "date_extracted": "2026-07-10",
+    "codebook_versions": {
+      "study_type": "0.2",
+      "task_environment": "0.8"
+    },
+    "model": "claude-sonnet-5",
+    "notes": "Confirms two behavioral-relation gaps at once (Engagement Task and the newly-proposed Defend/Block Task) plus the recurring Search Task gap. Also see flags for a borderline modality-flag question: the experimenter verbally narrated simulated UAV outcomes after each command, which is functionally similar to Wizard-of-Oz but openly disclosed to participants rather than hidden, so it was not coded as such (this question remains open; the Study-Type codebook_versions field is left at 0.2 pending a separate re-review). Re-coded 2026-07-10 against Task-Environment v0.8: reconnaissance, pre-emptive strikes, and infrastructure security now map onto the new Search Task (4.2), Engagement Task (4.3), and Defend/Block Task (4.5) codes, replacing the original Unclear / Candidate New Code flags."
+  },
+  "study_type": {
+    "primary": "User Study",
+    "secondary": "System/Architecture Paper",
+    "sub_attributes": {
+      "setting": "Lab",
+      "measured_constructs": ["Other / Not Listed"],
+      "modality_flags": []
+    },
+    "justification": "An informal usability study with 10 participants (SUS questionnaire, semi-structured interviews; explicitly 'a system usability test rather than strict performance benchmarking') reports real human interaction and reactions, so User Study is Primary; the OODA-based HSI framework, six design principles, and the seven-module prototype GCS are described in comparable depth and framed as a generalizable design paradigm, so System/Architecture Paper is Secondary."
+  },
+  "summary": {
+    "template": "user_study",
+    "task": "10 participants each served as the sole operator in an open-ended, indoor-simulated military scenario, commanding a virtual swarm of 20 micro reconnaissance-strike UAVs across three named areas to reconnoiter suspected enemy groupings (infantry, light vehicles, heavy armor), conduct pre-emptive strikes on identified targets, and secure road infrastructure to prevent sabotage, with no actual UAV hardware or fixed performance criteria involved.",
+    "control": "Participants used a portable ground control station (dual touchscreen displays, joystick/physical-button input) built around a 'task-oriented' paradigm: a Situation Display map view, a Swarm Monitor showing aggregate and per-UAV state, an Information Pusher surfacing filtered alerts, a Task Scheduler offering parameterized mission templates (e.g., rendezvous, patrol, reconnaissance) composable into task sequences and dispatchable in full-sequence, stepwise, or manual-joystick modes, a Video Surveillance module for target tracking, and a Payload Controller. Because the UAVs and targets were simulated rather than software-automated end-to-end, the experimenter verbally described the system-generated outcome after each participant command to confirm understanding.",
+    "participants": "10 adults aged 20-40, recruited via university mailing lists and UAV/HCI/design professional forums, spanning three self-reported skill levels: 4 Experts (proficient with GCS/graphical mission planning), 3 Beginners (some FPV/aerial-photography drone experience), and 3 Novices (no hands-on UAV experience). Each completed a standardized 30-minute familiarization session before a single open-ended mission scenario, followed by a System Usability Scale (SUS) questionnaire and a semi-structured interview.",
+    "results": "The system achieved an SUS score of 72.75 (grade B-, above roughly 65-69% of rated products), indicating acceptable-to-moderately-positive usability. 90% of participants agreed the system was easy to use and felt confident using it, and 100% agreed it would be quick for most people to learn; 80% agreed the system's functions were well integrated. However, 60% agreed they needed to learn a lot before getting going, indicating a moderate initial learning curve. Interviews found broad appreciation for the task-oriented, template-based paradigm (contrasted favorably with conventional low-level GCS software) and for route-preview/task-transparency features across both expert and novice participants, alongside converging complaints about limited flexibility for complex/asymmetric missions, no group/box-selection of UAVs, no in-panel task-sequence reordering, information-overload risk at scale, and a lack of swarm formation-awareness.",
+    "issues": "Predefined task templates and sequences lacked flexibility for complex, emergency, or asymmetric mission intents (e.g., differentiated per-UAV routing around obstacles), and some templates were perceived as overlapping/nested confusingly. The multi-step process of template selection, sequence construction, and parameter configuration still imposed meaningful cognitive load, particularly for novices, who wanted proactive next-step suggestions. There was no group/box selection of multiple UAVs (only one-at-a-time), no real-time idle/active status directly in the UAV list, and no in-panel task-sequence reordering. Participants worried the information-push mechanism would become overwhelming as alerts/targets scale without priority-based filtering or batch processing. The evaluation used only simulated data in an indoor environment with a small (n=10), non-representative sample, and did not assess team-based or heterogeneous-swarm scenarios or real hardware/environmental factors.",
+    "recommendations": "Expand the task-template library and add map-placed emergency panels (e.g., one-click return-to-home, takeoff/landing) for complex or time-critical missions, restructuring overlapping templates into distinct 'meta-task' units. Add intelligent/mixed-initiative guidance (e.g., AI-suggested next steps) and explainable post-action feedback to reduce cognitive load without displacing operator decision authority. Support group/box selection of UAVs, real-time idle/active status in the UAV list, and in-panel task-sequence reordering to reduce interaction overhead as swarm size grows. Add priority-based alert management and batch target-update processing to prevent information overload. Incorporate swarm formation-awareness so the system helps manage inter-UAV path conflicts. Validate with outdoor trials using real UAV hardware, heterogeneous swarms, larger samples, and objective metrics tied to OODA-loop transitions rather than usability/subjective measures alone.",
+    "autonomous_capabilities": "Once a parameterized task template (e.g., rendezvous, patrol, static/dynamic target reconnaissance, 3D structure search) is configured and dispatched, the system's backend planning-algorithm library autonomously handles downstream task assignment, path planning, and command preparation for the assigned UAVs, with each UAV then autonomously transitioning through its assigned mission phases based on defined task conditions without continuous operator intervention; multiple sub-swarms or individual UAVs can run distinct, asynchronously-dispatched task sequences at once. A rule-based filtering mechanism in the Information Pusher module autonomously determines which real-time events (communication dropouts, GPS failures, battery warnings, target detections) are surfaced to the operator as alerts."
+  },
+  "classification": {
+    "task_environment_v0.8": {
+      "task_object_spatiotemporal_dynamics": [
+        {
+          "code": "Distributed Task Object",
+          "justification": "Enemy groupings (infantry, light vehicles, heavy armor) are scattered across two named areas and discovered via reconnaissance, each a separate instance rather than a single tracked entity.",
+          "condition": null
+        }
+      ],
+      "behavioral_relation_to_task_object": [
+        {
+          "code": "Search Task",
+          "justification": "Reconnoitring suspected enemy groupings is a search/detection relation, not avoidance — matching Section 4.2 (Search Task), added in v0.8.",
+          "condition": "reconnaissance sub-task"
+        },
+        {
+          "code": "Engagement Task",
+          "justification": "Conducting pre-emptive strikes on identified targets is a goal-directed engagement relation — matching Section 4.3 (Engagement Task), added in v0.8.",
+          "condition": "strike sub-task"
+        },
+        {
+          "code": "Defend/Block Task",
+          "justification": "Securing road infrastructure to prevent enemy sabotage is a protective/blocking relation toward an adversary — matching Section 4.5 (Defend/Block Task), added in v0.8.",
+          "condition": "infrastructure security sub-task"
+        }
+      ],
+      "team_size": [
+        {
+          "code": "Single-human - Multi-robot",
+          "justification": "A single operator commands a swarm of 20 UAVs.",
+          "condition": null
+        }
+      ],
+      "team_composition": [
+        {
+          "code": "Homogeneous",
+          "justification": "The tested swarm consists of 20 identical reconnaissance-strike UAVs; a participant explicitly noted the system had not yet accounted for heterogeneous swarm configurations, confirming the tested case was homogeneous.",
+          "condition": "robot side"
+        }
+      ],
+      "interaction_model": [
+        {
+          "code": "One-to-many",
+          "justification": "A dispatched task template/sequence can be assigned to a sub-swarm of multiple UAVs at once.",
+          "condition": null
+        },
+        {
+          "code": "One-to-one",
+          "justification": "Individual UAV selection is also supported (and was criticized by participants as inefficient, since it only allowed one-at-a-time selection rather than group/box selection).",
+          "condition": null
+        }
+      ],
+      "interaction_directness": [
+        {
+          "code": "Direct",
+          "justification": "Operators issue explicit, addressed commands to specific UAVs, sub-swarms, or task templates via the interface.",
+          "condition": null
+        }
+      ],
+      "communication_proximity": [
+        {
+          "code": "Remote",
+          "justification": "The entire task is conducted through a screen-based/joystick-based simulated ground control station, with no physical UAVs present.",
+          "condition": null
+        }
+      ],
+      "coordination_architecture": [
+        {
+          "code": "Strongly Centralized Coordination",
+          "justification": "The ground control station's backend Task Scheduler is a single, fixed system that assigns task sequences to sub-swarms or individual UAVs for the duration of a mission; no robot-to-robot negotiation is described.",
+          "condition": null
+        }
+      ],
+      "computational_characteristics": [
+        {
+          "code": "Task-Allocation (Placeholder)",
+          "justification": "The Task Scheduler decides which sub-swarm or individual UAV executes which task sequence, a task-allocation mechanism distinct from any single UAV's own motion computation.",
+          "condition": null
+        },
+        {
+          "code": "Not Described",
+          "justification": "The 'planning algorithm library' that generates flight paths for a given task template is mentioned only functionally, without naming a specific algorithm family.",
+          "condition": null
+        }
+      ],
+      "human_involvement_level": [
+        {
+          "code": "Human-in-the-loop (HInL)",
+          "justification": "Manual joystick-based control mode requires continuous operator input to operate as intended.",
+          "condition": "manual joystick control mode"
+        },
+        {
+          "code": "Human-on-the-loop (HOnL)",
+          "justification": "Full-sequence and stepwise task dispatch modes execute autonomously once configured, without requiring continuous operator intervention.",
+          "condition": "full-sequence/stepwise dispatch modes"
+        }
+      ],
+      "level_of_human_control_abstraction": [
+        {
+          "code": "Goal-Oriented (LHCA 4)",
+          "justification": "Configuring and dispatching a task template is a discrete goal-level input, with the system autonomously executing all subsequent planning and control steps.",
+          "condition": "task template dispatch state"
+        },
+        {
+          "code": "Direct (LHCA 1)",
+          "justification": "The manual joystick-based control mode is continuous operator input directly setting a UAV's movement.",
+          "condition": "manual joystick control state"
+        }
+      ],
+      "operational_domain": [
+        {
+          "code": "Air",
+          "justification": "All 20 simulated vehicles are UAVs operating in the air domain.",
+          "condition": null
+        }
+      ]
+    }
+  },
+  "flags": [
+    {
+      "dimension": "study_type",
+      "type": "Unclear / Candidate New Code",
+      "note": "After each participant command, the experimenter verbally described the system-generated (simulated) UAV behavior rather than the system rendering it automatically end-to-end — mechanistically similar to Wizard-of-Oz (a human standing in for automated system behavior), but openly disclosed to participants as part of the simulation rather than hidden or downplayed, so it does not cleanly match the Study Modality Flag's WoZ definition, which specifies 'typically undisclosed.'",
+      "proposed_code": "Consider whether the Wizard-of-Oz flag definition should explicitly address disclosed/transparent human-narrated simulation as a related but distinct pattern, or whether it should remain out of scope. [Not actioned in this pass; the Task-Environment behavioral-relation codes were updated 2026-07-10 but this Study-Type modality-flag question was left open.]"
+    },
+    {
+      "dimension": "computational_characteristics",
+      "type": "Not Described",
+      "note": "No specific path-planning algorithm named for the backend planning algorithm library.",
+      "proposed_code": null
+    }
+  ]
+}

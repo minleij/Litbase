@@ -1,0 +1,175 @@
+{
+  "article_id": "osga_2013_mocu_usv_hci",
+  "citation": {
+    "authors": "Osga, G., McWilliams, M., Powell, D., Kellmeyer, D., Kaiwi, J., & Ahumada, A.",
+    "year": 2013,
+    "title": "Unmanned Surface Vehicle Human-Computer Interface for Amphibious Operations",
+    "source_file": "articles/MOCU_Osga_USVHCI_Final_Report_16Sep2013_FinalforPrint.md"
+  },
+  "extraction_metadata": {
+    "date_extracted": "2026-07-10",
+    "codebook_versions": {
+      "study_type": "0.2",
+      "task_environment": "0.8"
+    },
+    "model": "claude-sonnet-5",
+    "notes": "Technical report covering a multi-year, multi-phase project; although the vehicles studied are Unmanned Surface Vehicles (USVs) rather than aerial drones, the MOCU control-station architecture is explicitly reused across air/land/sea/undersea unmanned systems, and the human-supervisory-control/SA/workload findings are directly relevant to this project's HSI/HRI scope. Only the actual tested configuration (USVs, one or two at a time) is coded below, not MOCU's broader multi-domain capability. Re-coded 2026-07-10 against Task-Environment v0.8: contact reporting now maps onto the new Search Task (4.2) code, replacing the original Unclear / Candidate New Code flag."
+  },
+  "study_type": {
+    "primary": "User Study",
+    "secondary": "System/Architecture Paper",
+    "sub_attributes": {
+      "setting": "Lab",
+      "measured_constructs": ["Performance", "Situation Awareness (SA)", "Other / Not Listed"],
+      "modality_flags": []
+    },
+    "justification": "Formal, multi-phase usability testing with 32 Navy participants (pass/fail course-of-action performance, exit surveys) plus a separate eye-tracking visual-detection sub-study constitute the article's central empirical contribution, so User Study is Primary; the MOCU control-station architecture (a modular, service-oriented, plug-in-based platform reused across many DoD unmanned-systems programs) is described in comparable depth and framed as reusable infrastructure, so System/Architecture Paper is Secondary."
+  },
+  "summary": {
+    "template": "user_study",
+    "task": "Navy enlisted participants (mostly Sonar Technicians and Minemen from LCS anti-submarine-warfare/mine-countermeasures detachments) played the role of USV operator in a simulated mission, using the MOCU interface to transit one or two unmanned surface vehicles from a host ship to an operating area while responding to a scripted sequence of critical events (waypoint achievement, sighted contacts, system alarms, and potential collisions) and making periodic voice reports to a simulated Mission Supervisor. A separate eye-tracking sub-study measured detection of a single-pixel target on a simulated ocean horizon.",
+    "control": "Operators supervised USVs through MOCU's map/video interface (2D nautical chart plus stitched forward/aft/pan-tilt-zoom camera feeds), switching each vehicle between manual, vector, and route-following control modes. Earlier interface versions (Baseline/v2) used multi-layered pull-down menus; later versions (v3/v3.1) added a redesigned display layout with integrated alarm/route graphics, synthetic-speech audio alerts, and an Xbox-style game controller mapped to standard gaming conventions for navigation and menu selection.",
+    "participants": "32 Navy enlisted personnel (10 Sonar Technicians, 17 Minemen, plus others), all San Diego-based LCS ASW/MCM mission-package detachment members, distributed across five test conditions (2 USVs/Baseline HCI, n=6; 2 USVs/v3, n=8; 2 USVs/v3.1, n=10; 1 USV/Baseline, n=4; 1 USV/v3.1, n=4); most had minimal or no real USV operating experience. A separate, smaller eye-tracking visual-detection sub-study is reported without a stated N in the excerpted text.",
+    "results": "Controlling two USVs with the Baseline interface significantly degraded performance versus one USV (86% to 65% overall correct course-of-action responses), with collision-avoidance accuracy dropping from 83% to 50% and alarm-response accuracy dropping to 33%. Each successive MOCU redesign (v3, then v3.1) produced significant across-the-board improvements, most dramatically in alarm response (33% to 66% to 95% correct, driven substantially by added audio alerts in v3.1) and collision avoidance (50% to 84%). A parallel single-USV test found v3.1 also significantly improved single-vehicle performance over Baseline, especially alarm response. All five pre-registered Technology Transition exit criteria were met, including 89% overall SA-related task accuracy (exceeding an 80% threshold) and training times of about 15 minutes. Collision risk from radar-undetected vessels persisted even with v3.1 (operators roughly twice as likely to collide with an undetected vessel than a sensor-confirmed one, versus five times as likely with Baseline). Exit surveys showed a strong subjective preference for the enhanced interface. The eye-tracking sub-study found near-perfect single-pixel horizon-target detection using an average of 18 fixations (~5.3 seconds) per trial, consistent with a simple foveation-based detection model, though later unreported data suggested the model needs a false-alarm parameter.",
+    "issues": "Even the best interface (v3.1) could not fully compensate for missing sensor coverage: collision-avoidance tasks with no radar/sensor cues remained the weakest task domain throughout (50% miss rate on 'hard' collision problems versus 100% accuracy on 'easy' problems with parallel sensor+video cues), pointing to a need for improved onboard obstacle-detection hardware, not just interface redesign. Early 'wrap-around' 360-degree video concepts were rejected by operator reviewers for losing about 25% of their current field of view, introducing video distortion, and degrading situation awareness when the digital nautical chart rotated relative to USV heading. The persistent aft-view video feed was found distracting due to constant wake motion. Formal usability testing relied entirely on a low-cost commercial game simulator rather than live USV video/sensors. The visual-detection sub-study's simple foveation-only model was later found to be violated by data showing false alarms even for high-contrast targets.",
+    "recommendations": "Prioritize improved onboard obstacle-detection/collision-avoidance sensor capability, not just HCI redesign, before fielding true multi-USV single-operator control. Retain and further develop the redesigned display layout and game-style controller, both of which drove the largest measured performance gains. Conduct further validation with live USV video/sensor feeds and real operational radar-degradation tactics (e.g., following a fully-operational USV, reduced speed, mission postponement) rather than relying solely on simulator data. Extend the visual-detection model to include a false-alarm parameter and low-contrast targets, and use it to drive an embedded, condition-adaptive visual-attention-management/alerting system. Consider these HCI design properties (rapid training, intuitive game-style control, integrated multi-modal alerting) for other human-robotic interfaces aboard LCS more broadly.",
+    "autonomous_capabilities": "USVs could operate in manual, vector, or autonomous route-following control modes, following pre-planned waypoint routes without continuous operator steering once a route was set. The MOCU architecture itself is a modular, service-oriented, plug-in-based command-and-control platform capable of interfacing simultaneously with heterogeneous unmanned vehicles across air, land, sea, and undersea domains (already reused across other DoD programs), with mission-relevant status/alarm/route information automatically surfaced via integrated visual and synthetic-speech audio cues rather than requiring manual monitoring of raw sensor streams. USVs in this study's tested configuration carried no obstacle-avoidance hardware/software of their own — collision avoidance depended entirely on the human operator."
+  },
+  "classification": {
+    "task_environment_v0.8": {
+      "task_object_spatiotemporal_dynamics": [
+        {
+          "code": "Distributed Task Object",
+          "justification": "Radar/visual contacts (other vessels, small craft, floating obstacles like oil drums or pallets) are scattered, self-contained instances that arise intermittently at different points along the transit route.",
+          "condition": null
+        },
+        {
+          "code": "Moving Task Object",
+          "justification": "Other vessels and small craft in the vicinity are themselves in transit/motion, requiring continuous tracking to avoid a collision rather than a one-off detection.",
+          "condition": null
+        }
+      ],
+      "behavioral_relation_to_task_object": [
+        {
+          "code": "Avoidance Task",
+          "justification": "Collision Avoidance is one of the five explicit task domains measured; contact with another vessel/obstacle is the negative outcome the operator must prevent.",
+          "condition": "collision avoidance"
+        },
+        {
+          "code": "Search Task",
+          "justification": "Contact Reporting requires detecting and reporting sighted contacts, a search/detection relation rather than avoidance — matching Section 4.2 (Search Task), added in v0.8.",
+          "condition": "contact reporting"
+        }
+      ],
+      "team_size": [
+        {
+          "code": "Single-human - Single-robot",
+          "justification": "The 1-USV test conditions pair one operator with one USV.",
+          "condition": "1 USV conditions"
+        },
+        {
+          "code": "Single-human - Multi-robot",
+          "justification": "The 2-USV test conditions pair one operator with two USVs, shifting primary control between them.",
+          "condition": "2 USV conditions"
+        }
+      ],
+      "team_composition": [
+        {
+          "code": "Homogeneous",
+          "justification": "The two USVs used in the 2-USV test conditions are not described as differing in role or capability from one another; heterogeneous multi-domain support is a general MOCU architecture capability but is not exercised in this study's actual test conditions.",
+          "condition": "robot side, 2 USV conditions"
+        }
+      ],
+      "interaction_model": [
+        {
+          "code": "One-to-one",
+          "justification": "The operator explicitly shifts 'primary control' between USV 1 and USV 2 one at a time, rather than issuing one command to both simultaneously.",
+          "condition": null
+        }
+      ],
+      "interaction_directness": [
+        {
+          "code": "Direct",
+          "justification": "Operators issue explicit, addressed commands to a specific USV via the console/controller interface.",
+          "condition": null
+        }
+      ],
+      "communication_proximity": [
+        {
+          "code": "Remote",
+          "justification": "Operators interact through a console/screen interface; the USVs are simulated as being at sea, not physically co-located with the operator.",
+          "condition": null
+        }
+      ],
+      "coordination_architecture": [
+        {
+          "code": "Not Described",
+          "justification": "A leader-follower USV path tactic (one USV 'clears the path' for the second) is discussed in the report as a possible workload-management strategy, but the text does not confirm whether this was actually implemented or tested in the reported usability-test conditions, so the coordination mechanism actually used (if any) between the two USVs is not described.",
+          "condition": "2 USV conditions"
+        },
+        {
+          "code": "Not Applicable",
+          "justification": "With only one USV present, multi-robot coordination does not conceptually apply.",
+          "condition": "1 USV conditions"
+        }
+      ],
+      "computational_characteristics": [
+        {
+          "code": "Not Described",
+          "justification": "Vector and route-following modes are described functionally (the USV proceeds to waypoints without continuous manual input) but no specific path-computation algorithm family is named.",
+          "condition": null
+        }
+      ],
+      "human_involvement_level": [
+        {
+          "code": "Human-in-the-loop (HInL)",
+          "justification": "Manual mode requires continuous operator steering input (speed and heading) to operate as intended.",
+          "condition": "manual control mode"
+        },
+        {
+          "code": "Human-on-the-loop (HOnL)",
+          "justification": "In vector/route-following mode the USV proceeds toward its assigned waypoints without continuous operator input; the operator monitors and can intervene.",
+          "condition": "vector/route-following mode"
+        },
+        {
+          "code": "Human-in-the-loop (HInL)",
+          "justification": "The report explicitly states the USVs carry no obstacle-avoidance hardware or software, making collision avoidance entirely dependent on human visual monitoring and reaction.",
+          "condition": "collision avoidance function"
+        }
+      ],
+      "level_of_human_control_abstraction": [
+        {
+          "code": "Direct (LHCA 1)",
+          "justification": "In manual mode, the game controller continuously and directly sets the USV's speed and heading, matching exit-survey items about 'manually setting and maintaining' speed/course.",
+          "condition": "manual control mode"
+        },
+        {
+          "code": "Goal-Oriented (LHCA 4)",
+          "justification": "In vector/route-following mode, the operator gives discrete waypoint/route goals and the USV autonomously executes navigation to reach them.",
+          "condition": "vector/route-following mode"
+        }
+      ],
+      "operational_domain": [
+        {
+          "code": "Maritime",
+          "justification": "The vehicles actually studied are Unmanned Surface Vehicles operating in the maritime domain (the broader MOCU architecture's multi-domain support is not exercised in this study).",
+          "condition": null
+        }
+      ]
+    }
+  },
+  "flags": [
+    {
+      "dimension": "coordination_architecture",
+      "type": "Not Described",
+      "note": "A leader-follower USV coordination tactic is discussed as a possible workload-management strategy but not confirmed as implemented/tested in the reported study.",
+      "proposed_code": null
+    },
+    {
+      "dimension": "computational_characteristics",
+      "type": "Not Described",
+      "note": "No specific path-computation algorithm named for vector/route-following mode.",
+      "proposed_code": null
+    }
+  ]
+}

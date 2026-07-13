@@ -1,0 +1,137 @@
+{
+  "article_id": "wattearachchi_2025_hsi_task_performance",
+  "citation": {
+    "authors": "Wattearachchi, W. D., Lakshika, E., Kasmarik, K., & Barlow, M.",
+    "year": 2025,
+    "title": "Designing Effective Human-Swarm Interaction Interfaces: Insights from a User Study on Task Performance",
+    "source_file": "articles/Wattearachchi_2025_Designing_Effective_HumanSwarm_Interaction_Interfaces_Insights_from_a_User_Study_on_Task_Performance.md"
+  },
+  "extraction_metadata": {
+    "date_extracted": "2026-07-10",
+    "codebook_versions": {
+      "study_type": "0.2",
+      "task_environment": "0.8"
+    },
+    "model": "claude-sonnet-5",
+    "notes": "This is the article the Task-Environment codebook's own Section 12.1 Worked Example is built directly from, and one of the two canonical User Study examples cited in the Study-Type codebook's own 3.1 definition. The task-environment classification below directly implements that worked example, expanded with full justifications. No re-coding was needed for the v0.8 update: Avoidance Task already fit cleanly and no flags were raised for this article."
+  },
+  "study_type": {
+    "primary": "User Study",
+    "secondary": "System/Architecture Paper",
+    "sub_attributes": {
+      "setting": "Simulated/Remote (incl. VR)",
+      "measured_constructs": ["Performance", "Situation Awareness (SA)"],
+      "modality_flags": []
+    },
+    "justification": "A formal user study with 31 participants (186 participant-tasks, Friedman/Wilcoxon tests, SAGAT, SART) evaluating task performance is the article's central contribution and one of the two canonical User Study examples cited in the Study-Type codebook itself; the ten derived HSI design principles and the systematically-designed tablet interface are a comparably-weighted, generalizable contribution, so System/Architecture Paper is Secondary."
+  },
+  "summary": {
+    "template": "user_study",
+    "task": "31 participants used a tablet interface to guide a swarm of 20 simulated robots (using PSO local-best search) to locate and reach a single target within a 120x120m simulated arena, while avoiding three types of hazard regions across separate 5-minute trials — Distributed (intermittently appearing scattered hazards, e.g. falling rocks/trees, GPS loss, wind, damaged terrain), Moving (a shifting hazard region simulating adversarial patrolling), and Spreading (a hazard expanding outward from a single point, e.g. a spreading fire) — each hazard type completed twice, for six total 'participant-tasks' per participant.",
+    "control": "Robots autonomously searched via a PSO local-best (LBEST) swarm algorithm, sharing local best positions with neighboring robots within a set radius to produce emergent global search behavior; the operator influenced but did not directly steer the swarm, marking hazard cells (single tap to add, long-press with confirmation to remove) so robots would treat them as obstacles to avoid, and swiping near 'trapped' robots (stuck against a marked boundary) to apply a temporary directional force that reactivated/freed them and any active robots within a set radius. Robots entering an unmarked hazard cell were permanently deactivated.",
+    "participants": "31 participants (15 male, 15 female, 1 non-disclosing), aged 18-44 (mostly 25-34), primarily postgraduate/undergraduate students, 27 non-native English speakers, with self-reported swarm-robotics knowledge following a normal distribution; each completed a ~2-hour session comprising three hazard-type tasks (5 minutes each) performed twice in randomized order (six participant-tasks total), with 14 SAGAT questions at two pauses per task and a 10-item SART questionnaire after each task.",
+    "results": "The interface successfully supported target localization: at least one active robot reached the closest 0-12m range of the target in 97.85% of participant-tasks, and the median of the swarm (NQ2) reached that range in 84.95% of tasks, though performance dropped for the farthest robot (only 18.82% within range), indicating strong 'at least some robots succeed' performance but weaker whole-swarm cohesion. Proximity-based performance was significantly worse in the Spreading hazard than in Moving or Distributed across nearly every distance metric (all p<0.05), with no significant difference between Moving and Distributed. For robot deactivation, no task lost all 20 robots and 94.4% of tasks kept more than half the swarm active; however, deactivation counts differed significantly by hazard, with Distributed producing the fewest deactivations, Spreading intermediate, and Moving producing the most — the reverse pattern from the proximity finding, where Moving performed as well as Distributed.",
+    "issues": "The interface's effectiveness was uneven and inconsistent across hazard types: it best supported target-proximity performance in Moving and Distributed hazards but struggled most with Spreading; conversely, for minimizing robot losses, it best supported Distributed but struggled most with Moving — the highest-deactivation condition despite reasonable proximity performance there. Guiding the entire swarm cohesively close to the target remained difficult even under the best conditions, with the farthest active robot rarely (<19% of tasks) reaching the closest range. The study used non-expert participants (mostly research students unfamiliar with robot teleoperation) in a simulated environment only, without hardware latency, sensor noise, or physical robot failure, limiting generalization to real deployments and expert operators.",
+    "recommendations": "Develop hazard-adaptive interface support rather than a one-size-fits-all design, since the interface's strengths and weaknesses varied systematically by hazard type and diverged in opposite directions between the proximity and deactivation outcome measures. Improve control mechanisms specifically for tasks involving spread-out/dispersed robots (e.g., Spreading hazards) to raise whole-swarm cohesion. Test the interface with physical robots and real-world factors (hardware latency, sensor noise, physical failures) and with a broader, more expert participant pool. Incorporate adaptive features that respond to real-time user workload, and explore shared-control strategies and long-term user adaptation via longitudinal studies.",
+    "autonomous_capabilities": "Each robot autonomously computed its motion via a PSO local-best swarm algorithm, sharing local best positions with neighboring robots within a set radius and updating its own velocity/direction accordingly, producing emergent global search behavior toward the target without the operator directing any individual robot; robots also autonomously performed obstacle avoidance and maintained a minimum sensing distance to react to dynamic marked-hazard cells and other robots. Deactivated robots simply stopped contributing to the swarm's collective PSO computation, altering overall swarm behavior without requiring operator action."
+  },
+  "classification": {
+    "task_environment_v0.8": {
+      "task_object_spatiotemporal_dynamics": [
+        {
+          "code": "Distributed Task Object",
+          "justification": "The Distributed hazard condition presents multiple scattered, intermittently-appearing hazard instances (falling rocks/trees, GPS loss, wind, damaged terrain), each individually static once present — the codebook's own original source example for this code.",
+          "condition": "Distributed hazard condition"
+        },
+        {
+          "code": "Moving Task Object",
+          "justification": "The Moving hazard condition is a region that continuously shifts throughout the task (simulating adversarial patrolling), requiring ongoing tracking rather than a one-off response.",
+          "condition": "Moving hazard condition"
+        },
+        {
+          "code": "Spreading Task Object",
+          "justification": "The Spreading hazard condition expands outward from a single point of origin (e.g., a spreading fire), the codebook's own canonical source example for this code.",
+          "condition": "Spreading hazard condition"
+        }
+      ],
+      "behavioral_relation_to_task_object": [
+        {
+          "code": "Avoidance Task",
+          "justification": "Contact with any hazard type permanently deactivates a robot, an explicit negative consequence the operator must prevent while still guiding robots to the target — this article is the codebook's own original motivating source example for this code, so it is a clean fit with no gap to flag.",
+          "condition": null
+        }
+      ],
+      "team_size": [
+        {
+          "code": "Single-human - Multi-robot",
+          "justification": "A single operator guides a swarm of 20 robots.",
+          "condition": null
+        }
+      ],
+      "team_composition": [
+        {
+          "code": "Homogeneous",
+          "justification": "All 20 robots are identical, running the same PSO local-best behavior.",
+          "condition": "robot side"
+        }
+      ],
+      "interaction_model": [
+        {
+          "code": "One-to-many",
+          "justification": "A single swipe-force or hazard-marking action from the operator affects all robots within a defined radius simultaneously, not one robot individually.",
+          "condition": null
+        }
+      ],
+      "interaction_directness": [
+        {
+          "code": "Direct",
+          "justification": "Hazard-marking and swipe-force actions are explicitly addressed to specific cells/robot groups on the interface.",
+          "condition": null
+        }
+      ],
+      "communication_proximity": [
+        {
+          "code": "Remote",
+          "justification": "The operator interacts entirely through a screen-based tablet interface; a physical/vocal Proximate channel does not apply since there is no physical co-location with real robots.",
+          "condition": null
+        }
+      ],
+      "coordination_architecture": [
+        {
+          "code": "Distributed Coordination",
+          "justification": "Each robot's PSO local-best velocity update depends only on locally shared neighbor position information; no leader robot or central coordinator is described.",
+          "condition": null
+        }
+      ],
+      "computational_characteristics": [
+        {
+          "code": "Bio-Inspired / Metaheuristic Optimization Control",
+          "justification": "Robot motion is explicitly governed by a PSO (Particle Swarm Optimization) local-best swarm search algorithm, the canonical source example for this code.",
+          "condition": null
+        }
+      ],
+      "human_involvement_level": [
+        {
+          "code": "Human-on-the-loop (HOnL)",
+          "justification": "The swarm searches autonomously via PSO; the human monitors the task and intervenes with hazard-marking and swipe actions as needed, but the search function does not require continuous human input.",
+          "condition": null
+        }
+      ],
+      "level_of_human_control_abstraction": [
+        {
+          "code": "Parametric (LHCA 3)",
+          "justification": "Swipe-force and hazard-marking inputs are discrete, gesture-triggered parameter-setting actions (marking avoidance regions, applying a brief directional nudge) rather than sustained continuous joystick-style control, and the operator retains responsibility for monitoring the swarm's hazard exposure while the PSO controller autonomously executes movement.",
+          "condition": null
+        }
+      ],
+      "operational_domain": [
+        {
+          "code": "Land",
+          "justification": "The 20 simulated robots are ground robots searching a terrain grid/arena.",
+          "condition": null
+        }
+      ]
+    }
+  },
+  "flags": []
+}

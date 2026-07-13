@@ -1,0 +1,157 @@
+{
+  "article_id": "ramchurn_2015_maxsum_uav_task_allocation",
+  "citation": {
+    "authors": "Ramchurn, S. D., Fischer, J. E., Ikuno, Y., Wu, F., Flann, J., & Waldock, A.",
+    "year": 2015,
+    "title": "A Study of Human-Agent Collaboration for Multi-UAV Task Allocation in Dynamic Environments",
+    "source_file": "articles/ramchurn_etal_ijcai.md"
+  },
+  "extraction_metadata": {
+    "date_extracted": "2026-07-10",
+    "codebook_versions": {
+      "study_type": "0.2",
+      "task_environment": "0.8"
+    },
+    "model": "claude-sonnet-5",
+    "notes": "This is the exact article the Task-Environment codebook's own Section 8.6 (Task-Allocation Placeholder) cites as its source example ('A max-sum decentralized coordination algorithm computes task allocations across a UAV team to minimize completion time, Ramchurn et al., 2015') — that code is applied directly here with high confidence. Re-coded 2026-07-10 against Task-Environment v0.8: target search/identification now maps onto the new Search Task (4.2) code, replacing the original Unclear / Candidate New Code flag."
+  },
+  "study_type": {
+    "primary": "User Study",
+    "secondary": "System/Architecture Paper",
+    "sub_attributes": {
+      "setting": "Simulated/Remote (incl. VR)",
+      "measured_constructs": ["Performance", "Workload", "Other / Not Listed"],
+      "modality_flags": []
+    },
+    "justification": "A formal 2x2 within-subjects lab study with 40 participants (20 two-person teams), extensive ANOVA on performance/effort/collaboration measures, NASA-TLX, and 30 hours of video-coded interaction analysis is the article's central contribution, so User Study is Primary; the multi-UAV coordination system (max-sum extended to accept human constraints, plus the Planner/Camera/Monitor interfaces) is described in comparable depth and is a reusable contribution in its own right, so System/Architecture Paper is Secondary."
+  },
+  "summary": {
+    "template": "user_study",
+    "task": "Pairs of participants (one 'camera view' operator, one 'planner view' operator) collaboratively supervised 6 simulated UAVs performing a disaster-response search mission, searching a map for 20 hidden targets (distributed in two clusters plus scattered outliers) across four ~10-minute runs each, under a 2x2 within-subjects design manipulating task-allocation method (Manual vs. Mixed-Initiative via the max-sum algorithm) and whether UAVs experienced unexpected drop-outs (none vs. three per run).",
+    "control": "The Planner View operator could add/delete region-scan or point-search tasks on a map, and either manually assign specific UAVs to specific tasks (Manual Allocation) or let the max-sum decentralized coordination algorithm compute and propose a task allocation, which could then be constrained by clicking a UAV and reassigning it to a different task — causing max-sum to automatically re-solve the remaining allocation around that constraint (Mixed-Initiative). Operators could also add waypoints to adjust UAV flight paths. The Camera View operator monitored live simulated aerial imagery from all UAVs, identified and annotated targets, and could collaborate with the Planner View operator by sharing screen views.",
+    "participants": "40 participants (15 female, 25 male; 26 Computer Science undergraduates plus others), recruited from various university departments and randomly paired into 20 two-person teams, completing a within-subjects, counterbalanced 2x2 design (allocation method x drop-outs) across four ~10-minute runs per team, with NASA-TLX collected after each run, pre/post interviews, and 30 hours of video recorded for collaboration analysis.",
+    "results": "When UAVs dropped out, allocation method had no significant effect on targets found or efficiency, but Mixed-Initiative (max-sum) produced significantly less operator effort (~32 fewer mouse clicks than Manual) and significantly more tasks completed, partially supporting the hypothesis that Mixed-Initiative would help operators cope with drop-outs. Without drop-outs, Mixed-Initiative still required significantly less effort with no difference in targets found. Manual allocation elicited significantly more pre-launch collaborative planning between operators than Mixed-Initiative; drop-outs significantly increased collaborative target-annotation regardless of allocation method. Self-reported workload showed a significant interaction: workload was lower for Manual than Mixed-Initiative when there were no drop-outs, but reversed (Mixed-Initiative lower) when drop-outs occurred. Manipulation checks confirmed participants meaningfully adopted (rather than routinely overriding) the Mixed-Initiative recommendations, and a significant performance-decay order/fatigue effect across successive runs was also detected.",
+    "issues": "Some participants did not fully trust max-sum's automatic re-allocations following drop-outs or task completions, watching new allocations 'from the corner of my eye' to check they were acceptable, and wanted finer-grained ways to specify conditional preferences/priorities in advance (e.g., 'if this UAV drops out then do this'); max-sum also had no way to know which areas operators had already explored or which tasks they wanted prioritized, occasionally producing plans participants disagreed with and had to manually correct. The Camera View operator's task was described by several participants as 'boring,' with unmet expectations that the UAVs should have more advanced target-detection/notification capabilities. Splitting monitoring and annotation across two separate screens meant the Planner View operator lost sight of the plan view while helping annotate targets. A significant order-effect/fatigue pattern was found across the four counterbalanced runs, and counterbalancing the drop-out/no-drop-out ordering itself was left as future work.",
+    "recommendations": "Design coordination algorithms with users' need for control in mind — provide intuitive, click-based constraint mechanisms with immediate visual feedback of re-allocation so operators can understand and anticipate how their inputs affect the whole multi-agent plan. Give operators more upfront control over the type of plan the algorithm proposes (e.g., via dynamic, context-adapted 'playbook'-style plan libraries) rather than only letting them modify an already-computed plan after the fact. Support finer-grained expression of tactical priorities and contingency preferences (e.g., conditional 'if X drops out, do Y' rules) rather than requiring all mission priorities to be encoded into the algorithm at design time, since users developed effective manual workarounds (e.g., deliberately double-covering an important area in case one UAV dropped out) suggesting richer mixed-initiative tactics should be left partly to the operator. Investigate ways to keep the Camera View operator's task engaging and to notify operators more proactively of automatically-detected events. Evaluate the impact of deliberately imperfect algorithmic plans on operator trust in automation in future work.",
+    "autonomous_capabilities": "In Mixed-Initiative mode, a decentralized max-sum coordination algorithm autonomously computed and continuously (re-)optimized task allocations across the UAV team to minimize completion time, exchanging messages between UAV 'agent' nodes and task nodes in a factor-graph representation, automatically re-allocating tasks among remaining UAVs whenever a task was completed or a UAV dropped out, and incorporating human-specified constraints (a manually fixed agent-task pairing) by recomputing the best remaining allocation for the other UAVs around that constraint. Depending on the assigned autonomy level, UAVs could also autonomously navigate a specified region via sweep search, or follow operator-specified waypoints with obstacle avoidance and altitude/speed adjustment, without continuous operator piloting."
+  },
+  "classification": {
+    "task_environment_v0.8": {
+      "task_object_spatiotemporal_dynamics": [
+        {
+          "code": "Distributed Task Object",
+          "justification": "20 targets are pre-placed at scattered locations (two clusters plus dispersed outliers), initially hidden and revealed only as discovered by a UAV's camera — multiple separate, static instances rather than a single moving or growing entity.",
+          "condition": null
+        }
+      ],
+      "behavioral_relation_to_task_object": [
+        {
+          "code": "Search Task",
+          "justification": "Locating and identifying targets during the search mission is a search/identification relation, not avoidance — matching Section 4.2 (Search Task), added in v0.8.",
+          "condition": null
+        }
+      ],
+      "team_size": [
+        {
+          "code": "Multi-human - Multi-robot",
+          "justification": "Two human operators (Camera View and Planner View) jointly supervise a team of six UAVs.",
+          "condition": null
+        }
+      ],
+      "team_composition": [
+        {
+          "code": "Homogeneous",
+          "justification": "All six simulated UAVs (quadcopters) are identical in this study, with no described difference in capability.",
+          "condition": "robot side"
+        },
+        {
+          "code": "Heterogeneous",
+          "justification": "The two operators have distinct, fixed standing roles (Camera View vs. Planner View) with different responsibilities and interface access.",
+          "condition": "human side"
+        }
+      ],
+      "interaction_model": [
+        {
+          "code": "One-to-one",
+          "justification": "In Manual Allocation, the operator clicks a specific UAV and assigns it to a specific task individually.",
+          "condition": "Manual allocation condition"
+        },
+        {
+          "code": "One-to-many",
+          "justification": "In Mixed-Initiative mode, a single operator-specified constraint (reassigning one UAV) triggers max-sum to automatically re-solve and reassign multiple other UAVs at once.",
+          "condition": "Mixed-Initiative allocation condition"
+        }
+      ],
+      "interaction_directness": [
+        {
+          "code": "Direct",
+          "justification": "The operator's constraint or manual assignment is explicitly addressed to a specific UAV via a click action.",
+          "condition": null
+        },
+        {
+          "code": "Indirect",
+          "justification": "In Mixed-Initiative mode, the other UAVs affected by max-sum's automatic re-allocation following a single operator constraint are not directly addressed by the operator — they are affected by a re-solved plan resulting from an instruction meant for a different UAV.",
+          "condition": "Mixed-Initiative allocation condition"
+        }
+      ],
+      "communication_proximity": [
+        {
+          "code": "Remote",
+          "justification": "Operator-to-UAV interaction is entirely through the simulated screen-based interface, with no physical robots present.",
+          "condition": "operator-UAV channel"
+        },
+        {
+          "code": "Proximate",
+          "justification": "The two teamed operators are explicitly seated next to each other at adjacent full-HD screens and can communicate and collaborate verbally throughout the task.",
+          "condition": "operator-operator channel"
+        }
+      ],
+      "coordination_architecture": [
+        {
+          "code": "Distributed Coordination",
+          "justification": "Max-sum is explicitly described throughout as a decentralised coordination algorithm in which agent and task nodes iteratively exchange messages to converge on an allocation, with no single robot or server holding overall coordinating authority; a base station only offloads some of the heavier per-task computation, it does not act as a decision-making leader.",
+          "condition": null
+        }
+      ],
+      "computational_characteristics": [
+        {
+          "code": "Task-Allocation (Placeholder)",
+          "justification": "The max-sum algorithm computes task allocations across the UAV team to minimize completion time — this is the codebook's own cited source example for this code.",
+          "condition": null
+        },
+        {
+          "code": "Not Described",
+          "justification": "The article does not name a specific path-planning algorithm family for how an individual UAV computes its own route once assigned a waypoint or region-scan task.",
+          "condition": null
+        }
+      ],
+      "human_involvement_level": [
+        {
+          "code": "Human-in-the-loop (HInL)",
+          "justification": "Manual Allocation requires the operator to continuously click and assign each UAV to each task for the mission to proceed.",
+          "condition": "Manual allocation condition"
+        },
+        {
+          "code": "Human-on-the-loop (HOnL)",
+          "justification": "In Mixed-Initiative mode, max-sum computes and re-computes task allocations autonomously; the operator monitors and can constrain/override it but the function does not require this.",
+          "condition": "Mixed-Initiative allocation condition"
+        }
+      ],
+      "level_of_human_control_abstraction": [
+        {
+          "code": "Goal-Oriented (LHCA 4)",
+          "justification": "Both manual task-to-UAV assignment and Mixed-Initiative constraint-setting are discrete, one-off goal-level inputs (click a UAV, click a task/reassignment), with the system executing all subsequent path-planning and task-allocation steps; no continuous control channel is described.",
+          "condition": null
+        }
+      ],
+      "operational_domain": [
+        {
+          "code": "Air",
+          "justification": "All six vehicles are simulated quadcopter UAVs operating in the air domain.",
+          "condition": null
+        }
+      ]
+    }
+  },
+  "flags": []
+}

@@ -1,0 +1,87 @@
+{
+  "article_id": "naghsh_2008_guardians_firefighting_swarm",
+  "citation": {
+    "authors": "Amir M. Naghsh, Jeremi Gancet, Andry Tanoto, Chris Roast",
+    "year": 2008,
+    "title": "Analysis and Design of Human-Robot Swarm Interaction in Firefighting",
+    "source_file": "articles/Naghsh_Analysis_and_design_of_human-robot_swarm_interaction_in_firefighting.md"
+  },
+  "extraction_metadata": {
+    "date_extracted": "2026-07-10",
+    "codebook_versions": {
+      "study_type": "0.3",
+      "task_environment": "0.8"
+    },
+    "model": "claude-sonnet-5"
+  },
+  "study_type": {
+    "primary": "Design/Interface Concept Paper",
+    "secondary": "User Study",
+    "sub_attributes": {
+      "setting": "Lab",
+      "measured_constructs": ["Other / Not Listed (informal preference between ordinal vs. continuous visual direction indicators)"],
+      "modality_flags": []
+    },
+    "justification": "The article's central contribution is a set of proposed, largely untested interaction concepts (tactile, visual, movement-based, and tangible firefighter-swarm interfaces, plus a base-station architecture) for the GUARDIANS project, most reported with zero human evaluation, matching Design/Interface Concept Paper as Primary. However, one component — the visual LED-based direction-indicator prototype (Figure 3) — is stated to have been 'trialed with SyFire,' with informal preliminary findings about which display style users preferred, satisfying the v0.2 research-aim priority rule for User Study as Secondary."
+  },
+  "summary": {
+    "template": "user_study",
+    "task": "Firefighters (or firefighter trainees at the SyFire training centre) were shown different visual configurations of a novel LED-based, helmet-mounted directional device intended to communicate the swarm's collectively-determined direction toward a point of interest, with the aim of identifying the most effective way to communicate direction with minimal required attention.",
+    "control": "Not applicable in a swarm-control sense — this component of the study evaluated a one-way robot-to-human display device, not an interface for the firefighter to command the swarm.",
+    "participants": "Not precisely specified; described only as 'users' evaluated in consultation/trials with SyFire (South Yorkshire Fire and Rescue Service), the project's firefighting practitioner partner. No N, demographics, or formal recruitment details are given.",
+    "results": "Preliminary findings indicated that users valued clear ordinal (discrete, categorical) direction indications over continuous ones on the visual LED device.",
+    "issues": "Not reported for this specific trial beyond the described preference finding; the article gives no detail on task performance, errors, or difficulties encountered by users of the device.",
+    "recommendations": "Not explicitly stated for this specific trial beyond the implicit design guidance that ordinal/discrete visual indicators should be favored over continuous ones when communicating swarm-derived direction to firefighters under high-stress, low-visibility, minimal-attention conditions.",
+    "autonomous_capabilities": "The GUARDIANS robot swarm (about 20 Khepera III robots with IR/ultrasonic/chemical sensors, 3 ERRATIC robots additionally equipped with laser rangefinders and cameras, and 1 RESCUER robot with laser rangefinder, DGPS, inclinometer, gyroscope/magnetic, vision, and olfactory sensors) is designed to autonomously localize and navigate itself, track firefighters (optionally aided by RFID tags on their gear), notify them of hazards, and collectively determine and communicate a 'predominant swarm direction' toward points of interest, relying on auto-organization and emergent group behavior with built-in redundancy across heterogeneous, multimodal-wireless-networked (ZigBee/Bluetooth/WiFi) robots. A base station (mission editor, mission planning/scheduling/execution-monitoring module, mission data recorder, sensor-data-processing module) supports adjustable autonomy, letting operators shift between full swarm autonomy, policy-level requests (e.g. 'explore and report any abnormal event'), and direct step-by-step teleoperation of individual or small groups of robots (and, notably, of human crew members via simple relayed action requests when their own visibility/hearing is compromised)."
+  },
+  "classification": {
+    "task_environment_v0.8": {
+      "task_object_spatiotemporal_dynamics": [
+        { "code": "Distributed Task Object", "justification": "Hazards (obstacles, high temperature, chemicals) and victims are described as arising at multiple, scattered, largely static locations throughout the warehouse that the swarm must detect and notify firefighters about, per the paper's own described application scenario rather than a single reported executed run.", "condition": "described firefighting application scenario" }
+      ],
+      "behavioral_relation_to_task_object": [
+        { "code": "Search Task", "justification": "The swarm assists firefighters in searching for and localizing victims within the smoke-filled warehouse, whose location is initially unknown.", "condition": null },
+        { "code": "Avoidance Task", "justification": "The swarm notifies firefighters of hazards (obstacles, high temperature, chemicals) so they can be avoided, an explicit negative-consequence-driven behavioral relation.", "condition": null },
+        { "code": "Unclear / Candidate New Code", "justification": "Indicating direction toward the exit point or scene of incident is a navigate-to-a-point behavior, not a Search (location is not unknown to the system), Engagement, or Avoidance relation — the same gap flagged in bashyal_2008_radiation_source_hsi ('Navigate-to-Known-Target Task').", "condition": "exit/scene-of-incident direction guidance" }
+      ],
+      "team_size": [
+        { "code": "Multi-human - Multi-robot", "justification": "The GUARDIANS appliance explicitly involves multiple base-station roles (coordinator, operators, sensor-data specialists, commanding-chain stakeholders) and multiple on-field firefighters interacting with a multi-robot swarm.", "condition": null }
+      ],
+      "team_composition": [
+        { "code": "Heterogeneous", "justification": "Three distinct robot types (Khepera III, ERRATIC, RESCUER) with different sensor suites and capabilities are explicitly enumerated.", "condition": "robot side" },
+        { "code": "Heterogeneous", "justification": "Distinct, named human roles are defined with different responsibilities and system access: base station coordinator, operators, sensor data specialists, commanding-chain stakeholders, and on-field firefighters.", "condition": "human side" }
+      ],
+      "interaction_model": [
+        { "code": "Many-to-many", "justification": "Multiple base-station users and multiple on-field firefighters are all connected to, and can interact with, the multi-robot swarm through the shared GUARDIANS appliance system.", "condition": null }
+      ],
+      "interaction_directness": [
+        { "code": "Direct", "justification": "Tactile/visual signals are addressed specifically to a given firefighter, and base-station commands/teleoperation are addressed to specific robots or crew members.", "condition": null }
+      ],
+      "communication_proximity": [
+        { "code": "Proximate", "justification": "On-field firefighters wear tactile (torso tactors) and visual (helmet-mounted LED) interfaces that communicate with them via physical, co-located sensory channels as the swarm operates around them.", "condition": "on-field firefighter-swarm interaction" },
+        { "code": "Remote", "justification": "Base-station coordinators/operators/specialists interact with the swarm and field crew entirely through screen-based remote monitoring and control interfaces.", "condition": "base-station interaction" }
+      ],
+      "coordination_architecture": [
+        { "code": "Hybrid Coordination", "justification": "The swarm's default behavior explicitly relies on auto-organization and emergent group behavior (decentralized), while the base station can take centralized control over one or a few individual robots at any time without halting the rest of the swarm's autonomous activity (a coexisting centralized mechanism).", "condition": null }
+      ],
+      "computational_characteristics": [
+        { "code": "Not Described", "justification": "The article references 'the swarming algorithm' used by the GUARDIANS robots only by pointing to a separate publication, without naming or describing the specific control mechanism itself.", "condition": null }
+      ],
+      "human_involvement_level": [
+        { "code": "Human-on-the-loop (HOnL)", "justification": "During normal operations robots operate autonomously without requiring continuous human input, while base-station operators monitor overall swarm activity.", "condition": "normal autonomous swarm operation" },
+        { "code": "Human-in-the-loop (HInL)", "justification": "Adjustable autonomy lets an operator take direct teleoperation control over one or more robots (or, similarly, issue step-by-step action requests to a firefighter), a function that explicitly requires human intervention to occur.", "condition": "adjustable-autonomy teleoperation override" }
+      ],
+      "level_of_human_control_abstraction": [
+        { "code": "Direct (LHCA 1)", "justification": "The described teleoperation control mode is explicitly 'step by step action,' i.e. continuous direct commands to a robot (or crew member), the finest-grained control state described.", "condition": "teleoperation state" },
+        { "code": "Goal-Oriented (LHCA 4)", "justification": "The described 'policy level control' mode issues a discrete high-level request (e.g. 'explore and report any abnormal event') that the system then autonomously executes in full.", "condition": "policy-level control state" }
+      ],
+      "operational_domain": [
+        { "code": "Land", "justification": "All three robot types (Khepera III, ERRATIC, RESCUER) are ground robots operating within an industrial warehouse.", "condition": null }
+      ]
+    }
+  },
+  "flags": [
+    { "dimension": "task_environment_v0.8 / behavioral_relation_to_task_object", "type": "Unclear / Candidate New Code", "note": "Directional guidance toward a known exit/incident-scene point does not fit any existing code; reuses the gap already flagged in bashyal_2008_radiation_source_hsi ('Navigate-to-Known-Target Task')." },
+    { "dimension": "task_environment_v0.8 / computational_characteristics", "type": "Not Described", "note": "The swarming algorithm governing individual robot motion is referenced only by citation to another paper, not described in this article's own text." }
+  ]
+}

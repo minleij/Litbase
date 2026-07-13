@@ -1,0 +1,164 @@
+{
+  "article_id": "donmez_2010_des_workload_uv",
+  "citation": {
+    "authors": "Donmez, B., Nehme, C., & Cummings, M. L.",
+    "year": 2010,
+    "title": "Modeling Workload Impact in Multiple Unmanned Vehicle Supervisory Control",
+    "source_file": "articles/Donmez_2010_Modeling_Workload_Impact_in_Multiple_Unmanned_Vehicle_Supervisory_Control.md"
+  },
+  "extraction_metadata": {
+    "date_extracted": "2026-07-10",
+    "codebook_versions": {
+      "study_type": "0.2",
+      "task_environment": "0.8"
+    },
+    "model": "claude-sonnet-5",
+    "notes": "This is one of the two articles the Task-Environment codebook's own Section 9.5 Scope note (originally added in v0.7) cites as motivating the broadened LHCA scope — continuous camera pan/zoom during the RESCHU search task is coded Direct/Augmented per that precedent. Also see flags for a borderline Study-Type Secondary code fit (deferred by the user for now). Re-coded 2026-07-10 against Task-Environment v0.8: target search/identification now maps onto the new Search Task (4.2) code, replacing the original Unclear / Candidate New Code flag."
+  },
+  "study_type": {
+    "primary": "User Study",
+    "secondary": "Modeling/Theoretical Paper",
+    "sub_attributes": {
+      "setting": "Simulated/Remote (incl. VR)",
+      "measured_constructs": ["Performance", "Workload"],
+      "modality_flags": []
+    },
+    "justification": "A formal, well-powered between-subjects experiment with 74 online participants using the RESCHU testbed provides substantial live human-subjects data (score, wait times, utilization), so User Study is Primary; the article's persistent generalizable contribution is a queuing-theory discrete-event-simulation (DES) model of operator workload that the experiment is used to calibrate and validate, so Modeling/Theoretical Paper is the nearest-fit Secondary code (see flags for a caveat on this fit)."
+  },
+  "summary": {
+    "template": "user_study",
+    "task": "Single operators supervised a simulated heterogeneous team of unmanned vehicles (UAVs and UUVs) via the RESCHU testbed, running 10-minute surveillance missions to locate and visually identify targets of interest (cars, swimming pools, helipads) in urban coastal/inland settings, while replanning routes, avoiding dynamically-appearing threat areas, and completing visual search tasks at each area of interest (AOI).",
+    "control": "A five-panel map-based interface (RESCHU) let operators monitor vehicle locations/health, add waypoints, reroute vehicles around threats or toward closer AOIs, and, once a vehicle reached an AOI, engage its payload — a single button click uncovered the target for the high-altitude sensor UAV, while for the medium-altitude UAVs and UUVs the operator had to pan and zoom a simulated live camera feed to visually locate and identify the specified target. Most vehicle navigation and re-tasking after task completion was automated by the system, leaving the operator responsible for supervisory monitoring, optional replanning, threat avoidance, and target identification.",
+    "participants": "74 participants (6 female, 68 male, ages 18-50; mostly students, 14 industry UV researchers) completed one 10-minute online session after an interactive tutorial and open-ended practice, randomly assigned to one of three between-subjects vehicle-heterogeneity conditions (none, medium, or high). No monetary compensation beyond a single best-performer prize. A separate earlier pilot (15 online, 15 in-lab) had found no significant online-vs-lab differences.",
+    "results": "Vehicle-team heterogeneity significantly affected all three outcome measures (MANOVA, p < .0001). Operator utilization and search-task wait times were both highest with no heterogeneity (five identical vehicles requiring frequent interaction) and decreased with medium and high heterogeneity (longer neglect-tolerance vehicle types requiring less frequent interaction). Performance score was non-monotonic, peaking in the medium-heterogeneity condition rather than the high-heterogeneity condition, suggesting excessive heterogeneity/automation can also degrade performance. Utilization (the workload proxy) was significantly associated with attention-switching delay (wait time due to attention inefficiency, WTAI) and with performance score, broadly consistent with an inverted-U workload-performance relationship, though the pattern at low utilization differed between the medium- and high-heterogeneity conditions. Incorporating this utilization-WTAI relationship into the DES model substantially improved both its replication of the observed experimental data and its ability to predict outcomes for team structures not directly tested.",
+    "issues": "The 10-minute session length (chosen to limit online-participant attrition) meant most utilization data clustered at higher values and did not require sustained vigilance, leaving the low-utilization/underload end of the workload-performance relationship under-characterized and inconsistent across the two heterogeneous conditions. Utilization was measured only as a post hoc aggregate over each time window rather than an instantaneous real-time signal, limiting its use for real-time adaptive automation. The high-heterogeneity condition had missing experimental design cells, reducing the model's predictive accuracy specifically for that condition's performance-score and utilization estimates.",
+    "recommendations": "Investigate the functional form of the workload-performance relationship at low utilization/underload with longer sessions permitting sustained vigilance decrement to emerge. Develop real-time (rather than post hoc aggregate) utilization measurement to support runtime adaptive automation. Investigate the rate of onset of high-workload periods, not just sustained utilization levels, as a potentially more relevant performance driver. Incorporate additional sources of operator cognitive inefficiency beyond utilization alone (e.g., trust) in future models while retaining a parsimonious single-relationship approach where possible.",
+    "autonomous_capabilities": "Vehicles autonomously navigated between assigned areas of interest and were automatically reassigned to a new AOI once their current task was completed, via an automated-path planner, without requiring the operator to manually retask them. A high-altitude UAV autonomously carried a synthetic-aperture-radar-type sensor to discover new, previously-unspecified targets for later acquisition by other vehicle types. The underlying DES model itself autonomously generated stochastic event arrivals/service times and, in its revised form, computed a wait-time penalty for each new event as a function of the operator's utilization over the preceding time window, without requiring additional human input to the model."
+  },
+  "classification": {
+    "task_environment_v0.8": {
+      "task_object_spatiotemporal_dynamics": [
+        {
+          "code": "Distributed Task Object",
+          "justification": "Areas of interest carrying predetermined or newly-discovered targets are multiple separate, scattered, individually-static locations across the mission zone that the operator/vehicles must visit and act on.",
+          "condition": "areas of interest / targets"
+        },
+        {
+          "code": "Distributed Task Object",
+          "justification": "Threat areas are described as multiple, scattered instances that 'dynamically changed' (appearing/updating over the mission) rather than a single continuously translating or growing hazard.",
+          "condition": "threat areas"
+        }
+      ],
+      "behavioral_relation_to_task_object": [
+        {
+          "code": "Avoidance Task",
+          "justification": "Operators are explicitly instructed to avoid threat areas, with contact framed as a negative outcome to prevent while still completing the mission.",
+          "condition": "threat areas"
+        },
+        {
+          "code": "Search Task",
+          "justification": "Visually locating and identifying a target at an AOI is a search relation (finding/identifying the object is the goal), not avoidance — matching Section 4.2 (Search Task), added in v0.8.",
+          "condition": "target search/identification"
+        }
+      ],
+      "team_size": [
+        {
+          "code": "Single-human - Multi-robot",
+          "justification": "One operator supervises a team of 3-5 vehicles depending on the heterogeneity condition.",
+          "condition": null
+        }
+      ],
+      "team_composition": [
+        {
+          "code": "Homogeneous",
+          "justification": "The no-heterogeneity condition consists of five identical MALE UAVs.",
+          "condition": "robot side, no-heterogeneity condition"
+        },
+        {
+          "code": "Heterogeneous",
+          "justification": "The medium- and high-heterogeneity conditions mix MALE UAVs, UUVs, and (high-heterogeneity only) a HALE UAV, each differing in speed, sensor type, service time, and permitted AOI types.",
+          "condition": "robot side, medium- and high-heterogeneity conditions"
+        }
+      ],
+      "interaction_model": [
+        {
+          "code": "One-to-one",
+          "justification": "The operator's commands (waypoints, replanning, payload engagement) are each addressed to one specific vehicle at a time, consistent with the paper's own single-server queuing model of the operator.",
+          "condition": null
+        }
+      ],
+      "interaction_directness": [
+        {
+          "code": "Direct",
+          "justification": "Operators issue explicit, addressed commands to specific vehicles via the map interface.",
+          "condition": null
+        }
+      ],
+      "communication_proximity": [
+        {
+          "code": "Remote",
+          "justification": "The entire experiment is conducted online through a screen-based interface, with no physical co-location between operator and vehicles.",
+          "condition": null
+        }
+      ],
+      "coordination_architecture": [
+        {
+          "code": "Strongly Centralized Coordination",
+          "justification": "An automated-path planner within RESCHU is the single, fixed, mission-long mechanism that assigns idle vehicles to AOIs needing intelligence or predetermined targets; no robot-to-robot negotiation or leader-rotation is described.",
+          "condition": null
+        }
+      ],
+      "computational_characteristics": [
+        {
+          "code": "Task-Allocation (Placeholder)",
+          "justification": "The automated-path planner decides which idle vehicle is assigned to which AOI, a task-allocation mechanism distinct from any vehicle's own motion computation.",
+          "condition": null
+        },
+        {
+          "code": "Not Described",
+          "justification": "The article explicitly states vehicles were 'not modeled on real UV performance data' and gives no path-planning/motion-generation algorithm for how a vehicle travels to its assigned AOI.",
+          "condition": null
+        }
+      ],
+      "human_involvement_level": [
+        {
+          "code": "Human-on-the-loop (HOnL)",
+          "justification": "Vehicle navigation between AOIs and automatic re-tasking proceed without continuous operator input; the operator can monitor and optionally redirect (replan, avoid threats) but the function does not require this to complete.",
+          "condition": "navigation/re-tasking function"
+        },
+        {
+          "code": "Human-in-the-loop (HInL)",
+          "justification": "Visual target identification at an AOI requires the operator to actively pan/zoom the camera and submit an identification; the function cannot complete without this human action.",
+          "condition": "target search/identification function"
+        }
+      ],
+      "level_of_human_control_abstraction": [
+        {
+          "code": "Goal-Oriented (LHCA 4)",
+          "justification": "Adding a waypoint or assigning a vehicle to an AOI is a discrete goal-level input; the vehicle then autonomously executes navigation to reach it.",
+          "condition": "waypoint/AOI assignment state"
+        },
+        {
+          "code": "Direct (LHCA 1)",
+          "justification": "Panning and zooming the simulated camera to locate a target is continuous operator input directly setting the camera's view, matching this codebook's own precedent (Scope note, v0.7) that cites camera pan/zoom in this exact article as a motivating case for treating continuous payload/sensor manipulation as Direct/Augmented and dominant under Rule 2 even while navigation runs autonomously in the background.",
+          "condition": "camera pan/zoom search state"
+        }
+      ],
+      "operational_domain": [
+        {
+          "code": "Cross-Domain",
+          "justification": "The team combines aerial vehicles (UAVs, Air domain) and unmanned underwater vehicles (UUVs, Maritime domain) operating together in the same mission.",
+          "condition": null
+        }
+      ]
+    }
+  },
+  "flags": [
+    {
+      "dimension": "study_type",
+      "type": "Unclear / Candidate New Code",
+      "note": "The article's persistent contribution (a queuing-theory DES model of operator workload) is closest to Modeling/Theoretical Paper (3.11), which even lists 'queuing models of neglect tolerance' as an example — but 3.11's definition requires validation 'primarily analytically... rather than empirically or through simulation trials,' whereas this model is explicitly validated by fitting distributions to, and checking predictions against, real human experimental data. None of the eleven Study-Type codes cleanly cover a human-performance/queuing simulation model that is empirically calibrated and validated against a human-subjects experiment rather than proven analytically or compared across algorithms.",
+      "proposed_code": "Either broaden 3.11 (Modeling/Theoretical Paper) to explicitly include human-performance/queuing-simulation models validated via empirical calibration against human-subjects data (not only closed-form analytical proofs), or add a distinct code for this pattern if it recurs across more of the corpus's human-supervisory-control-modeling literature. [Deferred by the user 2026-07-10; not yet actioned.]"
+    }
+  ]
+}

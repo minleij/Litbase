@@ -1,0 +1,196 @@
+{
+  "article_id": "fern_2018_momu_playbook",
+  "citation": {
+    "authors": "Fern, L., Draper, M., Oron-Gilad, T., Shively, R. J., Porat, T., Rottem-Hovev, M., & Silbiger, J.",
+    "year": 2018,
+    "title": "Multi-Operator Multi-UAV (MOMU) Control: Exploring the Influence of Sensor Tools and Playbook Task Delegation",
+    "source_file": "articles/MUSIM_Fern.md"
+  },
+  "extraction_metadata": {
+    "date_extracted": "2026-07-10",
+    "codebook_versions": {
+      "study_type": "0.2",
+      "task_environment": "0.8"
+    },
+    "model": "claude-sonnet-5",
+    "notes": "This article's three mission task types (marking civilians, tracking military targets, prosecuting HVTs) cleanly correspond to three distinct behavioral-relation gaps flagged this session (Search, Pursuit, and Engagement Task respectively) — a useful single-article confirmation of all three proposed codes at once. Re-coded 2026-07-10 against Task-Environment v0.8: all three now map onto the newly-defined Search Task (4.2), Pursuit Task (4.4), and Engagement Task (4.3) codes, replacing the original Unclear / Candidate New Code flags."
+  },
+  "study_type": {
+    "primary": "User Study",
+    "secondary": null,
+    "sub_attributes": {
+      "setting": "Lab",
+      "measured_constructs": ["Performance", "Workload"],
+      "modality_flags": []
+    },
+    "justification": "A fully within-subjects, formally powered experiment (12 participants, 3x2x2 design, GLMM analysis of accuracy/reaction time/NASA-TLX) comparing three control modes is the article's sole contribution; MUSIM is an existing, previously-published testbed rather than a novel system introduced by this paper, so no Secondary code is needed."
+  },
+  "summary": {
+    "template": "user_study",
+    "task": "Pairs of participants (6 MOMU teams) shared a pool of 3 or 5 UAVs to conduct RSTA missions across two adjacent Areas of Operation (a high-resolution urban area with a single point of interest, and a lower-resolution suburban area along a route), each monitoring their assigned area for civilian and military vehicles and prioritizing four tasks: prosecuting High Value Targets (HVTs), tracking military vehicles, marking civilian vehicles, and responding to team chat messages, across six 8-minute scenarios per control-mode block.",
+    "control": "Three control modes were compared within-subjects: Manual (independently flying each UAV via point-click-drag waypoints and manually panning/tilting/zooming its sensor with a 6-DOF SpaceExplorer controller); Tools (three sensor-management aids — Line-of-Sight-with-Castling showing/predicting which UAV had the best view of a location, Maintain automatically holding a sensor's footprint size constant as the UAV moved, and Coupling linking multiple UAVs' cameras to a shared stare point); and Playbook (delegating high-level 'plays' — Surveillance, Route Recon, Prosecute Target — that automatically configured one or more UAVs' flight and sensor behavior to accomplish a task). UAV control could be requested and handed off between teammates, with only one operator able to actively control a given UAV at a time.",
+    "participants": "12 male participants (ages 19-25, M = 21), organized into 6 pre-existing pairs (friends/co-workers), all frequent video-game players (>=10 hrs/week) with no military, piloting, or UAV experience, in a fully within-subjects 3 (Control: Manual/Tools/Playbook) x 2 (UAV Level: 3/5) x 2 (AO: urban/suburban) design analyzed with General Linear Mixed Models.",
+    "results": "Playbook and Manual produced significantly higher HVT prosecution accuracy than Tools (56-60% vs. 32%), and Playbook/Tools were nearly twice as fast as Manual for prosecuting HVTs in the urban AO (~33s vs. 65s). Playbook also produced significantly higher civilian-marking accuracy (66%) than Manual (58%) or Tools (60%), and significantly faster chat-response times, though Manual had a higher (but less accurate) chat response rate. Playbook and Manual scored significantly higher on the composite mission score (66% and 62%) than Tools (48%); five UAVs significantly improved the composite score over three. Subjective workload ratings showed no significant differences between control modes (all around 50% of scale), though both Tools and Plays were rated favorably for ease of use and mission usefulness.",
+    "issues": "The Tools condition consistently underperformed both Manual and Playbook on accuracy for the two highest-priority tasks (prosecuting HVTs, marking civilians), and participants rated Tools as less useful than Plays despite comparable ease-of-use ratings — likely because Tools' relevance to any given task was less immediately obvious and required more strategic learning to use well. Both Tools and Playbook produced a 'tunneling' effect, reducing response rates to the lower-priority chat task relative to Manual, though it is unclear whether this reflects a genuine attentional cost or simply participants' inexperience with the new aids. Playbook's benefit was explicitly tied to how well its three pre-built plays matched the specific tasks tested; the authors caution this may not generalize to more dynamic environments where available plays are a poor match to the situation.",
+    "recommendations": "Continue developing task-specific automation 'plays' for supervisory control since their direct relevance to concrete tasks made value obvious to operators and drove the strongest performance; ensure the play library can be modified/adapted for more dynamic or unpredictable tasking environments. Improve the intuitiveness and task-specific framing of generic sensor-management Tools and provide dedicated training on when and how to use them. Investigate the workload/performance tradeoff of adding more UAV assets further, since performance improved with 5 UAVs over 3 while subjective workload stayed manageable in both conditions, suggesting room to add further resources.",
+    "autonomous_capabilities": "Playbook automation could autonomously fly and sensor-point one or more UAVs to accomplish a delegated task: a Surveillance play autonomously loitered and pre-pointed assigned UAVs' sensors at points of interest; a Route Recon play dynamically generated a flight path around a designated route and autonomously slewed the assigned UAVs' sensors along it; and a Prosecute Target play autonomously locked assigned UAVs' sensors onto a selected target and staged the laser/weapon in standby, leaving only final engagement (lase, then fire) to the operator. Independently of Playbook, an autotrack function could autonomously keep a UAV's sensor centered on a moving target until the target stopped, at which point it automatically disengaged, and a Coupling tool could autonomously slave one or more UAVs' cameras to follow another UAV's camera movements."
+  },
+  "classification": {
+    "task_environment_v0.8": {
+      "task_object_spatiotemporal_dynamics": [
+        {
+          "code": "Distributed Task Object",
+          "justification": "Civilian and military vehicles (30 civilian, 6-8 military, 2-4 HVT per scenario) are multiple separate instances that arise intermittently from a point of interest or along a route.",
+          "condition": null
+        },
+        {
+          "code": "Moving Task Object",
+          "justification": "Vehicles drive out of the POI or along the route and continue moving until stopped, requiring the operator to continuously track them rather than address them once.",
+          "condition": null
+        }
+      ],
+      "behavioral_relation_to_task_object": [
+        {
+          "code": "Search Task",
+          "justification": "Marking civilian vehicles as friendly is a detection/identification relation, not avoidance — matching Section 4.2 (Search Task), added in v0.8.",
+          "condition": "marking civilians"
+        },
+        {
+          "code": "Pursuit Task",
+          "justification": "Tracking a military vehicle with autotrack until it stops or reveals a weapon is continuous custody-maintenance of an already-identified moving target — matching Section 4.4 (Pursuit Task), added in v0.8.",
+          "condition": "tracking military targets"
+        },
+        {
+          "code": "Engagement Task",
+          "justification": "Prosecuting a confirmed HVT (lase and fire) is a goal-directed engagement relation where contact with the target is the objective — matching Section 4.3 (Engagement Task), added in v0.8.",
+          "condition": "prosecuting HVTs"
+        }
+      ],
+      "team_size": [
+        {
+          "code": "Multi-human - Multi-robot",
+          "justification": "Two operators per team share a pool of 3 or 5 UAVs.",
+          "condition": null
+        }
+      ],
+      "team_composition": [
+        {
+          "code": "Homogeneous",
+          "justification": "All UAVs are notional, identical fixed-wing vehicles with fixed airspeed/altitude across all conditions.",
+          "condition": "robot side"
+        },
+        {
+          "code": "Homogeneous",
+          "justification": "Both operators have identical roles, capabilities, and interface access, alternating which AO they are assigned to across trials.",
+          "condition": "human side"
+        }
+      ],
+      "interaction_model": [
+        {
+          "code": "One-to-one",
+          "justification": "In Manual/Tools modes, an operator's commands address one specific UAV they currently control at a time.",
+          "condition": "Manual/Tools modes"
+        },
+        {
+          "code": "One-to-many",
+          "justification": "A single Playbook play can configure the flight and sensor behavior of multiple assigned UAVs at once.",
+          "condition": "Playbook mode"
+        }
+      ],
+      "interaction_directness": [
+        {
+          "code": "Direct",
+          "justification": "Operators issue explicit, addressed commands to specific UAVs or plays via the interface.",
+          "condition": null
+        }
+      ],
+      "communication_proximity": [
+        {
+          "code": "Remote",
+          "justification": "Operators interact with UAVs entirely through networked Ground Control Stations, with no physical co-location with the simulated vehicles.",
+          "condition": "operator-UAV channel"
+        },
+        {
+          "code": "Not Described",
+          "justification": "The article does not state whether the two teamed operators were physically co-located in the same room or seated at separated, only network-linked stations.",
+          "condition": "operator-operator channel"
+        }
+      ],
+      "coordination_architecture": [
+        {
+          "code": "Not Applicable",
+          "justification": "No coordination or negotiation mechanism among the UAVs themselves is described; each UAV independently executes its assigned loiter/route/play, with the two human operators as the sole coordinating agents (via request/handoff of individual vehicles).",
+          "condition": null
+        }
+      ],
+      "computational_characteristics": [
+        {
+          "code": "Task-Allocation (Placeholder)",
+          "justification": "Playbook could optionally choose which of the participant's currently-controlled UAVs to assign to a called play, a task-allocation decision distinct from any single UAV's own motion computation.",
+          "condition": null
+        },
+        {
+          "code": "Classical Geometric / Sampling-Based Control",
+          "justification": "The autotrack function keeps the sensor centered on a tracked vehicle via image-based tracking, a deterministic geometric/visual-servoing computation rather than a named learned or population-based method.",
+          "condition": "autotrack"
+        },
+        {
+          "code": "Not Described",
+          "justification": "The Route Recon play's flight-path generation is described only as 'dynamically generated... based on the location of the assigned UAVs and the route,' without naming a specific path-planning algorithm family.",
+          "condition": "Route Recon play"
+        }
+      ],
+      "human_involvement_level": [
+        {
+          "code": "Human-in-the-loop (HInL)",
+          "justification": "Manual waypoint assignment and sensor steering (in both Manual and Tools modes) require continuous operator input to operate as intended.",
+          "condition": "manual flight/sensor control"
+        },
+        {
+          "code": "Human-on-the-loop (HOnL)",
+          "justification": "Once a Playbook play is called or autotrack is engaged, flight/sensor positioning or target tracking proceeds without further operator input; the operator monitors and can intervene.",
+          "condition": "Playbook plays and autotrack"
+        }
+      ],
+      "level_of_human_control_abstraction": [
+        {
+          "code": "Direct (LHCA 1)",
+          "justification": "Manual sensor control via the 6-DOF SpaceExplorer continuously and directly sets the gimbal's pan/tilt/zoom.",
+          "condition": "manual sensor control state"
+        },
+        {
+          "code": "Goal-Oriented (LHCA 4)",
+          "justification": "Both manual waypoint/flight-path assignment and calling a Playbook play are discrete goal-level inputs, with the system executing the necessary steps to reach them.",
+          "condition": "waypoint assignment / play-calling state"
+        }
+      ],
+      "operational_domain": [
+        {
+          "code": "Air",
+          "justification": "All vehicles are fixed-wing UAVs operating in the air domain.",
+          "condition": null
+        }
+      ]
+    }
+  },
+  "flags": [
+    {
+      "dimension": "coordination_architecture",
+      "type": "Not Applicable",
+      "note": "No robot-to-robot coordination mechanism is described; coordination resides entirely with the two human operators.",
+      "proposed_code": null
+    },
+    {
+      "dimension": "computational_characteristics",
+      "type": "Not Described",
+      "note": "No specific path-computation algorithm named for the Route Recon play.",
+      "proposed_code": null
+    },
+    {
+      "dimension": "communication_proximity",
+      "type": "Not Described",
+      "note": "Physical co-location of the two teamed operators relative to each other is not stated.",
+      "proposed_code": null
+    }
+  ]
+}

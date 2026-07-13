@@ -1,0 +1,74 @@
+{
+  "article_id": "peschel_2013_uas_mission_specialist_survey",
+  "citation": {
+    "authors": "Joshua Michael Peschel, Robin Roberson Murphy",
+    "year": 2013,
+    "title": "On the Human–Machine Interaction of Unmanned Aerial System Mission Specialists",
+    "source_file": "articles/Pechel-On_the_HumanMachine_Interaction_of_Unmanned_Aerial_System_Mission_Specialists.md"
+  },
+  "extraction_metadata": {
+    "date_extracted": "2026-07-10",
+    "codebook_versions": {
+      "study_type": "0.3",
+      "task_environment": "0.8"
+    },
+    "model": "claude-sonnet-5",
+    "notes": "Not a swarm article — a narrative literature survey of single-UAV (not multi-robot) human-machine interface technology across 17 fielded UAS, organized by the 'Mission Specialist' human team role. Because this is a survey of many different systems rather than a report of one system/study, task_environment_v0.8 codes below are applied at an aggregate level across the reviewed systems per the Study-Type codebook's own guidance for Meta-Review/Survey articles (Section 4), rather than to any single described mission; several dimensions are coded Not Applicable where the survey stays at a purely conceptual/interface-classification level."
+  },
+  "study_type": {
+    "primary": "Meta-Review / Survey",
+    "secondary": null,
+    "justification": "The article synthesizes existing published/trade literature and product documentation on 17 fielded UAS to characterize the hardware/software interfaces used by the 'Mission Specialist' human team role, without collecting new empirical data of its own (no new hardware trial, simulation, or elicitation) and without a reproducible, protocol-driven search methodology (no PRISMA-style search strategy or inclusion/exclusion flow reported), matching Narrative/Topical Survey (3.6.2)."
+  },
+  "summary": {
+    "template": "abstract_only",
+    "abstract_summary": "This survey characterizes the human-machine interaction technologies used by the 'Mission Specialist' role — one of three human team roles (alongside Flight Director and Pilot) identified across the unmanned aerial systems (UAS) literature — across 17 fielded systems spanning four UAV size/endurance categories (micro, small, MALE, HALE). Drawing on over 40 papers and product documentation, the authors catalog each system's hardware- and software-based interface elements and identify three findings: (1) Mission Specialist and Pilot roles have dedicated, separate interfaces in MALE/HALE systems, but share or mirror the same interface in micro/small systems; (2) larger (MALE/HALE) systems favor sophisticated software-based interfaces while micro/small systems rely predominantly on hardware-based controls (joysticks, buttons, touchscreens); and (3) this shared-interface arrangement in micro/small UAS creates a potential interaction conflict between the Pilot and Mission Specialist roles, since interface design principles call for dedicated interfaces per distinct role, risking suboptimal performance and reduced robustness in small-UAS operations such as urban or wilderness search and rescue."
+  },
+  "classification": {
+    "task_environment_v0.8": {
+      "task_object_spatiotemporal_dynamics": [
+        { "code": "Not Applicable", "justification": "As a survey of interface hardware/software across many different systems, the article does not describe a specific mission's task-object dynamics in enough detail to code this dimension; it stays at the level of generic 'reconnaissance imagery' and 'target identification' responsibilities.", "condition": null }
+      ],
+      "behavioral_relation_to_task_object": [
+        { "code": "Search Task", "justification": "Across essentially every reviewed system, the Mission Specialist's core responsibility is described as visual reconnaissance, imagery collection, and target identification/detection — a recurring Search-Task pattern applied here at the aggregate level of the survey's own generalized description, rather than to one specific reported mission run.", "condition": "aggregate across surveyed systems" }
+      ],
+      "team_size": [
+        { "code": "Multi-human - Single-robot", "justification": "The survey's baseline described structure is a human team (Flight Director, Pilot, Mission Specialist, with roles sometimes overlapping in micro/small UAS) operating a single UAV per UAS; a passing reference to future multi-UAV/swarm operation is noted as related work, not the surveyed systems' own default structure.", "condition": null }
+      ],
+      "team_composition": [
+        { "code": "Not Applicable", "justification": "The surveyed systems' default described structure is one UAV per human team, so robot-side homogeneity/heterogeneity does not apply.", "condition": "robot side" },
+        { "code": "Heterogeneous", "justification": "Flight Director, Pilot, and Mission Specialist are explicitly distinct roles with different responsibilities and (in larger UAS) different interfaces.", "condition": "human side" }
+      ],
+      "interaction_model": [
+        { "code": "One-to-one", "justification": "Each Mission Specialist role interacts with the payload/camera of a single UAV, even in cases where the Pilot and Mission Specialist share the same physical device.", "condition": null }
+      ],
+      "interaction_directness": [
+        { "code": "Direct", "justification": "All described interfaces (joysticks, touchscreens, menus, button panels) are explicitly addressed by the Mission Specialist to control or query a specific system function.", "condition": null }
+      ],
+      "communication_proximity": [
+        { "code": "Proximate", "justification": "Onsite active human teams for micro and small UAS are colocated with the vehicle in the field, sharing a handheld controller/display.", "condition": "micro and small UAS (onsite teams)" },
+        { "code": "Remote", "justification": "Offsite human teams for MALE and HALE UAS operate from a ground control station not colocated with the vehicle, communicating via satellite/remote links.", "condition": "MALE and HALE UAS (offsite teams)" }
+      ],
+      "coordination_architecture": [
+        { "code": "Not Applicable", "justification": "The surveyed systems each involve a single UAV per human team; no multi-robot coordination is described for the systems themselves (a future multi-UAV/swarm direction is only cited as related work).", "condition": null }
+      ],
+      "computational_characteristics": [
+        { "code": "Not Described", "justification": "The survey is scoped entirely to human-machine interface hardware/software (displays, input devices, menus); it does not describe the underlying algorithms governing any UAV's autonomous flight or motion.", "condition": null }
+      ],
+      "human_involvement_level": [
+        { "code": "Human-in-the-loop (HInL)", "justification": "Micro and small UAS Mission Specialist interfaces are described as direct hardware-based control (radio control, joysticks, pushbuttons) for camera positioning and, in overlap cases, flight, requiring continuous manual operation.", "condition": "micro and small UAS" },
+        { "code": "Human-on-the-loop (HOnL)", "justification": "Larger MALE UAV operators are described as monitoring autonomous flight and only occasionally taking control during data collection, indicating the vehicle can operate without continuous human input while being supervised.", "condition": "MALE/HALE UAS during autonomous flight segments" }
+      ],
+      "level_of_human_control_abstraction": [
+        { "code": "Direct (LHCA 1)", "justification": "Micro/small UAS Mission Specialists are described using joysticks and dedicated hardware controls (e.g., for camera angling) that map continuously to specific outputs.", "condition": "micro and small UAS hardware-based control" },
+        { "code": "Parametric (LHCA 3)", "justification": "MALE/HALE UAS Mission Specialists interact via software menus, point-and-click, and touch interfaces to set discrete parameters (e.g., selecting a target, adjusting sensor settings) that the system then executes/maintains.", "condition": "MALE and HALE UAS software-based control" }
+      ],
+      "operational_domain": [
+        { "code": "Air", "justification": "All 17 surveyed systems are unmanned aerial vehicles.", "condition": null }
+      ]
+    }
+  },
+  "flags": [
+    { "dimension": "task_environment_v0.8 / task_object_spatiotemporal_dynamics", "type": "Not Applicable", "note": "The survey does not describe task-object dynamics for any single mission in sufficient detail; it stays at the level of general interface/role description across many systems." }
+  ]
+}

@@ -1,0 +1,149 @@
+{
+  "article_id": "parasuraman_2005_roboflag_delegation",
+  "citation": {
+    "authors": "Parasuraman, R., Galster, S., Squire, P., Furukawa, H., & Miller, C.",
+    "year": 2005,
+    "title": "A Flexible Delegation-Type Interface Enhances System Performance in Human Supervision of Multiple Robots: Empirical Studies With RoboFlag",
+    "source_file": "articles/ParasuramanIEEE2005.md"
+  },
+  "extraction_metadata": {
+    "date_extracted": "2026-07-10",
+    "codebook_versions": {
+      "study_type": "0.2",
+      "task_environment": "0.8"
+    },
+    "model": "claude-sonnet-5",
+    "notes": "Contains three separate human-subjects experiments plus a non-human computational (task-network/Monte Carlo) workload model in Section V; the same borderline Study-Type fit issue flagged for Donmez et al. (2010) recurs here for that modeling component (deferred, unresolved). Re-coded 2026-07-10 against Task-Environment v0.8: this article is the codebook's own cited source example for the new Defend/Block Task (4.5) code; flag capture now maps onto Engagement Task (4.3). Both replace the original Unclear / Candidate New Code flags."
+  },
+  "study_type": {
+    "primary": "User Study",
+    "secondary": "Modeling/Theoretical Paper",
+    "sub_attributes": {
+      "setting": "Simulated/Remote (incl. VR)",
+      "measured_constructs": ["Performance", "Workload", "Situation Awareness (SA)"],
+      "modality_flags": []
+    },
+    "justification": "Three separate formal within-subjects experiments (18, 9, and 12 paid participants) with extensive performance, NASA-TLX workload, and SART situation-awareness measures are the article's central contribution, so User Study is Primary; a companion task-network/Monte Carlo computational model of operator workload (Section V) is a comparably-weighted persistent contribution, coded as the nearest-fit Secondary (see flags for the same imperfect-fit caveat noted for Donmez et al., 2010)."
+  },
+  "summary": {
+    "template": "user_study",
+    "task": "In the RoboFlag simulation, a single operator supervised a team of blue-team robots (4, 6, or 8 depending on experiment) tasked with entering scripted opponent ('red team') territory, capturing the opponent's flag from a central area, and returning to home territory, while simultaneously defending their own flag from a tactically-varying (offensive/defensive/mixed) opponent team of equal size, across three separate experiments plus a non-human computational workload-modeling analysis.",
+    "control": "Operators controlled robots either manually via point-and-click waypoints or by delegating higher-level automated 'plays' (Circle Offense, Circle Defense, Patrol Border, and in Experiment 3 also higher-level 'superplays' combining multiple plays into an overall team posture) through a simplified Playbook delegation interface. Delegation type (manual-only, automated-only, or flexible manual+automated) and interface flexibility (restricted vs. flexible combinations of task-abstraction level and robot-aggregation level) were experimentally manipulated across the three experiments.",
+    "participants": "Three separate paid samples: Experiment 1, 18 participants (8 male, 10 female, 18-33yo), 45 trials each (3 visual ranges x 3 opponent postures x 5 reps); Experiment 2, 9 participants (5 male, 4 female, 19-33yo), 45 trials each (3 delegation types x 3 opponent postures x 5 reps); Experiment 3, 12 participants (3 male, 9 female, 18-27yo), 80 trials each (8 interfaces x 2 robot counts x 5 reps). NASA-TLX and 3D-SART were administered after each block in all three experiments.",
+    "results": "Experiment 1: the delegation interface supported effective supervision across unpredictable opponent postures — 100% success against a purely defensive opponent (longest completion times), ~75% against offensive, ~62% against the most challenging mixed posture; manual control use and subjective workload both rose with opponent unpredictability and reduced observability (lower visual range). Experiment 2: flexible (manual+automated) delegation produced shorter mission completion times than fixed-automation-only, comparable to fixed-manual-only, though with a small but significant increase in workload and reduced situation awareness relative to manual-only. Experiment 3: supervising 8 robots significantly reduced success rate and slowed completion versus 4 robots; the most flexible interface improved success rate and completion time over restricted interfaces at 4 robots, but this benefit disappeared at 8 robots, where workload was highest; a companion computational model of operator workload closely reproduced the empirical workload pattern across all eight tested interfaces.",
+    "issues": "The benefit of full interface flexibility was eliminated once operators supervised 8 robots rather than 4, apparently because the added overhead of deciding how to use that flexibility outweighed its benefit under higher load. Subjective situation awareness was consistently highest under manual-only control and lowest under flexible or automated conditions, seemingly because deciding when to switch between manual and automated control itself consumed cognitive capacity — working against the coarse-grained, general SA measure used rather than one targeted at automation transparency specifically. Experiment 1's design could not disentangle the separate effects of opponent posture on workload from visual range. Only the abstraction-level dimension of delegation-interface flexibility was tested; other proposed delegation features (full goal/plan specification, heterogeneous constraint depth per robot) were not examined.",
+    "recommendations": "Provide operators flexible, adaptable (not just adaptive) delegation interfaces that let them choose their own operating point between manual intervention and automation use, since this consistently outperformed fixed manual-only or fixed automation-only control except at very high robot counts. Match the level of interface flexibility offered to the actual team size being supervised, since maximal flexibility helps at moderate loads (4 robots) but its benefit disappears (and workload rises) at higher loads (8 robots). Ensure automated behaviors ('plays') are genuinely robust, since users fell back on manual control specifically when automation appeared insufficiently effective against unpredictable or difficult opponent tactics. Examine other proposed dimensions of delegation-interface flexibility beyond abstraction level (full goal/plan delegation, heterogeneous per-robot constraint depth), and use more targeted situation-awareness measures focused on automation transparency rather than general SA.",
+    "autonomous_capabilities": "Automated 'plays' used a Hierarchical Task Network planning system to autonomously translate a delegated high-level goal into coordinated multi-robot behavior: Circle Offense autonomously routed a user-selected number of robots into enemy territory and positioned them around the opponent's flag to attempt capture; Circle Defense autonomously circled designated robots around the home flag to block enemy access; Patrol Border autonomously distributed robots along the midfield boundary; and (Experiment 3) 'superplays' autonomously allocated multiple robots across a mix of these plays to achieve an overall offensive, defensive, or mixed team posture from a single high-level command. A related developmental Playbook implementation (mentioned but not itself tested here) could autonomously plan and fly a 'Watch Area' surveillance play for real simulated UAVs from as few as three operator inputs, adapting its plan in flight in response to disturbances like headwinds or malfunctions."
+  },
+  "classification": {
+    "task_environment_v0.8": {
+      "task_object_spatiotemporal_dynamics": [
+        {
+          "code": "Moving Task Object",
+          "justification": "The opposing (red) team's robots actively and continuously reposition according to their scripted tactical posture (offense/defense/patrol), requiring the operator to continuously track and respond to their current locations rather than address them once.",
+          "condition": null
+        }
+      ],
+      "behavioral_relation_to_task_object": [
+        {
+          "code": "Engagement Task",
+          "justification": "Capturing the opponent's flag is a goal-directed acquisition relation (contact with the object is the objective) — matching Section 4.3 (Engagement Task), added in v0.8.",
+          "condition": "offensive/flag-capture behavior"
+        },
+        {
+          "code": "Defend/Block Task",
+          "justification": "Circle Defense and Patrol Border require positioning robots to prevent an active adversary from reaching/capturing one's own flag, distinct from Avoidance (own robots' safety) and from Engagement (acting on the object directly) — matching Section 4.5 (Defend/Block Task), added in v0.8, for which this article is the codebook's own cited source example.",
+          "condition": "defensive/flag-protection behavior"
+        }
+      ],
+      "team_size": [
+        {
+          "code": "Single-human - Multi-robot",
+          "justification": "A single operator supervises a team of 4, 6, or 8 robots depending on the experiment.",
+          "condition": null
+        }
+      ],
+      "team_composition": [
+        {
+          "code": "Homogeneous",
+          "justification": "All blue-team robots are identical with no described difference in role or capability.",
+          "condition": "robot side"
+        }
+      ],
+      "interaction_model": [
+        {
+          "code": "One-to-one",
+          "justification": "Individual waypoint control, and play-calling at the 'individual' aggregation level tested in Experiment 3, address a single robot at a time.",
+          "condition": "individual-level control"
+        },
+        {
+          "code": "One-to-many",
+          "justification": "Play-calling at the 'subgroup' or 'all' aggregation level assigns one command to multiple robots simultaneously.",
+          "condition": "group/all-aggregation control"
+        }
+      ],
+      "interaction_directness": [
+        {
+          "code": "Direct",
+          "justification": "Operators issue explicit, addressed commands (waypoints or plays) to specific robots or robot groups.",
+          "condition": null
+        }
+      ],
+      "communication_proximity": [
+        {
+          "code": "Remote",
+          "justification": "The entire task is conducted through a screen-based interface on a networked PC simulation, with no physical robot hardware present for the participant.",
+          "condition": null
+        }
+      ],
+      "coordination_architecture": [
+        {
+          "code": "Strongly Centralized Coordination",
+          "justification": "The Playbook's Hierarchical Task Network planner is the single, fixed mechanism that decomposes a called play into coordinated behavior across all assigned robots; there is no robot-to-robot negotiation.",
+          "condition": null
+        }
+      ],
+      "computational_characteristics": [
+        {
+          "code": "Task-Allocation (Placeholder)",
+          "justification": "The Hierarchical Task Network planner decides how to decompose a delegated goal/play across the assigned group of robots — closer to a task-allocation/planning mechanism than to any single robot's own path computation, though HTN planning is a more general symbolic-AI technique than the bidding/constraint-optimization examples this placeholder code was originally defined around.",
+          "condition": null
+        }
+      ],
+      "human_involvement_level": [
+        {
+          "code": "Human-in-the-loop (HInL)",
+          "justification": "Manual waypoint control requires continuous operator input to direct a robot's movement.",
+          "condition": "manual waypoint control"
+        },
+        {
+          "code": "Human-on-the-loop (HOnL)",
+          "justification": "Once a play or superplay is called, the HTN planner executes the coordinated behavior autonomously; the operator monitors and can revert to manual control if needed.",
+          "condition": "play/superplay execution"
+        }
+      ],
+      "level_of_human_control_abstraction": [
+        {
+          "code": "Goal-Oriented (LHCA 4)",
+          "justification": "Both a manual waypoint click and calling a play/superplay are discrete, one-off goal-level inputs at different levels of abstraction, with the system autonomously executing all steps needed to reach them; no continuous joystick-style control is described in this study.",
+          "condition": null
+        }
+      ],
+      "operational_domain": [
+        {
+          "code": "Not Described",
+          "justification": "The RoboFlag experiments themselves never specify the physical domain (air, land, etc.) of the simulated vehicles; only a separate, non-coded follow-on effort mentioned in Section VI explicitly involves small fixed/rotary-wing UAVs.",
+          "condition": null
+        }
+      ]
+    }
+  },
+  "flags": [
+    {
+      "dimension": "study_type",
+      "type": "Unclear / Candidate New Code",
+      "note": "The Section V computational workload model (task-network decomposition plus Monte Carlo simulation) is closest to Modeling/Theoretical Paper (3.11), but like Donmez et al. (2010), its validation approach (comparison to empirical human-subjects trends) does not cleanly match 3.11's 'validated primarily analytically' framing.",
+      "proposed_code": "Same proposed broadening of 3.11 suggested for Donmez et al. (2010) — this is now a second instance of the pattern. [Deferred by the user 2026-07-10; not yet actioned.]"
+    }
+  ]
+}

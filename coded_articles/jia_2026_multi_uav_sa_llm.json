@@ -1,0 +1,149 @@
+{
+  "article_id": "jia_2026_multi_uav_sa_llm",
+  "citation": {
+    "authors": "Jia, L., Alva, K. S., Li, H., Hager, W., Romero, L., Butler, T. A., & Lewis, M.",
+    "year": 2026,
+    "title": "Understanding Situation Awareness in Multi-UAV Supervision: Effects of Environmental Complexity, Interface Design, and Human–AI Differences",
+    "source_file": "articles/JIAUND1.md"
+  },
+  "extraction_metadata": {
+    "date_extracted": "2026-07-10",
+    "codebook_versions": {
+      "study_type": "0.2",
+      "task_environment": "0.8"
+    },
+    "model": "claude-sonnet-5",
+    "notes": "This is the exact Jia et al. (2026) article the Study-Type codebook's own v0.2 Change Log cites as the motivating test case for the Setting sub-attribute's Simulated/Remote default rule (a 393-participant online/browser-based study with no VR headset) — that rule is applied directly here. Re-coded 2026-07-10 against Task-Environment v0.8: the search/comprehension relation now maps onto the new Search Task (4.2) code, replacing the original Unclear / Candidate New Code flag."
+  },
+  "study_type": {
+    "primary": "User Study",
+    "secondary": null,
+    "sub_attributes": {
+      "setting": "Simulated/Remote (incl. VR)",
+      "measured_constructs": ["Situation Awareness (SA)", "Workload"],
+      "modality_flags": []
+    },
+    "justification": "A fully-powered, formal 4x2 mixed-design experiment (393 of 400 recruited participants, pre-registered power analysis, linear mixed-effects models) evaluating object-specific and global situation awareness is the article's sole and central contribution; the exploratory GPT-4o comparison is conducted within the same experimental report rather than as a separate system contribution, so no Secondary code is needed."
+  },
+  "summary": {
+    "template": "user_study",
+    "task": "Participants supervised six simulated UAVs conducting a 10-minute wildfire-reconnaissance mission over a simulated forested region (modeled on California's Cleveland National Forest), each UAV scripted to fly a fixed left-to-right path while autonomously flagging salient targets (hikers, vehicles, wildfires, and deliberately inserted false alarms). Participants clicked each flagged target to review zoomed footage and annotate its identity/status (e.g., movement direction, rescue need), and periodically answered paused, memory-based 'global' questions summarizing everything observed across all UAVs in a region.",
+    "control": "Participants never flew or repositioned the UAVs — vehicles autonomously followed pre-scripted trajectories and autonomously flagged salient objects — so the only operator action was informational/interpretive: clicking a flagged target or map icon to open zoomed footage and complete an annotation. Four between-subjects interface variants manipulated this access: a Synchronous interface (zoomed footage viewable only while the target remained in a live UAV's current field of view), an ASynchronous interface (a persistent map icon let users revisit a target's footage at any time), and Ablated versions of each that removed the continuous live-video panel entirely, leaving only on-demand map-marker access.",
+    "participants": "400 US-based adults recruited via the CloudResearch platform (100 per interface condition); 393 completed the study and provided usable data (mean age 36.43, SD 10.85; 200 male, 200 female). A pre-registered power analysis (G*Power, f = 0.15, alpha = .05, power = .95) indicated a minimum of 272 participants were needed. Each participant completed one ~30-minute session for $5 compensation. A separate exploratory arm evaluated OpenAI's GPT-4o on the same object-specific and global SA questions under matched conditions, without inferential statistics given the model's single deterministic response per prompt.",
+    "results": "Across all interface types, participants were significantly more accurate on immediate, object-specific (SPAM-based) queries than on memory-based global (SAGAT-based) queries (p < .001), and accuracy declined significantly as SA level increased from perception to comprehension to projection, especially under high target density. The Synchronous interface produced significantly lower object-specific SA accuracy and significantly more missed-target annotations than all three other interfaces; interfaces supporting retrospective access (ASynchronous) or reduced visual clutter (Ablated variants) helped maintain SA, though global SA accuracy was far less affected by interface type. Whether a wildfire appeared before or after related targets significantly shaped global SA accuracy across SA levels. GPT-4o matched humans on object-specific Level-1 (perception) but underperformed on Levels 2-3 (comprehension/projection), while it outperformed humans across all three levels on memory-intensive global queries, indicating complementary rather than uniformly superior/inferior AI performance.",
+    "issues": "Users' most common self-reported challenges (open-ended feedback, inter-rater kappa = .91) were: memory/recall burden (no way to revisit the map or past footage), fast task pace/time pressure (new targets appearing before an annotation could be finished), cognitive overload from simultaneous multitasking (monitoring, identifying, judging risk, and annotating at once), and difficulty making directional/dynamic judgments (e.g., whether a hiker was moving toward a moving fire) with no clear directional cues. Memory-load and time-pressure complaints concentrated in the Synchronous and Synchronous-Ablated (non-persistent-access) conditions, while multitasking-overload and directional-judgment complaints were more common in the Asynchronous conditions. The human-LLM comparison is explicitly exploratory (a single, general-purpose, non-fine-tuned LLM in deterministic mode, no inferential statistics), and participants were drawn from the general public rather than professional UAV/wildfire operators.",
+    "recommendations": "Reduce memory demands and support continuous comprehension via persistent-access structural elements (snapshot panels, collapsible history timelines, dynamic filters) plus simple annotation/progress-tracking tools. Design SA support to adapt dynamically to evolving task complexity (target density, event precedence, target type), e.g., using behavioral/physiological signals (eye movements, fixation duration) to predict SA state and proactively highlight uninspected areas. Pursue hybrid human-AI supervisory division of labor that assigns real-time perceptual interpretation and high-stakes decisions to humans while offloading memory-intensive tracking, multi-target summarization, and pattern-based anomaly detection to AI/LLM agents. Validate findings with expert/professional UAV operators and more ecologically realistic data, and examine fine-tuned LLMs and deployment factors like latency and trust calibration.",
+    "autonomous_capabilities": "Each of the six UAVs autonomously flew a fixed, pre-scripted flight path across the forested area and autonomously detected/flagged salient objects of interest (a red bounding box overlay plus a corresponding map marker), without any operator control over flight path, obstacle avoidance, or target detection itself. All higher-order reasoning (object identity, risk assessment, projected behavior) was deliberately delegated entirely to the human (or, in the exploratory arm, to GPT-4o); the system provided zoomed video and spatial/temporal metadata but performed no interpretation of its own."
+  },
+  "classification": {
+    "task_environment_v0.8": {
+      "task_object_spatiotemporal_dynamics": [
+        {
+          "code": "Distributed Task Object",
+          "justification": "45 targets (4 wildfires, 13 vehicles, 23 hikers, 5 false alarms) are pre-placed at scattered fixed locations across nine columns of the forested area, each a separate, self-contained instance encountered as the UAVs sweep across.",
+          "condition": null
+        },
+        {
+          "code": "Moving Task Object",
+          "justification": "Hikers and vehicles are given 'context-appropriate animations to simulate plausible motion and behavior,' and SA questions explicitly ask about a target's movement direction and whether it is approaching the wildfire, requiring the operator to track ongoing relocation rather than a one-off static assessment.",
+          "condition": "hiker and vehicle targets"
+        }
+      ],
+      "behavioral_relation_to_task_object": [
+        {
+          "code": "Search Task",
+          "justification": "The operator's task is to detect, identify, and assess the risk/status of targets — a search-and-comprehension relation, not avoidance — matching Section 4.2 (Search Task), added in v0.8.",
+          "condition": null
+        }
+      ],
+      "team_size": [
+        {
+          "code": "Single-human - Multi-robot",
+          "justification": "Each participant individually supervises the same six-UAV fleet.",
+          "condition": null
+        }
+      ],
+      "team_composition": [
+        {
+          "code": "Homogeneous",
+          "justification": "All six UAVs are identical in capability and behavior, differing only in assigned flight lane.",
+          "condition": "robot side"
+        }
+      ],
+      "interaction_model": [
+        {
+          "code": "One-to-many",
+          "justification": "A single operator simultaneously monitors and interacts with video feeds and flagged targets from all six UAVs.",
+          "condition": null
+        }
+      ],
+      "interaction_directness": [
+        {
+          "code": "Direct",
+          "justification": "Operators click explicitly on system-flagged targets or map markers to open footage and submit annotations.",
+          "condition": null
+        }
+      ],
+      "communication_proximity": [
+        {
+          "code": "Remote",
+          "justification": "The entire study is browser-based and online (WebGL build deployed via Netlify, recruited through CloudResearch), with no physical UAVs or co-location.",
+          "condition": null
+        }
+      ],
+      "coordination_architecture": [
+        {
+          "code": "Not Applicable",
+          "justification": "Each of the six UAVs is explicitly described as independently following its own fixed, pre-scripted flight path side by side, with no negotiation, leader, or shared decision-making described among them — coordination is absent by design, not merely undescribed.",
+          "condition": null
+        }
+      ],
+      "computational_characteristics": [
+        {
+          "code": "Predefined / Rule-Based Control",
+          "justification": "Both UAV flight ('scripted to follow a fixed flight path') and target flagging are pre-programmed/scripted simulation behaviors rather than a computed optimization, search, or learned model — matching fixed, predetermined action sequences.",
+          "condition": null
+        }
+      ],
+      "human_involvement_level": [
+        {
+          "code": "Human-on-the-loop (HOnL)",
+          "justification": "UAV flight and target-flagging execute autonomously and relay their output to the operator, who monitors but whose input is not required for these functions to operate.",
+          "condition": "flight/detection function"
+        },
+        {
+          "code": "Human-in-the-loop (HInL)",
+          "justification": "All higher-order reasoning — identity, risk, and projection judgments — is explicitly and entirely delegated to the human (or the LLM); the system performs no interpretation of its own, so this function cannot complete without that input.",
+          "condition": "annotation/interpretation function"
+        }
+      ],
+      "level_of_human_control_abstraction": [
+        {
+          "code": "Goal-Oriented (LHCA 4)",
+          "justification": "Selecting a flagged target and submitting an annotation are discrete, one-off inputs; the system has already done all the work of detecting and presenting the target.",
+          "condition": "target selection/annotation state"
+        },
+        {
+          "code": "Direct (LHCA 1)",
+          "justification": "The study logs participants' continuous camera movements while reviewing footage, matching this codebook's established precedent (Scope note, v0.7) that continuous view/payload manipulation is coded Direct/Augmented and dominant under Rule 2 even while an autonomous function runs in the background.",
+          "condition": "camera/viewpoint navigation state"
+        }
+      ],
+      "operational_domain": [
+        {
+          "code": "Air",
+          "justification": "All six vehicles are UAVs operating in the air domain.",
+          "condition": null
+        }
+      ]
+    }
+  },
+  "flags": [
+    {
+      "dimension": "coordination_architecture",
+      "type": "Not Applicable",
+      "note": "Surfaced per the shared application guide even though the determination is clean: the six UAVs are explicitly independent and non-coordinating by design.",
+      "proposed_code": null
+    }
+  ]
+}

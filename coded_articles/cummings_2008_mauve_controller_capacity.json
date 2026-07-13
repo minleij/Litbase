@@ -1,0 +1,89 @@
+{
+  "article_id": "cummings_2008_mauve_controller_capacity",
+  "citation": {
+    "authors": "Mary L. Cummings, Paul J. Mitchell",
+    "year": 2008,
+    "title": "Predicting Controller Capacity in Supervisory Control of Multiple UAVs",
+    "source_file": "articles/Cummings_Predicting_Controller_Capacity_in_Supervisory_Control_of_Multiple_UAVs.md"
+  },
+  "extraction_metadata": {
+    "date_extracted": "2026-07-10",
+    "codebook_versions": {
+      "study_type": "0.3",
+      "task_environment": "0.8"
+    },
+    "model": "claude-sonnet-5"
+  },
+  "study_type": {
+    "primary": "User Study",
+    "secondary": "Modeling/Theoretical Paper",
+    "sub_attributes": {
+      "setting": "Simulated/Remote (incl. VR)",
+      "measured_constructs": ["Performance", "Workload", "Situation Awareness (SA)"],
+      "modality_flags": []
+    },
+    "justification": "A controlled 12-subject experiment with the MAUVE simulation testbed, a 2x4(3) mixed statistical design, and measured wait-time dependent variables is the article's central validating evidence, making User Study Primary. The article's other major contribution is a formal mathematical extension of the fan-out operator-capacity equation (incorporating queuing, interaction, and situation-awareness wait times), comparably weighted and presented as a generalizable predictive model, warranting Modeling/Theoretical Paper as Secondary."
+  },
+  "summary": {
+    "template": "user_study",
+    "task": "12 participants individually supervised four homogeneous, independent simulated UAVs executing a simulated suppression-of-enemy-air-defenses strike (MAUVE testbed): monitoring each UAV's progress, replanning routes/targets in response to unexpected events, and manually executing mission-critical actions (arming/firing payloads, scheduling battle damage assessment), under one of four between-subjects automation/decision-support levels (manual, passive, active, superactive/management-by-exception) crossed with a within-subjects low- vs. high-replanning workload condition (two 30-minute sessions each).",
+    "control": "Supervisory control via a dual-display MAUVE interface: a 2-D navigation/map display for editing waypoints/routes and requesting (not commanding) time-on-target delays, plus a decision-support display with UAV status, a chat-based communication log, and — depending on the assigned automation level — a color-coded timeline with no automated assistance (manual/passive), automation-highlighted 'bottleneck' periods with recommended schedule changes the operator could accept, ignore, or override (active), or automatic execution of arming/firing once rules-of-engagement were met, subject only to a 30-second operator veto window (superactive, management-by-exception).",
+    "participants": "12 subjects (10 men, 2 women), age 20-42 (M=26.3), recruited for UAV/military/pilot background — 9 were ROTC members or active-duty officers, 9 had piloting experience (avg. 120 flight hours) though none had operational UAV experience; paid $10/h plus a $50 best-performance incentive; all completed 90-120 minutes of training and had to reach a minimum performance threshold before testing.",
+    "results": "Including the proposed wait-time (WT) components in the operator-capacity model reduced the predicted upper-bound number of controllable UAVs by 36-67% relative to the original fan-out equation, with wait time due to loss of situation awareness (WTSA) the dominant component (63% of total WT under low replanning, 72% under high replanning) across all automation levels. Interaction wait time (WTI) decreased significantly with increasing automation level as hypothesized. Queuing wait time (WTQ) was significantly affected by replanning level and unexpectedly spiked in the 'active' decision-support condition. Even the most automated (superactive/MBE) condition still showed a 36% capacity reduction driven by WTSA, indicating that situation-awareness loss constrains operator capacity even under near-full automation.",
+    "issues": "The 'active' decision-support level paradoxically produced queuing wait times as high as the unaided 'manual' level: operators fixated on chasing the automation's schedule-optimization recommendations, which degraded their situation awareness and drove up queuing delays rather than reducing workload as intended. Even the highest-automation (superactive/MBE) condition did not eliminate SA-related delays — operators still missed or mishandled events (e.g., leaving a UAV loitering unnecessarily, flying into a threat area) due to automation complacency. The 12-subject sample (3 per automation-level cell) limits generalizability of the specific statistical results. The authors were unable to isolate wait time due to cognitive reorientation (WTCR, a 'switching cost' between vehicles) from overall interaction wait time using cursor/timestamp-tracking data alone.",
+    "recommendations": "Predictive models of multi-vehicle operator capacity should explicitly incorporate wait-time sources — interaction time (including cognitive reorientation), queuing time, and especially situation-awareness loss — rather than relying on neglect/interaction time ratios alone, since SA loss dominates wait time even under high automation. Decision-support designs that hand operators specific optimization recommendations (as in the 'active' condition) should be evaluated carefully before deployment, since they can induce harmful fixation that paradoxically increases queuing delays and degrades SA instead of reducing workload. Future work should develop better methods (e.g., psychophysiological measures or more carefully designed scenarios) to isolate and quantify cognitive-reorientation wait time specifically.",
+    "autonomous_capabilities": "The four simulated UAVs launch with a predetermined mission plan (targets, routes, and waypoints already assigned) and autonomously travel to and loiter at targets without operator input, only requiring supervisory monitoring and occasional replanning. In the highest ('superactive') automation condition, the system also autonomously executes arming and firing actions once rules-of-engagement conditions are met (UAV at target, already armed, within the time-on-target window), giving the operator only a 30-second veto window rather than requiring an explicit per-action command; pre-scheduled battle damage assessment is likewise performed automatically by the UAV after firing."
+  },
+  "classification": {
+    "task_environment_v0.8": {
+      "task_object_spatiotemporal_dynamics": [
+        { "code": "Unclear / Candidate New Code", "justification": "Mission targets are a single, fixed, non-growing instance per target, but their location and priority are already assigned and known to the operator at launch ('initial target assignments and routes are already completed'), so they do not meet Static/Fixed Task Object's (3.4) requirement of being initially unknown and discovered via search — the same gap flagged for a known-location fixed target in another corpus article (bashyal_2008_radiation_source_hsi).", "condition": "mission targets" },
+        { "code": "Distributed Task Object", "justification": "Threat/hazard areas on the map can emerge entirely or disappear at different points during the scenario, matching multiple scattered, intermittently-arising instances.", "condition": "threat/hazard zones" },
+        { "code": "Moving Task Object", "justification": "The same threat/hazard areas are explicitly described as dynamic and able to change location throughout scenarios.", "condition": "threat/hazard zones" }
+      ],
+      "behavioral_relation_to_task_object": [
+        { "code": "Engagement Task", "justification": "Operators (or, at the highest automation level, the automation itself) arm and fire payloads on assigned targets once rules-of-engagement conditions are met — a decisive, mission-completing action directed at an already-identified target.", "condition": "mission targets" },
+        { "code": "Avoidance Task", "justification": "Threat/hazard areas are displayed for operators to route around; the paper's own example of a problem case is a subject flying a UAV into a threat area without attempting to redirect it to safety, implying a negative consequence for contact.", "condition": "threat/hazard zones" }
+      ],
+      "team_size": [
+        { "code": "Single-human - Multi-robot", "justification": "Each participant individually supervises four UAVs in a given session.", "condition": null }
+      ],
+      "team_composition": [
+        { "code": "Homogeneous", "justification": "The four UAVs are explicitly described as 'homogeneous and independent.'", "condition": "robot side" },
+        { "code": "Not Applicable", "justification": "Each experimental session involves a single operator working alone; there is no multi-human team within a session for composition to be assessed.", "condition": "human side" }
+      ],
+      "interaction_model": [
+        { "code": "One-to-many", "justification": "A single operator issues mission-planning changes, TOT requests, and arm/fire commands across four simultaneously-supervised UAVs." , "condition": null }
+      ],
+      "interaction_directness": [
+        { "code": "Direct", "justification": "Operator actions (dragging waypoints, requesting a TOT delay, arming/firing) are explicitly addressed to a specific UAV or target.", "condition": null }
+      ],
+      "communication_proximity": [
+        { "code": "Remote", "justification": "The operator supervises simulated UAVs entirely through a screen-based workstation, with no physical co-location.", "condition": null }
+      ],
+      "coordination_architecture": [
+        { "code": "Not Applicable", "justification": "The four UAVs are explicitly and repeatedly described as 'homogeneous and independent,' each executing its own preassigned mission plan with no described interaction, negotiation, or shared decision-making between them, so a coordination architecture does not conceptually exist among them in this design.", "condition": null }
+      ],
+      "computational_characteristics": [
+        { "code": "Predefined / Rule-Based Control", "justification": "Each UAV launches with a predetermined, fixed mission plan (targets, routes, waypoints already assigned) that it follows autonomously (enroute, loiter, return-to-base) rather than computing a path via search or a trained model.", "condition": null },
+        { "code": "Unclear / Candidate New Code", "justification": "The 'active' decision-support algorithm searches for predicted high-workload time periods and recommends schedule changes (e.g., shifting a TOT) to the human operator; this is a scheduling/workload-optimization mechanism aimed at the operator's own task schedule, not at how a robot computes its motion (8.1-8.5) or at which robot performs which task (8.6) — the same kind of human-workload-allocation gap flagged in another corpus article (jo_2025_awac_mhmr_teams).", "condition": "active-LOA decision-support scheduling algorithm" }
+      ],
+      "human_involvement_level": [
+        { "code": "Human-in-the-loop (HInL)", "justification": "In the manual, passive, and active decision-support levels, arming and firing require an explicit human command with no automatic execution; the function does not operate as intended without this human intervention.", "condition": "manual / passive / active LOA" },
+        { "code": "Human-on-the-loop (HOnL)", "justification": "In the superactive (management-by-exception) level, the system automatically executes arming and firing once rules-of-engagement are met, delivering its output without requiring human intervention, while the operator monitors and can veto within a 30-second window.", "condition": "superactive/MBE LOA" }
+      ],
+      "level_of_human_control_abstraction": [
+        { "code": "Parametric (LHCA 3)", "justification": "Operators give discrete inputs (arm/fire commands per target, waypoint edits, TOT delay requests) that the UAV's own autonomy then executes, and operators retain responsibility for safety/schedule monitoring even when the system is functioning correctly.", "condition": "manual / passive / active LOA" },
+        { "code": "Goal-Oriented (LHCA 4)", "justification": "Under superactive/MBE, the operator's assigned goal (strike this target within its window) is executed end-to-end by the system, including the arm/fire steps themselves, with the operator's role reduced to monitoring for a veto rather than issuing each action.", "condition": "superactive/MBE LOA" }
+      ],
+      "operational_domain": [
+        { "code": "Air", "justification": "The four supervised vehicles are UAVs executing an air-strike mission.", "condition": null }
+      ]
+    }
+  },
+  "flags": [
+    { "dimension": "task_environment_v0.8 / task_object_spatiotemporal_dynamics", "type": "Unclear / Candidate New Code", "note": "Mission targets are single, fixed, and known to the operator from mission launch (not discovered via search), so they do not fit Static/Fixed Task Object's 'initially unknown' requirement — the same known-fixed-target gap seen in bashyal_2008_radiation_source_hsi.", "proposed_code": "Known Fixed Task Object (see also bashyal_2008_radiation_source_hsi flag) — a single, non-moving, non-growing task-relevant object whose location is known to the operator from the outset." },
+    { "dimension": "task_environment_v0.8 / computational_characteristics", "type": "Unclear / Candidate New Code", "note": "The active-LOA decision-support algorithm optimizes and recommends changes to the human operator's own interaction schedule (which target to attend to when), not a robot's motion (8.1-8.5) or robot-to-task assignment (8.6) — the same operator-workload/schedule-optimization gap flagged in jo_2025_awac_mhmr_teams.", "proposed_code": "Operator-Schedule/Workload Optimization (Placeholder) — a computational mechanism that allocates or schedules the human operator's own attention/workload across tasks, distinct from robot motion control (8.1-8.5) and robot task allocation (8.6)." },
+    { "dimension": "task_environment_v0.8 / coordination_architecture", "type": "Not Applicable", "note": "The four UAVs are explicitly designed and described as independent, with no coordination mechanism of any kind between them." }
+  ]
+}

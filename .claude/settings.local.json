@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python .claude/skills/analytic-coding/scripts/validate_record.py coded_articles/taylor_2017_delcon_mum_t.json)",
+      "Bash(python .claude/skills/analytic-coding/scripts/validate_record.py coded_articles/divband_soorati_2021_user_centered_interface.json)",
+      "Bash(python .claude/skills/analytic-coding/scripts/validate_record.py coded_articles/gale_2018_playbook_casas.json)",
+      "Bash(python .claude/skills/analytic-coding/scripts/validate_record.py coded_articles/digregorio_2021_gcs_team_sa.json)",
+      "Bash(python .claude/skills/analytic-coding/scripts/validate_record.py coded_articles/jia_2026_multi_uav_sa_llm.json)",
+      "Bash(python .claude/skills/analytic-coding/scripts/validate_record.py coded_articles/osga_2013_mocu_usv_hci.json)",
+      "Bash(python .claude/skills/analytic-coding/scripts/validate_record.py coded_articles/hughes_2012_muscit_multi_uav.json)",
+      "Bash(python .claude/skills/analytic-coding/scripts/validate_record.py coded_articles/fern_2018_momu_playbook.json)",
+      "Bash(python .claude/skills/analytic-coding/scripts/validate_record.py coded_articles/)",
+      "Bash(python .claude/skills/analytic-coding/scripts/validate_record.py coded_articles/bashyal_2008_radiation_source_hsi.json)",
+      "Bash(python -c ' *)",
+      "Bash(python .claude/skills/analytic-coding/scripts/validate_record.py coded_articles/fortmann_2013_supervisory_guide_uav_swarm.json)",
+      "Bash(python .claude/skills/analytic-coding/scripts/validate_record.py coded_articles/howard_2006_leadership_role_allocation.json)",
+      "Bash(python .claude/skills/analytic-coding/scripts/validate_record.py coded_articles/leijonhufvud_2026_mhc_drone_swarms.json)",
+      "Bash(python .claude/skills/analytic-coding/scripts/validate_record.py coded_articles/naghsh_2008_guardians_firefighting_swarm.json)",
+      "Bash(python .claude/skills/analytic-coding/scripts/validate_record.py coded_articles/paul_2023_multimodal_hri_framework.json)",
+      "Bash(python .claude/skills/analytic-coding/scripts/validate_record.py coded_articles/peschel_2013_uas_mission_specialist_survey.json)",
+      "Bash(python .claude/skills/analytic-coding/scripts/validate_record.py coded_articles/frische_2013_sa_tracer_uav_swarm.json)",
+      "Bash(python .claude/skills/analytic-coding/scripts/validate_record.py coded_articles/kerman_2012_stakeholder_swarm_leadership.json)",
+      "Bash(git init *)",
+      "Bash(git add *)"
+    ]
+  }
+}

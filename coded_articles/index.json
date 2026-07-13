@@ -1,0 +1,205 @@
+[
+  {
+    "article_id": "williamson_2023_command_control_swarm",
+    "title": "Command and Control of a Large Scale Swarm Using Natural Human Interfaces",
+    "year": 2023,
+    "study_type_primary": "User Study",
+    "file": "williamson_2023_command_control_swarm.json"
+  },
+  {
+    "article_id": "taylor_2017_delcon_mum_t",
+    "title": "Controlling Multiple Unmanned Aircraft from a Manned Helicopter: The Need for Advanced Autonomy and Refined Pilot-Vehicle Interface",
+    "year": 2017,
+    "study_type_primary": "User Study",
+    "file": "taylor_2017_delcon_mum_t.json"
+  },
+  {
+    "article_id": "divband_soorati_2021_user_centered_interface",
+    "title": "Designing a User-Centered Interaction Interface for Human–Swarm Teaming",
+    "year": 2021,
+    "study_type_primary": "User Study",
+    "file": "divband_soorati_2021_user_centered_interface.json"
+  },
+  {
+    "article_id": "donmez_2010_des_workload_uv",
+    "title": "Modeling Workload Impact in Multiple Unmanned Vehicle Supervisory Control",
+    "year": 2010,
+    "study_type_primary": "User Study",
+    "file": "donmez_2010_des_workload_uv.json"
+  },
+  {
+    "article_id": "gale_2018_playbook_casas",
+    "title": "Playbook for UAS: UX of Goal-Oriented Planning & Execution",
+    "year": 2018,
+    "study_type_primary": "User Study",
+    "file": "gale_2018_playbook_casas.json"
+  },
+  {
+    "article_id": "digregorio_2021_gcs_team_sa",
+    "title": "Improving Human Ground Control Performance in Unmanned Aerial Systems",
+    "year": 2021,
+    "study_type_primary": "User Study",
+    "file": "digregorio_2021_gcs_team_sa.json"
+  },
+  {
+    "article_id": "jia_2026_multi_uav_sa_llm",
+    "title": "Understanding Situation Awareness in Multi-UAV Supervision: Effects of Environmental Complexity, Interface Design, and Human–AI Differences",
+    "year": 2026,
+    "study_type_primary": "User Study",
+    "file": "jia_2026_multi_uav_sa_llm.json"
+  },
+  {
+    "article_id": "osga_2013_mocu_usv_hci",
+    "title": "Unmanned Surface Vehicle Human-Computer Interface for Amphibious Operations",
+    "year": 2013,
+    "study_type_primary": "User Study",
+    "file": "osga_2013_mocu_usv_hci.json"
+  },
+  {
+    "article_id": "hughes_2012_muscit_multi_uav",
+    "title": "Multi-UAV Supervisory Control Interface Technology (MUSCIT)",
+    "year": 2012,
+    "study_type_primary": "User Study",
+    "file": "hughes_2012_muscit_multi_uav.json"
+  },
+  {
+    "article_id": "fern_2018_momu_playbook",
+    "title": "Multi-Operator Multi-UAV (MOMU) Control: Exploring the Influence of Sensor Tools and Playbook Task Delegation",
+    "year": 2018,
+    "study_type_primary": "User Study",
+    "file": "fern_2018_momu_playbook.json"
+  },
+  {
+    "article_id": "parasuraman_2005_roboflag_delegation",
+    "title": "A Flexible Delegation-Type Interface Enhances System Performance in Human Supervision of Multiple Robots: Empirical Studies With RoboFlag",
+    "year": 2005,
+    "study_type_primary": "User Study",
+    "file": "parasuraman_2005_roboflag_delegation.json"
+  },
+  {
+    "article_id": "roundtree_2021_collective_visualization_transparency",
+    "title": "Human-collective visualization transparency",
+    "year": 2021,
+    "study_type_primary": "User Study",
+    "file": "roundtree_2021_collective_visualization_transparency.json"
+  },
+  {
+    "article_id": "wattearachchi_2025_hsi_task_performance",
+    "title": "Designing Effective Human-Swarm Interaction Interfaces: Insights from a User Study on Task Performance",
+    "year": 2025,
+    "study_type_primary": "User Study",
+    "file": "wattearachchi_2025_hsi_task_performance.json"
+  },
+  {
+    "article_id": "zhou_2025_ooda_uav_swarm_hsi",
+    "title": "Towards human-centered interaction with UAV swarms: Framework, system design, and user study",
+    "year": 2025,
+    "study_type_primary": "User Study",
+    "file": "zhou_2025_ooda_uav_swarm_hsi.json"
+  },
+  {
+    "article_id": "ramchurn_2015_maxsum_uav_task_allocation",
+    "title": "A Study of Human-Agent Collaboration for Multi-UAV Task Allocation in Dynamic Environments",
+    "year": 2015,
+    "study_type_primary": "User Study",
+    "file": "ramchurn_2015_maxsum_uav_task_allocation.json"
+  },
+  {
+    "article_id": "bashyal_2008_radiation_source_hsi",
+    "title": "Human Swarm Interaction for Radiation Source Search and Localization",
+    "year": 2008,
+    "study_type_primary": "User Study",
+    "file": "bashyal_2008_radiation_source_hsi.json"
+  },
+  {
+    "article_id": "burkle_2011_micro_uav_swarm_platform",
+    "title": "Towards Autonomous Micro UAV Swarms",
+    "year": 2011,
+    "study_type_primary": "System/Architecture Paper",
+    "file": "burkle_2011_micro_uav_swarm_platform.json"
+  },
+  {
+    "article_id": "jo_2025_awac_mhmr_teams",
+    "title": "Cognitive Load-Based Affective Workload Allocation for Multihuman Multirobot Teams",
+    "year": 2025,
+    "study_type_primary": "User Study",
+    "file": "jo_2025_awac_mhmr_teams.json"
+  },
+  {
+    "article_id": "cummings_2008_mauve_controller_capacity",
+    "title": "Predicting Controller Capacity in Supervisory Control of Multiple UAVs",
+    "year": 2008,
+    "study_type_primary": "User Study",
+    "file": "cummings_2008_mauve_controller_capacity.json"
+  },
+  {
+    "article_id": "fortmann_2013_supervisory_guide_uav_swarm",
+    "title": "SA-Based Guidance to Aid UAV Swarm Supervisory Control: What do Experts Say?",
+    "year": 2013,
+    "study_type_primary": "User Study",
+    "file": "fortmann_2013_supervisory_guide_uav_swarm.json"
+  },
+  {
+    "article_id": "howard_2006_leadership_role_allocation",
+    "title": "Adapting Human Leadership Approaches for Role Allocation in Human-Robot Navigation Scenarios",
+    "year": 2006,
+    "study_type_primary": "User Study",
+    "file": "howard_2006_leadership_role_allocation.json"
+  },
+  {
+    "article_id": "kira_2009_human_control_decentralized_swarms",
+    "title": "Exerting Human Control Over Decentralized Robot Swarms",
+    "year": 2009,
+    "study_type_primary": "Algorithm/Controller Evaluation (Simulation-Only)",
+    "file": "kira_2009_human_control_decentralized_swarms.json"
+  },
+  {
+    "article_id": "leijonhufvud_2026_mhc_drone_swarms",
+    "title": "Meaningful human control in drone swarms",
+    "year": 2026,
+    "study_type_primary": "User Study",
+    "file": "leijonhufvud_2026_mhc_drone_swarms.json"
+  },
+  {
+    "article_id": "naghsh_2008_guardians_firefighting_swarm",
+    "title": "Analysis and Design of Human-Robot Swarm Interaction in Firefighting",
+    "year": 2008,
+    "study_type_primary": "Design/Interface Concept Paper",
+    "file": "naghsh_2008_guardians_firefighting_swarm.json"
+  },
+  {
+    "article_id": "patel_2022_multi_human_multi_robot_remote_interaction",
+    "title": "On multi-human multi-robot remote interaction: a study of transparency, inter-human communication, and information loss in remote interaction",
+    "year": 2022,
+    "study_type_primary": "User Study",
+    "file": "patel_2022_multi_human_multi_robot_remote_interaction.json"
+  },
+  {
+    "article_id": "paul_2023_multimodal_hri_framework",
+    "title": "Enhancing Human–Robot Collaboration through a Multi-Module Interaction Framework with Sensor Fusion",
+    "year": 2023,
+    "study_type_primary": "System/Architecture Paper",
+    "file": "paul_2023_multimodal_hri_framework.json"
+  },
+  {
+    "article_id": "peschel_2013_uas_mission_specialist_survey",
+    "title": "On the Human–Machine Interaction of Unmanned Aerial System Mission Specialists",
+    "year": 2013,
+    "study_type_primary": "Meta-Review / Survey",
+    "file": "peschel_2013_uas_mission_specialist_survey.json"
+  },
+  {
+    "article_id": "frische_2013_sa_tracer_uav_swarm",
+    "title": "SA-Tracer: A Tool for Assessment of UAV Swarm Operator SA during Mission Execution",
+    "year": 2013,
+    "study_type_primary": "User Study",
+    "file": "frische_2013_sa_tracer_uav_swarm.json"
+  },
+  {
+    "article_id": "kerman_2012_stakeholder_swarm_leadership",
+    "title": "Supporting Human Interaction with Robust Robot Swarms",
+    "year": 2012,
+    "study_type_primary": "Algorithm/Controller Evaluation (Simulation-Only)",
+    "file": "kerman_2012_stakeholder_swarm_leadership.json"
+  }
+]

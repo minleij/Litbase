@@ -1,0 +1,116 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "article_record.schema.json",
+  "title": "HSI/HRI Analytic Coding Article Record",
+  "description": "One coded article in the literature review corpus. See analytic-coding SKILL.md for how this is produced.",
+  "type": "object",
+  "required": ["article_id", "citation", "extraction_metadata", "study_type", "summary", "classification"],
+  "additionalProperties": false,
+  "properties": {
+    "article_id": {
+      "type": "string",
+      "description": "Stable slug, format <first_author_lastname>_<year>_<short_slug>, lowercase with underscores. Matches the filename.",
+      "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$"
+    },
+    "citation": {
+      "type": "object",
+      "required": ["authors", "year", "title", "source_file"],
+      "additionalProperties": false,
+      "properties": {
+        "authors": { "type": "string" },
+        "year": { "type": "integer" },
+        "title": { "type": "string" },
+        "source_file": { "type": "string", "description": "Path or filename of the markdown article this record was coded from." }
+      }
+    },
+    "extraction_metadata": {
+      "type": "object",
+      "required": ["date_extracted", "codebook_versions"],
+      "additionalProperties": false,
+      "properties": {
+        "date_extracted": { "type": "string", "format": "date" },
+        "codebook_versions": {
+          "type": "object",
+          "description": "Version of every codebook used, keyed by short codebook name (e.g. 'study_type', 'task_environment'). Add a new key whenever a new codebook is used, without changing this schema.",
+          "additionalProperties": { "type": "string" }
+        },
+        "model": { "type": "string", "description": "Model that performed the coding, if known." },
+        "notes": { "type": "string", "description": "Free text for anything about the extraction process itself worth recording (e.g. partial re-code, disagreement with a prior version)." }
+      }
+    },
+    "study_type": {
+      "type": "object",
+      "required": ["primary", "justification"],
+      "additionalProperties": false,
+      "properties": {
+        "primary": { "type": "string" },
+        "secondary": { "type": ["string", "null"] },
+        "sub_attributes": {
+          "type": "object",
+          "description": "Only present if User Study is primary or secondary.",
+          "additionalProperties": false,
+          "properties": {
+            "setting": { "type": "string" },
+            "measured_constructs": { "type": "array", "items": { "type": "string" } },
+            "modality_flags": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "justification": { "type": "string" }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "required": ["template"],
+      "additionalProperties": false,
+      "properties": {
+        "template": { "type": "string", "enum": ["user_study", "abstract_only"] },
+        "task": { "type": "string" },
+        "control": { "type": "string" },
+        "participants": { "type": "string" },
+        "results": { "type": "string" },
+        "issues": { "type": "string" },
+        "recommendations": { "type": "string" },
+        "autonomous_capabilities": { "type": "string" },
+        "abstract_summary": { "type": "string" }
+      }
+    },
+    "classification": {
+      "type": "object",
+      "description": "Keyed by '<codebook_short_name>_v<version>' (e.g. 'task_environment_v0.7'). Each value is an object whose keys are that codebook's dimension names and whose values are arrays of code assignments. New codebooks are added as new keys here without a schema change.",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["code", "justification"],
+            "additionalProperties": false,
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "The assigned code, or one of the reserved values 'Not Applicable', 'Not Described', or 'Unclear / Candidate New Code'."
+              },
+              "justification": { "type": "string" },
+              "condition": { "type": ["string", "null"], "description": "Which experimental condition/sub-study this applies to, if the article has more than one and they differ." }
+            }
+          }
+        }
+      }
+    },
+    "flags": {
+      "type": "array",
+      "description": "Every Not Applicable / Not Described / Unclear-Candidate-New-Code assignment, surfaced here so the corpus can be scanned for open review items without re-reading every classification block.",
+      "items": {
+        "type": "object",
+        "required": ["dimension", "type", "note"],
+        "additionalProperties": false,
+        "properties": {
+          "dimension": { "type": "string" },
+          "type": { "type": "string", "enum": ["Not Applicable", "Not Described", "Unclear / Candidate New Code"] },
+          "note": { "type": "string" },
+          "proposed_code": { "type": ["string", "null"] }
+        }
+      }
+    }
+  }
+}

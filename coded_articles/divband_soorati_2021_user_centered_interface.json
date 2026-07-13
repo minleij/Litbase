@@ -1,0 +1,170 @@
+{
+  "article_id": "divband_soorati_2021_user_centered_interface",
+  "citation": {
+    "authors": "Divband Soorati, M., Clark, J., Ghofrani, J., Tarapore, D., & Ramchurn, S. D.",
+    "year": 2021,
+    "title": "Designing a User-Centered Interaction Interface for Human–Swarm Teaming",
+    "source_file": "articles/Divband_Soorati_2021_Designing_a_User-Centered_Interaction_Interface_for_Human-Swarm_Teaming.md"
+  },
+  "extraction_metadata": {
+    "date_extracted": "2026-07-10",
+    "codebook_versions": {
+      "study_type": "0.2",
+      "task_environment": "0.8"
+    },
+    "model": "claude-sonnet-5",
+    "notes": "Contains two distinct human-subjects components (a 100-participant online visualization-preference study, and a 15-participant technology-probe interface evaluation) plus a separate simulation-only swarm model (Experiments I-III) with no live human in the loop; coded as genuinely mixed per the Study-Type codebook's Section 2 comparable-weight rule. Re-coded 2026-07-10 against Task-Environment v0.8: this article is the codebook's own cited source example for both the new Static/Fixed Task Object (3.4) and Search Task (4.2) codes, which replace the original two Unclear / Candidate New Code flags."
+  },
+  "study_type": {
+    "primary": "User Study",
+    "secondary": "System/Architecture Paper",
+    "sub_attributes": {
+      "setting": "Simulated/Remote (incl. VR)",
+      "measured_constructs": ["Performance", "Other / Not Listed"],
+      "modality_flags": ["Human-Swarm Teaming"]
+    },
+    "justification": "Two comparable-weight human-subjects components are reported (a 100-participant online visualization-preference study, Section 2; a 15-participant remote technology-probe interface evaluation, Experiment IV), so User Study is Primary; the belief/confidence-map interface and human-swarm collective decision-making model are framed as a general, reusable 'testbed' and 'benchmark' for the field, comparably weighted, so System/Architecture Paper is Secondary."
+  },
+  "summary": {
+    "template": "user_study",
+    "task": "In a simulated disaster-monitoring mission zone, an operator worked with up to 15 simulated UAVs to map a disaster area, either through fully autonomous exploration with monitoring only (Experiments I-II, one of which features a disaster that relocates mid-run), through issuing area-level attraction/repulsion commands including marking permanent no-fly zones (Experiment III), or, in a separate live study (Experiment IV), by using the interface interactively to guide exploration toward a moving disaster under two control schemes. A separate, earlier online study (Section 2) asked 100 participants to compare individual-UAV-dot versus heat-map swarm-coverage visualizations after watching short videos, with no live task or control involved.",
+    "control": "Two control paradigms were compared in Experiment IV: an 'indirect parameter setting' confidence-map interface (Task I), where the operator manipulates their own local belief/confidence heat map by clicking cells to mark areas of interest or no-fly zones, which then diffuses through one-to-one neighbor communication to bias each UAV's potential-field-based motion, without the operator ever selecting or addressing an individual UAV; and direct individual-UAV target assignment (Task II), where the operator selects a specific UAV from a list and assigns it a target by clicking a map cell.",
+    "participants": "Two distinct samples: (1) 100 online participants (62 female, 37 male, 1 non-binary, minimum BSc-level qualification), ethically approved, for the visualization-preference study; (2) 15 computer scientists (BSc/MSc in Computer Science or Engineering) recruited from a small online community for the technology-probe interface evaluation, given remote access to the simulation machine and briefed/debriefed via 10–15-minute video calls — an informal probe study with no stated formal power analysis.",
+    "results": "Heat maps were significantly preferred over individual-UAV displays for larger swarms, for displaying motion/coverage, and for time-critical tasks (all p < 0.001 after Bonferroni correction), and produced significantly higher System Usability and System Acceptance scores (both p < 0.001); individual-UAV displays were preferred only for detecting errors in the swarm. In the interface evaluation, the confidence-map interface (Task I) produced belief-map accuracy comparable to manually assigning individual UAVs (Task II), and both human-guided conditions outperformed fully autonomous exploration once the disaster moved (via operator-timed interventions, i.e., 'neglect benevolence'), while Task II was reported as requiring substantially higher cognitive workload than area-only targeting.",
+    "issues": "Individual-UAV displays remain preferable specifically for error detection, suggesting heat maps alone may be an insufficient sole display. Individual-UAV target selection (Task II) imposed markedly higher cognitive workload than area-only targeting and does not scale to larger swarms. No parameter-sensitivity analysis was performed (swarm size, confidence decay factor, and local/global weighting were all fixed and chosen empirically). Mapping resolution necessarily decreases as the explored area grows, limiting scalability. The technology-probe study (Experiment IV) was informal, with only 15 self-selected participants and no formal statistical comparison reported between Task I and Task II.",
+    "recommendations": "Combine both display types — use heat maps as the core display but retain an individual-UAV view as a supplementary diagnostic tool for error detection. Extend the model to multiple simultaneous dynamic disasters and multiple human operators with collaborative/competitive strategies, and to detecting adversarial 'intruder' UAVs or operators. Investigate communication/positioning/sensing noise and malfunctioning/lost-UAV detection. Study speed-versus-accuracy tradeoffs under different messaging qualities. Run a systematic parameter-sensitivity analysis rather than relying on empirically fixed values. Co-design the interface with industry experts and conduct a larger, more comprehensive user study. Investigate operator-bias effects in human-in-the-loop experimentation. Support directing a subset of the swarm via a more selective communication protocol. Extend the approach to physical UAVs and real-world evaluation.",
+    "autonomous_capabilities": "Each UAV autonomously builds and shares local belief and confidence heat maps via one-to-one neighbor communication (no full network connectivity required), decides its own motion by descending the gradient of a Sobel-filtered confidence potential field (attracted to low-confidence/unexplored cells, repelled from boundaries and neighbors' recently-visited high-confidence cells for implicit collision avoidance and spatial division of labor), and absorbs a temporarily-injected operator command that diffuses through the swarm via the same reliability-weighted neighbor-averaging mechanism used for ordinary belief updates, with a locking mechanism that temporarily preserves the operator's influence against being averaged away. The swarm can run with full autonomy or under partial operator influence, self-organizing to redistribute individual target points without the operator specifying which UAV performs which sub-task."
+  },
+  "classification": {
+    "task_environment_v0.8": {
+      "task_object_spatiotemporal_dynamics": [
+        {
+          "code": "Moving Task Object",
+          "justification": "The disaster zone explicitly relocates from one point to another between simulation steps 150-350 in Experiment II, and again in Experiment IV, requiring the swarm/operator to continuously re-track its position.",
+          "condition": "Experiment II and Experiment IV"
+        },
+        {
+          "code": "Distributed Task Object",
+          "justification": "The multi-barrier test uses up to five separate, fixed-location permanent no-fly zones scattered in the arena, each a static, self-contained instance.",
+          "condition": "Experiment III, multi-barrier test"
+        },
+        {
+          "code": "Static/Fixed Task Object",
+          "justification": "In Experiment I the disaster is a single, fixed, initially-unknown location that the swarm must discover and localize; it does not move or grow once found — matching Section 3.4 (Static/Fixed Task Object), added in Task-Environment codebook v0.8, for which this article is the codebook's own cited source example.",
+          "condition": "Experiment I"
+        },
+        {
+          "code": "Not Applicable",
+          "justification": "The Section 2 visualization-preference study is a passive video-watching comparison with no live task or task-relevant object being acted upon.",
+          "condition": "Section 2 visualization-preference study"
+        }
+      ],
+      "behavioral_relation_to_task_object": [
+        {
+          "code": "Avoidance Task",
+          "justification": "The operator applies a repulsion force to keep the swarm away from marked no-fly/prohibited zones, with contact (flying over the zone) being the thing to prevent.",
+          "condition": "no-fly zone / barrier avoidance"
+        },
+        {
+          "code": "Search Task",
+          "justification": "Locating and mapping the disaster area is a search relation (finding the object is the goal), not avoidance — matching Section 4.2 (Search Task), added in v0.8.",
+          "condition": "disaster localization/mapping"
+        }
+      ],
+      "team_size": [
+        {
+          "code": "Single-human - Multi-robot",
+          "justification": "One operator interacts with a swarm of 15 UAVs throughout the simulation experiments and the technology-probe study.",
+          "condition": "Experiments I-IV"
+        },
+        {
+          "code": "Not Applicable",
+          "justification": "The Section 2 visualization-preference study is a passive individual video-comparison task with no live human-robot team.",
+          "condition": "Section 2 visualization-preference study"
+        }
+      ],
+      "team_composition": [
+        {
+          "code": "Homogeneous",
+          "justification": "Although the model supports heterogeneous agent capabilities in principle, all 15 UAVs in the actual experiments share identical parameters (φ = 0.5, ρ = 1) and behavior.",
+          "condition": "robot side, Experiments I-IV"
+        }
+      ],
+      "interaction_model": [
+        {
+          "code": "One-to-one",
+          "justification": "By design, the operator communicates only with UAVs in their own local neighborhood, whether disseminating a confidence-map command or assigning a target to a specific selected UAV; this is explicitly framed as keeping cognitive complexity at O(1).",
+          "condition": null
+        }
+      ],
+      "interaction_directness": [
+        {
+          "code": "Direct",
+          "justification": "The operator's command is explicitly disseminated to the UAVs within their own local communication neighborhood.",
+          "condition": null
+        },
+        {
+          "code": "Indirect",
+          "justification": "UAVs beyond the operator's direct neighborhood are affected by the operator's influence only via relayed, averaged confidence values passed hop-by-hop between neighboring UAVs, not by any message addressed to them.",
+          "condition": null
+        }
+      ],
+      "communication_proximity": [
+        {
+          "code": "Remote",
+          "justification": "The operator interacts entirely through the confidence-map interface on a remote machine running the simulation (Experiment IV participants were given remote access to the simulation machine), with no physical co-location with real UAVs.",
+          "condition": null
+        }
+      ],
+      "coordination_architecture": [
+        {
+          "code": "Distributed Coordination",
+          "justification": "No robot or server holds coordinating authority; each UAV independently computes its own motion from locally-shared, reliability-weighted confidence averages with its neighbors, with the operator entering the same peer-to-peer averaging process rather than issuing centrally-coordinated commands.",
+          "condition": null
+        }
+      ],
+      "computational_characteristics": [
+        {
+          "code": "Classical Geometric / Sampling-Based Control",
+          "justification": "UAV motion is generated by an explicitly named artificial-potential-field method (local and global confidence gradients computed via a Sobel filter, weighted and summed), a deterministic geometric computation with no learned model or population-based search.",
+          "condition": null
+        }
+      ],
+      "human_involvement_level": [
+        {
+          "code": "Human-on-the-loop (HOnL)",
+          "justification": "The swarm explores, maps, and (when commanded) redirects itself without requiring continuous human input under any condition tested — fully autonomous exploration functions correctly with the operator only monitoring, and the optional attraction/repulsion commands are consistent with 'flexible autonomy' in which the human can intervene but the system does not depend on it to operate.",
+          "condition": null
+        }
+      ],
+      "level_of_human_control_abstraction": [
+        {
+          "code": "Goal-Oriented (LHCA 4)",
+          "justification": "In both Task I (area-level attraction/repulsion click) and Task II (per-UAV target-cell click), the operator gives a discrete goal for the swarm/robot to achieve, and the potential-field controller autonomously executes all steps to reach it, with no operator safety-monitoring role described.",
+          "condition": "Experiment III/IV, both Task I and Task II"
+        }
+      ],
+      "operational_domain": [
+        {
+          "code": "Air",
+          "justification": "All agents in the model are UAVs operating in the air domain (over a 2D mission zone at constant altitude).",
+          "condition": null
+        }
+      ]
+    }
+  },
+  "flags": [
+    {
+      "dimension": "task_object_spatiotemporal_dynamics",
+      "type": "Not Applicable",
+      "note": "The Section 2 visualization-preference study has no live task-object at all (participants only watched pre-recorded videos and answered questionnaires).",
+      "proposed_code": null
+    },
+    {
+      "dimension": "team_size",
+      "type": "Not Applicable",
+      "note": "Same reason as above — Section 2's passive video-comparison study has no live human-robot team to describe.",
+      "proposed_code": null
+    }
+  ]
+}

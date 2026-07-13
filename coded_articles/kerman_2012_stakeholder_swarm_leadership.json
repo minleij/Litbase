@@ -1,0 +1,73 @@
+{
+  "article_id": "kerman_2012_stakeholder_swarm_leadership",
+  "citation": {
+    "authors": "Sean Kerman, Daniel Brown, Michael A. Goodrich",
+    "year": 2012,
+    "title": "Supporting Human Interaction with Robust Robot Swarms",
+    "source_file": "articles/Supporting_human_interaction_with_robust_robot_swarms.md"
+  },
+  "extraction_metadata": {
+    "date_extracted": "2026-07-10",
+    "codebook_versions": {
+      "study_type": "0.3",
+      "task_environment": "0.8"
+    },
+    "model": "claude-sonnet-5"
+  },
+  "study_type": {
+    "primary": "Algorithm/Controller Evaluation (Simulation-Only)",
+    "secondary": "Modeling/Theoretical Paper",
+    "justification": "The paper's central, extensively simulation-validated contribution is a bio-inspired decentralized swarm control model with two attractors (torus, flock) and a 'stakeholder' mechanism letting a (conceptual) human operator switch between and lead these attractors, validated through parameter-sweep simulation studies (attractor-switching probability, path-following accuracy) with no human participant at any point, matching Algorithm/Controller Evaluation as Primary. A comparably-weighted secondary contribution is a formal linear stability analysis (change of variables, Jacobian linearization, eigenvalue analysis) proving local asymptotic stability of the cyclic (torus) equilibrium for an attraction-only simplified model, warranting Modeling/Theoretical Paper as Secondary."
+  },
+  "summary": {
+    "template": "abstract_only",
+    "abstract_summary": "This paper proposes a decentralized, bio-inspired swarm control model (extending Couzin et al.'s zone-based repulsion/orientation/attraction model, smoothed to avoid hard switching and adapted for nonholonomic robot dynamics) that exhibits two stable collective formations: a rotating 'torus' (useful for perimeter monitoring) and a translating 'flock' (useful for rapid relocation). Through simulation, the authors identify parameter values (notably the orientation-zone radius) at which both formations emerge with equal probability from random initial conditions, and through a formal linear stability analysis of a simplified attraction-only model, prove that the torus formation is a locally asymptotically stable limit cycle. The paper then introduces 'stakeholder' agents — swarm members simultaneously influenced by their neighbors and by a human-operator-broadcast reference input — and shows via simulation that a human needs only to influence a subset (roughly 30-40%) of the swarm to reliably switch it between torus and flock attractors, and can lead either formation along a moving reference path while preserving group structure, demonstrating a form of swarm control that is robust to limited/partial human-swarm communication."
+  },
+  "classification": {
+    "task_environment_v0.8": {
+      "task_object_spatiotemporal_dynamics": [
+        { "code": "Not Applicable", "justification": "The swarm's task is to organize and control its own collective formation/motion (torus vs. flock, switching, leading); there is no external environmental entity, hazard, or target that the swarm detects, avoids, or acts upon.", "condition": null }
+      ],
+      "behavioral_relation_to_task_object": [
+        { "code": "Not Applicable", "justification": "As no external task-relevant object exists in this model (see above), no behavioral relation to one applies; the described behaviors (forming, switching, and leading a torus/flock) are internal swarm self-organization, not a relation to an external object.", "condition": null }
+      ],
+      "team_size": [
+        { "code": "Single-human - Multi-robot", "justification": "The stakeholder mechanism is designed for a single human operator to broadcast a reference input to a subset of a 100-agent swarm; this is the model's conceptual use case, though not tested with an actual human participant.", "condition": null }
+      ],
+      "team_composition": [
+        { "code": "Homogeneous", "justification": "All agents share identical dynamics and sensing/interaction rules; 'stakeholder' status is a control-influence distinction applied to a subset, not a difference in physical type or capability.", "condition": "robot side" },
+        { "code": "Not Applicable", "justification": "Only a single conceptual human operator is described; there is no multi-human team.", "condition": "human side" }
+      ],
+      "interaction_model": [
+        { "code": "One-to-many", "justification": "The human operator's reference input is broadcast simultaneously to M stakeholder agents.", "condition": null }
+      ],
+      "interaction_directness": [
+        { "code": "Direct", "justification": "The reference input is explicitly broadcast to a defined set of M stakeholder agents.", "condition": "operator-to-stakeholder broadcast" },
+        { "code": "Indirect", "justification": "Non-stakeholder swarm members are influenced only through their ordinary local interactions with stakeholders, not by anything addressed to them by the human.", "condition": "stakeholder-to-rest-of-swarm propagation" }
+      ],
+      "communication_proximity": [
+        { "code": "Remote", "justification": "The human operator's influence is modeled as a broadcast reference input, with no physical co-location described.", "condition": null }
+      ],
+      "coordination_architecture": [
+        { "code": "Distributed Coordination", "justification": "All agents (including stakeholders) act on purely local repulsion/orientation/attraction interactions with visible neighbors; no leader robot or central coordinator exists.", "condition": null }
+      ],
+      "computational_characteristics": [
+        { "code": "Classical Geometric / Sampling-Based Control", "justification": "Agent steering is computed from zone-based repulsion/orientation/attraction force vectors toward neighbors, functionally equivalent to an artificial-potential-field method (the codebook's own source example for this code), rather than a population-based metaheuristic search or a trained model.", "condition": null }
+      ],
+      "human_involvement_level": [
+        { "code": "Human-on-the-loop (HOnL)", "justification": "The swarm self-organizes into a torus or flock formation autonomously via local rules with no human input required; a human may optionally monitor and intervene via stakeholders.", "condition": "baseline self-organization" },
+        { "code": "Human-in-the-loop (HInL)", "justification": "Successfully switching the swarm between attractors or leading it along a moving path requires the operator's continuous or triggered reference input to the stakeholders; without it, the swarm remains in its current attractor.", "condition": "attractor-switching and path-following via stakeholders" }
+      ],
+      "level_of_human_control_abstraction": [
+        { "code": "Parametric (LHCA 3)", "justification": "Switching the swarm from one attractor to another is achieved by giving stakeholders a single discrete, fixed reference location; the swarm then autonomously transitions and stabilizes into the new formation.", "condition": "attractor-switching (fixed reference)" },
+        { "code": "Augmented (LHCA 2)", "justification": "Path-following requires the operator to continuously supply a moving reference position (a constant-velocity target) that stakeholders track in real time, with the swarm's own dynamics closing the inner formation-keeping loop.", "condition": "path-following (time-varying reference)" }
+      ],
+      "operational_domain": [
+        { "code": "Not Described", "justification": "The model uses generic 2-D nonholonomic single-integrator agent dynamics without specifying a physical operational domain; the authors describe future work as 'implementation with real robot platforms' generically, without committing to air, land, or maritime.", "condition": null }
+      ]
+    }
+  },
+  "flags": [
+    { "dimension": "task_environment_v0.8 / operational_domain", "type": "Not Described", "note": "The abstract agent-dynamics model does not specify a physical operational domain (air/land/maritime); future work only vaguely mentions 'real robot platforms.'" }
+  ]
+}

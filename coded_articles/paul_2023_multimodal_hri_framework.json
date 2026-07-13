@@ -1,0 +1,85 @@
+{
+  "article_id": "paul_2023_multimodal_hri_framework",
+  "citation": {
+    "authors": "Shuvo Kumar Paul, Mircea Nicolescu, Monica Nicolescu",
+    "year": 2023,
+    "title": "Enhancing Human–Robot Collaboration through a Multi-Module Interaction Framework with Sensor Fusion: Object Recognition, Verbal Communication, User of Interest Detection, Gesture and Gaze Recognition",
+    "source_file": "articles/Paul.md"
+  },
+  "extraction_metadata": {
+    "date_extracted": "2026-07-10",
+    "codebook_versions": {
+      "study_type": "0.3",
+      "task_environment": "0.8"
+    },
+    "model": "claude-sonnet-5",
+    "notes": "Single-human/single-robot (Baxter) and multi-human/single-robot HRI, not a swarm system — a perception/interaction framework, not a multi-robot study. Included per the batch request; flagged here given this project's swarm focus. Coded from the Introduction, Methodology overview, and the human-involving evaluation subsections (4.3-4.5) and Conclusions; the heavily technical algorithmic subsections on object detection/pose-estimation accuracy (4.1) and NLP model architecture (4.2, mostly non-human-subject benchmarking) were skimmed rather than read in full detail."
+  },
+  "study_type": {
+    "primary": "System/Architecture Paper",
+    "secondary": "User Study",
+    "sub_attributes": {
+      "setting": "Lab",
+      "measured_constructs": ["Performance", "Other / Not Listed (system recognition accuracy — facing/speaking-state, pointing-gesture, and gaze-target classification — validated against participant-generated ground-truth behavior, rather than a measure of human task performance)"],
+      "modality_flags": []
+    },
+    "justification": "The article's central, comparably-weighted contribution across its length is a reusable, generalizable multi-module perception framework (object/pose detection, verbal-command parsing, user-of-interest detection, gesture recognition, gaze estimation) intended for use across HRI applications, matching System/Architecture Paper as Primary. However, several evaluation experiments have real participants physically interacting with (facing, speaking to, pointing at, gazing toward) the system and, in one case, a real Baxter robot that receives and acts on their instructions — real human behavior data, however narrowly reported as ground-truth for algorithm accuracy rather than as a study of operator experience — satisfying the v0.2 research-aim priority rule for User Study as Secondary."
+  },
+  "summary": {
+    "template": "user_study",
+    "task": "Participants performed scripted interaction behaviors to generate ground-truth data for evaluating the framework's perception modules: (a) facing/not-facing and speaking/not-speaking states while talking to each other or a robot, including a final multi-party scenario with two users and a Baxter humanoid robot exchanging instructions; (b) pointing gestures at one of several tabletop objects while giving a verbal command, at varying distances (1.22-4.88 m); and (c) gazing at specified objects among several on a table, again paired with verbal commands.",
+    "control": "Participants did not operate a control interface in the conventional sense; rather, their natural verbal commands, pointing gestures, and gaze served as the framework's input modalities, which the system parsed (via NLP, pose/gesture/gaze estimation) into structured task parameters (action, object, attributes, location) for the robot to act on, requesting clarification when information was ambiguous or missing.",
+    "participants": "Not precisely specified — described only generically as 'participants' across several small, unspecified-N lab sessions (a multi-party scenario involving at minimum two users plus a Baxter robot is described); no demographic detail, recruitment method, or total participant count is given.",
+    "results": "The facing-state classifier reached up to 98.70% accuracy (Gaussian process, best of six classifiers tested); speaking-state accuracy improved with longer observation sequence length and was optimized at a decision threshold of ~0.009. In the final multi-party demonstration, the system correctly distinguished which of two co-present users (if either) was addressing the robot across three scenario types (both facing robot with one speaking; one facing/speaking; both facing/speaking to each other, i.e. no valid addressee). Pointing-gesture recognition achieved accuracy of 0.995-1.0 (precision 1.0, recall 0.99-1.0) across all four tested distances. The combined pointing+verbal and gaze+verbal pipelines correctly extracted structured task parameters and correctly flagged genuinely ambiguous cases (e.g., an underspecified verbal command with no accompanying pointing gesture) by requesting clarification from the user rather than guessing.",
+    "issues": "Ambiguity in identifying the object of interest arose when a verbal command lacked sufficient distinguishing attributes and was not accompanied by a valid pointing gesture or gaze target, or when a pointing/gaze cue failed to intersect any object boundary; the system's fallback in these cases was a generic clarification request ('Need additional information to identify object') rather than a more targeted follow-up question. When verbal- and gesture-derived object identifications conflicted, the system prioritized the gesture-derived identification on the assumption that speech-to-text transcription is more error-prone, an unvalidated design assumption rather than an empirically-tested tradeoff.",
+    "recommendations": "Extract additional cues and patterns from user dialogue to help resolve the user-of-interest even when a speaker is not facing the robot. Incorporate more reliable 3D information to improve precision and reduce ambiguity in object identification. Investigate more complex interaction scenarios involving multiple simultaneous users and more intricate multi-turn dialogues to move toward more broadly capable, natural HRI systems.",
+    "autonomous_capabilities": "The framework autonomously fuses multiple sensing modalities into structured, actionable task configurations: real-time planar object detection and 3D pose estimation from RGB-D data (feature-detector-descriptor matching plus homography-based perspective transformation); a deep multi-task Bi-LSTM model trained on a 154,065-sample custom dataset to extract task action, object identity/attributes, and location from spoken commands; a two-stage facial-landmark-based pipeline that autonomously classifies each visible person's facing state and speaking state to resolve which user (if any) is the current 'user of interest' addressing the robot; a pointing-gesture classifier that autonomously determines pointing state and coarse direction (away/across/straight) from forearm-joint image coordinates; and a 2D-image-based gaze-estimation module that autonomously infers gaze direction and the corresponding gazed-at object. The framework autonomously combines whichever of these modality outputs are available to resolve or disambiguate a complete task command, requesting clarification only when the combined evidence remains insufficient."
+  },
+  "classification": {
+    "task_environment_v0.8": {
+      "task_object_spatiotemporal_dynamics": [
+        { "code": "Unclear / Candidate New Code", "justification": "The physical objects (books, boxes, a Cheez-It box) referenced by participants' commands are multiple, static, and visible/known on the table from the start of each trial, not discovered via search — the same known-fixed-target gap flagged in bashyal_2008_radiation_source_hsi, howard_2006_leadership_role_allocation, and patel_2022_multi_human_multi_robot_remote_interaction.", "condition": null }
+      ],
+      "behavioral_relation_to_task_object": [
+        { "code": "Unclear / Candidate New Code", "justification": "The robot's implied task, once a command is resolved (e.g., 'bring me that'), is to retrieve/deliver a specified known object to the requesting user — the same object-transport/delivery relation flagged as a gap in patel_2022_multi_human_multi_robot_remote_interaction, not covered by Search, Avoidance, Engagement, Pursuit, or Defend/Block.", "condition": null }
+      ],
+      "team_size": [
+        { "code": "Multi-human - Single-robot", "justification": "The framework's user-of-interest detection module and its final demonstration are explicitly built around multi-party scenarios (two users plus one Baxter robot); several individual sub-module evaluations (pointing, gaze) instead involve a single user with the system, but the article's own framing centers on the multi-party case.", "condition": null }
+      ],
+      "team_composition": [
+        { "code": "Not Applicable", "justification": "Only a single robot (Baxter) is used throughout, so robot-side homogeneity/heterogeneity does not apply.", "condition": "robot side" },
+        { "code": "Homogeneous", "justification": "Co-present users in the multi-party scenarios have identical roles — any of them may be the current addressee/user-of-interest, with no distinguished hierarchy.", "condition": "human side" }
+      ],
+      "interaction_model": [
+        { "code": "One-to-one", "justification": "At any given moment the system resolves exactly one active user-of-interest whose command is treated as addressed to the robot, even when other users are simultaneously present and speaking to each other.", "condition": null }
+      ],
+      "interaction_directness": [
+        { "code": "Direct", "justification": "A resolved user-of-interest's verbal command, point, or gaze is explicitly treated as addressed to the robot.", "condition": null },
+        { "code": "Indirect", "justification": "The system also detects and reasons about co-present users' facing/speaking states even when they are conversing with each other rather than addressing the robot, i.e., observing an interaction not addressed to it.", "condition": null }
+      ],
+      "communication_proximity": [
+        { "code": "Proximate", "justification": "Users and the robot/camera are co-located in the same physical space (explicitly within 1.5-4.88 m), interacting via natural speech, gesture, and gaze channels.", "condition": null }
+      ],
+      "coordination_architecture": [
+        { "code": "Not Applicable", "justification": "Only a single robot is present, so multi-robot coordination does not conceptually apply.", "condition": null }
+      ],
+      "computational_characteristics": [
+        { "code": "Not Described", "justification": "The article's technical contribution is entirely about multi-modal perception and command interpretation (object/pose detection, NLP parsing, facing/speaking/pointing/gaze classification); it does not describe the downstream control mechanism by which the robot would actually plan or execute motion to retrieve/deliver an identified object.", "condition": null }
+      ],
+      "human_involvement_level": [
+        { "code": "Human-in-the-loop (HInL)", "justification": "The entire framework's task-configuration output depends on continuous human verbal/gesture/gaze input; without a human command there is no task for the robot to act on.", "condition": null }
+      ],
+      "level_of_human_control_abstraction": [
+        { "code": "Goal-Oriented (LHCA 4)", "justification": "Each user command (e.g., 'bring the red book') is a single discrete goal specification that the system is intended to resolve and execute in full, with no continuous or step-by-step control involved.", "condition": null }
+      ],
+      "operational_domain": [
+        { "code": "Land", "justification": "The system and the demonstrated Baxter robot operate in an indoor, ground-based physical environment; none of the other defined domains (air, maritime, space, cyber, spectrum) apply.", "condition": null }
+      ]
+    }
+  },
+  "flags": [
+    { "dimension": "task_environment_v0.8 / task_object_spatiotemporal_dynamics", "type": "Unclear / Candidate New Code", "note": "Objects referenced in commands are known/visible from the start, not discovered via search.", "proposed_code": "See bashyal_2008_radiation_source_hsi, howard_2006_leadership_role_allocation, and patel_2022_multi_human_multi_robot_remote_interaction flags for 'Known Fixed Task Object.'" },
+    { "dimension": "task_environment_v0.8 / behavioral_relation_to_task_object", "type": "Unclear / Candidate New Code", "note": "Object retrieval/delivery on request is not covered by any existing behavioral-relation code.", "proposed_code": "See patel_2022_multi_human_multi_robot_remote_interaction flag for 'Transport/Delivery Task.'" },
+    { "dimension": "task_environment_v0.8 / computational_characteristics", "type": "Not Described", "note": "No robot motion/manipulation control mechanism is described; the article's scope is limited to perception and command interpretation." }
+  ]
+}

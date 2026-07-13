@@ -1,0 +1,88 @@
+{
+  "article_id": "bashyal_2008_radiation_source_hsi",
+  "citation": {
+    "authors": "Shishir Bashyal, Ganesh Kumar Venayagamoorthy",
+    "year": 2008,
+    "title": "Human Swarm Interaction for Radiation Source Search and Localization",
+    "source_file": "articles/Bashyal_Human_swarm_interaction_for_radiation_source_search_and_localization.md"
+  },
+  "extraction_metadata": {
+    "date_extracted": "2026-07-10",
+    "codebook_versions": {
+      "study_type": "0.3",
+      "task_environment": "0.8"
+    },
+    "model": "claude-sonnet-5"
+  },
+  "study_type": {
+    "primary": "User Study",
+    "secondary": "System/Architecture Paper",
+    "sub_attributes": {
+      "setting": "Simulated/Remote (incl. VR)",
+      "measured_constructs": ["Performance", "Other / Not Listed (learnability, inferred from mission-completion-time trend across repeated trials)"],
+      "modality_flags": []
+    },
+    "justification": "Five participants each ran a MATLAB-simulated 20-robot swarm through two experiments, with mission completion time recorded and compared against an autonomous-swarm baseline; this real, measured human-in-the-loop data makes User Study Primary per the Step 0 research-aim priority rule. The paper also proposes a named, generalizable HSI architecture (avatar-based, peer-to-peer, Section IV) with its own feature list and diagram, substantial enough to warrant System/Architecture Paper as Secondary."
+  },
+  "summary": {
+    "template": "user_study",
+    "task": "Participants used a MATLAB-based 2D indoor swarm simulation (20 robots) to search for and localize a radiation source. Experiment A (familiarization): the radiation gradient was shown on the map and participants had to guide the swarm to reach the detectable region as fast as possible, repeating up to 5 times. Experiment B (evaluation): participants had to guide the swarm to visit 7 marked key-points to determine whether a radiation source was present, with PSO taking over convergence once detected.",
+    "control": "Participants selected one robot at a time as their 'avatar' via mouse click and could drive it directly with the numeric keypad, or switch it (and thereby its neighbors, via local peer-to-peer signaling) into a repel mode or one of four directional 'director' modes. The avatar has no special authority over the swarm — its influence on neighboring robots propagates only through the same local swarm protocol every robot uses, not through a global command channel.",
+    "participants": "Five participants in each of the two experiments (unspecified background/expertise); N is small and no demographic detail is reported beyond count.",
+    "results": "In Experiment A, mission completion time generally decreased with repetition, taken as evidence of an easy-to-learn interface; most participants eventually beat the autonomous swarm's average completion time (69.64 ± 8.91 s). In Experiment B, human-guided completion time (314.19 ± 155.40 s) was 50.68% faster on average than the autonomous swarm (637.02 ± 343.75 s), with all participants beating the autonomous average and four beating half of it.",
+    "issues": "First-attempt performance in Experiment A was worse than the autonomous swarm because participants spent time experimenting with the different robot modes rather than pursuing the mission goal — an interface-learning cost. One participant (of five) never matched the autonomous swarm's average completion time, and one showed fluctuating rather than steadily improving performance, indicating the learning curve is not uniform across users.",
+    "recommendations": "Not stated explicitly as forward-looking design guidance; the paper's implicit recommendation, drawn from its own results, is that human strategic/navigational input should be layered onto an otherwise fully autonomous swarm (peer-to-peer, locally scoped) rather than replacing swarm autonomy with direct global control, since this preserves scalability and emergent behavior while still improving mission speed.",
+    "autonomous_capabilities": "The swarm operates fully autonomously via random-walk exploration plus a modified, localized particle swarm optimization (PSO) algorithm: once any robot detects a radiation signal stronger than its neighbors', it shares its position locally (not swarm-wide) to become a local-best (lbest) reference, allowing the swarm to converge on the source without any user input, and to pursue multiple radiation sources in parallel via this local sharing."
+  },
+  "classification": {
+    "task_environment_v0.8": {
+      "task_object_spatiotemporal_dynamics": [
+        { "code": "Unclear / Candidate New Code", "justification": "In the familiarization experiment the radiation source's location is displayed on the map to participants from the outset, so it is single and fixed but not 'initially unknown,' which Static/Fixed Task Object (3.4) requires; none of the existing codes cover a known-location fixed target.", "condition": "Experiment A (familiarization)" },
+        { "code": "Static/Fixed Task Object", "justification": "The evaluation experiment treats the (possible) radiation source as a single, initially-unknown, non-moving, non-growing entity that must be discovered by covering 7 key-points; no source was actually instantiated in this particular run, but that is the task's designed object structure.", "condition": "Experiment B (user evaluation)" }
+      ],
+      "behavioral_relation_to_task_object": [
+        { "code": "Unclear / Candidate New Code", "justification": "Participants must navigate the swarm to a known-location radiation region as fast as possible; this is neither Avoidance (no negative consequence to contact) nor Search (location is already known) nor Engagement (no decisive/neutralizing action beyond arrival) as currently defined.", "condition": "Experiment A (familiarization)" },
+        { "code": "Search Task", "justification": "Participants must direct robots to 7 key-points to determine whether an unknown-presence radiation source exists in the environment, which is a canonical location/presence-detection task.", "condition": "Experiment B (user evaluation)" }
+      ],
+      "team_size": [
+        { "code": "Single-human - Multi-robot", "justification": "Each participant individually controls a single avatar within a 20-robot swarm; the architecture is described as supporting multiple simultaneous users but this was not tested in the reported experiments.", "condition": null }
+      ],
+      "team_composition": [
+        { "code": "Homogeneous", "justification": "The 20 robots in the swarm are identical in role and capability; any one can be selected as the avatar.", "condition": "robot side" },
+        { "code": "Not Applicable", "justification": "Only a single human participant operates at a time in the reported experiments, so homogeneity/heterogeneity of the human side does not apply.", "condition": "human side" }
+      ],
+      "interaction_model": [
+        { "code": "One-to-one", "justification": "The direct control channel is one participant driving exactly one selected avatar robot at a time via the keypad or mode buttons.", "condition": null }
+      ],
+      "interaction_directness": [
+        { "code": "Direct", "justification": "The participant explicitly selects and commands the avatar robot (movement, or repel/director mode).", "condition": null },
+        { "code": "Indirect", "justification": "Neighboring robots are affected by the avatar's mode (e.g., repel, director) through the same local swarm protocol used for any robot-to-robot signal, not because the user addressed them directly.", "condition": null }
+      ],
+      "communication_proximity": [
+        { "code": "Remote", "justification": "The participant interacts through a computer/handheld-device screen and GUI, not co-located with the (simulated) robots.", "condition": null }
+      ],
+      "coordination_architecture": [
+        { "code": "Distributed Coordination", "justification": "No leader robot or central controller exists; the avatar is treated by the rest of the swarm as just another peer, and radiation-source convergence uses a localized PSO with neighbor-only (lbest) sharing rather than a global coordinator.", "condition": null }
+      ],
+      "computational_characteristics": [
+        { "code": "Bio-Inspired / Metaheuristic Optimization Control", "justification": "A modified, localized particle swarm optimization algorithm governs convergence toward a detected radiation source once any robot senses a signal.", "condition": null },
+        { "code": "Predefined / Rule-Based Control", "justification": "Baseline wandering, wall/obstruction avoidance, and the fixed repel/director mode behaviors (signal neighbors to move away/toward a direction) are implemented as fixed if-then rules rather than computed via search or a trained model.", "condition": null }
+      ],
+      "human_involvement_level": [
+        { "code": "Human-on-the-loop (HOnL)", "justification": "The swarm searches and converges on the radiation source fully autonomously via PSO even with zero user input (the autonomous-swarm baseline condition); the human, when present, monitors and can intervene by taking an avatar, without which the function still executes and delivers output.", "condition": null }
+      ],
+      "level_of_human_control_abstraction": [
+        { "code": "Direct (LHCA 1)", "justification": "While actively driving a selected avatar via the numeric keypad, the participant continuously sets that robot's exact movement.", "condition": "avatar keypad-driving state" },
+        { "code": "Parametric (LHCA 3)", "justification": "Setting a robot to repel or director mode is a discrete input of a persistent behavioral parameter; the robot then autonomously maintains that behavior toward neighbors without further continuous input from the user.", "condition": "repel/director mode-setting state" }
+      ],
+      "operational_domain": [
+        { "code": "Land", "justification": "The swarm consists of ground robots operating in a simulated 2D indoor environment.", "condition": null }
+      ]
+    }
+  },
+  "flags": [
+    { "dimension": "task_environment_v0.8 / task_object_spatiotemporal_dynamics", "type": "Unclear / Candidate New Code", "note": "Experiment A's radiation source is single and fixed but its location is displayed to participants from the start, so it does not meet Static/Fixed Task Object's (3.4) 'initially unknown' requirement. No existing code covers a known-location fixed target.", "proposed_code": "Known Fixed Task Object — a single, non-moving, non-growing task-relevant object whose location is known to the operator from the outset (distinguished from Static/Fixed, 3.4, which requires the location to be initially unknown and discovered via search)." },
+    { "dimension": "task_environment_v0.8 / behavioral_relation_to_task_object", "type": "Unclear / Candidate New Code", "note": "Experiment A requires participants to navigate the swarm to a known-location target region as quickly as possible, with no negative consequence for contact (rules out Avoidance), no unknown location (rules out Search), and no decisive/neutralizing action beyond arrival (rules out Engagement).", "proposed_code": "Navigate-to-Known-Target Task — the operator's goal is to move the team into contact with/proximity to a single task-relevant object whose location is already known, as fast as possible, where reaching it (not acting on it further) completes the task." },
+    { "dimension": "task_environment_v0.8 / team_composition", "type": "Not Applicable", "note": "Only one human participant operates the interface at a time in the reported experiments, so human-side homogeneity/heterogeneity does not apply, though the architecture is described as designed to support multiple simultaneous users in principle." }
+  ]
+}

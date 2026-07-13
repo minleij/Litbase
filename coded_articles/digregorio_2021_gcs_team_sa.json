@@ -1,0 +1,169 @@
+{
+  "article_id": "digregorio_2021_gcs_team_sa",
+  "citation": {
+    "authors": "Di Gregorio, M., Romano, M., Sebillo, M., Vitiello, G., & Vozella, A.",
+    "year": 2021,
+    "title": "Improving Human Ground Control Performance in Unmanned Aerial Systems",
+    "source_file": "articles/Gregorio_2021.md"
+  },
+  "extraction_metadata": {
+    "date_extracted": "2026-07-10",
+    "codebook_versions": {
+      "study_type": "0.2",
+      "task_environment": "0.8"
+    },
+    "model": "claude-sonnet-5",
+    "notes": "First article this session with a genuinely Proximate human-human communication channel (two co-located operators at a shared MultiTouch wall), distinct from the operator-to-drone channel, which remains Remote. Re-coded 2026-07-10 against Task-Environment v0.8: this article is the codebook's own cited source example for the new Monitoring/Maintenance Task (4.6) code; per that code's scope note, Section 3 is now coded Not Applicable for the battery event rather than forced into Static/Fixed Task Object, since it concerns the system's own internal status, not an external task-object."
+  },
+  "study_type": {
+    "primary": "User Study",
+    "secondary": "System/Architecture Paper",
+    "sub_attributes": {
+      "setting": "Lab",
+      "measured_constructs": ["Performance", "Situation Awareness (SA)", "Other / Not Listed"],
+      "modality_flags": []
+    },
+    "justification": "A formal 2x2 between-subjects experiment with 40 participants (SAGAT situation-awareness scores, drones-returned-home performance, team-communication frequency, all statistically analyzed) is the article's central contribution, so User Study is Primary; the MultiTouch-wall GCS interface and its three-tier architecture are substantially described and framed as reusable fleet-management infrastructure building on the authors' prior work, so System/Architecture Paper is Secondary."
+  },
+  "summary": {
+    "template": "user_study",
+    "task": "Two-person operator teams jointly monitored a simulated persistent-surveillance mission conducted by a fleet of five drones detecting an area and reporting to a Ground Control Station, with one team member directing/monitoring drone positions and targets on a shared map and the other monitoring each drone's battery status, across two 4-minute trials (one routine, one with a simulated unexpected low-battery event).",
+    "control": "Teams used a MultiTouch-wall GCS interface (a three-tier NodeJS web app) showing drone positions/targets on a map plus per-drone status cards (ID, next target, coordinates, battery, a manual recall-to-takeoff button, an artificial-horizon view). At 30% battery a notification alerts the team; at 10% the affected drone automatically returns to and lands at takeoff without further input. The display was manipulated between 'Shared' (both team members see the same full screen) and 'Non-shared' (each sees only their own task-relevant information) conditions.",
+    "participants": "40 University of Salerno students (25 male, 15 female, mean age 23.7), all amateur-level UAS pilots and volunteers, randomly assigned within a 2x2 between-subjects design (Shared/Non-shared display x No-event/Event) forming two-person teams, with within-team control-role assignment also randomized and undisclosed to participants.",
+    "results": "Shared displays produced no difference in performance or situation awareness during routine (No-event) trials, but significantly helped in off-nominal (Event) trials: non-shared teams had significantly worse SAGAT projection scores (Q3, p = .003), returned significantly fewer drones home (Mann-Whitney p = .045), and asked significantly more clarifying questions of each other (t-test p = .002) than shared-display teams specifically when the unexpected low-battery event occurred, with no such differences in the routine condition.",
+    "issues": "The shared-display advantage appeared only in off-nominal conditions, so its benefit may not be obvious from routine-operation performance alone, potentially undermining adoption arguments. Shared MultiTouch-wall displays require a larger, co-located physical space for the operator team, a practical deployment constraint the authors note explicitly. Only two-operator teams were studied, though real-world control rooms may involve more collaborators. The fleet was homogeneous (five identical drones) over a short (4-minute), relatively simple scenario, leaving open how results generalize to larger, heterogeneous, or longer missions.",
+    "recommendations": "Prioritize shared-display investment specifically for off-nominal/emergency resilience rather than expecting routine-operation gains. Investigate scenarios with more than two collaborating operators. Extend testing to wider monitored areas, heterogeneous drones with differing performance/payload, and operators distributed across different physical locations rather than only the co-located two-person case tested here. Further investigate the mechanism behind the shared-display advantage (e.g., faster event detection vs. better post-detection problem-solving).",
+    "autonomous_capabilities": "Each drone autonomously proceeds toward its algorithm-assigned next target and automatically returns to and lands at the take-off point without operator intervention once its battery reaches the critical 10% threshold (with only an informational notification at 30%); the operator otherwise retains decision authority over when to recall a drone early, sharing responsibility for drone status/landing decisions with the system under an established liability-allocation scheme, except at the minimum battery threshold where the system takes automatic control."
+  },
+  "classification": {
+    "task_environment_v0.8": {
+      "task_object_spatiotemporal_dynamics": [
+        {
+          "code": "Not Described",
+          "justification": "The mission is described as 'detection of an area' with drones proceeding to a sequence of targets, but the article does not describe whether these targets are pre-known fixed points or unknown entities discovered during the mission, or how they are spatially/temporally structured.",
+          "condition": "general surveillance targets"
+        },
+        {
+          "code": "Not Applicable",
+          "justification": "The manipulated 'unexpected event' — a single drone's battery suddenly dropping — concerns the system's own internal status, not an external environmental task-object, so this dimension does not conceptually apply; per Section 4.6's scope note (added in Task-Environment codebook v0.8), Monitoring/Maintenance Task behavior is coded Not Applicable here rather than forced into Static/Fixed Task Object.",
+          "condition": "battery-failure event"
+        }
+      ],
+      "behavioral_relation_to_task_object": [
+        {
+          "code": "Monitoring/Maintenance Task",
+          "justification": "The operator's required response to a drone's battery event is detecting and responding to the system's own internal health/status change — matching Section 4.6 (Monitoring/Maintenance Task), added in v0.8, for which this article is the codebook's own cited source example.",
+          "condition": "battery-event response"
+        }
+      ],
+      "team_size": [
+        {
+          "code": "Multi-human - Multi-robot",
+          "justification": "Two-person operator teams jointly supervise a fleet of five drones.",
+          "condition": null
+        }
+      ],
+      "team_composition": [
+        {
+          "code": "Homogeneous",
+          "justification": "The fleet consists of five identical drones; heterogeneous drones with differing performance/payload are explicitly named as future work, implying the tested fleet is not heterogeneous.",
+          "condition": "robot side"
+        },
+        {
+          "code": "Heterogeneous",
+          "justification": "The two team members have distinct standing roles — one directs drones/targets, the other monitors battery status — differing in responsibility even though both are human operators of similar background.",
+          "condition": "human side"
+        }
+      ],
+      "interaction_model": [
+        {
+          "code": "One-to-many",
+          "justification": "Each individual team member's role (directing drones, or monitoring battery) addresses/monitors the whole five-drone fleet at once.",
+          "condition": null
+        },
+        {
+          "code": "Many-to-many",
+          "justification": "The two human operators and the five-drone fleet are all connected through the same shared (or, in the other condition, partially shared) GCS system simultaneously.",
+          "condition": null
+        }
+      ],
+      "interaction_directness": [
+        {
+          "code": "Direct",
+          "justification": "Both the operator-to-drone commands (e.g., recall button) and the operator-to-operator verbal questions are explicitly addressed to their recipient.",
+          "condition": null
+        }
+      ],
+      "communication_proximity": [
+        {
+          "code": "Proximate",
+          "justification": "The two team members are physically co-located at the same MultiTouch wall and communicate verbally with each other during the task.",
+          "condition": "human-human channel"
+        },
+        {
+          "code": "Remote",
+          "justification": "Operator-to-drone interaction is entirely through the simulated screen-based interface, with no physical drones present.",
+          "condition": "human-drone channel"
+        }
+      ],
+      "coordination_architecture": [
+        {
+          "code": "Not Described",
+          "justification": "The article does not describe any mechanism by which the five drones coordinate with one another (e.g., a leader, negotiation, or shared rule); each appears to follow its own preset route independently, but this is not explicitly confirmed.",
+          "condition": null
+        }
+      ],
+      "computational_characteristics": [
+        {
+          "code": "Predefined / Rule-Based Control",
+          "justification": "The automatic return-to-takeoff behavior at 10% battery is a fixed if-then rule (battery threshold breached -> autonomous RTH and landing) rather than a computed optimization or learned model.",
+          "condition": "auto-return-home behavior"
+        },
+        {
+          "code": "Not Described",
+          "justification": "The mechanism by which 'the algorithm' sequences a drone's next target is mentioned only in passing, with no algorithm family specified.",
+          "condition": "target-sequencing/path computation"
+        }
+      ],
+      "human_involvement_level": [
+        {
+          "code": "Human-on-the-loop (HOnL)",
+          "justification": "Drones move toward algorithm-assigned targets without requiring continuous operator input; the operator monitors and can recall a drone early but the function does not depend on this.",
+          "condition": "normal navigation function"
+        },
+        {
+          "code": "Human-in-the-loop (HInL)",
+          "justification": "Above the critical battery threshold, the operator is explicitly described as being in charge of deciding when a drone should land or return home.",
+          "condition": "discretionary recall/landing decision (30% battery notice)"
+        },
+        {
+          "code": "Human-on-the-loop (HOnL)",
+          "justification": "At the 10% critical threshold the system automatically returns and lands the drone without waiting for operator input, but still interfaces with the human via a notification, rather than operating with zero human interface at any stage.",
+          "condition": "critical-battery auto-RTH function"
+        }
+      ],
+      "level_of_human_control_abstraction": [
+        {
+          "code": "Goal-Oriented (LHCA 4)",
+          "justification": "Both directing a drone toward a target and recalling a drone home are discrete, one-off goal-level inputs (e.g., clicking a recall button), with the system executing all subsequent navigation steps; no continuous control channel is described in this study.",
+          "condition": null
+        }
+      ],
+      "operational_domain": [
+        {
+          "code": "Air",
+          "justification": "All vehicles in the fleet are aerial drones.",
+          "condition": null
+        }
+      ]
+    }
+  },
+  "flags": [
+    {
+      "dimension": "coordination_architecture",
+      "type": "Not Described",
+      "note": "No description of whether/how the five drones coordinate with one another beyond each following its own preset route.",
+      "proposed_code": null
+    }
+  ]
+}

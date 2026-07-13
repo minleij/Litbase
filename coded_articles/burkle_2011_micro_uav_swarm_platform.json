@@ -1,0 +1,75 @@
+{
+  "article_id": "burkle_2011_micro_uav_swarm_platform",
+  "citation": {
+    "authors": "Axel Bürkle, Florian Segor, Matthias Kollmann",
+    "year": 2011,
+    "title": "Towards Autonomous Micro UAV Swarms",
+    "source_file": "articles/Burkle.md"
+  },
+  "extraction_metadata": {
+    "date_extracted": "2026-07-10",
+    "codebook_versions": {
+      "study_type": "0.3",
+      "task_environment": "0.8"
+    },
+    "model": "claude-sonnet-5"
+  },
+  "study_type": {
+    "primary": "System/Architecture Paper",
+    "secondary": null,
+    "justification": "The article's central contribution is a reusable platform: a modified commercial quadrocopter enhanced for autonomy, a generic modular ground control station (AMFIS), a four-channel communication infrastructure, and a multi-agent software framework (Teamleader/Copter/Sensor agents) for implementing swarm coordination strategies, framed explicitly as generic infrastructure across sensor platforms and applications. No human participant's reaction, feedback, or behavior of any kind is reported anywhere in the article, only a description of the intended two-operator ground-control-station roles and a simulation-based evaluation of cooperation strategies."
+  },
+  "summary": {
+    "template": "abstract_only",
+    "abstract_summary": "This paper presents a hardware and software platform for building swarms of micro UAVs (quadrocopters), consisting of AirRobot quadrocopters enhanced with an onboard smart-camera processing/communication payload, a generic modular ground control station (AMFIS) for multi-sensor integration and operator control, a four-channel (broadcast/control/data/co-op) wireless communication infrastructure designed for scalable, low-interference swarm networking, and a multi-agent software architecture (Teamleader, Copter, and Sensor agent classes) for implementing team-collaboration strategies. The enhanced UAVs can currently perform basic autonomous maneuvers (take-off, fly-to-position, landing) with manual override always available as a safety fallback, and cooperation strategies are being developed and tested in a game-engine-based simulation environment that shares the same control-command interface as the real hardware, with transfer to validated real-world operation still pending."
+  },
+  "classification": {
+    "task_environment_v0.8": {
+      "task_object_spatiotemporal_dynamics": [
+        { "code": "Moving Task Object", "justification": "The paper's own motivating application scenario describes intruders entering a monitored site who move and split up, requiring the swarm to form subgroups and track each individually — a translating, continuously-relocating task-relevant entity, though this is a described application scenario rather than a reported executed run.", "condition": "described perimeter-security application scenario (Section 2), not an executed/reported experiment" }
+      ],
+      "behavioral_relation_to_task_object": [
+        { "code": "Search Task", "justification": "Quadrocopters are described as patrolling areas of interest to detect perimeter violations, i.e. locating an intruder whose presence/location is initially unknown.", "condition": "described perimeter-security application scenario (Section 2)" },
+        { "code": "Pursuit Task", "justification": "Once a perimeter violation/intruder is detected, quadrocopters 'follow and monitor' the intruder, i.e. continuously maintain custody of an already-identified moving entity.", "condition": "described perimeter-security application scenario (Section 2)" }
+      ],
+      "team_size": [
+        { "code": "Multi-human - Multi-robot", "justification": "The ground control station is designed around two operators (a 'pilot' handling sensor/vehicle control and an 'analyst' handling data fusion/coordination) jointly supervising multiple UAVs and other sensor platforms.", "condition": null }
+      ],
+      "team_composition": [
+        { "code": "Heterogeneous", "justification": "The agent framework explicitly composes different Copter+Sensor agent combinations (e.g. an IR-Camera-Copter agent vs. a chemical-sensor-equipped copter), and application scenarios describe a swarm carrying different sensor types (visual, CBRNE) simultaneously.", "condition": "robot side" },
+        { "code": "Heterogeneous", "justification": "The two ground-control-station operators have distinct, named roles (pilot workstation for sensor/vehicle control vs. analyst workstation for data fusion, archiving, and coordination) rather than being interchangeable.", "condition": "human side" }
+      ],
+      "interaction_model": [
+        { "code": "Many-to-many", "justification": "Both ground-control-station operators, connected via a shared situation-awareness display and the AMFIS integration hub, jointly interact with multiple UAVs and sensor platforms simultaneously.", "condition": null }
+      ],
+      "interaction_directness": [
+        { "code": "Direct", "justification": "Operators explicitly control and configure specific platforms through their dedicated workstations." , "condition": null }
+      ],
+      "communication_proximity": [
+        { "code": "Remote", "justification": "Operators work from a ground control station physically separated from the flying UAVs, communicating via the described uplink/downlink and WiFi channels.", "condition": null }
+      ],
+      "coordination_architecture": [
+        { "code": "Hybrid Coordination", "justification": "A Teamleader Agent centrally coordinates a group of Copter Agents and assigns sub-tasks (and can itself be controlled by a superordinate Teamleader, a hierarchical/centralized element), while the separately-described Co-op channel lets any two UAVs negotiate and exchange subtasks directly as peers ('wingman' requests) without going through a leader — an explicitly coexisting centralized-plus-decentralized mechanism." , "condition": null }
+      ],
+      "computational_characteristics": [
+        { "code": "Task-Allocation (Placeholder)", "justification": "New tasks broadcast to the whole group are explicitly resolved by 'the group' deciding which UAV best fits the task, and the Teamleader Agent assigns sub-tasks to team members — a task/role-assignment mechanism distinct from how any one robot computes its own flight path.", "condition": null },
+        { "code": "Not Described", "justification": "Beyond naming 'autonomous navigation' and GPS-waypoint 'fly to position' maneuvers, the article does not specify the underlying path-planning algorithm (classical, heuristic, bio-inspired, or learned) used to compute an individual UAV's own flight path.", "condition": "individual-UAV path/motion computation" }
+      ],
+      "human_involvement_level": [
+        { "code": "Human-on-the-loop (HOnL)", "justification": "The enhanced quadrocopters perform basic maneuvers (take-off, fly-to-position, landing) autonomously without requiring continuous operator input, while the operator can always monitor and override to take manual control as a safety feature." , "condition": null }
+      ],
+      "level_of_human_control_abstraction": [
+        { "code": "Parametric (LHCA 3)", "justification": "In normal autonomous operation the operator provides a discrete position/waypoint for the UAV to fly to, while the UAV's own control system executes and maintains that flight; the operator retains a monitoring/override role.", "condition": "autonomous fly-to-position state" },
+        { "code": "Not Described", "justification": "The article states manual override is always available as a fallback but does not describe the granularity of that manual control (e.g. direct stick-to-actuator mapping vs. stabilized/augmented control).", "condition": "manual-override state" }
+      ],
+      "operational_domain": [
+        { "code": "Air", "justification": "The platform built and tested in this article is a fleet of quadrocopter micro UAVs; the ground control station is described as generically extensible to other platform types (UGVs, underwater vessels) but only the air-domain UAV platform is actually built and evaluated here.", "condition": null }
+      ]
+    }
+  },
+  "flags": [
+    { "dimension": "task_environment_v0.8 / task_object_spatiotemporal_dynamics and behavioral_relation_to_task_object", "type": "Not Described", "note": "These codes are drawn from the paper's Section 2 application scenarios (a bulleted, narratively-described perimeter-intrusion use case) rather than from a reported, executed experiment — the paper's own simulated 'intrusion' scenario (Fig. 7) is mentioned but no details of its object dynamics or outcome are given." },
+    { "dimension": "task_environment_v0.8 / computational_characteristics", "type": "Not Described", "note": "No specific path-planning/motion-control algorithm is named for how an individual UAV computes its own flight path beyond 'autonomous navigation' and GPS-waypoint flight." },
+    { "dimension": "task_environment_v0.8 / level_of_human_control_abstraction", "type": "Not Described", "note": "The granularity of the manual-override control mode (direct stick control vs. augmented/stabilized control) is not specified." }
+  ]
+}

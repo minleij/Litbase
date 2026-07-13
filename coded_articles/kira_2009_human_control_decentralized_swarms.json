@@ -1,0 +1,72 @@
+{
+  "article_id": "kira_2009_human_control_decentralized_swarms",
+  "citation": {
+    "authors": "Zsolt Kira, Mitchell A. Potter",
+    "year": 2009,
+    "title": "Exerting Human Control Over Decentralized Robot Swarms",
+    "source_file": "articles/Kira_Exerting_human_control_over_decentralized_robot_swarms.md"
+  },
+  "extraction_metadata": {
+    "date_extracted": "2026-07-10",
+    "codebook_versions": {
+      "study_type": "0.3",
+      "task_environment": "0.8"
+    },
+    "model": "claude-sonnet-5"
+  },
+  "study_type": {
+    "primary": "Algorithm/Controller Evaluation (Simulation-Only)",
+    "secondary": "Physical Robot Demonstration / Proof-of-Concept",
+    "justification": "The paper's central contribution is two new learning-based control mechanisms (instance-based/nearest-neighbor learning for top-down global-characteristic control; evolutionary learning for bottom-up virtual-particle control), systematically validated primarily via simulation (parameter-space sampling, evolutionary fitness curves, generalization tests). A smaller confirmatory validation was also run on real Pioneer 3-AT robots (3 of 6 tested radius values), but with zero human-subject data reported anywhere — no participant ever operated the system in the paper — so Physical Robot Demonstration is Secondary rather than Primary, and no User Study code applies."
+  },
+  "summary": {
+    "template": "abstract_only",
+    "abstract_summary": "This paper introduces the problem of post-deployment, real-time human control over decentralized robot swarms controlled by physicomimetics (physics-inspired attractive/repulsive force laws between particle-like agents). It proposes two control mechanisms: a top-down approach that uses instance-based (nearest-neighbor) learning to map desired global swarm characteristics (e.g., swarm radius, maximum inter-agent distance) to the underlying force-law parameters that produce them, and a bottom-up approach that uses evolutionary learning to design 'virtual particles' — non-physical agents that influence real robots through the same force-law interactions — to perform higher-level swarm operations (SPLIT and FOLLOW) without altering the real agents' own parameters. Both mechanisms are demonstrated in a simulated defense scenario (a swarm of robots protecting a resource from an attacker) and validated primarily through simulation, with a smaller confirmatory test of the radius-control mechanism also run on physical Pioneer 3-AT ground robots, showing comparable accuracy (error consistently under half a meter) between simulation and hardware."
+  },
+  "classification": {
+    "task_environment_v0.8": {
+      "task_object_spatiotemporal_dynamics": [
+        { "code": "Moving Task Object", "justification": "The attacker approaches the protected resource and later retreats into a narrow corridor as it is pursued, requiring ongoing tracking rather than a one-off response.", "condition": null }
+      ],
+      "behavioral_relation_to_task_object": [
+        { "code": "Defend/Block Task", "justification": "The defender swarm's baseline role is to position around and protect a valuable resource from the adversarial attacker, thwarting its approach — the same RoboFlag-style pattern that is this code's own source example.", "condition": null },
+        { "code": "Pursuit Task", "justification": "Once the operator splits off part of the defensive swarm to chase the attacker (SPLIT + FOLLOW), the defenders must continuously follow the already-identified, retreating attacker into a corridor.", "condition": null },
+        { "code": "Engagement Task", "justification": "The scenario narrative states the invader is eventually 'disabled' by the pursuing defenders, a decisive outcome directed at the already-identified attacker, though the specific disabling mechanism/action is not detailed further in the text.", "condition": null }
+      ],
+      "team_size": [
+        { "code": "Single-human - Multi-robot", "justification": "A single operator is described as able to request swarm-characteristic changes or trigger SPLIT/FOLLOW operations affecting the whole six-robot defender swarm.", "condition": null }
+      ],
+      "team_composition": [
+        { "code": "Homogeneous", "justification": "The six defender robots (Pioneer 3-AT platforms) are identical in role and capability.", "condition": "robot side" },
+        { "code": "Not Applicable", "justification": "Only a single (conceptual) operator role is described; no multi-human team is present.", "condition": "human side" }
+      ],
+      "interaction_model": [
+        { "code": "One-to-many", "justification": "A single operator's global-characteristic request or virtual-particle introduction affects the whole defender swarm simultaneously, not one robot individually.", "condition": null }
+      ],
+      "interaction_directness": [
+        { "code": "Indirect", "justification": "The operator never addresses a command to any specific robot; instead, virtual particles introduced by the operator influence real defenders purely through their physical presence and the same local force-law interactions used among the robots themselves, and top-down characteristic requests reconfigure underlying force-law parameters rather than addressing any agent directly.", "condition": null }
+      ],
+      "communication_proximity": [
+        { "code": "Remote", "justification": "The operator's influence is exerted through software parameter changes / virtual-particle placement rather than physical co-location or direct physical interaction with the robots.", "condition": null }
+      ],
+      "coordination_architecture": [
+        { "code": "Distributed Coordination", "justification": "Defender robots coordinate purely through local, pairwise physicomimetic force-law interactions with no leader robot or central coordinator described.", "condition": null }
+      ],
+      "computational_characteristics": [
+        { "code": "Classical Geometric / Sampling-Based Control", "justification": "Each robot's motion is generated by a physicomimetic force law (attractive/repulsive forces between point-mass particles based on distance), functionally equivalent to an artificial-potential-field method, the codebook's own source example for this code.", "condition": "base robot motion generation" },
+        { "code": "Bio-Inspired / Metaheuristic Optimization Control", "justification": "A generational evolutionary algorithm (population of 60 genomes, ranked selection, adaptive Gaussian mutation) is used to search for virtual-particle placement/parameters that achieve the SPLIT operation.", "condition": "SPLIT virtual-particle parameter design" },
+        { "code": "Learning-Based Control", "justification": "A nearest-neighbor (instance-based) learning system, trained on simulated parameter-sweep data, maps a user-requested global swarm characteristic (e.g., desired radius) to the corresponding low-level force-law parameters.", "condition": "top-down global-characteristic control" }
+      ],
+      "human_involvement_level": [
+        { "code": "Human-on-the-loop (HOnL)", "justification": "The defensive swarm functions and protects the resource via autonomous physicomimetic force-law interactions without requiring operator input, while the described operator role can monitor and intervene (request characteristic changes, trigger SPLIT/FOLLOW) as needed; note this describes the system's intended design rather than a tested human interaction, since no participant actually operated the system in this paper.", "condition": null }
+      ],
+      "level_of_human_control_abstraction": [
+        { "code": "Goal-Oriented (LHCA 4)", "justification": "The described operator role gives discrete, mission-level directives (a desired characteristic value, or a SPLIT/FOLLOW macro-operation) that the system then autonomously executes in full via its learned parameter mappings.", "condition": null }
+      ],
+      "operational_domain": [
+        { "code": "Land", "justification": "The physical validation uses Pioneer 3-AT ground robots; the simulated scenario likewise models ground-based agents.", "condition": null }
+      ]
+    }
+  },
+  "flags": []
+}

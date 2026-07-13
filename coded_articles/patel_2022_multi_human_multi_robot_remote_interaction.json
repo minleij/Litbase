@@ -1,0 +1,83 @@
+{
+  "article_id": "patel_2022_multi_human_multi_robot_remote_interaction",
+  "citation": {
+    "authors": "Jayam Patel, Prajankya Sonar, Carlo Pinciroli",
+    "year": 2022,
+    "title": "On multi-human multi-robot remote interaction: a study of transparency, inter-human communication, and information loss in remote interaction",
+    "source_file": "articles/Patel.md"
+  },
+  "extraction_metadata": {
+    "date_extracted": "2026-07-10",
+    "codebook_versions": {
+      "study_type": "0.3",
+      "task_environment": "0.8"
+    },
+    "model": "claude-sonnet-5"
+  },
+  "study_type": {
+    "primary": "User Study",
+    "secondary": "System/Architecture Paper",
+    "sub_attributes": {
+      "setting": "Simulated/Remote (incl. VR)",
+      "measured_constructs": ["Performance", "Workload", "Trust", "Situation Awareness (SA)", "Other / Not Listed (custom 5-item quality-of-interaction scale covering teammate/robot understanding and task-progress tracking)"],
+      "modality_flags": []
+    },
+    "justification": "Three formally-designed, statistically-analyzed user studies (48 total participants across a transparency/communication study and an information-loss pilot + main study) with SART, NASA-TLX, trust, interaction-quality, and objective performance measures are the article's central validating evidence, making User Study Primary. The article also presents a novel, open-sourced, generically-reusable web-based client-server remote-interaction platform (transparency modes, communication modes, collective-transport behavior) as a comparably-weighted contribution, warranting System/Architecture Paper as Secondary."
+  },
+  "summary": {
+    "template": "user_study",
+    "task": "Pairs of remote operators used a web-based interface to jointly command 9 simulated robots to collectively transport 6 objects (2 large, 4 small) to a goal region in a scoring game (8-minute sessions, up to 8 points). A second, related study had single operators (later re-paired into 10 teams) perform a similar collective-transport task under six/four different levels of simulated information loss (delay between video-frame updates), including homogeneous (both operators experience the same loss) and heterogeneous (operators experience different loss levels) conditions.",
+    "control": "Operators used a point-and-click web interface (ARGoS-simulator-backed) to select individual robots, teams of robots (ctrl+click), or objects and assign each a goal position/orientation via a right-click; robots then autonomously executed a finite-state-machine 'collective transport' behavior (reach object, approach, push, rotate) to deliver it. Four 'transparency' display modes (baseline/none, central — on-robot heading and task status overlays, peripheral — robot/object panels and a log, and mixed) and four inter-operator 'communication' modes (none, direct/verbal via Zoom, indirect/via-interface-only, and mixed) were experimentally manipulated as between/within-subject conditions.",
+    "participants": "48 total participants across two user studies, all university students with no prior experience with the remote interface. Study 1 (transparency/communication, ideal conditions): 28 participants — 14 (5F/9M, ages 19-37, M=23.28) tested across the four transparency modes, and 14 (4F/10M, ages 18-48, M=23.64) tested across the four communication modes, each performing all four conditions of their assigned factor. Study 2 (information loss): 20 participants (7F/13M, ages 18-31, M=22.75) completed a single-operator pilot study across 6 information-loss levels (0-2.5s), then were randomly paired into 10 two-person teams for a main study testing 4 homogeneous/heterogeneous information-loss combinations.",
+    "results": "Transparency study: mixed transparency (both central and peripheral information shown) ranked best overall (Borda count) for situational awareness, trust, and interaction quality, followed by central transparency, then peripheral, then baseline (no information) — supporting all three transparency hypotheses; task-score differences across modes were not statistically significant, attributed to a learning effect across the four repeated trials. Communication study: mixed communication (verbal + interface-mediated) ranked best, followed by direct (verbal) communication, then indirect, then none — supporting all three communication hypotheses; again no significant difference in raw task score, attributed to learning effects. Information-loss pilot study: workload increased and performance decreased monotonically with information loss; usability was high at 0-0.5s and low at 2-2.5s delay, with individual differences in tolerance (2 of 20 operators stopped early; 11 reported reaching a frustration limit at 2.5s but continued; 7 reported they could have tolerated more). Information-loss main study: low homogeneous loss (both operators fast) was the best condition on nearly every subjective and objective measure; heterogeneous loss (one operator fast, one slow) produced a measurable imbalance in awareness, workload, trust, and interaction quality between teammates (an 'out-of-the-loop' effect for the higher-loss operator), and was preferred over high homogeneous loss; participants clustered into four preference 'types' regarding who should bear high loss in heterogeneous conditions (Egocentrics, Altruists, Egalitarians, and a lone 'Thinker' who preferred experiencing high loss himself).",
+    "issues": "Central and peripheral transparency alone were each reported as substantially worse than mixed transparency, with peripheral transparency in particular described by operators as 'cumbersome' and associated with the lowest awareness and trust — a single information channel was insufficient. Indirect-only communication produced higher workload than direct or mixed communication despite offering good robot-level information, indicating a real cost to being unable to speak with a teammate. Heterogeneous information loss created a persistent imbalance between teammates: the higher-loss operator experienced degraded awareness, higher workload, and lower trust than their teammate, and could not always adequately understand their teammate's actions even though inter-operator (as opposed to inter-robot) information itself was not delayed in this study. Object/robot command conflicts between the two operators were resolved with a simple 'last command wins' override policy (deliberately chosen over a lock-based approach for implementation robustness), which could in principle cause operators to unknowingly overwrite each other's commands.",
+    "recommendations": "Combine both central (in-context, on-robot) and peripheral (summary panel/log) transparency information rather than offering either alone, since the combination consistently outperformed either individually. Support both direct (verbal) and indirect (interface-mediated) inter-operator communication simultaneously rather than only one channel. When deploying multi-operator remote interaction under bandwidth constraints, prioritize keeping information loss homogeneous and low across all operators; if some degradation is unavoidable, prefer a shared moderate loss over placing one operator at a much higher loss than their teammate, since heterogeneous loss creates trust and coordination problems beyond what the raw average loss would predict. Future work should investigate the effect of information loss specifically on the inter-operator communication channel (not just the robot/task video feed), which this study held loss-free throughout.",
+    "autonomous_capabilities": "Robots execute a shared finite-state-machine 'collective transport' behavior once given a goal by an operator: they autonomously organize themselves in a circle around the target object based on team size and distance, approach and make contact with it, then move together at matched speed toward the goal while maintaining formation (re-forming if any robot breaks formation), and can similarly self-organize to rotate an object in place. If an operator assigns a goal to multiple objects at once, robots autonomously distribute themselves across the objects and execute the transport behavior for each, with no further step-by-step operator direction required."
+  },
+  "classification": {
+    "task_environment_v0.8": {
+      "task_object_spatiotemporal_dynamics": [
+        { "code": "Unclear / Candidate New Code", "justification": "The 6 transportable objects are multiple, static, and visible/known to operators from the start of the task (Fig. 10), not discovered via search — the same known-fixed-target gap flagged in bashyal_2008_radiation_source_hsi and howard_2006_leadership_role_allocation, here again in a multi-instance form.", "condition": null }
+      ],
+      "behavioral_relation_to_task_object": [
+        { "code": "Unclear / Candidate New Code", "justification": "The operator's required behavior is to have the robot team collectively pick up/push and relocate a known task-relevant object to a specified goal position — an object-transport/delivery relation that is not Search (location known), Engagement (no neutralizing action), Avoidance, Pursuit, or Defend/Block, since the object itself is not adversarial or something to be reached by the team's own bodies but is itself being moved by the team.", "condition": null }
+      ],
+      "team_size": [
+        { "code": "Multi-human - Multi-robot", "justification": "Each session pairs two human operators jointly commanding a shared team of 9 robots.", "condition": null }
+      ],
+      "team_composition": [
+        { "code": "Homogeneous", "justification": "The 9 robots are identical in capability, distinguished only by colored fiducial markers for operator reference.", "condition": "robot side" },
+        { "code": "Homogeneous", "justification": "Both operators in a session have identical roles, permissions, and task goals — there is no supervisor/subordinate distinction.", "condition": "human side" }
+      ],
+      "interaction_model": [
+        { "code": "Many-to-many", "justification": "Both operators can select and command any robot or object through the same shared interface, with the system explicitly handling command conflicts between them (last-command-wins)." , "condition": null }
+      ],
+      "interaction_directness": [
+        { "code": "Direct", "justification": "Object/robot manipulation commands (click-to-select, right-click-to-assign-goal) are explicitly addressed to a specific robot, team, or object.", "condition": null },
+        { "code": "Indirect", "justification": "The paper's own 'indirect communication' mode is explicitly defined as operators observing each other's actions/intentions through transparency-mode interface elements rather than being directly addressed by their teammate.", "condition": "indirect inter-operator communication" }
+      ],
+      "communication_proximity": [
+        { "code": "Remote", "justification": "Operators are in physically separate locations, connected only via the web-based interface and (in direct-communication conditions) Zoom.", "condition": null }
+      ],
+      "coordination_architecture": [
+        { "code": "Distributed Coordination", "justification": "Robots in a transport team each follow the same local finite-state-machine rules (organize around the object, wait for all teammates to reach their positions, then jointly push/rotate), with no leader robot or central per-robot commander described — group behavior emerges from each robot independently satisfying shared local conditions.", "condition": null }
+      ],
+      "computational_characteristics": [
+        { "code": "Predefined / Rule-Based Control", "justification": "Robot behavior is explicitly implemented as a fixed finite-state machine (Reach Object -> Approach Object -> Push Object -> Rotate Object) triggered by operator requests, a scripted rather than searched/learned control mechanism.", "condition": null }
+      ],
+      "human_involvement_level": [
+        { "code": "Human-in-the-loop (HInL)", "justification": "The collective-transport behavior is explicitly triggered 'upon operator's request' (Fig. 3 caption); without an operator assigning a goal, no object/robot movement toward a task goal occurs.", "condition": null }
+      ],
+      "level_of_human_control_abstraction": [
+        { "code": "Goal-Oriented (LHCA 4)", "justification": "The operator's only input is a discrete goal position/orientation for a selected robot, team, or object; the robot team then autonomously executes all steps (organizing, approaching, pushing, rotating) needed to reach it.", "condition": null }
+      ],
+      "operational_domain": [
+        { "code": "Land", "justification": "The simulated robots are ground robots (ARGoS multi-robot simulator) performing object transport on a flat arena.", "condition": null }
+      ]
+    }
+  },
+  "flags": [
+    { "dimension": "task_environment_v0.8 / task_object_spatiotemporal_dynamics", "type": "Unclear / Candidate New Code", "note": "Multiple transportable objects are visible/known from task start, not discovered via search — extends the recurring known-fixed-target gap.", "proposed_code": "See bashyal_2008_radiation_source_hsi and howard_2006_leadership_role_allocation flags for 'Known Fixed Task Object.'" },
+    { "dimension": "task_environment_v0.8 / behavioral_relation_to_task_object", "type": "Unclear / Candidate New Code", "note": "Collective object transport/delivery to a goal is a distinct behavioral relation not covered by any of the six existing codes.", "proposed_code": "Transport/Delivery Task — the operator's required behavior is to direct the robot team to physically relocate a task-relevant object from its current position to a specified goal location, distinct from Pursuit (following an object, not moving it) and Engagement (neutralizing/capturing rather than relocating)." }
+  ]
+}

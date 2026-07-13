@@ -1,0 +1,171 @@
+{
+  "article_id": "gale_2018_playbook_casas",
+  "citation": {
+    "authors": "Gale, J., Karasinski, J., & Hillenius, S.",
+    "year": 2018,
+    "title": "Playbook for UAS: UX of Goal-Oriented Planning & Execution",
+    "source_file": "articles/Gale_2018_Playbook_for_CASAS.md"
+  },
+  "extraction_metadata": {
+    "date_extracted": "2026-07-10",
+    "codebook_versions": {
+      "study_type": "0.2",
+      "task_environment": "0.8"
+    },
+    "model": "claude-sonnet-5",
+    "notes": "Notable for the corpus: the temporary flight restriction (TFR) volumes here are explicitly tied to an expanding wildfire, giving a second real-world confirmation of Spreading Task Object beyond Wattearachchi et al. (2025) — though still fire-related, not yet the non-hazard analogue the Task-Environment codebook says is still unconfirmed. Re-coded 2026-07-10 against Task-Environment v0.8: survivor search now maps onto the new Search Task (4.2) code, replacing the original Unclear / Candidate New Code flag."
+  },
+  "study_type": {
+    "primary": "User Study",
+    "secondary": "System/Architecture Paper",
+    "sub_attributes": {
+      "setting": "Simulated/Remote (incl. VR)",
+      "measured_constructs": ["Other / Not Listed"],
+      "modality_flags": []
+    },
+    "justification": "A structured think-aloud usability study with 7 subjects (DART first responders and UAS researchers) using an interactive iPad prototype is reported (observations, subjective comments, direct quotes), so User Study is Primary; the Playbook-for-CASAS interface itself is a substantially-described, general-purpose planning tool adapted from an existing NASA spaceflight system and framed as reusable across future UAS/swarm domains, so System/Architecture Paper is Secondary."
+  },
+  "summary": {
+    "template": "user_study",
+    "task": "Participants used an iPad-based prototype (Playbook for CASAS, adapted from NASA's spaceflight mission-planning tool) to plan and manage a simulated multi-UAS 'search and recover' disaster-response mission: starting the mission, selecting waypoints, and choosing among auto-resolver-generated alternate flight trajectories when a simulated temporary flight restriction (TFR) forced a reroute.",
+    "control": "Goal-oriented, higher-level planning rather than direct per-vehicle piloting: users assigned broad mission goals (e.g., 'search the fire zone,' 'deliver a package,' 'monitor the waypoint'), which the system decomposed into sub-goals/waypoints across the swarm. A timeline view (one row per UAS) showed each vehicle's planned goals/waypoints over time, a geospatial map view showed trajectories, waypoints, and flight-restriction volumes with pan/zoom, and a 'stream view' surfaced detailed temporal/constraint information and prompted the user to make decisions (e.g., selecting among auto-resolver-suggested reroutes) at key mission moments.",
+    "participants": "7 volunteer subjects — members of NASA Ames' Disaster Assistance Rescue Team (DART, a federal emergency-response/recovery team with prior deployments to major disasters) and UAS researchers from the Human Systems Integration Division — completed a structured think-aloud usability protocol (defined roles, timing, tasks, completion criteria, follow-up questions). This was explicitly the team's first, non-exhaustive round of testing, with data captured as observations, subjective comments, and direct quotes rather than a formally reported N or statistics.",
+    "results": "The prototype's goal-oriented planning approach and multimodal (timeline + geospatial + stream) layout were generally usable to participants with minimal training, supporting the core 'walk up and use' design goal, and participants successfully completed tasks including trajectory selection under a simulated flight restriction. Recurring behavioral patterns emerged: participants hesitated before sending instructions to the swarm/ground control station; requested clearer temporal waypoint-timing information; preferred using the geospatial and stream views together over the timeline view for trajectory decisions; wanted weather/wind data and altitude given as Above-Ground-Level rather than barometric/sea-level; and expressed a desire to retain manual override rather than being fully automated out of the loop.",
+    "issues": "Air-traffic-control jargon (e.g., 'NOTAMs') confused untrained participants. Guiding many UAS simultaneously increased the information users had to hold in working memory (goal-completion percentage, waypoints met, battery life across candidate trajectories), and labeling in the geospatial view was not clear enough to reduce this load. The timeline view did not clearly convey temporal waypoint information despite participants wanting it, so they relied on the geospatial/stream views instead. Participants hesitated before committing swarm instructions with no Go/No-Go confirmation available. Some wanted to manually create/drag their own waypoints, particularly for fast-changing TFRs that an auto-resolver might not handle quickly enough. The study is explicitly a first, informal round of testing with only 7 participants.",
+    "recommendations": "Remove ATC/system jargon in favor of plain language for untrained first-responder users. Provide clear, glanceable labeling of zones, trajectories, and flight-plan options to reduce cognitive load. Add Go/No-Go confirmation indicators to reduce hesitation before sending swarm/GCS instructions. Provide clearer temporal waypoint information directly in whichever view users actually rely on. Add weather/wind data and switch altitude display to Above-Ground-Level. Allow first responders to manually create/drag their own waypoints for time-critical situations an auto-resolver can't handle fast enough. Provide a clear, recallable pre-mission briefing so users can consistently prioritize objectives (e.g., time vs. battery life). Preserve meaningful human agency/override rather than defaulting to full automation.",
+    "autonomous_capabilities": "An auto-resolver (AR) algorithm autonomously computes and proposes multiple alternate flight-path trajectories to resolve medium-term conflicts (e.g., responding to a temporary flight restriction), which the interface then presents to the user for selection. In the planned flight demonstration, the underlying system autonomously decomposes user-issued high-level mission goals into sub-goals/waypoints executed across the UAS swarm; swarm members could also potentially form ad hoc communication network arrays autonomously when equipped with appropriate sensors/antennas (an identified but not-yet-implemented use case). Separately, early physical flight tests with three UAS at NASA's UAS Autonomy Research Complex validated the underlying route-planning-through-Playbook pipeline outside the formal usability study."
+  },
+  "classification": {
+    "task_environment_v0.8": {
+      "task_object_spatiotemporal_dynamics": [
+        {
+          "code": "Distributed Task Object",
+          "justification": "Survivors/high-value points of interest within the fire zone are unknown, scattered instances that the swarm must search out via a coverage trajectory of waypoints.",
+          "condition": "search and recover mission"
+        },
+        {
+          "code": "Spreading Task Object",
+          "justification": "Temporary flight restriction volumes are explicitly described as changing 'from moment to moment - especially when these are caused due to the wildfire itself,' matching a single, fire-driven, outward-expanding hazard area.",
+          "condition": "wildfire-driven TFR volumes"
+        }
+      ],
+      "behavioral_relation_to_task_object": [
+        {
+          "code": "Avoidance Task",
+          "justification": "Temporary flight restriction volumes must be rerouted around; entering one is the negative outcome to prevent.",
+          "condition": "TFR avoidance"
+        },
+        {
+          "code": "Search Task",
+          "justification": "Locating survivors during the 'search and recover' mission is a search relation, not avoidance — matching Section 4.2 (Search Task), added in v0.8.",
+          "condition": "survivor search"
+        }
+      ],
+      "team_size": [
+        {
+          "code": "Single-human - Multi-robot",
+          "justification": "A single pilot/first-responder operator is described as controlling a swarm of UAS via the interface.",
+          "condition": null
+        }
+      ],
+      "team_composition": [
+        {
+          "code": "Not Described",
+          "justification": "The article does not specify whether the tested/planned swarm's UAS differ from one another in role or capability, beyond generically calling them all 'UAS'; the physical flight test used three drones with no stated differentiation.",
+          "condition": "robot side"
+        }
+      ],
+      "interaction_model": [
+        {
+          "code": "One-to-many",
+          "justification": "A single high-level goal issued by the operator (e.g., 'search the fire zone') is distributed across, and decomposed for, the whole swarm at once.",
+          "condition": null
+        }
+      ],
+      "interaction_directness": [
+        {
+          "code": "Direct",
+          "justification": "The operator issues explicit goals and makes explicit trajectory-choice decisions addressed to the system.",
+          "condition": null
+        }
+      ],
+      "communication_proximity": [
+        {
+          "code": "Remote",
+          "justification": "The operator interacts entirely through a tablet-based screen interface, not through direct physical or vocal co-location with the UAS.",
+          "condition": null
+        }
+      ],
+      "coordination_architecture": [
+        {
+          "code": "Not Described",
+          "justification": "The article mentions only at a high level 'a network of ground control systems which together produce flight path trajectories,' without describing whether coordination among robots/ground-control elements is centralized, distributed, or hierarchical.",
+          "condition": null
+        }
+      ],
+      "computational_characteristics": [
+        {
+          "code": "Task-Allocation (Placeholder)",
+          "justification": "Goal-oriented planning explicitly breaks down a high-level goal into sub-goals/waypoints distributed across multiple UAS, deciding which vehicle covers which part of the task.",
+          "condition": null
+        },
+        {
+          "code": "Not Described",
+          "justification": "The auto-resolver is described only functionally ('a trajectory-based conflict resolution algorithm that provides efficient flight path changes'), without naming a specific algorithm family (classical, heuristic, bio-inspired, or learning-based).",
+          "condition": "auto-resolver trajectory computation"
+        }
+      ],
+      "human_involvement_level": [
+        {
+          "code": "Human-in-the-loop (HInL)",
+          "justification": "The system does not generate its own mission goals; a human must specify the high-level goal (e.g., 'search the fire zone') for the mission to proceed.",
+          "condition": "goal specification function"
+        },
+        {
+          "code": "Human-in-the-loop (HInL)",
+          "justification": "When a TFR forces a reroute, the auto-resolver presents alternate trajectories but the mission requires the operator to select one before proceeding.",
+          "condition": "reroute/trajectory-selection function"
+        },
+        {
+          "code": "Human-on-the-loop (HOnL)",
+          "justification": "Once goals/waypoints are approved, vehicle navigation and low-level execution proceed without further operator input, with the operator only monitoring and available to take over at key moments.",
+          "condition": "standard waypoint execution function"
+        }
+      ],
+      "level_of_human_control_abstraction": [
+        {
+          "code": "Goal-Oriented (LHCA 4)",
+          "justification": "Both mission-goal specification and TFR-reroute trajectory selection are discrete, one-off inputs of a goal/choice within the mission, with the system executing all subsequent steps.",
+          "condition": null
+        }
+      ],
+      "operational_domain": [
+        {
+          "code": "Air",
+          "justification": "All vehicles described are unmanned aircraft (UAS) operating in the air domain.",
+          "condition": null
+        }
+      ]
+    }
+  },
+  "flags": [
+    {
+      "dimension": "coordination_architecture",
+      "type": "Not Described",
+      "note": "Only a vague, high-level mention of 'a network of ground control systems' producing trajectories together; no detail on the actual coordination mechanism among robots or ground-control elements.",
+      "proposed_code": null
+    },
+    {
+      "dimension": "computational_characteristics",
+      "type": "Not Described",
+      "note": "The auto-resolver's algorithm type is never named, only its function (trajectory-based conflict resolution).",
+      "proposed_code": null
+    },
+    {
+      "dimension": "team_composition",
+      "type": "Not Described",
+      "note": "No information on whether the swarm's UAS differ in role/capability from one another.",
+      "proposed_code": null
+    }
+  ]
+}

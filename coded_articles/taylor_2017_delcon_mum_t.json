@@ -1,0 +1,184 @@
+{
+  "article_id": "taylor_2017_delcon_mum_t",
+  "citation": {
+    "authors": "Taylor, G. S., Alicia, T. J., Turpin, T., & Surana, A.",
+    "year": 2017,
+    "title": "Controlling Multiple Unmanned Aircraft from a Manned Helicopter: The Need for Advanced Autonomy and Refined Pilot-Vehicle Interface",
+    "source_file": "articles/Delcon_tayloretal2017controllingmultipleunmannedaircraftfromamannedhelicoptertheneedforadvancedautonomyand_1.md"
+  },
+  "extraction_metadata": {
+    "date_extracted": "2026-07-10",
+    "codebook_versions": {
+      "study_type": "0.2",
+      "task_environment": "0.8"
+    },
+    "model": "claude-sonnet-5",
+    "notes": "This is the article the Task-Environment codebook's own Section 9.5 Scope note cites as a motivating test case (a weapons-engagement authorization treated as a Goal-Oriented LHCA input) — that precedent is applied directly here. Re-coded 2026-07-10 against Task-Environment v0.8: the search relation (area/route recon) and engagement relation (weapons engagement) now map onto the new Search Task (4.2) and Engagement Task (4.3) codes, replacing the original Unclear / Candidate New Code flag."
+  },
+  "study_type": {
+    "primary": "User Study",
+    "secondary": null,
+    "sub_attributes": {
+      "setting": "Lab",
+      "measured_constructs": ["Performance", "Workload", "Situation Awareness (SA)"],
+      "modality_flags": []
+    },
+    "justification": "A formal 2x2 within-subjects experiment with 8 military test pilots operating a physical helicopter-crewstation simulator (real touchscreens, joysticks, hand controller) manipulated autonomy level (DelCon present/absent) and team size (1 vs 3 UAS), with objective performance measures plus Bedford Workload and China Lake SA scales collected after every mission."
+  },
+  "summary": {
+    "template": "user_study",
+    "task": "A single crewmember (Air Mission Commander, AMC) in a simulated attack-helicopter crewstation supervised their own aircraft's sensor/weapons plus up to three teamed UASs (a Gray Eagle and two Shadows) across four scenario-based tactical missions in a simulated Pakistan/Afghanistan-like terrain: an area recon for a high-value target, a deliberate attack supporting a downed-aircrew extraction, a point recon supporting a hostage rescue, and a route-security/close-attack mission to capture a high-value target.",
+    "control": "A 2x2 within-subjects design compared manual control (the AMC directly slews/zooms each UAS's sensor and manages its flight path via joystick and touchscreen) against the DelCon delegation-of-control system, through which the AMC selects one of four high-level 'plays' (point recon, area recon, route recon, safe air-volume weapons engagement) via a hand-controller touchscreen, assigns UAS assets and parameters, and DelCon then autonomously plans and executes flight routes and sensor pointing across the assigned UASs; the AMC could pause, modify, or terminate an active play at any time and always retained exclusive, manual authority to arm and fire weapons.",
+    "participants": "8 military-rated helicopter test and line-unit pilots with combat experience (mean 3,430 flight hours); 6 of 8 had prior Manned-Unmanned Teaming experience. Formal within-subjects design with mission/condition pairings counterbalanced across participants.",
+    "results": "DelCon substantially increased sensor utilization (d = 1.25) and produced moderately lower workload (Bedford, d = -0.20) and moderately better SA (China Lake, d = -0.21) than manual control. Effects were highly task-dependent: route recon was much faster with DelCon (d = -2.83), while area recon (d = 1.24) and target engagement (d = 4.15) were markedly slower with DelCon due to suboptimal automated search patterns and poor pre-positioning for engagements; point recon showed little consistent difference. DelCon also produced a far lower rate of missiles fired outside safety constraints (d = -5.65) than manual control, trading engagement speed for safety margin.",
+    "issues": "DelCon's automated search behavior did not incorporate expert strategies used by human operators (e.g., prioritizing roads when searching for vehicles in area recon), resulting in slower target acquisition despite greater area coverage. DelCon did not anticipate future engagement needs when positioning UASs during recon, leaving them poorly placed to fire when a target was found, increasing engagement response time. DelCon's viewing constraints (look-down angle, standoff range) were more restrictive than those pilots used manually, adding transit time. The map interface became visually cluttered when many targets were stored in a small area. Participants had difficulty tracking the recon progress of multiple simultaneously-autonomous UASs.",
+    "recommendations": "Incorporate expert human search and positioning strategies into DelCon's automated behaviors (road-prioritized search, anticipatory pre-positioning for likely engagements, relaxed/matched viewing constraints). Add a one-button shortcut to set up a weapons engagement directly from an in-progress recon mission. Redesign the map interface to reduce target-label clutter. Add a sensor-coverage-history visualization to help operators track multiple concurrently-autonomous UASs. Simplify or redesign the safe-engagement-volume representation to further reduce missiles fired outside constraints.",
+    "autonomous_capabilities": "DelCon autonomously generated and executed multi-UAS flight routes and sensor pointing for four mission 'plays,' automatically dividing and (re)assigning points/sub-regions/route segments across UAS assets as they were added or removed mid-mission, and computed optimal weapons-engagement geometry (firing and laser-designating positions) within range, no-fly-zone, and angular safety constraints without the AMC needing to calculate them manually. A simulated Aided Target Recognition (ATR) capability automatically detected, locked onto, and alerted the AMC to targets meeting visibility/angle thresholds; final engagement authorization (arm/fire) always required a manual AMC action."
+  },
+  "classification": {
+    "task_environment_v0.8": {
+      "task_object_spatiotemporal_dynamics": [
+        {
+          "code": "Distributed Task Object",
+          "justification": "In area and route recon, the task-relevant objects (vehicles/enemies to be found) are unknown, scattered instances discovered intermittently while scanning an area or route, each individually static once located.",
+          "condition": "area recon and route recon missions"
+        },
+        {
+          "code": "Not Applicable",
+          "justification": "Point recon involves viewing pre-designated, already-known POI locations rather than detecting or tracking a newly-emerging scattered/moving/spreading entity, so this dimension's spatial-temporal dynamics do not conceptually apply; similarly, the target-engagement mission concerns a target already identified prior to the engagement task itself, not one whose spatial-temporal dynamics are being coded.",
+          "condition": "point recon and target-engagement missions"
+        }
+      ],
+      "behavioral_relation_to_task_object": [
+        {
+          "code": "Search Task",
+          "justification": "Area and route recon require locating unknown targets before any further action — matching Section 4.2 (Search Task), added in Task-Environment codebook v0.8.",
+          "condition": "area recon and route recon missions"
+        },
+        {
+          "code": "Engagement Task",
+          "justification": "The weapons-engagement mission requires neutralizing an already-identified target — matching Section 4.3 (Engagement Task), added in v0.8.",
+          "condition": "target-engagement mission"
+        }
+      ],
+      "team_size": [
+        {
+          "code": "Single-human - Single-robot",
+          "justification": "The 1-UAS experimental condition paired the single AMC with one Gray Eagle.",
+          "condition": "1 UAS condition"
+        },
+        {
+          "code": "Single-human - Multi-robot",
+          "justification": "The 3-UAS experimental condition paired the single AMC with a Gray Eagle and two Shadows; the manned pilot and Tactical Operations Center are mentioned only as radio communication partners, not as agents interacting with or controlling the UAS team.",
+          "condition": "3 UAS condition"
+        }
+      ],
+      "team_composition": [
+        {
+          "code": "Heterogeneous",
+          "justification": "The 3-UAS team combines a weapon-equipped Gray Eagle with two unarmed Shadows, differing in payload/capability and therefore role.",
+          "condition": "robot side, 3 UAS condition"
+        }
+      ],
+      "interaction_model": [
+        {
+          "code": "One-to-one",
+          "justification": "In the 1-UAS condition the AMC's commands address a single UAS.",
+          "condition": "1 UAS condition"
+        },
+        {
+          "code": "One-to-many",
+          "justification": "In the 3-UAS condition, a single DelCon 'play' issued by the AMC is distributed across, and divided among, all assigned UASs at once.",
+          "condition": "3 UAS condition, DelCon active"
+        }
+      ],
+      "interaction_directness": [
+        {
+          "code": "Direct",
+          "justification": "The AMC issues explicit, addressed commands (joystick slewing, touchscreen play creation) to specific UAS assets.",
+          "condition": null
+        }
+      ],
+      "communication_proximity": [
+        {
+          "code": "Remote",
+          "justification": "The AMC controls the UASs from within the manned crewstation via screen/joystick/touchscreen interfaces rather than through direct physical or vocal co-location with the unmanned aircraft themselves.",
+          "condition": null
+        }
+      ],
+      "coordination_architecture": [
+        {
+          "code": "Strongly Centralized Coordination",
+          "justification": "The DelCon system itself acts as a single, fixed planner that divides POIs, search areas, or route segments across all assigned UASs for the duration of a play and reconfigures assignments centrally if an asset is added or removed; no peer-to-peer or leader-rotation mechanism among the UASs is described.",
+          "condition": "3 UAS condition"
+        },
+        {
+          "code": "Not Applicable",
+          "justification": "With only one UAS present, there is no multi-robot coordination to code.",
+          "condition": "1 UAS condition"
+        }
+      ],
+      "computational_characteristics": [
+        {
+          "code": "Classical Geometric / Sampling-Based Control",
+          "justification": "DelCon computes flight paths/viewing conditions via 'a path planning algorithm' and derives weapons-engagement firing/designating positions through explicit geometric constraint-solving (min/max range, no-fly zone, angular constraints) — deterministic geometric computation without a learned model or population-based search, though no specific named algorithm (e.g., RRT, APF) is given.",
+          "condition": null
+        },
+        {
+          "code": "Task-Allocation (Placeholder)",
+          "justification": "DelCon automatically distributes POIs, search sub-regions, or route segments across multiple assigned UAS assets and reallocates them if an asset is added or removed mid-mission — a task-allocation mechanism distinct from any individual UAS's own motion computation.",
+          "condition": "3 UAS condition"
+        },
+        {
+          "code": "Predefined / Rule-Based Control",
+          "justification": "The Aided Target Recognition (ATR) function is explicitly a simulated, threshold-based stand-in ('constrained to avoid providing an unrealistic capability,' gated on field-of-view, occlusion, and visual-angle thresholds) rather than a real trained detector, matching fixed if-then rule logic more than a learned or optimization-based mechanism.",
+          "condition": null
+        }
+      ],
+      "human_involvement_level": [
+        {
+          "code": "Human-on-the-loop (HOnL)",
+          "justification": "Once a DelCon play is active, route planning, task allocation, and sensor pointing execute without further operator input; the AMC monitors and can pause, modify, or terminate the play but the function does not require this to proceed.",
+          "condition": "DelCon mission execution function"
+        },
+        {
+          "code": "Human-in-the-loop (HInL)",
+          "justification": "Weapons release always requires the AMC to manually arm and fire; the function cannot complete without this human action.",
+          "condition": "weapons-release function"
+        },
+        {
+          "code": "Human-on-the-loop (HOnL)",
+          "justification": "ATR detection and target lock-on/tracking execute automatically and only alert the AMC after the fact, who then decides whether to ignore, continue tracking, or engage.",
+          "condition": "ATR detection/tracking function"
+        }
+      ],
+      "level_of_human_control_abstraction": [
+        {
+          "code": "Direct (LHCA 1)",
+          "justification": "In the manual-control condition, the AMC's joysticks continuously and directly set the sensor's exact azimuth/elevation/zoom.",
+          "condition": "manual control condition"
+        },
+        {
+          "code": "Goal-Oriented (LHCA 4)",
+          "justification": "In the DelCon condition, the AMC gives discrete goal-level input (selecting and parameterizing a play, or authorizing an engagement) and the system executes all necessary steps to achieve it, matching this codebook's own precedent (Scope note, v0.7) of treating a discrete weapons-engagement authorization as a Goal-Oriented input.",
+          "condition": "DelCon condition, including engagement authorization"
+        }
+      ],
+      "operational_domain": [
+        {
+          "code": "Air",
+          "justification": "All platforms (the manned helicopter and the UASs) operate exclusively in the air domain.",
+          "condition": null
+        }
+      ]
+    }
+  },
+  "flags": [
+    {
+      "dimension": "task_object_spatiotemporal_dynamics",
+      "type": "Not Applicable",
+      "note": "Point recon (viewing pre-designated known POIs) and the target-engagement mission (acting on an already-identified target) don't involve detecting/tracking a newly-emerging object, so this dimension doesn't conceptually apply to those two mission types, unlike area/route recon in the same article.",
+      "proposed_code": null
+    }
+  ]
+}

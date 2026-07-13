@@ -1,0 +1,85 @@
+{
+  "article_id": "frische_2013_sa_tracer_uav_swarm",
+  "citation": {
+    "authors": "Florian Frische, Andreas Lüdtke",
+    "year": 2013,
+    "title": "SA-Tracer: A Tool for Assessment of UAV Swarm Operator SA during Mission Execution",
+    "source_file": "articles/SA-Tracer_A_tool_for_assessment_of_UAV_swarm_operator_SA_during_mission_execution.md"
+  },
+  "extraction_metadata": {
+    "date_extracted": "2026-07-10",
+    "codebook_versions": {
+      "study_type": "0.3",
+      "task_environment": "0.8"
+    },
+    "model": "claude-sonnet-5",
+    "notes": "Uses the same simulated three-UAV fire-fighting scenario (OFFIS, D3CoS project) later reused as the evaluation scenario in fortmann_2013_supervisory_guide_uav_swarm; this paper's formal situation model (Frische & Lüdtke, 2013) is explicitly cited as the theoretical foundation in that companion article."
+  },
+  "study_type": {
+    "primary": "User Study",
+    "secondary": "System/Architecture Paper",
+    "sub_attributes": {
+      "setting": "Simulated/Remote (incl. VR)",
+      "measured_constructs": ["Performance", "Situation Awareness (SA)"],
+      "modality_flags": []
+    },
+    "justification": "A controlled experiment with 10 participants acting as UAV swarm operators, using eye-tracking and post-scenario debriefing recall to validate the tool's SA assessments via quantitative correlation analysis (MCC=.43, Pearson r=.55), is the article's central evidence, making User Study Primary. The article's other major, comparably-weighted contribution is SA-Tracer itself — a formal situation model and system architecture for automated, continuous, real-time operator SA assessment — warranting System/Architecture Paper as Secondary."
+  },
+  "summary": {
+    "template": "user_study",
+    "task": "10 participants individually supervised a simulated swarm of three UAVs tasked with extinguishing multiple fire sources in terrain inaccessible to human firefighters, across 9 two-minute scenarios (3 with no malfunctions, 6 with 1-3 UAV malfunction events triggered, never more than one at a time). Each UAV autonomously cycled between three goals (refill water, extinguish fire, recharge energy) with no operator control over task selection; the operator's only required action was to notice and resolve UAV malfunctions by pressing a dedicated button on the HMI. After each scenario, the HMI was blanked and participants had to mentally recall and reconstruct the last known state of each UAV by clicking on the (now blank) status indicators, providing ground-truth 'debriefing' data on their subjective situation awareness.",
+    "control": "The HMI displayed three per-UAV status panels (arranged horizontally), each with six information objects (status lamps for the three goal states and a malfunction indicator, plus energy and water-level status bars). Participants had a single interactive control: a button to resolve a UAV's malfunction once detected; all other monitored information updated autonomously and could not be directly manipulated. A head-mounted eye tracker (Dikablis) recorded gaze/fixations against pre-defined areas of interest overlaid on the HMI, projected at 2 m diagonal, viewed from 2.5 m.",
+    "participants": "10 students (6 female) from the University of Oldenburg, aged 20-31 (M=25.2, SD=3.52), compensated monetarily; one participant's data was excluded from analysis due to eye-tracker technical problems during the experiment, leaving 9 participants' data (81 scenario-datasets) in the final validation analysis.",
+    "results": "SA-Tracer's binary SA-gap classification against the debriefing-derived ground truth correctly identified approximately 86% of actual SA-gaps and 62.4% of actual non-gaps (Matthews Correlation Coefficient = .43, indicating reasonably good predictive quality for a first prototype). SA-Tracer's continuous quantitative SAlevel1 assessment correlated moderately well with debriefing-derived values (Pearson r=.55). For SAlevel2 (goal awareness), all participants correctly resolved every malfunction immediately following a detected fixation on the relevant malfunction indicator, with no malfunctions resolved without a prior fixation and none left unresolved despite a fixation — supporting the validity of the SAlevel2 assessment logic, though the authors caution further analysis is needed. Detection-to-resolution time for malfunctions ranged from 0.4 to 10.2 seconds (M=2.42, SD=1.72). Gaze data showed a central bias (the middle UAV's display received the most dwell time) and short, frequent fixations (100-300ms) characteristic of an active scanning/supervisory task.",
+    "issues": "The SA-gap classifier performed noticeably better at detecting true SA-gaps (86%) than true non-gaps (62.4%), an asymmetry the authors do not fully resolve, and the overall correlation strength (MCC=.43, r=.55) is described only as 'rather promising' for a first prototype, not as strong validation. The tool's forgetting/decay mechanism (a simple fixed 10-second clock per environment element) is explicitly called 'rough' by the authors. The goal-pertinence logic is described by the authors themselves as 'naive,' since it assumes correct perception of an environment element automatically means the operator has activated the corresponding goal, without collecting further confirming evidence. The evaluation used a simplified, static HMI (three fixed status panels, no moving UAV icons or mission map), which the authors note is less realistic than an actual UAV swarm mission display.",
+    "recommendations": "Extend validation to a more realistic HMI including a mission map with moving UAV objects, rather than the simplified static status-panel display used here. Replace the simple fixed-decay memory mechanism with a cognitively-grounded memory model (e.g., inspired by ACT-R) to better simulate forgetting. Extend the Bayesian perceptibility classifier to incorporate the SEEV model's 'Saliency of information objects' parameter, currently omitted. Consider integrating Tversky's feature contrast model to improve the global SA assessment. Collect additional behavioral evidence after perceptual conditions are met to better validate whether an operator has actually activated a pertinent goal, rather than assuming it directly from perception.",
+    "autonomous_capabilities": "The three simulated UAVs operate with a high level of autonomy: each independently and continuously cycles through refilling water, extinguishing fire, and recharging energy without any operator input into task selection, and only surfaces a malfunction event for manual operator resolution. Separately, SA-Tracer itself autonomously and continuously infers the operator's subjective environment-state awareness in real time from eye-tracking fixation data, using a Bayesian classifier (informed by the SEEV visual-attention model) to estimate each fixated information element's perceptibility, and a simple time-decay ('forgetting') mechanism to age out stale subjective-state values, producing continuous quantitative SAlevel1 and SAlevel2 traces without requiring any human expert in the loop."
+  },
+  "classification": {
+    "task_environment_v0.8": {
+      "task_object_spatiotemporal_dynamics": [
+        { "code": "Not Applicable", "justification": "The operator's only actionable task-relevant event is a UAV malfunction, which concerns the UAV's own internal status rather than an external environmental object, so per the codebook's own rule this dimension is Not Applicable whenever Monitoring/Maintenance Task applies.", "condition": null }
+      ],
+      "behavioral_relation_to_task_object": [
+        { "code": "Monitoring/Maintenance Task", "justification": "The operator's required behavior is to detect and resolve a UAV's own malfunction (an internal-status event) via a dedicated button, the codebook's own source example for this code (shared scenario design with Di Gregorio et al., 2021).", "condition": null }
+      ],
+      "team_size": [
+        { "code": "Single-human - Multi-robot", "justification": "Each participant individually supervises a swarm of three UAVs.", "condition": null }
+      ],
+      "team_composition": [
+        { "code": "Homogeneous", "justification": "All three UAVs perform the same autonomous fire-fighting behavior with identical status-display panels.", "condition": "robot side" },
+        { "code": "Not Applicable", "justification": "Each session involves a single operator; no multi-human team is present.", "condition": "human side" }
+      ],
+      "interaction_model": [
+        { "code": "One-to-many", "justification": "A single operator simultaneously monitors all three UAVs' status displays and can act on any of them.", "condition": null }
+      ],
+      "interaction_directness": [
+        { "code": "Direct", "justification": "The malfunction-resolution button press is explicitly addressed to a specific UAV's malfunction indicator.", "condition": null }
+      ],
+      "communication_proximity": [
+        { "code": "Remote", "justification": "The operator interacts entirely through a projected screen-based HMI and mouse device, not physically co-located with the (simulated) UAVs.", "condition": null }
+      ],
+      "coordination_architecture": [
+        { "code": "Not Described", "justification": "The article states the operator cannot influence UAV task/goal selection, implying autonomous coordination among the three UAVs, but does not describe the underlying mechanism.", "condition": null }
+      ],
+      "computational_characteristics": [
+        { "code": "Not Described", "justification": "No specific algorithm is named for how UAV task/goal selection or motion is computed; the article focuses entirely on the SA-assessment tool.", "condition": "UAV task/goal selection and motion" },
+        { "code": "Unclear / Candidate New Code", "justification": "SA-Tracer's own Bayesian-classifier-based perceptibility inference and decay mechanism is a computational mechanism directed at assessing the human operator's cognitive state, not at robot control — the same recurring operator-directed-computation gap flagged in fortmann_2013_supervisory_guide_uav_swarm, jo_2025_awac_mhmr_teams, and cummings_2008_mauve_controller_capacity.", "condition": "SA-Tracer's own SA-inference mechanism" }
+      ],
+      "human_involvement_level": [
+        { "code": "Human-on-the-loop (HOnL)", "justification": "The UAV swarm executes its fire-fighting mission (water refill, fire extinguishing, energy recharge) fully autonomously without operator input, while the operator monitors via the HMI.", "condition": "autonomous fire-fighting mission execution" },
+        { "code": "Human-in-the-loop (HInL)", "justification": "Malfunction resolution explicitly requires the operator to detect and press a dedicated button; the malfunction is not resolved without this manual intervention.", "condition": "malfunction resolution" }
+      ],
+      "level_of_human_control_abstraction": [
+        { "code": "Goal-Oriented (LHCA 4)", "justification": "The operator's only control action is a single discrete directive (resolve this UAV's malfunction) that the system then handles in full, with the operator's role otherwise limited to monitoring.", "condition": null }
+      ],
+      "operational_domain": [
+        { "code": "Air", "justification": "The swarm consists of UAVs performing an aerial fire-fighting mission.", "condition": null }
+      ]
+    }
+  },
+  "flags": [
+    { "dimension": "task_environment_v0.8 / coordination_architecture", "type": "Not Described", "note": "The mechanism by which the three UAVs coordinate/select tasks among themselves is not described beyond 'the operator could not influence UAV task selection.'" },
+    { "dimension": "task_environment_v0.8 / computational_characteristics", "type": "Unclear / Candidate New Code", "note": "SA-Tracer's SA-inference mechanism targets the human operator's cognitive state, not robot control, echoing a recurring gap in Section 8's scope seen in several other corpus articles.", "proposed_code": "See fortmann_2013_supervisory_guide_uav_swarm, jo_2025_awac_mhmr_teams, and cummings_2008_mauve_controller_capacity flags for the same proposed 'operator-directed computation' gap." }
+  ]
+}

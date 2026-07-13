@@ -1,0 +1,157 @@
+{
+  "article_id": "williamson_2023_command_control_swarm",
+  "citation": {
+    "authors": "Williamson, B. M., Taranta II, E. M., Moolenaar, Y. M., & LaViola Jr., J. J.",
+    "year": 2023,
+    "title": "Command and Control of a Large Scale Swarm Using Natural Human Interfaces",
+    "source_file": "articles/DARPA_OFFSET__Williams.md"
+  },
+  "extraction_metadata": {
+    "date_extracted": "2026-07-10",
+    "codebook_versions": {
+      "study_type": "0.2",
+      "task_environment": "0.8"
+    },
+    "model": "claude-sonnet-5",
+    "notes": "This is the article both codebooks cite as their own motivating test case for the User Study research-aim priority rule and the Task-Allocation placeholder code (referred to there as 'Williams et al., 2023' — the codebooks' own citation shorthand differs from the paper's actual first author, Williamson; the correct name is used here). Re-coded 2026-07-10 against Task-Environment v0.8: this article is in fact the codebook's own cited source example for both the new Search Task (4.2) and Engagement Task (4.3) codes, which replace the original Unclear / Candidate New Code flag."
+  },
+  "study_type": {
+    "primary": "User Study",
+    "secondary": "System/Architecture Paper",
+    "sub_attributes": {
+      "setting": "Field",
+      "measured_constructs": ["Performance", "Other / Not Listed"],
+      "modality_flags": []
+    },
+    "justification": "Two live field experiments (FX4, FX6) report real operators and periodic guest personnel (~15 and ~30 respectively) using the interfaces, with quoted comments and performance data collected, so User Study applies per the codebook's research-aim priority rule; the system/architecture of the two interfaces and the pyc2 server is the article's other substantial, comparably-weighted contribution, so it is coded as Secondary."
+  },
+  "summary": {
+    "template": "user_study",
+    "task": "Operators directed a large-scale swarm of aerial and ground robots (up to roughly 200) through a simulated urban combat mission across two live field experiments (FX4 at Joint Base Lewis-McChord, FX6 at Fort Campbell): searching a mock town for civilians, hostile threats, and high-value targets marked with April tags, then neutralizing or securing them, while periodic guest personnel also briefly tried the interfaces.",
+    "control": "Two complementary interfaces were used: a 2D sketch-based tactical display (stylus or mouse) on which operators drew gestures classified into discrete high-level tactics (e.g., Deploy, Overhead Scan, Secure Artifact) that a centralized server (pyc2) decomposed into robot primitives for the swarm to bid on internally; and a Hololens 2 augmented-reality interface supporting 3D air-gesture and voice-command tasking plus a virtual tablet mirroring the sketch interface. Camera/viewpoint navigation in both interfaces was continuous (pan/fly/look via stylus drag or hand pinch), separate from the discrete goal-level tactic commands.",
+    "participants": "Two trained primary operators (both male researchers), one on each interface, ran both field experiments. Additionally, roughly 15 military personnel and researchers of varying backgrounds briefly tested the interfaces during FX4, and roughly 30 during FX6; their comments were recorded qualitatively. No formal sample size, demographic breakdown, or statistical analysis was reported for either group — this is an informal, lightly-reported evaluation rather than a controlled experiment.",
+    "results": "Both interfaces successfully tasked and monitored 80 to 200+ robots across 14- and 18-day field campaigns. Artifact discovery rate was about 20% in FX4 (described by DARPA as an expected baseline) and improved substantially by FX6, with one run reporting over 600 artifacts found within the first twenty minutes. Wireless network issues limited how many robots could be tasked simultaneously in FX4; this was resolved in FX6 via a Rajant mobile ad-hoc radio network, enabling a successful stress test tasking up to 100 robots at once. Gesture recognition was reliable for the trained primary operators on both interfaces but degraded noticeably for untrained guest users.",
+    "issues": "Network/communication reliability constrained simultaneous robot tasking in FX4. Gesture recognition was operator-specific: guest/untrained users had markedly lower recognition accuracy on both interfaces, found this stressful, and repeatedly asked for button-based alternatives instead of gestures. Sunlight glare made both the tablet screen and the AR visor hard to read. Users struggled to remember the full gesture vocabulary. The AR interface's continuous hand tracking caused occasional accidental command triggers. Users wanted a zoom capability for distant AR objects, which was technically out of scope. No built-in safety checks existed (e.g., to catch a forgotten safe-landing zone before launch).",
+    "recommendations": "Load each individual operator's own gesture training data before a mission, rather than relying on a single pre-trained operator, to preserve recognition accuracy at scale. Add a help/reference overlay for the gesture vocabulary (citing Gesturebar as a model). Use environmental/contextual analysis to assist precise boundary- and zone-drawing rather than requiring exact manual precision. Add pre-mission automated safety checks. Explore an explicit engagement/disengagement mechanism for AR hand tracking to reduce accidental triggers. Extend the AR interface with a shared, multi-user annotatable scaled map and allow tactic placement independent of a virtual building anchor. Add zoom capability to the AR view.",
+    "autonomous_capabilities": "The centralized pyc2 server autonomously decomposed operator-issued high-level tactics into robot primitive commands; individual robots then bid amongst themselves on which was best suited to execute a given task, with subsequent execution, status reporting (in-progress/success/fail), and health monitoring handled without further step-by-step operator input. Robots also autonomously scanned for and classified objects of interest via April-tag detection during coverage tasks."
+  },
+  "classification": {
+    "task_environment_v0.8": {
+      "task_object_spatiotemporal_dynamics": [
+        {
+          "code": "Distributed Task Object",
+          "justification": "Civilians, hostile threats, high-value targets, and defensive structures are described as multiple separate, scattered instances marked by April tags across the mock town, discovered intermittently as robots swept the area; the text gives no indication any individual instance relocated or grew once present.",
+          "condition": null
+        }
+      ],
+      "behavioral_relation_to_task_object": [
+        {
+          "code": "Search Task",
+          "justification": "The swarm locates and reports civilians, high-value targets, and enemy forces (e.g., via the Overhead Scan tactic) before any further action is taken on them — matching Section 4.2, for which this article is the codebook's own cited source example.",
+          "condition": "reconnaissance/target search"
+        },
+        {
+          "code": "Engagement Task",
+          "justification": "Once identified and confirmed, hostile targets are neutralized directly (e.g., via the Secure Artifact tactic) — matching Section 4.3, for which this article is the codebook's own cited source example.",
+          "condition": "target engagement"
+        }
+      ],
+      "team_size": [
+        {
+          "code": "Multi-human - Multi-robot",
+          "justification": "Two primary operators (rear command on the sketch interface, a field operator on the AR interface) directed a swarm of up to roughly 200 aerial and ground robots; guest personnel additionally interacted briefly during demonstrations.",
+          "condition": null
+        }
+      ],
+      "team_composition": [
+        {
+          "code": "Heterogeneous",
+          "justification": "The robot side combines aerial and ground vehicles with distinct roles (aerial for coverage/reconnaissance, ground for securing artifacts), differing in embodiment and function.",
+          "condition": "robot side"
+        },
+        {
+          "code": "Heterogeneous",
+          "justification": "The human side has two distinct standing roles across both experiments — a rear-command sketch-interface operator and a field-deployed AR-interface operator — with different responsibilities and vantage points.",
+          "condition": "human side"
+        }
+      ],
+      "interaction_model": [
+        {
+          "code": "One-to-many",
+          "justification": "A single operator issues a high-level tactic via the sketch or AR interface that is distributed to, and bid on by, the whole swarm network at once.",
+          "condition": "tactic issuance"
+        },
+        {
+          "code": "Many-to-many",
+          "justification": "Both human operators and the full robot swarm are simultaneously connected through the shared pyc2 server/network, with the two operators also coordinating with each other (e.g., via handheld radio) about swarm status.",
+          "condition": "overall system, FX6"
+        }
+      ],
+      "interaction_directness": [
+        {
+          "code": "Direct",
+          "justification": "Operators issue explicit, addressed tactic commands (gestures, voice) to the swarm network, and the two operators explicitly communicate with each other via radio about routes and tasking.",
+          "condition": null
+        }
+      ],
+      "communication_proximity": [
+        {
+          "code": "Remote",
+          "justification": "Both operators command the swarm through a screen-based tablet or AR-headset interface mediated by a wireless network rather than through direct, unmediated physical presence with the robots — consistent with this codebook's own precedent (Wattearachchi et al., 2025 worked example) of coding screen/interface-mediated control as Remote even when an operator is physically near the robots, as the AR field operator was.",
+          "condition": null
+        }
+      ],
+      "coordination_architecture": [
+        {
+          "code": "Hybrid Coordination",
+          "justification": "The pyc2 server acts as a single, fixed, mission-long central hub that receives operator tactics and decomposes them into robot primitives (a centralized mechanism), but which specific robot carries out a given primitive is then decided by the robots themselves via an internal bidding/auction process (a decentralized mechanism) — matching Hybrid Coordination's definition of centralized goal-assignment combined with decentralized execution-level allocation.",
+          "condition": null
+        }
+      ],
+      "computational_characteristics": [
+        {
+          "code": "Task-Allocation (Placeholder)",
+          "justification": "Individual robots bid on which of them is best suited to carry out a given tactic/primitive once it is issued by pyc2 — an auction/bidding-based allocation mechanism explicitly matching this code's definition (this article is in fact the codebook's own cited source example for 8.6).",
+          "condition": null
+        },
+        {
+          "code": "Not Described",
+          "justification": "The article never specifies the underlying path-planning/motion-generation algorithm an individual robot uses once it has been assigned a primitive (e.g., no classical, heuristic, bio-inspired, or learning-based method is named for navigation itself), so the robot-level motion-computation codes (8.1-8.5) cannot be assigned.",
+          "condition": null
+        }
+      ],
+      "human_involvement_level": [
+        {
+          "code": "Human-in-the-loop (HInL)",
+          "justification": "The tactic-issuance function requires continuous operator input (drawing/gesturing new tactics) to keep the mission progressing; the swarm does not generate new mission-level goals on its own.",
+          "condition": "tactic issuance function"
+        },
+        {
+          "code": "Human-on-the-loop (HOnL)",
+          "justification": "Once a tactic is issued, its decomposition, bidding, and execution proceed without further operator input; the operator monitors color-coded status (in-progress/success/fail) and can intervene (e.g., reposition or erase a tactic) but the function does not require it to complete.",
+          "condition": "tactic execution/monitoring function"
+        }
+      ],
+      "level_of_human_control_abstraction": [
+        {
+          "code": "Goal-Oriented (LHCA 4)",
+          "justification": "Sketched/gestured tactics are discrete goal-level inputs (e.g., 'Overhead Scan,' 'Secure Artifact') that the system autonomously decomposes and executes in full; the operator's role is issuing the next goal and monitoring for failure.",
+          "condition": "tactic issuance state"
+        },
+        {
+          "code": "Augmented (LHCA 2)",
+          "justification": "Camera/viewpoint navigation (fly/look/pan via stylus drag or AR hand-pinch) is continuous operator input of desired movement direction/velocity, with the system's camera-control logic closing the inner loop to produce the actual rotation/translation — matching this codebook's own precedent (Scope note, v0.7) that continuous camera/payload manipulation is coded Direct/Augmented and dominates the state under Rule 2 even when a Goal-Oriented tactic is executing autonomously in the background.",
+          "condition": "camera navigation state"
+        }
+      ],
+      "operational_domain": [
+        {
+          "code": "Cross-Domain",
+          "justification": "The swarm combines unmanned aerial vehicles (Air) and unmanned ground vehicles (Land) operating together in the same field experiments.",
+          "condition": null
+        }
+      ]
+    }
+  },
+  "flags": []
+}

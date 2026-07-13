@@ -1,0 +1,127 @@
+{
+  "article_id": "roundtree_2021_collective_visualization_transparency",
+  "citation": {
+    "authors": "Roundtree, K. A., Cody, J. R., Leaf, J., Demirel, H. O., & Adams, J. A.",
+    "year": 2021,
+    "title": "Human-collective visualization transparency",
+    "source_file": "articles/Roundtree.md"
+  },
+  "extraction_metadata": {
+    "date_extracted": "2026-07-10",
+    "codebook_versions": {
+      "study_type": "0.2",
+      "task_environment": "0.8"
+    },
+    "model": "claude-sonnet-5",
+    "notes": "The collective's correlated-random-walk exploration and quorum-based consensus decision-making, with no central coordinator, is an unusually direct real-world match to the Task-Environment codebook's own generalized example under Distributed Coordination (Section 7.3): 'correlated-random-walk exploration in which a best-of-n outcome emerges from local information exchange with no leader robot.' Re-coded 2026-07-10 against Task-Environment v0.8: target identification/selection now maps onto the new Search Task (4.2) code, replacing the original Unclear / Candidate New Code flag."
+  },
+  "study_type": {
+    "primary": "User Study",
+    "secondary": null,
+    "sub_attributes": {
+      "setting": "Simulated/Remote (incl. VR)",
+      "measured_constructs": ["Performance", "Workload", "Situation Awareness (SA)", "Other / Not Listed"],
+      "modality_flags": []
+    },
+    "justification": "Two large between-subjects evaluations (33 and 28 participants) with extensive objective and subjective metrics (SA probe accuracy, SART, NASA-TLX, decision time, selection success) are the article's central and sole contribution; the two visualization interfaces are the manipulated independent variable being tested rather than a separately-framed reusable system, so no Secondary code is needed."
+  },
+  "summary": {
+    "template": "user_study",
+    "task": "A single operator supervised four robotic collectives (200 simulated UAVs each, 800 total) performing a sequential best-of-n decision-making task — identifying and selecting the highest-valued target within a 500m search range, moving the collective's hub to it, then repeating the selection a second time — while searching an approximately 2 km^2 simulated urban area, across two ~10-minute trial segments (one 'easy,' one 'hard,' based on target proximity/value) with periodic situation-awareness probe questions interleaved as a secondary task.",
+    "control": "The operator could increase a collective's support for a specific target (investigate command, recruiting 5% of the collective to favor it), decrease support (abandon command, returning favoring entities to uncommitted), or force the collective to commit and move to a target once at least 30% support was reached (decide command) — effectively lowering the collective's level of autonomy from its default highly-autonomous behavior. Two visualization designs for issuing these same commands were compared between-subjects: an Individual Agents (IA) interface showing every one of the 800 simulated entities' positions/states directly on the map, versus an abstract Collective interface showing only each collective's aggregate state (via quadrant icons for uncommitted/favoring/committed/executing counts) and each target's aggregate value/support, without rendering individual entities.",
+    "participants": "Two independent between-subjects samples: 33 participants (14 female, 19 male) evaluated the IA interface at Oregon State University, and 28 participants (15 female, 13 male) evaluated the Collective interface at Vanderbilt University; 5 IA participants were excluded (1 inconsistent methodology, 4 software failures), leaving 56 total analyzed. All completed a demographic questionnaire and the Mental Rotations spatial-reasoning test before training and practice sessions with both the baseline (M3) and sequential best-of-n (M2, the focus of the between-visualization comparison) decision-making models.",
+    "results": "The Collective (abstract) visualization achieved better overall transparency than the Individual Agents visualization: operators with differing individual capabilities (spatial reasoning, video-game experience, computer-use experience) performed more similarly to one another under the Collective interface, and the human-collective team achieved consistently better decision times and target-selection success rates across all difficulty levels with the Collective interface. The IA interface's dynamic display of individual entities' movement appeared to help operators directly perceive collective behavior and support levels, whereas Collective-interface operators relied more on collective/target information pop-up windows for the same information — but this pop-up reliance was also the dominant source of visual clutter in both interfaces. Collective-interface operators abandoned the highest-value target more often, possibly because that interface's target icon split its display between value and support information rather than dedicating the whole icon to value.",
+    "issues": "Displaying every individual collective entity (as in the IA interface) does not scale — as collectives grow to thousands of entities, showing all of them will increasingly clutter the display and hinder perception/comprehension, and the study's metrics could not fully disentangle whether the IA interface's dynamic entity motion genuinely aided comprehension or simply reduced the need to open information pop-ups. Both interfaces relied heavily on information pop-up windows, the majority contributor to visual clutter in both conditions. The relationship between visualization and operator comprehension/usability specifically (as opposed to overall performance/SA) was not conclusively resolved and is flagged as needing further investigation with more reliable metrics (e.g., eye-tracking). The two evaluations were run at different universities on different display configurations without controlling operator-to-monitor viewing distance, a potential confound the authors acknowledge.",
+    "recommendations": "Prefer abstract, aggregate-state visualizations over ones rendering every individual collective entity, especially as collective size scales into the thousands, since consistent decision-time and success-rate advantages were found without a corresponding SA or workload cost. Redesign information pop-up windows to reduce clutter (e.g., a target's pop-up immediately showing zero support right after an abandon command, matching the operator's mental model, plus a status color overlay on the collective icon as secondary confirmation). Indicate a collective's single most-supported state/target directly on its icon (e.g., 'F8' for 'Favoring Target 8') rather than requiring the operator to interpret all four state-count quadrants at once. Use eye-tracking in future evaluations to more directly assess what information operators attend to and when. Apply the paper's proposed 11-item design-guidance table (limited color palette, legends, color/opacity for non-numeric values, distinct object identifiers, explicit command-status indicators) when designing future human-collective visualizations.",
+    "autonomous_capabilities": "By default the collectives operated at a high level of autonomy: individual simulated entities autonomously explored the urban area via correlated random walks, autonomously detected and evaluated targets within a short sensory range, autonomously recruited other entities to favor a discovered target through in-hub interactions, and autonomously committed to and executed a move to a target once a quorum (30% support) or majority (50% support) threshold was reached, including a built-in quorum-detection consensus mechanism and an environmental-bias correction (in the M2 model) so the collective did not default to the nearest rather than the highest-value target. The operator's investigate/abandon/decide commands only nudged this otherwise-autonomous consensus process rather than directly controlling any individual entity or the collective's motion itself."
+  },
+  "classification": {
+    "task_environment_v0.8": {
+      "task_object_spatiotemporal_dynamics": [
+        {
+          "code": "Distributed Task Object",
+          "justification": "Targets (candidate hub sites) are multiple, scattered, static instances that become visible intermittently as collective entities discover them during exploration; once discovered, a target does not move or grow.",
+          "condition": null
+        }
+      ],
+      "behavioral_relation_to_task_object": [
+        {
+          "code": "Search Task",
+          "justification": "Identifying and selecting the highest-valued target is a search/evaluation relation, not avoidance — matching Section 4.2 (Search Task), added in v0.8.",
+          "condition": null
+        }
+      ],
+      "team_size": [
+        {
+          "code": "Single-human - Multi-robot",
+          "justification": "A single operator supervises four collectives of 200 simulated entities each (800 total) — a 'swarm of swarms' structure, still fitting the single-human/multi-robot pattern at the level of individual entities under supervision.",
+          "condition": null
+        }
+      ],
+      "team_composition": [
+        {
+          "code": "Homogeneous",
+          "justification": "Within and across the four collectives, all simulated entities are identical simple robots with no described differences in role or capability.",
+          "condition": "robot side"
+        }
+      ],
+      "interaction_model": [
+        {
+          "code": "One-to-many",
+          "justification": "A single investigate/abandon/decide command is received by multiple entities within the targeted collective at once (e.g., an investigate command recruits 5% of the collective simultaneously), rather than addressing one individual entity.",
+          "condition": null
+        }
+      ],
+      "interaction_directness": [
+        {
+          "code": "Direct",
+          "justification": "Commands are explicitly addressed to a specific collective and target via the interface.",
+          "condition": null
+        }
+      ],
+      "communication_proximity": [
+        {
+          "code": "Remote",
+          "justification": "The task is conducted entirely through a screen-based interface with no physical robot hardware present.",
+          "condition": null
+        }
+      ],
+      "coordination_architecture": [
+        {
+          "code": "Distributed Coordination",
+          "justification": "No leader robot or central coordinator exists within a collective; entities coordinate via local hub-based recruitment interactions and an emergent quorum-consensus mechanism, directly matching the codebook's own generalized example of correlated-random-walk exploration producing a best-of-n outcome with no leader robot.",
+          "condition": null
+        }
+      ],
+      "computational_characteristics": [
+        {
+          "code": "Bio-Inspired / Metaheuristic Optimization Control",
+          "justification": "The collective's decision-making is explicitly modeled on honeybee nest-site-selection quorum sensing, with a population of entities iteratively recruiting/reassessing support for candidate targets — a nature-inspired, population-based collective decision process.",
+          "condition": null
+        }
+      ],
+      "human_involvement_level": [
+        {
+          "code": "Human-on-the-loop (HOnL)",
+          "justification": "The evaluated M2 decision-making model operates autonomously by default (it was also run fully without an operator, as M2_SIM, for comparison); the operator monitors and can intervene to influence but does not need to for the model to function.",
+          "condition": "M2 collective decision-making model"
+        }
+      ],
+      "level_of_human_control_abstraction": [
+        {
+          "code": "Goal-Oriented (LHCA 4)",
+          "justification": "Investigate, abandon, and decide commands are all discrete, one-off goal-level inputs (select command, collective, and target, then commit), with the collective autonomously executing all subsequent consensus and movement steps.",
+          "condition": null
+        }
+      ],
+      "operational_domain": [
+        {
+          "code": "Air",
+          "justification": "The article explicitly states each collective consists of 200 simulated Unmanned Aerial Vehicles.",
+          "condition": null
+        }
+      ]
+    }
+  },
+  "flags": []
+}
