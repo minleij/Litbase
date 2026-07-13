@@ -140,13 +140,6 @@
     "file": "fortmann_2013_supervisory_guide_uav_swarm.json"
   },
   {
-    "article_id": "howard_2006_leadership_role_allocation",
-    "title": "Adapting Human Leadership Approaches for Role Allocation in Human-Robot Navigation Scenarios",
-    "year": 2006,
-    "study_type_primary": "User Study",
-    "file": "howard_2006_leadership_role_allocation.json"
-  },
-  {
     "article_id": "kira_2009_human_control_decentralized_swarms",
     "title": "Exerting Human Control Over Decentralized Robot Swarms",
     "year": 2009,
@@ -175,13 +168,6 @@
     "file": "patel_2022_multi_human_multi_robot_remote_interaction.json"
   },
   {
-    "article_id": "paul_2023_multimodal_hri_framework",
-    "title": "Enhancing Human–Robot Collaboration through a Multi-Module Interaction Framework with Sensor Fusion",
-    "year": 2023,
-    "study_type_primary": "System/Architecture Paper",
-    "file": "paul_2023_multimodal_hri_framework.json"
-  },
-  {
     "article_id": "peschel_2013_uas_mission_specialist_survey",
     "title": "On the Human–Machine Interaction of Unmanned Aerial System Mission Specialists",
     "year": 2013,
@@ -201,5 +187,40 @@
     "year": 2012,
     "study_type_primary": "Algorithm/Controller Evaluation (Simulation-Only)",
     "file": "kerman_2012_stakeholder_swarm_leadership.json"
+  },
+  {
+    "article_id": "paas_2022_swarm_control_cognitive_load",
+    "title": "Towards evaluating the impact of swarm robotic control strategy on operators' cognitive load",
+    "year": 2022,
+    "study_type_primary": "User Study",
+    "file": "paas_2022_swarm_control_cognitive_load.json"
+  },
+  {
+    "article_id": "turco_2024_shared_control_swarm_teleoperation",
+    "title": "Reducing Cognitive Load in Teleoperating Swarms of Robots through a Data-Driven Shared Control Approach",
+    "year": 2024,
+    "study_type_primary": "User Study",
+    "file": "turco_2024_shared_control_swarm_teleoperation.json"
+  },
+  {
+    "article_id": "villani_2020_affect_based_multi_robot_interaction",
+    "title": "Humans interacting with multi-robot systems: a natural affect-based approach",
+    "year": 2020,
+    "study_type_primary": "User Study",
+    "file": "villani_2020_affect_based_multi_robot_interaction.json"
+  },
+  {
+    "article_id": "yang_2025_mmf_microrobotic_swarm_teleoperation",
+    "title": "A Human-Factor-Driven Evaluation of Multi-Modal Feedback for Enhancing Teleoperated Microrobotic Swarm Control",
+    "year": 2025,
+    "study_type_primary": "User Study",
+    "file": "yang_2025_mmf_microrobotic_swarm_teleoperation.json"
+  },
+  {
+    "article_id": "lewis_2013_multi_uv_hri_review",
+    "title": "Human Interaction With Multiple Remote Robots",
+    "year": 2013,
+    "study_type_primary": "Meta-Review / Survey",
+    "file": "lewis_2013_multi_uv_hri_review.json"
   }
 ]

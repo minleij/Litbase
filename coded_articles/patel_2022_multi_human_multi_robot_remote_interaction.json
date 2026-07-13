@@ -10,9 +10,10 @@
     "date_extracted": "2026-07-10",
     "codebook_versions": {
       "study_type": "0.3",
-      "task_environment": "0.8"
+      "task_environment": "0.9"
     },
-    "model": "claude-sonnet-5"
+    "model": "claude-sonnet-5",
+    "notes": "Re-coded task_object_spatiotemporal_dynamics and behavioral_relation_to_task_object on 2026-07-13 using the newly-added Known Fixed Task Object and Transport/Delivery Task codes (v0.9), which this article's own flags had proposed (the latter originating here)."
   },
   "study_type": {
     "primary": "User Study",
@@ -35,12 +36,12 @@
     "autonomous_capabilities": "Robots execute a shared finite-state-machine 'collective transport' behavior once given a goal by an operator: they autonomously organize themselves in a circle around the target object based on team size and distance, approach and make contact with it, then move together at matched speed toward the goal while maintaining formation (re-forming if any robot breaks formation), and can similarly self-organize to rotate an object in place. If an operator assigns a goal to multiple objects at once, robots autonomously distribute themselves across the objects and execute the transport behavior for each, with no further step-by-step operator direction required."
   },
   "classification": {
-    "task_environment_v0.8": {
+    "task_environment_v0.9": {
       "task_object_spatiotemporal_dynamics": [
-        { "code": "Unclear / Candidate New Code", "justification": "The 6 transportable objects are multiple, static, and visible/known to operators from the start of the task (Fig. 10), not discovered via search — the same known-fixed-target gap flagged in bashyal_2008_radiation_source_hsi and howard_2006_leadership_role_allocation, here again in a multi-instance form.", "condition": null }
+        { "code": "Known Fixed Task Object", "justification": "The 6 transportable objects are multiple, static, and visible/known to operators from the start of the task (Fig. 10), not discovered via search, matching Known Fixed Task Object (3.5, added in codebook v0.9) in its multi-instance form.", "condition": null }
       ],
       "behavioral_relation_to_task_object": [
-        { "code": "Unclear / Candidate New Code", "justification": "The operator's required behavior is to have the robot team collectively pick up/push and relocate a known task-relevant object to a specified goal position — an object-transport/delivery relation that is not Search (location known), Engagement (no neutralizing action), Avoidance, Pursuit, or Defend/Block, since the object itself is not adversarial or something to be reached by the team's own bodies but is itself being moved by the team.", "condition": null }
+        { "code": "Transport/Delivery Task", "justification": "The operator's required behavior is to have the robot team collectively pick up/push and relocate a known task-relevant object to a specified goal position — an object-transport/delivery relation matching Transport/Delivery Task (4.7, added in codebook v0.9, and originally proposed based on this article).", "condition": null }
       ],
       "team_size": [
         { "code": "Multi-human - Multi-robot", "justification": "Each session pairs two human operators jointly commanding a shared team of 9 robots.", "condition": null }
@@ -76,8 +77,5 @@
       ]
     }
   },
-  "flags": [
-    { "dimension": "task_environment_v0.8 / task_object_spatiotemporal_dynamics", "type": "Unclear / Candidate New Code", "note": "Multiple transportable objects are visible/known from task start, not discovered via search — extends the recurring known-fixed-target gap.", "proposed_code": "See bashyal_2008_radiation_source_hsi and howard_2006_leadership_role_allocation flags for 'Known Fixed Task Object.'" },
-    { "dimension": "task_environment_v0.8 / behavioral_relation_to_task_object", "type": "Unclear / Candidate New Code", "note": "Collective object transport/delivery to a goal is a distinct behavioral relation not covered by any of the six existing codes.", "proposed_code": "Transport/Delivery Task — the operator's required behavior is to direct the robot team to physically relocate a task-relevant object from its current position to a specified goal location, distinct from Pursuit (following an object, not moving it) and Engagement (neutralizing/capturing rather than relocating)." }
-  ]
+  "flags": []
 }

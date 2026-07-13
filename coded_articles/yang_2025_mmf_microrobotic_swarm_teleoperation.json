@@ -1,0 +1,83 @@
+{
+  "article_id": "yang_2025_mmf_microrobotic_swarm_teleoperation",
+  "citation": {
+    "authors": "Qijun Yang, Shengming Luo, Zhiqiang Tang, Qianqian Wang",
+    "year": 2025,
+    "title": "A Human-Factor-Driven Evaluation of Multi-Modal Feedback for Enhancing Teleoperated Microrobotic Swarm Control",
+    "source_file": "articles/Yang_A_Human-Factor-Driven_Evaluation_of_Multi-Modal_Feedback_for_Enhancing_Teleoperated_Microrobotic_Swarm_Control.md"
+  },
+  "extraction_metadata": {
+    "date_extracted": "2026-07-10",
+    "codebook_versions": {
+      "study_type": "0.3",
+      "task_environment": "0.9"
+    },
+    "model": "claude-sonnet-5",
+    "notes": "Re-coded task_object_spatiotemporal_dynamics on 2026-07-13 using the newly-added Known Fixed Task Object code (v0.9), which this article's own flag had proposed."
+  },
+  "study_type": {
+    "primary": "User Study",
+    "secondary": "System/Architecture Paper",
+    "sub_attributes": {
+      "setting": "Lab",
+      "measured_constructs": ["Performance", "Workload", "Other / Not Listed (system usability/satisfaction via a Likert-scale questionnaire)"],
+      "modality_flags": []
+    },
+    "justification": "A controlled 20-participant, counterbalanced within-subject experiment with objective performance metrics, eye-tracking-based physiological workload indicators, and NASA-TLX/Likert subjective measures, analyzed via RM-ANOVA with post-hoc corrections, is the article's central validating evidence, making User Study Primary. The article also presents a complete, reusable teleoperated microrobotic-swarm delivery system architecture (magnetic actuation unit, multi-modal feedback interface, vision-based swarm-state classification) as a comparably-weighted contribution, warranting System/Architecture Paper as Secondary."
+  },
+  "summary": {
+    "template": "user_study",
+    "task": "20 participants each teleoperated a magnetic microrobotic swarm through a narrow, simulated 3-D vascular phantom containing a challenging 90-degree turn, navigating from a start point to a target point while keeping the swarm in a stable, aggregated formation. Each participant completed three trials under each of three counterbalanced feedback conditions: Haptic Feedback (HF) only, Haptic-Visual Feedback (HVF), and Multi-Modal Feedback (MMF: haptic + visual + auditory).",
+    "control": "Operators used a 3D Touch haptic device as the master controller: hand movements were mapped through a coordinate transformation and scaling matrix to a target position for a 6-DOF robotic arm's end-effector (bearing a permanent magnet), with a discrete PID controller computing the joint commands needed to reach that position, thereby steering the magnetically-aggregated microrobotic swarm. The same haptic device delivered force feedback proportional to trajectory deviation (position error) and movement aggressiveness (velocity/damping error), amplified automatically when a YOLO-v5-based vision module detected swarm instability; in the HVF and MMF conditions this was supplemented by a real-time visual overlay of swarm state, and in MMF additionally by an auditory buzzer alert on instability.",
+    "participants": "20 participants (10 male, 10 female), mean age 24.2 (SD=1.9), all providing informed consent.",
+    "results": "The swarm remained in a stable state for 89% of task duration under MMF, versus 78% under HVF and only 44% under HF, with MMF also producing the lowest trajectory error; task completion time did not differ significantly across conditions. Eye-tracking data showed significantly smaller average pupil diameter during fixation under MMF than HF (p<0.01) and HVF, along with longer fixation durations and reduced saccadic velocity relative to HF (both p<0.01), consistent with lower cognitive load and a more efficient visual search strategy. Subjectively, MMF received the highest Likert usability ratings (significantly above HVF and HF, p<0.001) and the lowest NASA-TLX scores across mental demand, performance, effort, and frustration subscales (all significant vs. at least one of HF/HVF); physical and temporal demand did not differ significantly across conditions.",
+    "issues": "The haptic-only (HF) condition was consistently rated the most mentally demanding, effortful, and frustrating, and produced by far the worst objective swarm-stability performance (44% stable time), underscoring that force feedback alone is insufficient for this delicate manipulation task without complementary sensory channels. Task completion time showed no significant differences across feedback conditions, indicating that MMF's benefits lie in control quality/precision and operator experience rather than raw speed.",
+    "recommendations": "Design teleoperation interfaces for microrobotic swarm manipulation (and by extension similar delicate, high-precision teleoperation tasks) around integrated multi-modal feedback — combining haptic, visual, and auditory channels — rather than relying on a single or dual modality, since this consistently improved both objective task performance and operator experience relative to haptic-only or haptic-visual feedback alone. Use auditory alerts as a complementary, non-visual cue for critical events (e.g., swarm instability) to ensure operators are notified even when visual attention is directed elsewhere.",
+    "autonomous_capabilities": "A fine-tuned YOLO-v5 model continuously processes the overhead camera's video feed in real time to detect the microrobotic swarm's bounding box, track its position, and classify its formation/stability state (e.g., stable vs. spreading) based on its area and aspect ratio, without operator input. This automated state classification autonomously drives two feedback behaviors: amplifying the haptic force-feedback gain when instability is detected, and (in HVF/MMF conditions) updating the visual overlay and, in MMF, triggering an auditory alert — providing closed-loop, system-initiated cueing on top of the operator's continuous manual control of the magnet's position."
+  },
+  "classification": {
+    "task_environment_v0.9": {
+      "task_object_spatiotemporal_dynamics": [
+        { "code": "Known Fixed Task Object", "justification": "The start and target points within the vascular phantom are fixed and known to the operator from the outset (a designed navigation path with a known 90-degree turn), not discovered via search, matching Known Fixed Task Object (3.5, added in codebook v0.9).", "condition": null }
+      ],
+      "behavioral_relation_to_task_object": [
+        { "code": "Unclear / Candidate New Code", "justification": "The operator's task is to navigate the swarm itself to a known target point — the same navigate-to-known-target gap flagged in bashyal_2008_radiation_source_hsi — compounded by a second, distinct requirement to actively maintain the swarm's own aggregated/stable formation throughout, which is a collective-state-integrity management task not equivalent to Monitoring/Maintenance (4.6, which concerns a robot's internal health/status like battery, not an emergent multi-agent formation property) nor any of the other six codes. Left open per user decision (2026-07-13) to defer these one-off proposals for now.", "condition": null }
+      ],
+      "team_size": [
+        { "code": "Single-human - Multi-robot", "justification": "A single operator controls the collective microrobotic swarm (many individual microrobots) via one external magnetic actuation source.", "condition": null }
+      ],
+      "team_composition": [
+        { "code": "Homogeneous", "justification": "The microrobots forming the swarm are identical magnetic particles/units.", "condition": "robot side" },
+        { "code": "Not Applicable", "justification": "A single operator is described per session; no multi-human team is present.", "condition": "human side" }
+      ],
+      "interaction_model": [
+        { "code": "One-to-many", "justification": "A single operator's haptic input controls the position of the external magnet, which simultaneously governs the aggregation and movement of the entire microrobotic swarm as a collective.", "condition": null }
+      ],
+      "interaction_directness": [
+        { "code": "Direct", "justification": "Haptic input is explicitly and continuously mapped to the magnet/end-effector's target position.", "condition": null }
+      ],
+      "communication_proximity": [
+        { "code": "Remote", "justification": "The operator interacts with the swarm entirely through the haptic device and a monitor displaying the camera feed, not through direct physical contact with the swarm or phantom.", "condition": null }
+      ],
+      "coordination_architecture": [
+        { "code": "Not Applicable", "justification": "The swarm's aggregation and formation arise from physical magnetic-field dynamics acting on the microrobots as a collective via a single external field source, not from any computational inter-robot coordination or decision-making architecture among discrete agents.", "condition": null }
+      ],
+      "computational_characteristics": [
+        { "code": "Predefined / Rule-Based Control", "justification": "The robotic arm's motion is governed by a discrete PID controller computing joint commands from a fixed, deterministic error-feedback law, rather than a computed search, population-based optimization, or trained model.", "condition": null }
+      ],
+      "human_involvement_level": [
+        { "code": "Human-in-the-loop (HInL)", "justification": "The magnet's (and hence the swarm's) motion is directly and continuously driven by the operator's haptic input throughout the task; it does not proceed without this input.", "condition": null }
+      ],
+      "level_of_human_control_abstraction": [
+        { "code": "Direct (LHCA 1)", "justification": "Continuous hand movement on the haptic device is directly mapped, via coordinate transformation, to the exact target position of the robotic arm's end-effector.", "condition": null }
+      ],
+      "operational_domain": [
+        { "code": "Unclear / Candidate New Code", "justification": "The task environment is a simulated confined vascular phantom, which does not fit Air, Land, Maritime, Space, Cyber, or Spectrum as currently defined — the same gap flagged in turco_2024_shared_control_swarm_teleoperation.", "condition": null }
+      ]
+    }
+  },
+  "flags": [
+    { "dimension": "task_environment_v0.9 / behavioral_relation_to_task_object", "type": "Unclear / Candidate New Code", "note": "Navigating to a known target is not covered by any existing code, and separately, maintaining the swarm's own collective formation/stability while doing so is a distinct behavioral relation not covered by Monitoring/Maintenance (which concerns internal robot health, not emergent multi-agent formation state).", "proposed_code": "See bashyal_2008_radiation_source_hsi flag for 'Navigate-to-Known-Target Task'; propose an additional new code, 'Formation/Cohesion Maintenance Task' — the operator's required behavior is to actively preserve a robot team's own collective spatial arrangement or state integrity (e.g., swarm aggregation) during task execution, distinct from Monitoring/Maintenance's focus on a single robot's internal health/status." },
+    { "dimension": "task_environment_v0.9 / operational_domain", "type": "Unclear / Candidate New Code", "note": "Navigation within a confined vascular phantom does not fit any existing Operational Domain code.", "proposed_code": "See turco_2024_shared_control_swarm_teleoperation flag for 'Confined/Enclosed Structure.'" }
+  ]
+}

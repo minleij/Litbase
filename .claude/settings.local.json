@@ -21,7 +21,19 @@
       "Bash(python .claude/skills/analytic-coding/scripts/validate_record.py coded_articles/frische_2013_sa_tracer_uav_swarm.json)",
       "Bash(python .claude/skills/analytic-coding/scripts/validate_record.py coded_articles/kerman_2012_stakeholder_swarm_leadership.json)",
       "Bash(git init *)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(git config *)",
+      "Bash(python .claude/skills/analytic-coding/scripts/validate_record.py coded_articles/paas_2022_swarm_control_cognitive_load.json)",
+      "Bash(python .claude/skills/analytic-coding/scripts/validate_record.py coded_articles/turco_2024_shared_control_swarm_teleoperation.json)",
+      "Bash(git push *)",
+      "Bash(python .claude/skills/analytic-coding/scripts/validate_record.py coded_articles/yang_2025_mmf_microrobotic_swarm_teleoperation.json)",
+      "Bash(python .claude/skills/analytic-coding/scripts/validate_record.py coded_articles/cushing_2006_tomahawk_overview_detail_dss.json)",
+      "Bash(python .claude/skills/analytic-coding/scripts/validate_record.py coded_articles/lewis_2013_multi_uv_hri_review.json)",
+      "Bash(python .claude/skills/analytic-coding/scripts/validate_record.py coded_articles/strazdas_2022_rosa_multimodal_hri.json)",
+      "Bash(rm articles/Howard_2006_Adapting_Human_Leadership_Approaches_for_Role_Allocation_in_Human-Robot_Navigation_Scenarios.md articles/Paul.md articles/Suzuki_The_Role_of_automation_and_User_Experience_in_Multi_Robot_Systems.md articles/strazdaz.md articles/cushing-et-al-2006-overview-detail-in-a-tomahawk-mission-to-platform-assignment-tool-applying-information-visualization.md)",
+      "Bash(rm coded_articles/howard_2006_leadership_role_allocation.json coded_articles/paul_2023_multimodal_hri_framework.json coded_articles/suzuki_2024_multi_presence_automation.json coded_articles/strazdas_2022_rosa_multimodal_hri.json coded_articles/cushing_2006_tomahawk_overview_detail_dss.json)",
+      "Bash(python .claude/skills/analytic-coding/scripts/validate_record.py coded_articles/cummings_2008_mauve_controller_capacity.json)",
+      "Bash(python .claude/skills/analytic-coding/scripts/validate_record.py coded_articles/patel_2022_multi_human_multi_robot_remote_interaction.json)"
     ]
   }
 }

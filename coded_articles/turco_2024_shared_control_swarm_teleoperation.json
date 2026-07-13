@@ -1,0 +1,82 @@
+{
+  "article_id": "turco_2024_shared_control_swarm_teleoperation",
+  "citation": {
+    "authors": "Enrico Turco, Chiara Castellani, Valerio Bo, Claudio Pacchierotti, Domenico Prattichizzo, Tommaso Lisini Baldi",
+    "year": 2024,
+    "title": "Reducing Cognitive Load in Teleoperating Swarms of Robots through a Data-Driven Shared Control Approach",
+    "source_file": "articles/Turco_Reducing_Cognitive_Load_in_Teleoperating_Swarms_of_Robots_through_a_Data-Driven_Shared_Control_Approach.md"
+  },
+  "extraction_metadata": {
+    "date_extracted": "2026-07-10",
+    "codebook_versions": {
+      "study_type": "0.3",
+      "task_environment": "0.8"
+    },
+    "model": "claude-sonnet-5"
+  },
+  "study_type": {
+    "primary": "User Study",
+    "secondary": "System/Architecture Paper",
+    "sub_attributes": {
+      "setting": "Simulated/Remote (incl. VR)",
+      "measured_constructs": ["Performance", "Workload"],
+      "modality_flags": []
+    },
+    "justification": "A controlled 10-participant experiment (data-collection phase plus a 15-trial-per-participant evaluation phase) with statistically analyzed objective performance metrics and NASA-TLX workload scores across seven control conditions is the article's central validating evidence, making User Study Primary. The article also presents a generalizable, reusable data-driven shared-control architecture (point-cloud-based autonomous controllers, four shared-control allocation strategies derived from variance analysis) as a comparably-weighted contribution, warranting System/Architecture Paper as Secondary."
+  },
+  "summary": {
+    "template": "user_study",
+    "task": "Participants steered a simulated 64-agent spherical robot swarm (controllable as a single deformable body with 9 degrees of freedom: 6-DoF centroid pose plus 3-DoF shape deformation) through a narrow, tortuous 3-D pipe-like path with straight/curved and deformed/non-deformed segments (representing, e.g., blood vessels or industrial pipes), aiming to traverse it as quickly as possible, occupy as much of the cross-sectional area as possible, and minimize wall collisions. An initial data-collection phase (10 participants, paired into 5 dual-user teams) had pairs jointly control all 9 DoFs (one user per haptic device controlling pose or deformation, roles swapped halfway) to gather demonstration data. The same 10 participants then evaluated, single-handed, four novel data-driven shared-control strategies (S-D, S-DO, S-P, S-PO, each allocating a DoF subset to the human and the rest to an autonomous controller) against two full-manual baselines (single-user full control, S-POD; the original dual-user full control, D-POD).",
+    "control": "Users controlled the swarm via one or two Omega.7 haptic interfaces using an incremental clutch-based mapping: engaging the clutch stores the current interface and swarm poses, and subsequent handle displacement is transformed into the swarm's reference frame and added to its stored state, for both the 6-DoF centroid pose and/or the 3-DoF axis-wise deformation depending on the condition. Haptic (handle vibration) and visual (pipe color change to red) feedback signaled wall collisions. In the four shared-control conditions, whichever DoF subset was not assigned to the human was instead computed automatically by a point-cloud/path-informed proportional controller.",
+    "participants": "10 participants (5 male, 5 female), aged 24-35 (M=28, SD=3.1), one with prior teleoperation-device experience; recruited under Declaration-of-Helsinki-compliant informed consent, unpaid, with no reported visual or haptic perceptual deficiencies. All 10 took part in both the initial dual-user data-collection phase and the single-user shared-control evaluation phase.",
+    "results": "All four shared-control strategies (S-D, S-DO, S-P, S-PO) significantly outperformed both full-manual baselines (single-user S-POD and dual-user D-POD) on objective metrics, with markedly lower variability across trials. Deformation-led strategies (S-D, S-DO) maximized occupied cross-sectional area and reduced completion time; the position-led S-P strategy also reduced collisions and completion time relative to full-manual control; the orientation-emphasizing S-PO strategy performed worst among the shared-control conditions on occupied area but still beat both full-manual baselines on completion time. Subjectively, all shared-control strategies were rated as less cognitively demanding (lower mental demand, effort, and frustration) than full-manual teleoperation, with deformation-led strategies (S-D, S-DO) showing the lowest overall weighted NASA-TLX workload; physical demand was notably higher and more variable for dual-interface full-manual control (S-POD); temporal demand did not differ significantly across conditions. Participants rated their own perceived task success slightly lower for shared-control conditions despite objectively performing better, a mismatch the authors note as suggesting the shared-control interfaces still improved actual effectiveness even where perceived success ratings did not fully track it.",
+    "issues": "Full-manual dual-user teleoperation (D-POD) did not perform significantly better than full-manual single-user teleoperation (S-POD), against the authors' expectation that a second collaborator would help; they note this may partly reflect that all subjects experienced D-POD first (an order/practice confound), since it was not re-randomized in the second evaluation phase. Full-manual conditions showed markedly higher inter-trial variability than the shared-control conditions, attributed to the greater manual dexterity full DoF control demands, itself a source of inconsistent performance. Subjective performance ratings and objective performance measures diverged for the shared-control conditions (participants rated themselves as less successful even where they objectively performed better), illustrating that self-reported success is not a reliable proxy for actual task performance in this context.",
+    "recommendations": "When designing shared-control allocation for swarm teleoperation, automate the degrees of freedom that showed the least inter-operator variability during human demonstrations (i.e., the ones users tend to control similarly/predictably) and leave the human in control of the DoFs with the most variability (i.e., the more subjective, situation-dependent aspects of the task), since this combination produced the best performance and lowest workload in this study. Future work should incorporate machine learning (e.g., reinforcement learning) to refine the autonomous controllers using the collected demonstration data, and should validate the approach in more varied, dynamic, and real-world environments (e.g., actual microrobot navigation in blood vessels, or drone navigation in constrained macroscale environments) beyond the single simulated pipe geometry tested here.",
+    "autonomous_capabilities": "In each shared-control condition, the autonomous controller computes the DoFs not assigned to the human user via a proportional control law referenced against the local pipe geometry extracted in real time from point-cloud/depth-sensor data (via Delaunay triangulation, a Voronoi-graph medial-axis central path, and curvature/deformation classification with a Gaussian Mixture Model) — e.g., automatically adjusting swarm deformation to maximize occupied cross-sectional area while avoiding pipe-wall collisions when the human controls position, or automatically centering the swarm's position on the path's medial axis when the human controls deformation — requiring no prior model of the specific environment, so the approach generalizes to any imaged path geometry (e.g., from 3-D or CT scan data)."
+  },
+  "classification": {
+    "task_environment_v0.8": {
+      "task_object_spatiotemporal_dynamics": [
+        { "code": "Not Applicable", "justification": "The task is continuous navigation through a fixed, fully-known static environment (the pipe geometry itself), not detection/tracking of a discrete external task-relevant object or event.", "condition": null }
+      ],
+      "behavioral_relation_to_task_object": [
+        { "code": "Avoidance Task", "justification": "Contact with the pipe wall carries an explicit negative consequence (haptic vibration and a visual red color-change alert) that the operator must prevent while still navigating to the path's end, the canonical avoidance pattern.", "condition": null }
+      ],
+      "team_size": [
+        { "code": "Multi-human - Multi-robot", "justification": "The initial data-collection phase had two human operators simultaneously controlling the 64-agent swarm (one on pose, one on deformation).", "condition": "dual-user data-collection phase" },
+        { "code": "Single-human - Multi-robot", "justification": "The main shared-control evaluation phase had a single human operator controlling a subset of DoFs of the 64-agent swarm, with an autonomous controller handling the remainder.", "condition": "single-user shared-control evaluation phase" }
+      ],
+      "team_composition": [
+        { "code": "Homogeneous", "justification": "The swarm consists of 64 identical spherical agents.", "condition": "robot side" },
+        { "code": "Homogeneous", "justification": "In the dual-user data-collection phase, both operators had symmetric, interchangeable roles (pose vs. deformation), swapped halfway through the trials.", "condition": "human side, dual-user data-collection phase" }
+      ],
+      "interaction_model": [
+        { "code": "One-to-many", "justification": "A single human's haptic input on a given DoF subset simultaneously governs the collective pose/shape of the entire 64-agent swarm, not any individual robot.", "condition": null }
+      ],
+      "interaction_directness": [
+        { "code": "Direct", "justification": "Haptic handle displacements are explicitly mapped to specific swarm state variables (position, orientation, or deformation) the user is assigned to control.", "condition": null }
+      ],
+      "communication_proximity": [
+        { "code": "Remote", "justification": "Operators interact through a desktop haptic interface with a simulated (CoppeliaSim) environment rendered on a screen, with no physical robot co-location.", "condition": null }
+      ],
+      "coordination_architecture": [
+        { "code": "Strongly Centralized Coordination", "justification": "The swarm's collective pose and shape are directly set as a single commanded state (by the human and/or the autonomous controller) rather than emerging from local inter-agent rules; no distributed, agent-level coordination mechanism among the 64 spherical agents is described.", "condition": null }
+      ],
+      "computational_characteristics": [
+        { "code": "Classical Geometric / Sampling-Based Control", "justification": "The autonomous controller computes its assigned DoFs via a deterministic proportional control law referenced against geometric features (medial axis, curvature) extracted from point-cloud data, rather than a population-based search or a trained model.", "condition": null }
+      ],
+      "human_involvement_level": [
+        { "code": "Human-in-the-loop (HInL)", "justification": "Whichever DoFs are assigned to the human require continuous haptic input to move; the swarm does not change along those axes without it.", "condition": null }
+      ],
+      "level_of_human_control_abstraction": [
+        { "code": "Direct (LHCA 1)", "justification": "The haptic interface provides continuous, real-time incremental control that is directly added to the swarm's current state for the user-assigned DoFs.", "condition": null }
+      ],
+      "operational_domain": [
+        { "code": "Unclear / Candidate New Code", "justification": "The task environment is an enclosed conduit explicitly framed as dual-purpose — either a biological blood vessel (medical microrobotics) or an industrial pipe — which does not fit Air, Land, Maritime, Space, Cyber, or Spectrum as currently defined.", "condition": null }
+      ]
+    }
+  },
+  "flags": [
+    { "dimension": "task_environment_v0.8 / operational_domain", "type": "Unclear / Candidate New Code", "note": "Navigation within an enclosed conduit (blood vessel or industrial pipe) does not fit any of the six existing Operational Domain codes.", "proposed_code": "Confined/Enclosed Structure — an operational domain covering navigation within an enclosed man-made or biological conduit (pipes, ducts, vessels), distinct from the open-space Air/Land/Maritime/Space domains." }
+  ]
+}

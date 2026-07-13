@@ -1,0 +1,74 @@
+{
+  "article_id": "lewis_2013_multi_uv_hri_review",
+  "citation": {
+    "authors": "Michael Lewis",
+    "year": 2013,
+    "title": "Human Interaction With Multiple Remote Robots",
+    "source_file": "articles/lewis-2013-human-interaction-with-multiple-remote-robots.md"
+  },
+  "extraction_metadata": {
+    "date_extracted": "2026-07-10",
+    "codebook_versions": {
+      "study_type": "0.3",
+      "task_environment": "0.8"
+    },
+    "model": "claude-sonnet-5",
+    "notes": "A 44-page book chapter (Reviews of Human Factors and Ergonomics, Vol. 9) reviewing multi-UV HRI literature broadly (dozens of cited studies across UAV/UGV/UUV simulations and a few fielded systems), organized around a novel complexity-based taxonomy the chapter itself proposes. Because this is a survey of many different systems rather than one study, task_environment_v0.8 codes below are applied at an aggregate level across the reviewed literature per the Study-Type codebook's own guidance for Meta-Review/Survey articles (Section 4), mirroring the approach used for peschel_2013_uas_mission_specialist_survey. Not read in full line-by-line detail given its length; the Introduction, taxonomy sections, O(n)/O(1)/O(>n) control sections, swarm/amorphous-computing section, display/visualization section, and Guidelines/Conclusion were read directly, while some sub-sections on independent/cooperative planners and plan libraries (roughly pages 17-27) were represented via the section-header outline and surrounding context rather than read verbatim."
+  },
+  "study_type": {
+    "primary": "Meta-Review / Survey",
+    "secondary": "Framework/Taxonomy Paper",
+    "justification": "The chapter's bulk content synthesizes and organizes dozens of published empirical studies on human interaction with multiple unmanned vehicles (UAVs, UGVs, UUVs), without a reproducible search protocol (no PRISMA-style methodology reported), matching Narrative/Topical Survey (3.6.2) as Primary. However, the chapter's central organizing device is a genuinely new conceptual scheme — a complexity-based taxonomy classifying multi-UV control tasks as O(1) (constant operator effort regardless of team size), O(n) (effort scales linearly with team size), or O(>n) (effort scales worse than linearly due to tight inter-robot coordination demands) — explicitly presented as filling a gap in prior taxonomies that addressed physical/structural characteristics but not operator task complexity, warranting Framework/Taxonomy Paper as a comparably-weighted Secondary code."
+  },
+  "summary": {
+    "template": "abstract_only",
+    "abstract_summary": "This book chapter reviews the literature on remote human supervision of multiple unmanned vehicles (UVs), organized around a new complexity-based taxonomy: O(n) control, in which each UV requires similar individual attention so operator effort scales linearly with team size (e.g., serial waypoint assignment, target approval); O(1) commanding, in which higher-level commands (e.g., designating a search region, issuing a formation goal) direct an autonomously-coordinating group at constant operator effort regardless of size (including path planners, plan libraries, and robotic swarms); and O(>n) tasks, in which tight inter-robot dependencies (e.g., cooperative box-pushing, formation following) impose worse-than-linear, potentially unbounded operator effort. The chapter reviews neglect-tolerance and fan-out models (and their augmented wait-time variants) for O(n) supervision, levels-of-autonomy findings (management-by-consent vs. management-by-exception), task-switching costs, scheduling-based aiding approaches, independent and cooperative path planners, plan-library-based systems, and emerging research on human interaction with robotic swarms and amorphous computing (including force/virtual-particle-based swarm influence and leader-based influence methods). A section on multi-UV display and visualization covers information fusion, context-provision, and filtering techniques (e.g., picture-in-picture overlays, ray-casting view selection, image-queue-based frame selection) needed to keep operators from being overwhelmed by returned sensor data. The chapter concludes that no single level of control complexity is likely to suffice for realistic multi-UV missions — a mix of O(n), O(1), and (where unavoidable) O(>n) control will be needed — and offers design guidelines: automate monitoring and minimize task-switching for O(n) control; automate coordination first (before other functions) whenever UVs must work interdependently; and select among independent planners, cooperative planners, or plan libraries based on how independent UV behaviors are and how well operator intent can be expressed as a simple objective function."
+  },
+  "classification": {
+    "task_environment_v0.8": {
+      "task_object_spatiotemporal_dynamics": [
+        { "code": "Not Applicable", "justification": "As a broad survey spanning many different reviewed systems and task domains (search-and-rescue, SEAD strikes, box-pushing, formation following, shopping-mall social robots, etc.), the article does not describe a single task-object's spatiotemporal dynamics; this dimension would need to be applied per cited study rather than to the chapter as a whole.", "condition": null }
+      ],
+      "behavioral_relation_to_task_object": [
+        { "code": "Search Task", "justification": "Foraging tasks (search and rescue, reconnaissance) are repeatedly identified across the reviewed literature as the dominant, most-studied O(n) task class for multi-UV teams.", "condition": "aggregate across reviewed foraging/search-and-rescue studies" }
+      ],
+      "team_size": [
+        { "code": "Single-human - Multi-robot", "justification": "The chapter's defining scope is explicitly 'remote human supervision of multiple unmanned vehicles' by a single operator; multi-operator variants are discussed as a distinct sub-topic but are not the dominant reviewed case.", "condition": null }
+      ],
+      "team_composition": [
+        { "code": "Homogeneous", "justification": "Many reviewed systems (e.g., fan-out/neglect-tolerance studies, most swarm research) explicitly assume identical, interchangeable UVs.", "condition": "aggregate, majority of reviewed O(n) and O(1) swarm studies" },
+        { "code": "Heterogeneous", "justification": "Some reviewed simulations (e.g., RESCHU) explicitly support heterogeneous UAV/UUV types with different capabilities within the same team.", "condition": "aggregate, systems supporting mixed vehicle types" }
+      ],
+      "interaction_model": [
+        { "code": "One-to-one", "justification": "O(n) control, as defined in the chapter's own taxonomy, involves the operator addressing each UV individually in turn (e.g., serial waypoint assignment, individual target approval).", "condition": "O(n) control" },
+        { "code": "One-to-many", "justification": "O(1) commanding, as defined in the chapter's own taxonomy, involves a single operator action (e.g., designating a search region) directing an arbitrary number of UVs simultaneously.", "condition": "O(1) control" }
+      ],
+      "interaction_directness": [
+        { "code": "Direct", "justification": "The reviewed control paradigms (teleoperation, waypoint assignment, region designation, plan approval) are explicitly addressed by the operator to specific UVs or groups.", "condition": null }
+      ],
+      "communication_proximity": [
+        { "code": "Remote", "justification": "The chapter explicitly adopts and focuses on the remote-interaction category (as distinguished from proximate/social interaction) per Goodrich and Schultz's (2007) framework, citing it directly as the chapter's scope-defining distinction.", "condition": null }
+      ],
+      "coordination_architecture": [
+        { "code": "Distributed Coordination", "justification": "The swarm/amorphous-computing section explicitly describes coordination via local inter-robot interactions (physicomimetic forces, message passing, proximity sensing) that reduce or eliminate the need for a centralized human or robotic controller.", "condition": "O(1) swarm-based systems" },
+        { "code": "Strongly Centralized Coordination", "justification": "Planner-based and Arbiter-mediated systems (e.g., RoboFlag, plan-library systems) compute a single coordinated plan/allocation for the team through one central planning process rather than local peer negotiation.", "condition": "planner-based and Arbiter-mediated systems" }
+      ],
+      "computational_characteristics": [
+        { "code": "Classical Geometric / Sampling-Based Control", "justification": "Physicomimetic swarm-influence mechanisms are explicitly described as using imaginary attraction/repulsion forces to direct swarm behavior, functionally equivalent to an artificial-potential-field method.", "condition": "physicomimetic/force-based swarm coordination" },
+        { "code": "Task-Allocation (Placeholder)", "justification": "Multiple reviewed scheduling-based aiding approaches (shortest-job-first discipline, load balancing between operators, utility-based operator attention allocation schemes) are explicitly about deciding which UV/task receives operator or system attention next, distinct from how any one UV computes its own motion.", "condition": "scheduling-based aiding approaches" }
+      ],
+      "human_involvement_level": [
+        { "code": "Human-in-the-loop (HInL)", "justification": "Manual/teleoperation control and management-by-consent (MBC) LOAs, both extensively reviewed, require explicit human approval or continuous input for the function to proceed.", "condition": "manual control / MBC levels of autonomy" },
+        { "code": "Human-on-the-loop (HOnL)", "justification": "Management-by-exception (MBE) LOAs and O(1) swarm/planner systems, both extensively reviewed, execute autonomously while the human monitors and can intervene.", "condition": "MBE levels of autonomy / O(1) systems" }
+      ],
+      "level_of_human_control_abstraction": [
+        { "code": "Parametric (LHCA 3)", "justification": "Waypoint assignment, a dominant reviewed O(n) control method, is a discrete input of a navigational parameter that the UV then autonomously executes.", "condition": "waypoint-based O(n) control" },
+        { "code": "Goal-Oriented (LHCA 4)", "justification": "O(1) commands such as designating a search region on a map are discrete, mission-level goal specifications that an autonomously-coordinating group then executes in full.", "condition": "O(1) region-designation/formation-goal control" }
+      ],
+      "operational_domain": [
+        { "code": "Cross-Domain", "justification": "The reviewed literature explicitly spans unmanned aerial vehicles (UAVs), unmanned ground vehicles (UGVs), and unmanned underwater vehicles (UUVs), with some simulations (e.g., RESCHU) supporting mixed UAV/UUV teams.", "condition": null }
+      ]
+    }
+  },
+  "flags": []
+}

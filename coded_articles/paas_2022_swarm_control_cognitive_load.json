@@ -1,0 +1,81 @@
+{
+  "article_id": "paas_2022_swarm_control_cognitive_load",
+  "citation": {
+    "authors": "Anita Paas, Emily B. J. Coffey, Giovanni Beltrame, David St-Onge",
+    "year": 2022,
+    "title": "Towards evaluating the impact of swarm robotic control strategy on operators' cognitive load",
+    "source_file": "articles/Towards_evaluating_the_impact_of_swarm_robotic_control_strategy_on_operators_cognitive_load.md"
+  },
+  "extraction_metadata": {
+    "date_extracted": "2026-07-10",
+    "codebook_versions": {
+      "study_type": "0.3",
+      "task_environment": "0.8"
+    },
+    "model": "claude-sonnet-5"
+  },
+  "study_type": {
+    "primary": "User Study",
+    "secondary": "System/Architecture Paper",
+    "sub_attributes": {
+      "setting": "Lab",
+      "measured_constructs": ["Performance", "Workload"],
+      "modality_flags": []
+    },
+    "justification": "A controlled, IRB-approved 40-participant experiment with a real 6-UAV swarm, a 2x2 within-subject design, and both subjective (NASA-TLX) and physiological (heart-rate-variability/SDNN) workload measures plus objective mission performance is the article's central, extensively statistically analyzed evidence, making User Study Primary. The article also presents a substantial reusable system architecture — the indoor micro-UAV swarm platform with its safety/geofencing/consensus infrastructure, and a novel tangible (Zooids-based) command-center interface — as a comparably-weighted contribution, warranting System/Architecture Paper as Secondary."
+  },
+  "summary": {
+    "template": "user_study",
+    "task": "40 participants each completed four 5-minute missions (all combinations of 2 interfaces x 2 control algorithms, order randomized) directing a real fleet of six micro-quadcopters (Crazyflies) flying in an indoor arena to locate up to 5 simulated hidden ground features, using: (1) a tablet with group self-deployment control (assigning one or two 'hotspot' markers around which the UAVs autonomously distributed and searched), (2) a tablet with individual waypoint control (assigning a destination to each UAV individually), (3) a tangible interface (small tabletop 'Zooid' robots mirroring the UAVs on a map) with group self-deployment, and (4) the tangible interface with individual waypoint control.",
+    "control": "In tablet conditions, participants stood facing the flying arena and entered marker/waypoint positions via a touchscreen UI, sending commands with a 'send' button. In tangible conditions, participants stood at a table beside the arena and physically picked up and placed specially-marked Zooid robots to set group hotspots, or picked up and held a UAV's individual Zooid counterpart at a desired map location for two seconds to command that specific UAV (indicated by an LED color change on receipt); released Zooids then mimicked their corresponding UAV's real-time position on the map. Robots autonomously generated their own flight trajectories and used decentralized collision avoidance and a geofence/state-machine safety layer regardless of control mode.",
+    "participants": "40 adult participants (13 female, 27 male), aged 18-55, all of whom completed all four mission conditions; recruitment and protocol were approved by the ethics committees of all three universities involved. Heart-rate data from 8 participants were excluded from the physiological analysis due to recording equipment issues, leaving 32 in that analysis.",
+    "results": "Participants found significantly more features in the tablet/group, tablet/individual, and Zooid/group conditions than in the Zooid/individual condition, and performed significantly different numbers of control actions across all four conditions, with the most actions in the Zooid/group condition. Subjectively (NASA-TLX), individual waypoint control was rated more mentally demanding and hurried than group self-deployment, and the Zooid (tangible) interface was rated more frustrating and, on the combined TLX score, more demanding overall than the tablet — the opposite pattern from the physiological measure: heart-rate variability (SDNN) was significantly higher (indicating lower cognitive load) when using the Zooid interface than the tablet, with no significant correlation between combined NASA-TLX scores and SDNN in any condition. The Zooid/individual condition was rated as requiring the most effort and least success, consistent with its weaker objective performance.",
+    "issues": "Subjective (NASA-TLX) and physiological (HRV/SDNN) workload measures diverged and even pointed in opposite directions regarding whether the tangible interface was more or less cognitively demanding than the tablet, underscoring that these measures may be sensitive to different aspects of operator state and cannot be assumed interchangeable. The higher SDNN (lower apparent physiological load) observed for the tangible interface may be confounded by physicality — the Zooid interface required participants to bend over and reach for/move small robots, versus standing still with the tablet — rather than reflecting cognitive load specifically. Greater automation (group self-deployment vs. individual waypoints) did not consistently reduce the number of control actions performed or consistently improve mission performance across interfaces, contrary to a simple 'more autonomy always helps' expectation, suggesting the benefit is mission/environment/implementation-dependent.",
+    "recommendations": "Do not rely on a single workload measure (subjective or physiological alone) when evaluating human-swarm interfaces; use complementary subjective, objective/performance, and physiological measures together, since they can diverge in sensitivity. Validate additional physiological measures (e.g., pupil dilation, skin conductivity) and their combination with existing measures (HRV, self-report) specifically for swarm-control contexts, and relate them to both subjective experience and objective mission success. Develop a systematic, user-centric methodology for testing and guiding interface/control-algorithm design choices during development, since specific implementation details (not just 'more automation' or 'tangible vs. screen-based' in the abstract) determine cognitive-load outcomes for a given application.",
+    "autonomous_capabilities": "The six Crazyflie micro-UAVs generate their own flight trajectories autonomously and use a decentralized collision-avoidance algorithm (informed by neighbors' known locations) plus altitude separation to avoid collisions without operator intervention; a state machine (turned off, take off, idle, waypoint, deploy, go home, land) coordinates each robot's behavior, with consensus achieved via a distributed database, and a geofence combined with input- and receipt-side distance/time verification (e.g., rejecting destinations unreachable within 5 seconds) provides automatic safety enforcement. In the group self-deployment mode, once given one or two focal points defining a region of interest, the UAVs autonomously and evenly distribute themselves within that region and search it for hidden features without further per-robot operator input."
+  },
+  "classification": {
+    "task_environment_v0.8": {
+      "task_object_spatiotemporal_dynamics": [
+        { "code": "Distributed Task Object", "justification": "Up to five simulated hidden ground features are present at multiple scattered locations within the flying area from the start of the mission, each individually static and undiscovered until searched.", "condition": null }
+      ],
+      "behavioral_relation_to_task_object": [
+        { "code": "Search Task", "justification": "Participants direct the UAV swarm to locate hidden ground features whose presence/location is initially unknown, the mission's explicit objective.", "condition": null }
+      ],
+      "team_size": [
+        { "code": "Single-human - Multi-robot", "justification": "Each participant individually directs a fleet of six UAVs per mission.", "condition": null }
+      ],
+      "team_composition": [
+        { "code": "Homogeneous", "justification": "All six Crazyflie UAVs are identical platforms.", "condition": "robot side" },
+        { "code": "Not Applicable", "justification": "Each session involves a single participant; no multi-human team is present.", "condition": "human side" }
+      ],
+      "interaction_model": [
+        { "code": "One-to-many", "justification": "In group self-deployment mode, a single hotspot/focal-point command simultaneously directs the whole swarm's distribution.", "condition": "group self-deployment control mode" },
+        { "code": "One-to-one", "justification": "In individual waypoint mode, the operator assigns a destination to each UAV separately, one command per robot.", "condition": "individual waypoint control mode" }
+      ],
+      "interaction_directness": [
+        { "code": "Direct", "justification": "Marker placements and waypoint assignments (via tablet or tangible Zooid) are explicitly addressed to a specific UAV or defined region.", "condition": null }
+      ],
+      "communication_proximity": [
+        { "code": "Proximate", "justification": "Participants stood at the border of the flying arena with no glass or net separating them from the real, physically flying UAVs, sharing the same physical space as the robots throughout the study, even though commands were entered via a tablet or tangible proxy interface.", "condition": null }
+      ],
+      "coordination_architecture": [
+        { "code": "Distributed Coordination", "justification": "The article explicitly describes decentralized collision avoidance among robots using locally-known neighbor positions and consensus achieved via a distributed database, with no leader robot or central per-robot commander.", "condition": null }
+      ],
+      "computational_characteristics": [
+        { "code": "Not Described", "justification": "The article references the specific deployment and collision-avoidance algorithms only by citation to companion papers (St-Onge et al., 2020; Shahriari et al., 2018) without naming or describing the underlying mechanism in its own text.", "condition": null }
+      ],
+      "human_involvement_level": [
+        { "code": "Human-in-the-loop (HInL)", "justification": "Both control modes require an explicit human command (a hotspot or a set of waypoints) to direct the swarm toward the search area; without this input the mission does not proceed as intended.", "condition": null }
+      ],
+      "level_of_human_control_abstraction": [
+        { "code": "Parametric (LHCA 3)", "justification": "In individual waypoint mode, the operator sets a discrete destination parameter per UAV, which the UAV then autonomously navigates to and searches along the way.", "condition": "individual waypoint control mode" },
+        { "code": "Goal-Oriented (LHCA 4)", "justification": "In group self-deployment mode, the operator specifies only a high-level region-of-interest goal (via one or two focal points), and the swarm autonomously determines and executes individual robot positions/paths to achieve it.", "condition": "group self-deployment control mode" }
+      ],
+      "operational_domain": [
+        { "code": "Air", "justification": "The Crazyflie platforms are micro-UAVs.", "condition": null }
+      ]
+    }
+  },
+  "flags": []
+}

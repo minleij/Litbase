@@ -1,0 +1,91 @@
+{
+  "article_id": "villani_2020_affect_based_multi_robot_interaction",
+  "citation": {
+    "authors": "Valeria Villani, Beatrice Capelli, Cristian Secchi, Cesare Fantuzzi, Lorenzo Sabattini",
+    "year": 2020,
+    "title": "Humans interacting with multi-robot systems: a natural affect-based approach",
+    "source_file": "articles/Villani.md"
+  },
+  "extraction_metadata": {
+    "date_extracted": "2026-07-10",
+    "codebook_versions": {
+      "study_type": "0.3",
+      "task_environment": "0.9"
+    },
+    "model": "claude-sonnet-5",
+    "notes": "Re-coded task_object_spatiotemporal_dynamics for Experiments 1-2 on 2026-07-13 using the newly-added Known Fixed Task Object code (v0.9), which this article's own flag had proposed. Article reports four distinct human-subject experiments: (1) a 21-subject HRV-methodology validation test (no robots involved, purely physiological), and three HRI experiments summarized in the article's own Table 2 — Natural Interaction (12 users, physical e-puck ground robots), Affect-Based Adaptation (4 users, physical e-puck robots), and a Complex Realistic Scenario (30 users, VR, simulated aerial-robot swarm). Task-environment coding below focuses primarily on the richest/final VR scenario, with conditions noted for the simpler physical-robot experiments where they diverge."
+  },
+  "study_type": {
+    "primary": "User Study",
+    "secondary": "System/Architecture Paper",
+    "sub_attributes": {
+      "setting": "Lab",
+      "measured_constructs": ["Performance", "Workload"],
+      "modality_flags": []
+    },
+    "justification": "Four separate human-subject experiments (totaling 67 participants across the HRV validation and three HRI studies), with quantitative travel-time comparisons, HRV-based mental-fatigue detection, and subjective post-task questionnaires, are the article's central validating evidence, making User Study Primary. The article also presents a generalizable, reusable smartwatch-based interaction architecture (natural wrist-motion teleoperation mapping, gesture-based mode switching, a real-time HRV mental-fatigue detection algorithm, and a state-machine-driven affect-adaptive control scheme) as a comparably-weighted contribution, warranting System/Architecture Paper as Secondary."
+  },
+  "summary": {
+    "template": "user_study",
+    "task": "Across three HRI experiments, users controlled small mobile robot teams via a wrist-worn smartwatch. Experiment 1 (Natural Interaction, 12 users): drive two e-puck robots to a target together, then select and drive one individually to a further target while the other moved autonomously in a circle, comparing the smartwatch to a joypad and a haptic teleoperation device. Experiment 2 (Affect-Based Adaptation, 4 users, 7.5 min each): repeatedly drive three e-puck robots one at a time into alternating target zones while the other two moved randomly (simulating autonomous exploration), with the system simplifying the task (auto-following by the other two robots) when mental fatigue was detected. Experiment 3 (Complex Realistic Scenario, 30 users, VR): supervise a 12-drone swarm split into four 3-drone sub-teams, each autonomously patrolling one of four simulated urban districts for fires and bombs; on an alert, the user could switch (via gesture) to teleoperate the alerting sub-team and use hand gestures to extinguish the fire or defuse the bomb, while the system relieved the user of monitoring other districts when mental fatigue was detected.",
+    "control": "Wrist pitch/roll angles (measured by the smartwatch's IMU) were continuously mapped to linear/angular robot velocity for direct teleoperation of the currently-selected robot or sub-team. Discrete wrist gestures (Circle, Up, Down, Left, Right) triggered high-level mode switches — selecting the whole team, an individual robot, or a specific sub-team/district for teleoperation — confirmed to the user via smartwatch vibration and (where available) sound. In the VR scenario, a Leap Motion controller mounted on the headset additionally tracked hand pose for gesture-based target-deactivation actions (extinguish/defuse).",
+    "participants": "Experiment 1: 12 first-time users (4 female, 8 male, M=26.4, SD=2.9). Experiment 2: 4 users (1 female, 3 male, M=30.5, SD=3.1). Experiment 3: 30 users (9 female, 21 male, M=25.5, SD=3.0), engineering-department researchers new to the task, each giving informed consent. A separate, non-robotic 21-subject sample (15 male, 6 female, M=28.4, SD=4.1) was used earlier in the paper solely to validate the smartwatch's HRV-based mental-fatigue detection algorithm against a rest/stress protocol (arithmetic task + loud music).",
+    "results": "In Experiment 1, the smartwatch interface produced faster average travel time (199.6 s) than both a joypad (280.1 s) and a haptic teleoperation device (214.5 s). The HRV validation test found that only the RR interval metric (not SDRR, RMSSD, pNN50, LF, HF, or LF/HF) reliably discriminated rest from stress conditions, including on shorter 2.5-minute windows (statistically significant in 854/1000 Monte Carlo resamples), motivating its use as the real-time fatigue-detection metric. In the VR scenario (Experiment 3), of 30 users: 2 remained at rest throughout, 9 developed fatigue only by the end, 4 showed fatigue at the midpoint that resolved by the end (coinciding with adaptation), and 15 showed fatigue at the midpoint that persisted despite adaptation. Among the 19 users who experienced affect-based adaptation, the large majority (12 of 19: 8 'strongly agree,' 4 'agree') subjectively reported the task became easier after adaptation, including most of those whose physiological stress response did not measurably change.",
+    "issues": "In Experiment 1, the haptic teleoperation device became noticeably less intuitive on more complex paths involving turns and orientation mismatches between the user's and robot's reference frames, and constrained the user to a fixed physical position, unlike the smartwatch. Task-simplifying adaptation reduced field information: when other robots were given full autonomy to relieve the user (Experiment 3), any misdetected or inaccurately detected targets in those districts would be autonomously (and potentially wrongly) acted upon without user verification. Adaptation did not always resolve detected mental fatigue (15 of 19 affected users still showed fatigue at the end of the VR scenario despite adaptation), and even where physiological stress did not measurably improve, users still self-reported the task as easier, indicating a partial dissociation between physiological and subjective relief. The authors note their own general finding that assistance/adaptation reduces user fatigue but can decrease task performance (since it removes functionality or adds constraints), a explicit trade-off not resolved in this paper.",
+    "recommendations": "Pursue more extensive experimental validation of the system in future work, and explore multi-modal interaction incorporating speech input alongside gesture and motion. Further investigate HRV-based fatigue detection to decouple physical fatigue's confounding effect on HRV from mental fatigue specifically, and study how task engagement, disengagement, boredom, and tiredness affect HRV to reduce false-positive fatigue detections. Future systems should jointly optimize task-related (performance) and user-centered (fatigue/workload) metrics together, explicitly trading off assistance against performance and tailoring the degree of adaptation to task-specific needs and constraints, rather than treating fatigue relief as an unconditional goal.",
+    "autonomous_capabilities": "Non-teleoperated robots/sub-teams implement autonomous or semi-autonomous behaviors depending on configuration: predefined-velocity autonomous area exploration, random motion (Experiment 2, simulating exploration), or full sensor-driven autonomous patrol with target (fire/bomb) detection and alerting (Experiment 3, sub-teams presumed equipped with heat sensors). When affect-based adaptation is triggered, previously human-selected non-teleoperated robots either switch to consensus-based following of the currently-teleoperated robot (Experiment 2) or are granted full autonomy to detect and unilaterally act on targets without further user verification (Experiment 3), removing the user's supervisory burden for those elements. The system's own real-time mental-fatigue detection algorithm continuously estimates user cognitive state from a sliding-window mean RR-interval (heart-rate variability) signal via a hysteresis-based rest/stress state-transition rule, and a finite-state machine governs which robots/sub-teams are under direct teleoperation versus autonomous/adapted behavior at any time."
+  },
+  "classification": {
+    "task_environment_v0.9": {
+      "task_object_spatiotemporal_dynamics": [
+        { "code": "Distributed Task Object", "justification": "Fires and bombs (targets) appear at multiple scattered locations across four districts over the course of the VR mission, each individually static once detected.", "condition": "Experiment 3 (VR complex scenario)" },
+        { "code": "Known Fixed Task Object", "justification": "Target zones/positions (green squares/crosses, yellow areas) are visible and known to the user from the outset of the task, not discovered via search, matching Known Fixed Task Object (3.5, added in codebook v0.9).", "condition": "Experiments 1 and 2 (physical e-puck robots)" }
+      ],
+      "behavioral_relation_to_task_object": [
+        { "code": "Search Task", "justification": "Autonomous sub-teams detect targets (fires, bombs) of initially unknown presence/location within their assigned district, requiring user verification and confirmation.", "condition": "Experiment 3 (VR complex scenario)" },
+        { "code": "Engagement Task", "justification": "Once a target is detected and the user switches attention to it, hand gestures are used to extinguish the fire or defuse the bomb, a decisive action on an already-identified target.", "condition": "Experiment 3 (VR complex scenario)" },
+        { "code": "Unclear / Candidate New Code", "justification": "Driving robots to known-location target zones is a navigate-to-known-target behavior, the same gap flagged in bashyal_2008_radiation_source_hsi. Left open per user decision (2026-07-13) to defer this one-off proposal for now.", "condition": "Experiments 1 and 2 (physical e-puck robots)" }
+      ],
+      "team_size": [
+        { "code": "Single-human - Multi-robot", "justification": "Each participant individually controls a team of 2-3 e-puck robots (Experiments 1-2) or a 12-drone swarm in four sub-teams (Experiment 3).", "condition": null }
+      ],
+      "team_composition": [
+        { "code": "Homogeneous", "justification": "The e-puck robots and, separately, the simulated drones within each sub-team are identical platforms.", "condition": "robot side" },
+        { "code": "Not Applicable", "justification": "Each session involves a single operator; no multi-human team is present.", "condition": "human side" }
+      ],
+      "interaction_model": [
+        { "code": "One-to-many", "justification": "A Circle gesture broadcasts teleoperation control to the whole team at once.", "condition": null },
+        { "code": "One-to-one", "justification": "Directional gestures select and address an individual robot or a single sub-team for teleoperation, distinct from the rest of the team.", "condition": null }
+      ],
+      "interaction_directness": [
+        { "code": "Direct", "justification": "Wrist motion and gesture commands are explicitly addressed to the currently-selected robot(s)/sub-team." , "condition": null }
+      ],
+      "communication_proximity": [
+        { "code": "Proximate", "justification": "Users are physically co-located with the real e-puck robots and can move freely following them in the same physical space.", "condition": "Experiments 1 and 2 (physical e-puck robots)" },
+        { "code": "Remote", "justification": "The VR scenario places the user in an immersive simulated environment with simulated drones, with no physical co-location with real robots.", "condition": "Experiment 3 (VR complex scenario)" }
+      ],
+      "coordination_architecture": [
+        { "code": "Distributed Coordination", "justification": "When adaptation is triggered in Experiment 2, non-teleoperated robots explicitly implement consensus to follow the currently teleoperated robot, with no leader robot; a master-slave hierarchy is also described as an available configuration option but is not the one used in the reported experiments.", "condition": null }
+      ],
+      "computational_characteristics": [
+        { "code": "Predefined / Rule-Based Control", "justification": "Non-teleoperated robots follow fixed predefined behaviors (constant-velocity autonomous exploration, random motion, or consensus-following), and the overall operational-mode logic is governed by an explicit finite state machine rather than a computed search or learned model.", "condition": null }
+      ],
+      "human_involvement_level": [
+        { "code": "Human-in-the-loop (HInL)", "justification": "Direct teleoperation of the selected robot/sub-team requires continuous wrist-motion input; robot motion under teleoperation stops without it.", "condition": "teleoperated robot/sub-team" },
+        { "code": "Human-on-the-loop (HOnL)", "justification": "Non-selected sub-teams explore and detect targets autonomously without operator input, alerting the user only when needed.", "condition": "autonomously-exploring sub-teams" }
+      ],
+      "level_of_human_control_abstraction": [
+        { "code": "Direct (LHCA 1)", "justification": "Continuous wrist pitch/roll angles are mapped directly to the selected robot/sub-team's linear and angular velocity.", "condition": "teleoperation state" },
+        { "code": "Goal-Oriented (LHCA 4)", "justification": "A hand gesture to extinguish a fire or defuse a bomb is a single discrete authorization of a specific action, which the system then carries out in full, matching a goal-directed one-off command rather than continuous control.", "condition": "target-deactivation gesture (Experiment 3)" }
+      ],
+      "operational_domain": [
+        { "code": "Land", "justification": "Experiments 1 and 2 use physical wheeled e-puck ground robots.", "condition": "Experiments 1 and 2" },
+        { "code": "Air", "justification": "Experiment 3 uses a simulated fleet of aerial drones.", "condition": "Experiment 3 (VR complex scenario)" }
+      ]
+    }
+  },
+  "flags": [
+    { "dimension": "task_environment_v0.9 / task_object_spatiotemporal_dynamics", "type": "Unclear / Candidate New Code", "note": "Target zones in the simpler physical-robot experiments are known/visible from task start.", "proposed_code": "See bashyal_2008_radiation_source_hsi flag for 'Known Fixed Task Object.'" },
+    { "dimension": "task_environment_v0.9 / behavioral_relation_to_task_object", "type": "Unclear / Candidate New Code", "note": "Navigating to a known target zone is not covered by any existing behavioral-relation code.", "proposed_code": "See bashyal_2008_radiation_source_hsi flag for 'Navigate-to-Known-Target Task.'" }
+  ]
+}

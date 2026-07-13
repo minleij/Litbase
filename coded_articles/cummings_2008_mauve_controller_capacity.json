@@ -10,9 +10,10 @@
     "date_extracted": "2026-07-10",
     "codebook_versions": {
       "study_type": "0.3",
-      "task_environment": "0.8"
+      "task_environment": "0.9"
     },
-    "model": "claude-sonnet-5"
+    "model": "claude-sonnet-5",
+    "notes": "Re-coded task_object_spatiotemporal_dynamics for mission targets on 2026-07-13 using the newly-added Known Fixed Task Object code (v0.9), which this article's own flag had proposed."
   },
   "study_type": {
     "primary": "User Study",
@@ -35,9 +36,9 @@
     "autonomous_capabilities": "The four simulated UAVs launch with a predetermined mission plan (targets, routes, and waypoints already assigned) and autonomously travel to and loiter at targets without operator input, only requiring supervisory monitoring and occasional replanning. In the highest ('superactive') automation condition, the system also autonomously executes arming and firing actions once rules-of-engagement conditions are met (UAV at target, already armed, within the time-on-target window), giving the operator only a 30-second veto window rather than requiring an explicit per-action command; pre-scheduled battle damage assessment is likewise performed automatically by the UAV after firing."
   },
   "classification": {
-    "task_environment_v0.8": {
+    "task_environment_v0.9": {
       "task_object_spatiotemporal_dynamics": [
-        { "code": "Unclear / Candidate New Code", "justification": "Mission targets are a single, fixed, non-growing instance per target, but their location and priority are already assigned and known to the operator at launch ('initial target assignments and routes are already completed'), so they do not meet Static/Fixed Task Object's (3.4) requirement of being initially unknown and discovered via search — the same gap flagged for a known-location fixed target in another corpus article (bashyal_2008_radiation_source_hsi).", "condition": "mission targets" },
+        { "code": "Known Fixed Task Object", "justification": "Mission targets are a single, fixed, non-growing instance per target, and their location and priority are already assigned and known to the operator at launch ('initial target assignments and routes are already completed'), matching Known Fixed Task Object (3.5, added in codebook v0.9) rather than Static/Fixed (3.4, which requires initially-unknown location).", "condition": "mission targets" },
         { "code": "Distributed Task Object", "justification": "Threat/hazard areas on the map can emerge entirely or disappear at different points during the scenario, matching multiple scattered, intermittently-arising instances.", "condition": "threat/hazard zones" },
         { "code": "Moving Task Object", "justification": "The same threat/hazard areas are explicitly described as dynamic and able to change location throughout scenarios.", "condition": "threat/hazard zones" }
       ],
@@ -82,8 +83,7 @@
     }
   },
   "flags": [
-    { "dimension": "task_environment_v0.8 / task_object_spatiotemporal_dynamics", "type": "Unclear / Candidate New Code", "note": "Mission targets are single, fixed, and known to the operator from mission launch (not discovered via search), so they do not fit Static/Fixed Task Object's 'initially unknown' requirement — the same known-fixed-target gap seen in bashyal_2008_radiation_source_hsi.", "proposed_code": "Known Fixed Task Object (see also bashyal_2008_radiation_source_hsi flag) — a single, non-moving, non-growing task-relevant object whose location is known to the operator from the outset." },
-    { "dimension": "task_environment_v0.8 / computational_characteristics", "type": "Unclear / Candidate New Code", "note": "The active-LOA decision-support algorithm optimizes and recommends changes to the human operator's own interaction schedule (which target to attend to when), not a robot's motion (8.1-8.5) or robot-to-task assignment (8.6) — the same operator-workload/schedule-optimization gap flagged in jo_2025_awac_mhmr_teams.", "proposed_code": "Operator-Schedule/Workload Optimization (Placeholder) — a computational mechanism that allocates or schedules the human operator's own attention/workload across tasks, distinct from robot motion control (8.1-8.5) and robot task allocation (8.6)." },
-    { "dimension": "task_environment_v0.8 / coordination_architecture", "type": "Not Applicable", "note": "The four UAVs are explicitly designed and described as independent, with no coordination mechanism of any kind between them." }
+    { "dimension": "task_environment_v0.9 / computational_characteristics", "type": "Unclear / Candidate New Code", "note": "The active-LOA decision-support algorithm optimizes and recommends changes to the human operator's own interaction schedule (which target to attend to when), not a robot's motion (8.1-8.5) or robot-to-task assignment (8.6) — the same operator-workload/schedule-optimization gap flagged in jo_2025_awac_mhmr_teams. Left open per user decision (2026-07-13) to defer this one-off proposal for now.", "proposed_code": "Operator-Schedule/Workload Optimization (Placeholder) — a computational mechanism that allocates or schedules the human operator's own attention/workload across tasks, distinct from robot motion control (8.1-8.5) and robot task allocation (8.6)." },
+    { "dimension": "task_environment_v0.9 / coordination_architecture", "type": "Not Applicable", "note": "The four UAVs are explicitly designed and described as independent, with no coordination mechanism of any kind between them." }
   ]
 }
