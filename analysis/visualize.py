@@ -17,9 +17,10 @@ Two kinds of plots, both saved as PNGs under analysis/figures/:
    unreadable here (many articles share the same code pair, and points would
    just overlap), so size-encoding the count is what actually makes
    co-occurrence between two categorical dimensions legible. Dimensions are
-   coalesced across codebook versions (task_environment_v0.9 falls back to
-   v0.8 per article) since most of the corpus is still coded under v0.8
-   while newer articles use v0.9. Produced in two variants, since an article
+   coalesced across whatever task_environment_v* codebook versions are
+   actually present in the corpus (highest version wins per article), since
+   the corpus is not always uniformly coded at the current version. Produced
+   in two variants, since an article
    can carry more than one code per dimension (e.g. one per experimental
    condition):
      - figures/scatter/<dim_x>__vs__<dim_y>.png -- multi-condition
@@ -38,6 +39,7 @@ Run: python analysis/visualize.py
 from __future__ import annotations
 
 import itertools
+import re
 from pathlib import Path
 
 import matplotlib
@@ -176,16 +178,33 @@ def plot_counts(long_df: pd.DataFrame, out_dir: Path = COUNTS_DIR) -> None:
         print(f"  wrote {out_path.relative_to(FIG_DIR.parent)}")
 
 
+_TASK_ENV_COL_RE = re.compile(r"^task_environment_v(?P<major>\d+)\.(?P<minor>\d+)__(?P<dim>.+)$")
+
+
+def _task_env_version_cols(wide_df: pd.DataFrame, dim: str) -> list[str]:
+    """All task_environment_v*__<dim> columns actually present in wide_df for
+    this dimension, sorted from highest version to lowest -- so whichever
+    versions the corpus happens to be coded under (possibly several at once,
+    e.g. mid-recode) are all covered without hardcoding specific numbers."""
+    matches = []
+    for col in wide_df.columns:
+        m = _TASK_ENV_COL_RE.match(col)
+        if m and m.group("dim") == dim:
+            matches.append((int(m.group("major")), int(m.group("minor")), col))
+    matches.sort(reverse=True)
+    return [col for _, _, col in matches]
+
+
 def _combined_dimension_frame(wide_df: pd.DataFrame) -> pd.DataFrame:
     """One row per article, one column per SCATTER_DIMENSIONS entry, coalescing
-    task_environment_v0.9__<dim> and task_environment_v0.8__<dim> (v0.9 wins
-    where an article has been coded under both)."""
+    across every task_environment_v* version column present (highest version
+    wins where an article has been coded under more than one)."""
     out = pd.DataFrame({"article_id": wide_df["article_id"]})
     for dim in SCATTER_DIMENSIONS:
-        v9_col, v8_col = f"task_environment_v0.9__{dim}", f"task_environment_v0.8__{dim}"
-        v9 = wide_df[v9_col] if v9_col in wide_df.columns else pd.Series(index=wide_df.index, dtype=object)
-        v8 = wide_df[v8_col] if v8_col in wide_df.columns else pd.Series(index=wide_df.index, dtype=object)
-        out[dim] = v9.combine_first(v8)
+        combined = pd.Series(index=wide_df.index, dtype=object)
+        for col in _task_env_version_cols(wide_df, dim):
+            combined = combined.combine_first(wide_df[col])
+        out[dim] = combined
     return out
 
 
