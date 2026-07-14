@@ -10,10 +10,10 @@
     "date_extracted": "2026-07-10",
     "codebook_versions": {
       "study_type": "0.4",
-      "task_environment": "0.8"
+      "task_environment": "0.10"
     },
     "model": "claude-sonnet-5",
-    "notes": "This is one of the two articles the Task-Environment codebook's own Section 9.5 Scope note (originally added in v0.7) cites as motivating the broadened LHCA scope — continuous camera pan/zoom during the RESCHU search task is coded Direct/Augmented per that precedent. Re-coded 2026-07-10 against Task-Environment v0.8: target search/identification now maps onto the new Search Task (4.2) code, replacing the original Unclear / Candidate New Code flag. Re-coded study_type Secondary again on 2026-07-13 per the new Section 3.11 edge-case note (Study-Type codebook v0.4): the DES workload model is confirmed as Modeling/Theoretical Paper (Secondary), accepted as an edge case per the user's decision, resolving the prior Unclear / Candidate New Code flag."
+    "notes": "This is one of the two articles the Task-Environment codebook's own Section 9.5 Scope note (originally added in v0.7) cites as motivating the broadened LHCA scope — continuous camera pan/zoom during the RESCHU search task is coded Direct/Augmented per that precedent. Re-coded 2026-07-10 against Task-Environment v0.8: target search/identification now maps onto the new Search Task (4.2) code, replacing the original Unclear / Candidate New Code flag. Re-coded study_type Secondary again on 2026-07-13 per the new Section 3.11 edge-case note (Study-Type codebook v0.4): the DES workload model is confirmed as Modeling/Theoretical Paper (Secondary), accepted as an edge case per the user's decision, resolving the prior Unclear / Candidate New Code flag. Re-coded task_object_spatiotemporal_dynamics on 2026-07-14, bumping task_environment to v0.10: per the article's own text (\"the map displayed the locations of vehicles, threat areas, and areas of interests (AOIs)\"), both the predetermined-target (red) and not-yet-specified-target (gray) AOIs are visible on the map from mission start, not intermittently/unpredictably arising, so they match Known Fixed Task Object (3.5, added v0.9) rather than Distributed Task Object — the same pattern as this codebook's own Known Fixed worked example, drawn from the closely analogous Cummings & Mitchell (2008) 'mission targets.' Threat areas are unchanged (they do dynamically/unpredictably appear, correctly Distributed). behavioral_relation_to_task_object's Search Task assignment is unchanged: even though the AOI's location is now known, the target's identity/presence at that AOI is still what's unknown and must be visually identified, which is what Search Task's 'or identify it' clause covers, and no other v0.9/v0.10 code (Transport/Delivery, Move Task, Confined/Enclosed domain, operator-directed-computation) applies to this article."
   },
   "study_type": {
     "primary": "User Study",
@@ -36,11 +36,11 @@
     "autonomous_capabilities": "Vehicles autonomously navigated between assigned areas of interest and were automatically reassigned to a new AOI once their current task was completed, via an automated-path planner, without requiring the operator to manually retask them. A high-altitude UAV autonomously carried a synthetic-aperture-radar-type sensor to discover new, previously-unspecified targets for later acquisition by other vehicle types. The underlying DES model itself autonomously generated stochastic event arrivals/service times and, in its revised form, computed a wait-time penalty for each new event as a function of the operator's utilization over the preceding time window, without requiring additional human input to the model."
   },
   "classification": {
-    "task_environment_v0.8": {
+    "task_environment_v0.10": {
       "task_object_spatiotemporal_dynamics": [
         {
-          "code": "Distributed Task Object",
-          "justification": "Areas of interest carrying predetermined or newly-discovered targets are multiple separate, scattered, individually-static locations across the mission zone that the operator/vehicles must visit and act on.",
+          "code": "Known Fixed Task Object",
+          "justification": "Both predetermined-target (red) and not-yet-specified-target (gray) AOIs are displayed on the map from the outset of the mission, alongside vehicle and threat-area locations, so their locations are already known/visible rather than discovered via search or arising intermittently; this matches Known Fixed Task Object (3.5, added in codebook v0.9), the same code assigned to the closely analogous 'mission targets' in Cummings & Mitchell (2008).",
           "condition": "areas of interest / targets"
         },
         {

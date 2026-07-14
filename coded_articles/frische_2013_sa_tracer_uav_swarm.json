@@ -9,11 +9,11 @@
   "extraction_metadata": {
     "date_extracted": "2026-07-10",
     "codebook_versions": {
-      "study_type": "0.3",
+      "study_type": "0.4",
       "task_environment": "0.10"
     },
     "model": "claude-sonnet-5",
-    "notes": "Uses the same simulated three-UAV fire-fighting scenario (OFFIS, D3CoS project) later reused as the evaluation scenario in fortmann_2013_supervisory_guide_uav_swarm; this paper's formal situation model (Frische & Lüdtke, 2013) is explicitly cited as the theoretical foundation in that companion article. Re-coded computational_characteristics on 2026-07-13 per the new operator-directed-computation scope note (v0.10): SA-Tracer's own SA-inference mechanism is now coded Not Applicable rather than Unclear, per the user's decision not to add a dedicated code for this pattern."
+    "notes": "Uses the same simulated three-UAV fire-fighting scenario (OFFIS, D3CoS project) later reused as the evaluation scenario in fortmann_2013_supervisory_guide_uav_swarm; this paper's formal situation model (Frische & Lüdtke, 2013) is explicitly cited as the theoretical foundation in that companion article. Re-coded computational_characteristics on 2026-07-13 per the new operator-directed-computation scope note (v0.10): SA-Tracer's own SA-inference mechanism is now coded Not Applicable rather than Unclear, per the user's decision not to add a dedicated code for this pattern. Bumped study_type to v0.4 on 2026-07-14: the v0.4 change is scoped to a Modeling/Theoretical Paper (3.11) edge case that doesn't apply to this article's coding (no 3.11 code assigned); version stamp updated with no substantive change."
   },
   "study_type": {
     "primary": "User Study",

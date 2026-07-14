@@ -9,11 +9,11 @@
   "extraction_metadata": {
     "date_extracted": "2026-07-10",
     "codebook_versions": {
-      "study_type": "0.2",
-      "task_environment": "0.8"
+      "study_type": "0.4",
+      "task_environment": "0.10"
     },
     "model": "claude-sonnet-5",
-    "notes": "The collective's correlated-random-walk exploration and quorum-based consensus decision-making, with no central coordinator, is an unusually direct real-world match to the Task-Environment codebook's own generalized example under Distributed Coordination (Section 7.3): 'correlated-random-walk exploration in which a best-of-n outcome emerges from local information exchange with no leader robot.' Re-coded 2026-07-10 against Task-Environment v0.8: target identification/selection now maps onto the new Search Task (4.2) code, replacing the original Unclear / Candidate New Code flag."
+    "notes": "The collective's correlated-random-walk exploration and quorum-based consensus decision-making, with no central coordinator, is an unusually direct real-world match to the Task-Environment codebook's own generalized example under Distributed Coordination (Section 7.3): 'correlated-random-walk exploration in which a best-of-n outcome emerges from local information exchange with no leader robot.' Re-coded 2026-07-10 against Task-Environment v0.8: target identification/selection now maps onto the new Search Task (4.2) code, replacing the original Unclear / Candidate New Code flag. Bumped to v0.4/v0.10 on 2026-07-14: considered Move Task (v0.10) for 'moving the collective's hub' to a selected target, but the target's location is discovered via search rather than known from the outset, which Move Task's definition requires -- kept as part of Search Task per the original coding rather than force-fit. No other v0.9/v0.10 addition applies (no external object relocation, no operator-directed-computation pattern). study_type has no Secondary code, so its deltas don't apply. Version stamps updated with no other substantive change."
   },
   "study_type": {
     "primary": "User Study",
@@ -36,7 +36,7 @@
     "autonomous_capabilities": "By default the collectives operated at a high level of autonomy: individual simulated entities autonomously explored the urban area via correlated random walks, autonomously detected and evaluated targets within a short sensory range, autonomously recruited other entities to favor a discovered target through in-hub interactions, and autonomously committed to and executed a move to a target once a quorum (30% support) or majority (50% support) threshold was reached, including a built-in quorum-detection consensus mechanism and an environmental-bias correction (in the M2 model) so the collective did not default to the nearest rather than the highest-value target. The operator's investigate/abandon/decide commands only nudged this otherwise-autonomous consensus process rather than directly controlling any individual entity or the collective's motion itself."
   },
   "classification": {
-    "task_environment_v0.8": {
+    "task_environment_v0.10": {
       "task_object_spatiotemporal_dynamics": [
         {
           "code": "Distributed Task Object",

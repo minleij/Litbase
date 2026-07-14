@@ -9,11 +9,11 @@
   "extraction_metadata": {
     "date_extracted": "2026-07-10",
     "codebook_versions": {
-      "study_type": "0.2",
-      "task_environment": "0.8"
+      "study_type": "0.4",
+      "task_environment": "0.10"
     },
     "model": "claude-sonnet-5",
-    "notes": "This is the exact Jia et al. (2026) article the Study-Type codebook's own v0.2 Change Log cites as the motivating test case for the Setting sub-attribute's Simulated/Remote default rule (a 393-participant online/browser-based study with no VR headset) — that rule is applied directly here. Re-coded 2026-07-10 against Task-Environment v0.8: the search/comprehension relation now maps onto the new Search Task (4.2) code, replacing the original Unclear / Candidate New Code flag."
+    "notes": "This is the exact Jia et al. (2026) article the Study-Type codebook's own v0.2 Change Log cites as the motivating test case for the Setting sub-attribute's Simulated/Remote default rule (a 393-participant online/browser-based study with no VR headset) — that rule is applied directly here. Re-coded 2026-07-10 against Task-Environment v0.8: the search/comprehension relation now maps onto the new Search Task (4.2) code, replacing the original Unclear / Candidate New Code flag. Bumped to v0.4/v0.10 on 2026-07-14: no v0.9/v0.10 addition applies -- the 45 targets remain Distributed Task Object since they are not known to the operator until autonomously flagged during flight (not known from the outset), and no Transport/Delivery, Move Task, Confined/Enclosed domain, or operator-directed-computation pattern is described; study_type has no Secondary code and no WoZ modality flag, so its deltas don't apply either. Version stamps updated with no other substantive change."
   },
   "study_type": {
     "primary": "User Study",
@@ -36,7 +36,7 @@
     "autonomous_capabilities": "Each of the six UAVs autonomously flew a fixed, pre-scripted flight path across the forested area and autonomously detected/flagged salient objects of interest (a red bounding box overlay plus a corresponding map marker), without any operator control over flight path, obstacle avoidance, or target detection itself. All higher-order reasoning (object identity, risk assessment, projected behavior) was deliberately delegated entirely to the human (or, in the exploratory arm, to GPT-4o); the system provided zoomed video and spatial/temporal metadata but performed no interpretation of its own."
   },
   "classification": {
-    "task_environment_v0.8": {
+    "task_environment_v0.10": {
       "task_object_spatiotemporal_dynamics": [
         {
           "code": "Distributed Task Object",

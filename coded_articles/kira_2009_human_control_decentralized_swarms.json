@@ -9,10 +9,11 @@
   "extraction_metadata": {
     "date_extracted": "2026-07-10",
     "codebook_versions": {
-      "study_type": "0.3",
-      "task_environment": "0.8"
+      "study_type": "0.4",
+      "task_environment": "0.10"
     },
-    "model": "claude-sonnet-5"
+    "model": "claude-sonnet-5",
+    "notes": "Re-coded task_object_spatiotemporal_dynamics on 2026-07-14, bumping to v0.4/v0.10: added Known Fixed Task Object (3.5, v0.9) for the protected resource -- the article states 'the protected resource is in the middle of the open space' from the outset, previously omitted as a task-object entirely (only the moving attacker was coded, even though the Defend/Block Task behavioral-relation code already referenced 'a valuable resource'). No other v0.9/v0.10 addition applies (no object relocation, no simple known-location-arrival-only behavior beyond what Defend/Block/Pursuit/Engagement already cover, the open arena remains Land not Confined/Enclosed, and no operator-directed-computation pattern is described). study_type's 3.11 edge case doesn't apply (no Modeling/Theoretical Paper code)."
   },
   "study_type": {
     "primary": "Algorithm/Controller Evaluation (Simulation-Only)",
@@ -24,9 +25,10 @@
     "abstract_summary": "This paper introduces the problem of post-deployment, real-time human control over decentralized robot swarms controlled by physicomimetics (physics-inspired attractive/repulsive force laws between particle-like agents). It proposes two control mechanisms: a top-down approach that uses instance-based (nearest-neighbor) learning to map desired global swarm characteristics (e.g., swarm radius, maximum inter-agent distance) to the underlying force-law parameters that produce them, and a bottom-up approach that uses evolutionary learning to design 'virtual particles' — non-physical agents that influence real robots through the same force-law interactions — to perform higher-level swarm operations (SPLIT and FOLLOW) without altering the real agents' own parameters. Both mechanisms are demonstrated in a simulated defense scenario (a swarm of robots protecting a resource from an attacker) and validated primarily through simulation, with a smaller confirmatory test of the radius-control mechanism also run on physical Pioneer 3-AT ground robots, showing comparable accuracy (error consistently under half a meter) between simulation and hardware."
   },
   "classification": {
-    "task_environment_v0.8": {
+    "task_environment_v0.10": {
       "task_object_spatiotemporal_dynamics": [
-        { "code": "Moving Task Object", "justification": "The attacker approaches the protected resource and later retreats into a narrow corridor as it is pursued, requiring ongoing tracking rather than a one-off response.", "condition": null }
+        { "code": "Moving Task Object", "justification": "The attacker approaches the protected resource and later retreats into a narrow corridor as it is pursued, requiring ongoing tracking rather than a one-off response.", "condition": "attacker" },
+        { "code": "Known Fixed Task Object", "justification": "The protected resource is a single, fixed entity positioned in the middle of the open space from the outset of the scenario, known/visible to the defender swarm throughout rather than discovered via search, matching Known Fixed Task Object (3.5, added in codebook v0.9).", "condition": "protected resource" }
       ],
       "behavioral_relation_to_task_object": [
         { "code": "Defend/Block Task", "justification": "The defender swarm's baseline role is to position around and protect a valuable resource from the adversarial attacker, thwarting its approach — the same RoboFlag-style pattern that is this code's own source example.", "condition": null },

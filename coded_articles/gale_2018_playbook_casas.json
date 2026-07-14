@@ -9,11 +9,11 @@
   "extraction_metadata": {
     "date_extracted": "2026-07-10",
     "codebook_versions": {
-      "study_type": "0.2",
-      "task_environment": "0.8"
+      "study_type": "0.4",
+      "task_environment": "0.10"
     },
     "model": "claude-sonnet-5",
-    "notes": "Notable for the corpus: the temporary flight restriction (TFR) volumes here are explicitly tied to an expanding wildfire, giving a second real-world confirmation of Spreading Task Object beyond Wattearachchi et al. (2025) — though still fire-related, not yet the non-hazard analogue the Task-Environment codebook says is still unconfirmed. Re-coded 2026-07-10 against Task-Environment v0.8: survivor search now maps onto the new Search Task (4.2) code, replacing the original Unclear / Candidate New Code flag."
+    "notes": "Notable for the corpus: the temporary flight restriction (TFR) volumes here are explicitly tied to an expanding wildfire, giving a second real-world confirmation of Spreading Task Object beyond Wattearachchi et al. (2025) — though still fire-related, not yet the non-hazard analogue the Task-Environment codebook says is still unconfirmed. Re-coded 2026-07-10 against Task-Environment v0.8: survivor search now maps onto the new Search Task (4.2) code, replacing the original Unclear / Candidate New Code flag. Bumped to v0.4/v0.10 on 2026-07-14: considered Transport/Delivery Task (v0.9) against the article's own 'deliver a package' goal-type example (Section 1.2/2), but this is an illustrative UI-design example of the goal-oriented planning paradigm, not part of the actual tested 'search and recover' usability scenario, so it doesn't meet the evidence requirement for a code -- left uncoded rather than added. No other v0.9/v0.10 addition applies either. Version stamps updated with no other substantive change."
   },
   "study_type": {
     "primary": "User Study",
@@ -36,7 +36,7 @@
     "autonomous_capabilities": "An auto-resolver (AR) algorithm autonomously computes and proposes multiple alternate flight-path trajectories to resolve medium-term conflicts (e.g., responding to a temporary flight restriction), which the interface then presents to the user for selection. In the planned flight demonstration, the underlying system autonomously decomposes user-issued high-level mission goals into sub-goals/waypoints executed across the UAS swarm; swarm members could also potentially form ad hoc communication network arrays autonomously when equipped with appropriate sensors/antennas (an identified but not-yet-implemented use case). Separately, early physical flight tests with three UAS at NASA's UAS Autonomy Research Complex validated the underlying route-planning-through-Playbook pipeline outside the formal usability study."
   },
   "classification": {
-    "task_environment_v0.8": {
+    "task_environment_v0.10": {
       "task_object_spatiotemporal_dynamics": [
         {
           "code": "Distributed Task Object",

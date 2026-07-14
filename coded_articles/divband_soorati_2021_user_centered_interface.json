@@ -9,11 +9,11 @@
   "extraction_metadata": {
     "date_extracted": "2026-07-10",
     "codebook_versions": {
-      "study_type": "0.2",
-      "task_environment": "0.8"
+      "study_type": "0.4",
+      "task_environment": "0.10"
     },
     "model": "claude-sonnet-5",
-    "notes": "Contains two distinct human-subjects components (a 100-participant online visualization-preference study, and a 15-participant technology-probe interface evaluation) plus a separate simulation-only swarm model (Experiments I-III) with no live human in the loop; coded as genuinely mixed per the Study-Type codebook's Section 2 comparable-weight rule. Re-coded 2026-07-10 against Task-Environment v0.8: this article is the codebook's own cited source example for both the new Static/Fixed Task Object (3.4) and Search Task (4.2) codes, which replace the original two Unclear / Candidate New Code flags."
+    "notes": "Contains two distinct human-subjects components (a 100-participant online visualization-preference study, and a 15-participant technology-probe interface evaluation) plus a separate simulation-only swarm model (Experiments I-III) with no live human in the loop; coded as genuinely mixed per the Study-Type codebook's Section 2 comparable-weight rule. Re-coded 2026-07-10 against Task-Environment v0.8: this article is the codebook's own cited source example for both the new Static/Fixed Task Object (3.4) and Search Task (4.2) codes, which replace the original two Unclear / Candidate New Code flags. Bumped to v0.4/v0.10 on 2026-07-14: checked the Experiment III no-fly zones against the new Known Fixed Task Object (3.5) code specifically, since they are fixed-location and simultaneous like its examples, but the article's text describes them as 'imposed restrictions by the operator' introduced mid-simulation via command rather than a pre-existing object whose location is already known/visible to the operator from the outset -- kept as Distributed Task Object per the original (unflagged, confident) judgment call rather than re-deriving it on a weaker basis. No other v0.9/v0.10 addition (Transport/Delivery, Move Task, Confined/Enclosed domain, operator-directed-computation) applies; study_type's 3.11 and WoZ-broadening deltas also don't apply (no 3.11 code, no WoZ modality flag). Version stamps updated with no other substantive change."
   },
   "study_type": {
     "primary": "User Study",
@@ -36,7 +36,7 @@
     "autonomous_capabilities": "Each UAV autonomously builds and shares local belief and confidence heat maps via one-to-one neighbor communication (no full network connectivity required), decides its own motion by descending the gradient of a Sobel-filtered confidence potential field (attracted to low-confidence/unexplored cells, repelled from boundaries and neighbors' recently-visited high-confidence cells for implicit collision avoidance and spatial division of labor), and absorbs a temporarily-injected operator command that diffuses through the swarm via the same reliability-weighted neighbor-averaging mechanism used for ordinary belief updates, with a locking mechanism that temporarily preserves the operator's influence against being averaged away. The swarm can run with full autonomy or under partial operator influence, self-organizing to redistribute individual target points without the operator specifying which UAV performs which sub-task."
   },
   "classification": {
-    "task_environment_v0.8": {
+    "task_environment_v0.10": {
       "task_object_spatiotemporal_dynamics": [
         {
           "code": "Moving Task Object",

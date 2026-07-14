@@ -9,11 +9,11 @@
   "extraction_metadata": {
     "date_extracted": "2026-07-10",
     "codebook_versions": {
-      "study_type": "0.3",
+      "study_type": "0.4",
       "task_environment": "0.10"
     },
     "model": "claude-sonnet-5",
-    "notes": "Re-coded task_object_spatiotemporal_dynamics on 2026-07-13 using the newly-added Known Fixed Task Object code (v0.9), which this article's own flag had proposed. Re-coded behavioral_relation_to_task_object and operational_domain again on 2026-07-13: the navigate-to-known-target portion now uses the newly-added Move Task code (v0.10) and the confined-environment portion now uses the newly-added Confined/Enclosed Structure code (v0.10), both proposed by this article's own flags. The formation/cohesion-maintenance portion of the behavioral_relation_to_task_object flag is not resolved by either new code and remains open as its own flag entry below."
+    "notes": "Re-coded task_object_spatiotemporal_dynamics on 2026-07-13 using the newly-added Known Fixed Task Object code (v0.9), which this article's own flag had proposed. Re-coded behavioral_relation_to_task_object and operational_domain again on 2026-07-13: the navigate-to-known-target portion now uses the newly-added Move Task code (v0.10) and the confined-environment portion now uses the newly-added Confined/Enclosed Structure code (v0.10), both proposed by this article's own flags. The formation/cohesion-maintenance portion of the behavioral_relation_to_task_object flag is not resolved by either new code and remains open as its own flag entry below. Bumped study_type to v0.4 on 2026-07-14: the v0.4 change is scoped to a Modeling/Theoretical Paper (3.11) edge case that doesn't apply to this article's coding (no 3.11 code assigned); version stamp updated with no substantive change."
   },
   "study_type": {
     "primary": "User Study",

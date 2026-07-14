@@ -9,11 +9,11 @@
   "extraction_metadata": {
     "date_extracted": "2026-07-10",
     "codebook_versions": {
-      "study_type": "0.2",
-      "task_environment": "0.8"
+      "study_type": "0.4",
+      "task_environment": "0.10"
     },
     "model": "claude-sonnet-5",
-    "notes": "This article's three mission task types (marking civilians, tracking military targets, prosecuting HVTs) cleanly correspond to three distinct behavioral-relation gaps flagged this session (Search, Pursuit, and Engagement Task respectively) — a useful single-article confirmation of all three proposed codes at once. Re-coded 2026-07-10 against Task-Environment v0.8: all three now map onto the newly-defined Search Task (4.2), Pursuit Task (4.4), and Engagement Task (4.3) codes, replacing the original Unclear / Candidate New Code flags."
+    "notes": "This article's three mission task types (marking civilians, tracking military targets, prosecuting HVTs) cleanly correspond to three distinct behavioral-relation gaps flagged this session (Search, Pursuit, and Engagement Task respectively) — a useful single-article confirmation of all three proposed codes at once. Re-coded 2026-07-10 against Task-Environment v0.8: all three now map onto the newly-defined Search Task (4.2), Pursuit Task (4.4), and Engagement Task (4.3) codes, replacing the original Unclear / Candidate New Code flags. Bumped to v0.4/v0.10 on 2026-07-14: no v0.9/v0.10 addition applies -- the Areas of Operation themselves aren't task-objects (the vehicles within them are, already correctly Distributed+Moving), and no Transport/Delivery, Move Task, Confined/Enclosed domain, or operator-directed-computation pattern is described; study_type has no Secondary code so its deltas don't apply either. Version stamps updated with no other substantive change."
   },
   "study_type": {
     "primary": "User Study",
@@ -36,7 +36,7 @@
     "autonomous_capabilities": "Playbook automation could autonomously fly and sensor-point one or more UAVs to accomplish a delegated task: a Surveillance play autonomously loitered and pre-pointed assigned UAVs' sensors at points of interest; a Route Recon play dynamically generated a flight path around a designated route and autonomously slewed the assigned UAVs' sensors along it; and a Prosecute Target play autonomously locked assigned UAVs' sensors onto a selected target and staged the laser/weapon in standby, leaving only final engagement (lase, then fire) to the operator. Independently of Playbook, an autotrack function could autonomously keep a UAV's sensor centered on a moving target until the target stopped, at which point it automatically disengaged, and a Coupling tool could autonomously slave one or more UAVs' cameras to follow another UAV's camera movements."
   },
   "classification": {
-    "task_environment_v0.8": {
+    "task_environment_v0.10": {
       "task_object_spatiotemporal_dynamics": [
         {
           "code": "Distributed Task Object",

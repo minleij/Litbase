@@ -9,11 +9,11 @@
   "extraction_metadata": {
     "date_extracted": "2026-07-10",
     "codebook_versions": {
-      "study_type": "0.2",
-      "task_environment": "0.8"
+      "study_type": "0.4",
+      "task_environment": "0.10"
     },
     "model": "claude-sonnet-5",
-    "notes": "This is the article the Task-Environment codebook's own Section 9.5 Scope note cites as a motivating test case (a weapons-engagement authorization treated as a Goal-Oriented LHCA input) — that precedent is applied directly here. Re-coded 2026-07-10 against Task-Environment v0.8: the search relation (area/route recon) and engagement relation (weapons engagement) now map onto the new Search Task (4.2) and Engagement Task (4.3) codes, replacing the original Unclear / Candidate New Code flag."
+    "notes": "This is the article the Task-Environment codebook's own Section 9.5 Scope note cites as a motivating test case (a weapons-engagement authorization treated as a Goal-Oriented LHCA input) — that precedent is applied directly here. Re-coded 2026-07-10 against Task-Environment v0.8: the search relation (area/route recon) and engagement relation (weapons engagement) now map onto the new Search Task (4.2) and Engagement Task (4.3) codes, replacing the original Unclear / Candidate New Code flag. Re-coded task_object_spatiotemporal_dynamics and behavioral_relation_to_task_object for point recon on 2026-07-14, bumping to v0.4/v0.10: point recon's task-object was previously coded Not Applicable ('pre-designated, already-known POI locations... don't conceptually apply') specifically because it didn't fit any pre-v0.9 code -- this is exactly the gap Known Fixed Task Object (3.5, v0.9) fills (the article states 'DelCon allowed the AMC to specify one or more Point of Interest (POI) locations on the digital map,' an operator-defined, known-from-that-point-on location requiring no further search), so it is recoded to Known Fixed Task Object rather than left Not Applicable. Added a corresponding Move Task (4.8, v0.10) behavioral-relation code for point recon, previously uncoded entirely -- the UAS travels to and orbits/views the known POI with no negative consequence for contact and no further decisive action beyond arrival+viewing. target-engagement's Not Applicable coding is left unchanged: unlike point recon, the article doesn't clearly establish that mission's target location is known from the outset rather than identified via a preceding, uncoded search phase, so recoding it would be a weaker-evidence inference than the point-recon case. No other v0.9/v0.10 addition applies."
   },
   "study_type": {
     "primary": "User Study",
@@ -36,7 +36,7 @@
     "autonomous_capabilities": "DelCon autonomously generated and executed multi-UAS flight routes and sensor pointing for four mission 'plays,' automatically dividing and (re)assigning points/sub-regions/route segments across UAS assets as they were added or removed mid-mission, and computed optimal weapons-engagement geometry (firing and laser-designating positions) within range, no-fly-zone, and angular safety constraints without the AMC needing to calculate them manually. A simulated Aided Target Recognition (ATR) capability automatically detected, locked onto, and alerted the AMC to targets meeting visibility/angle thresholds; final engagement authorization (arm/fire) always required a manual AMC action."
   },
   "classification": {
-    "task_environment_v0.8": {
+    "task_environment_v0.10": {
       "task_object_spatiotemporal_dynamics": [
         {
           "code": "Distributed Task Object",
@@ -44,9 +44,14 @@
           "condition": "area recon and route recon missions"
         },
         {
+          "code": "Known Fixed Task Object",
+          "justification": "The AMC specifies one or more Point of Interest locations directly on the digital map before DelCon plans a viewing path -- an operator-defined, known-from-that-point-on location requiring no further search by the UAS, matching Known Fixed Task Object (3.5, added in codebook v0.9).",
+          "condition": "point recon mission"
+        },
+        {
           "code": "Not Applicable",
-          "justification": "Point recon involves viewing pre-designated, already-known POI locations rather than detecting or tracking a newly-emerging scattered/moving/spreading entity, so this dimension's spatial-temporal dynamics do not conceptually apply; similarly, the target-engagement mission concerns a target already identified prior to the engagement task itself, not one whose spatial-temporal dynamics are being coded.",
-          "condition": "point recon and target-engagement missions"
+          "justification": "The target-engagement mission concerns a target already identified prior to the engagement task itself, not one whose spatial-temporal dynamics are being coded here.",
+          "condition": "target-engagement mission"
         }
       ],
       "behavioral_relation_to_task_object": [
@@ -54,6 +59,11 @@
           "code": "Search Task",
           "justification": "Area and route recon require locating unknown targets before any further action — matching Section 4.2 (Search Task), added in Task-Environment codebook v0.8.",
           "condition": "area recon and route recon missions"
+        },
+        {
+          "code": "Move Task",
+          "justification": "Point recon requires the UAS to travel to and orbit/view an already-known POI location, with no negative consequence for contact and no further decisive action beyond arrival and viewing, matching Move Task (4.8, added in codebook v0.10).",
+          "condition": "point recon mission"
         },
         {
           "code": "Engagement Task",
@@ -175,9 +185,9 @@
   },
   "flags": [
     {
-      "dimension": "task_object_spatiotemporal_dynamics",
+      "dimension": "task_environment_v0.10 / task_object_spatiotemporal_dynamics",
       "type": "Not Applicable",
-      "note": "Point recon (viewing pre-designated known POIs) and the target-engagement mission (acting on an already-identified target) don't involve detecting/tracking a newly-emerging object, so this dimension doesn't conceptually apply to those two mission types, unlike area/route recon in the same article.",
+      "note": "The target-engagement mission (acting on an already-identified target) doesn't involve detecting/tracking a newly-emerging object, so this dimension doesn't conceptually apply to that mission type. (Point recon, previously grouped with this flag, is resolved as of 2026-07-14 -- see Known Fixed Task Object above.)",
       "proposed_code": null
     }
   ]

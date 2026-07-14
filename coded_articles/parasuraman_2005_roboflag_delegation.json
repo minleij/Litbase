@@ -10,10 +10,10 @@
     "date_extracted": "2026-07-10",
     "codebook_versions": {
       "study_type": "0.4",
-      "task_environment": "0.8"
+      "task_environment": "0.10"
     },
     "model": "claude-sonnet-5",
-    "notes": "Contains three separate human-subjects experiments plus a non-human computational (task-network/Monte Carlo) workload model in Section V. Re-coded 2026-07-10 against Task-Environment v0.8: this article is the codebook's own cited source example for the new Defend/Block Task (4.5) code; flag capture now maps onto Engagement Task (4.3). Both replace the original Unclear / Candidate New Code flags. Re-coded study_type Secondary again on 2026-07-13 per the new Section 3.11 edge-case note (Study-Type codebook v0.4): the Section V workload model is confirmed as Modeling/Theoretical Paper (Secondary), accepted as an edge case per the user's decision, resolving the prior Unclear / Candidate New Code flag."
+    "notes": "Contains three separate human-subjects experiments plus a non-human computational (task-network/Monte Carlo) workload model in Section V. Re-coded 2026-07-10 against Task-Environment v0.8: this article is the codebook's own cited source example for the new Defend/Block Task (4.5) code; flag capture now maps onto Engagement Task (4.3). Both replace the original Unclear / Candidate New Code flags. Re-coded study_type Secondary again on 2026-07-13 per the new Section 3.11 edge-case note (Study-Type codebook v0.4): the Section V workload model is confirmed as Modeling/Theoretical Paper (Secondary), accepted as an edge case per the user's decision, resolving the prior Unclear / Candidate New Code flag. Re-coded task_object_spatiotemporal_dynamics and behavioral_relation_to_task_object on 2026-07-14, bumping task_environment to v0.10: the article's own text places both flags at fixed, known locations ('located at the center of a circular area') visible from mission start, previously omitted as a task-object entirely (only the moving opposing robots were coded) -- added Known Fixed Task Object (3.5, v0.9) for the flags. Also added Transport/Delivery Task (4.7, v0.9) for the offensive mission's second phase: after capturing the opponent's flag (Engagement Task), robots must physically carry it back across the midline to home territory ('capture ... and return home' / 'captured the opponent's flag but was unable to cross the [midline]'), a distinct object-relocation requirement the original coding pass had folded entirely into Engagement Task."
   },
   "study_type": {
     "primary": "User Study",
@@ -36,12 +36,17 @@
     "autonomous_capabilities": "Automated 'plays' used a Hierarchical Task Network planning system to autonomously translate a delegated high-level goal into coordinated multi-robot behavior: Circle Offense autonomously routed a user-selected number of robots into enemy territory and positioned them around the opponent's flag to attempt capture; Circle Defense autonomously circled designated robots around the home flag to block enemy access; Patrol Border autonomously distributed robots along the midfield boundary; and (Experiment 3) 'superplays' autonomously allocated multiple robots across a mix of these plays to achieve an overall offensive, defensive, or mixed team posture from a single high-level command. A related developmental Playbook implementation (mentioned but not itself tested here) could autonomously plan and fly a 'Watch Area' surveillance play for real simulated UAVs from as few as three operator inputs, adapting its plan in flight in response to disturbances like headwinds or malfunctions."
   },
   "classification": {
-    "task_environment_v0.8": {
+    "task_environment_v0.10": {
       "task_object_spatiotemporal_dynamics": [
         {
           "code": "Moving Task Object",
           "justification": "The opposing (red) team's robots actively and continuously reposition according to their scripted tactical posture (offense/defense/patrol), requiring the operator to continuously track and respond to their current locations rather than address them once.",
-          "condition": null
+          "condition": "opposing robots"
+        },
+        {
+          "code": "Known Fixed Task Object",
+          "justification": "Both the opponent's flag and the team's own flag are located at the center of a fixed circular area, visible/known from the outset of the mission with no search required to locate either, matching Known Fixed Task Object (3.5, added in codebook v0.9).",
+          "condition": "opponent's flag and home flag"
         }
       ],
       "behavioral_relation_to_task_object": [
@@ -49,6 +54,11 @@
           "code": "Engagement Task",
           "justification": "Capturing the opponent's flag is a goal-directed acquisition relation (contact with the object is the objective) — matching Section 4.3 (Engagement Task), added in v0.8.",
           "condition": "offensive/flag-capture behavior"
+        },
+        {
+          "code": "Transport/Delivery Task",
+          "justification": "Once captured, the opponent's flag must be physically carried by the robot back across the midline into home territory to complete the mission ('return home ... with minimum time delay'; a participant could capture the flag but 'be unable to cross the [midline]'), which is a distinct object-relocation requirement matching Transport/Delivery Task (4.7, added in codebook v0.9) rather than being folded into the preceding Engagement Task.",
+          "condition": "offensive/flag-return behavior, after capture"
         },
         {
           "code": "Defend/Block Task",

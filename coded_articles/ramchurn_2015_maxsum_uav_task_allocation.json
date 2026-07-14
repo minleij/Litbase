@@ -9,11 +9,11 @@
   "extraction_metadata": {
     "date_extracted": "2026-07-10",
     "codebook_versions": {
-      "study_type": "0.2",
-      "task_environment": "0.8"
+      "study_type": "0.4",
+      "task_environment": "0.10"
     },
     "model": "claude-sonnet-5",
-    "notes": "This is the exact article the Task-Environment codebook's own Section 8.6 (Task-Allocation Placeholder) cites as its source example ('A max-sum decentralized coordination algorithm computes task allocations across a UAV team to minimize completion time, Ramchurn et al., 2015') — that code is applied directly here with high confidence. Re-coded 2026-07-10 against Task-Environment v0.8: target search/identification now maps onto the new Search Task (4.2) code, replacing the original Unclear / Candidate New Code flag."
+    "notes": "This is the exact article the Task-Environment codebook's own Section 8.6 (Task-Allocation Placeholder) cites as its source example ('A max-sum decentralized coordination algorithm computes task allocations across a UAV team to minimize completion time, Ramchurn et al., 2015') — that code is applied directly here with high confidence. Re-coded 2026-07-10 against Task-Environment v0.8: target search/identification now maps onto the new Search Task (4.2) code, replacing the original Unclear / Candidate New Code flag. Bumped to v0.4/v0.10 on 2026-07-14: no v0.9/v0.10 addition applies -- the 20 targets remain Distributed (explicitly hidden, not known to the operator), operator-set waypoints remain subsumed under the overall Search mission rather than a distinct Move Task, and the max-sum Task-Allocation Placeholder coding is correctly robot-directed (not operator-directed), unaffected by the v0.10 scope note. study_type's 3.11 and WoZ deltas also don't apply. Version stamps updated with no other substantive change."
   },
   "study_type": {
     "primary": "User Study",
@@ -36,7 +36,7 @@
     "autonomous_capabilities": "In Mixed-Initiative mode, a decentralized max-sum coordination algorithm autonomously computed and continuously (re-)optimized task allocations across the UAV team to minimize completion time, exchanging messages between UAV 'agent' nodes and task nodes in a factor-graph representation, automatically re-allocating tasks among remaining UAVs whenever a task was completed or a UAV dropped out, and incorporating human-specified constraints (a manually fixed agent-task pairing) by recomputing the best remaining allocation for the other UAVs around that constraint. Depending on the assigned autonomy level, UAVs could also autonomously navigate a specified region via sweep search, or follow operator-specified waypoints with obstacle avoidance and altitude/speed adjustment, without continuous operator piloting."
   },
   "classification": {
-    "task_environment_v0.8": {
+    "task_environment_v0.10": {
       "task_object_spatiotemporal_dynamics": [
         {
           "code": "Distributed Task Object",

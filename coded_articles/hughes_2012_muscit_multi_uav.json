@@ -9,11 +9,11 @@
   "extraction_metadata": {
     "date_extracted": "2026-07-10",
     "codebook_versions": {
-      "study_type": "0.2",
-      "task_environment": "0.8"
+      "study_type": "0.4",
+      "task_environment": "0.10"
     },
     "model": "claude-sonnet-5",
-    "notes": "AFRL Spiral 3 report combining a lab simulation study (8 participants, formal 2x2 design) and a real-hardware flight test (6 participants, 2 real UAVs, descriptive statistics only) — both settings (Lab and Field) are coded, following the same dual-setting approach used for Williamson et al. (2023)'s FX4/FX6 field experiments earlier this session. Re-coded 2026-07-10 against Task-Environment v0.8: this article is the codebook's own cited source example for the new Pursuit Task (4.4) code (HVT/squirter tracking); the overwatch/distractor/IED search behaviors now map onto Search Task (4.2). Both replace the original Unclear / Candidate New Code flags."
+    "notes": "AFRL Spiral 3 report combining a lab simulation study (8 participants, formal 2x2 design) and a real-hardware flight test (6 participants, 2 real UAVs, descriptive statistics only) — both settings (Lab and Field) are coded, following the same dual-setting approach used for Williamson et al. (2023)'s FX4/FX6 field experiments earlier this session. Re-coded 2026-07-10 against Task-Environment v0.8: this article is the codebook's own cited source example for the new Pursuit Task (4.4) code (HVT/squirter tracking); the overwatch/distractor/IED search behaviors now map onto Search Task (4.2). Both replace the original Unclear / Candidate New Code flags. Re-coded task_object_spatiotemporal_dynamics on 2026-07-14, bumping to v0.4/v0.10: added Known Fixed Task Object (3.5, v0.9) for the HVT compounds themselves (Objectives Steelers/Cowboys/Giants) -- the article's mission brief states vehicles begin 'positioned in a loiter over Objective Steelers ... and Objective Cowboys' from the start of each trial per pre-briefed objectives, previously omitted as a task-object entirely (only the moving HVTs/squirters and the scattered activity events were coded). behavioral_relation_to_task_object's Search Task assignment for overwatch is unchanged, since what's actually unknown is the personnel/activity at the known compound, not the compound's location. No other v0.9/v0.10 addition applies."
   },
   "study_type": {
     "primary": "User Study",
@@ -36,12 +36,17 @@
     "autonomous_capabilities": "UAVs could be placed in autonomous loiter mode and, in 'Sensor Slaved' mode, autonomously adjusted their own loiter position to keep the vehicle positioned for optimal sensor coverage as the operator redirected the sensor, without requiring the operator to separately fly the vehicle. A pixel-processing automatic target tracker could autonomously steer the sensor to keep a designated moving target within the field of view once engaged, alerting the operator only when tracking quality degraded. Terrain clearance and mid-air deconfliction between MUSCIT vehicles were handled through fixed altitude separation rather than an onboard sense-and-avoid capability, and vehicles were constrained to a pre-defined 'Keep In Box' airspace boundary that had to be established before Sensor Slaved mode could be activated."
   },
   "classification": {
-    "task_environment_v0.8": {
+    "task_environment_v0.10": {
       "task_object_spatiotemporal_dynamics": [
         {
           "code": "Moving Task Object",
           "justification": "HVTs travel continuously by motorcycle/bicycle between compounds, and fleeing 'squirters' move away from the assault compound, both requiring continuous re-acquisition and tracking rather than a one-off detection.",
           "condition": "HVT and squirter tracking"
+        },
+        {
+          "code": "Known Fixed Task Object",
+          "justification": "Each trial begins with vehicles pre-positioned in a loiter over named, pre-briefed Objectives (Steelers, Cowboys, Giants) per the mission brief, so these compound locations are known/visible to the operator from the outset with no search required to locate them, matching Known Fixed Task Object (3.5, added in codebook v0.9).",
+          "condition": "HVT compounds (Objectives Steelers/Cowboys/Giants)"
         },
         {
           "code": "Distributed Task Object",

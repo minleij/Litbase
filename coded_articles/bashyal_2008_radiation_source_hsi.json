@@ -9,11 +9,11 @@
   "extraction_metadata": {
     "date_extracted": "2026-07-10",
     "codebook_versions": {
-      "study_type": "0.3",
+      "study_type": "0.4",
       "task_environment": "0.10"
     },
     "model": "claude-sonnet-5",
-    "notes": "Re-coded task_object_spatiotemporal_dynamics for Experiment A on 2026-07-13 using the newly-added Known Fixed Task Object code (v0.9), which this article's own flag had proposed. Re-coded behavioral_relation_to_task_object for Experiment A again on 2026-07-13 using the newly-added Move Task code (v0.10, added at the user's direction under this name rather than the originally-proposed 'Navigate-to-Known-Target Task'), which this article's own flag had proposed."
+    "notes": "Re-coded task_object_spatiotemporal_dynamics for Experiment A on 2026-07-13 using the newly-added Known Fixed Task Object code (v0.9), which this article's own flag had proposed. Re-coded behavioral_relation_to_task_object for Experiment A again on 2026-07-13 using the newly-added Move Task code (v0.10, added at the user's direction under this name rather than the originally-proposed 'Navigate-to-Known-Target Task'), which this article's own flag had proposed. Bumped study_type to v0.4 on 2026-07-14: the v0.4 change is scoped to a Modeling/Theoretical Paper (3.11) edge case that doesn't apply to this article's coding (no 3.11 code assigned); version stamp updated with no substantive change."
   },
   "study_type": {
     "primary": "User Study",

@@ -9,11 +9,11 @@
   "extraction_metadata": {
     "date_extracted": "2026-07-10",
     "codebook_versions": {
-      "study_type": "0.2",
-      "task_environment": "0.8"
+      "study_type": "0.4",
+      "task_environment": "0.10"
     },
     "model": "claude-sonnet-5",
-    "notes": "First article this session with a genuinely Proximate human-human communication channel (two co-located operators at a shared MultiTouch wall), distinct from the operator-to-drone channel, which remains Remote. Re-coded 2026-07-10 against Task-Environment v0.8: this article is the codebook's own cited source example for the new Monitoring/Maintenance Task (4.6) code; per that code's scope note, Section 3 is now coded Not Applicable for the battery event rather than forced into Static/Fixed Task Object, since it concerns the system's own internal status, not an external task-object."
+    "notes": "First article this session with a genuinely Proximate human-human communication channel (two co-located operators at a shared MultiTouch wall), distinct from the operator-to-drone channel, which remains Remote. Re-coded 2026-07-10 against Task-Environment v0.8: this article is the codebook's own cited source example for the new Monitoring/Maintenance Task (4.6) code; per that code's scope note, Section 3 is now coded Not Applicable for the battery event rather than forced into Static/Fixed Task Object, since it concerns the system's own internal status, not an external task-object. Bumped to v0.4/v0.10 on 2026-07-14: no v0.9/v0.10 addition applies -- the general surveillance targets remain Not Described (the article still doesn't say whether they're pre-known or discovered, an information gap not a category mismatch), and no Transport/Delivery, Move Task, Confined/Enclosed domain, or operator-directed-computation pattern is described; study_type's deltas (WoZ broadening, 3.11 edge case) also don't apply. Version stamps updated with no other substantive change."
   },
   "study_type": {
     "primary": "User Study",
@@ -36,7 +36,7 @@
     "autonomous_capabilities": "Each drone autonomously proceeds toward its algorithm-assigned next target and automatically returns to and lands at the take-off point without operator intervention once its battery reaches the critical 10% threshold (with only an informational notification at 30%); the operator otherwise retains decision authority over when to recall a drone early, sharing responsibility for drone status/landing decisions with the system under an established liability-allocation scheme, except at the minimum battery threshold where the system takes automatic control."
   },
   "classification": {
-    "task_environment_v0.8": {
+    "task_environment_v0.10": {
       "task_object_spatiotemporal_dynamics": [
         {
           "code": "Not Described",

@@ -9,11 +9,11 @@
   "extraction_metadata": {
     "date_extracted": "2026-07-10",
     "codebook_versions": {
-      "study_type": "0.2",
-      "task_environment": "0.8"
+      "study_type": "0.4",
+      "task_environment": "0.10"
     },
     "model": "claude-sonnet-5",
-    "notes": "Technical report covering a multi-year, multi-phase project; although the vehicles studied are Unmanned Surface Vehicles (USVs) rather than aerial drones, the MOCU control-station architecture is explicitly reused across air/land/sea/undersea unmanned systems, and the human-supervisory-control/SA/workload findings are directly relevant to this project's HSI/HRI scope. Only the actual tested configuration (USVs, one or two at a time) is coded below, not MOCU's broader multi-domain capability. Re-coded 2026-07-10 against Task-Environment v0.8: contact reporting now maps onto the new Search Task (4.2) code, replacing the original Unclear / Candidate New Code flag."
+    "notes": "Technical report covering a multi-year, multi-phase project; although the vehicles studied are Unmanned Surface Vehicles (USVs) rather than aerial drones, the MOCU control-station architecture is explicitly reused across air/land/sea/undersea unmanned systems, and the human-supervisory-control/SA/workload findings are directly relevant to this project's HSI/HRI scope. Only the actual tested configuration (USVs, one or two at a time) is coded below, not MOCU's broader multi-domain capability. Re-coded 2026-07-10 against Task-Environment v0.8: contact reporting now maps onto the new Search Task (4.2) code, replacing the original Unclear / Candidate New Code flag. Re-coded task_object_spatiotemporal_dynamics and behavioral_relation_to_task_object on 2026-07-14, bumping to v0.4/v0.10: added Known Fixed Task Object (3.5, v0.9) and Move Task (4.8, v0.10) for the pre-planned transit route -- the article states the scenario required responding to 'waypoint achievement' among 'a series of predetermined conditions' as USVs transit 'from the LCS host ship to the mission area' along pre-planned routes ('the USV route has been [pre-planned]'), a known-destination, arrival-completes-the-event pattern previously uncoded (only the contacts/obstacles were coded as task-objects). No other v0.9/v0.10 addition applies (no object relocation, maritime remains Maritime not Confined/Enclosed, and computational_characteristics has no named algorithm to reconsider). study_type's 3.11 edge case doesn't apply (no Modeling/Theoretical Paper code)."
   },
   "study_type": {
     "primary": "User Study",
@@ -36,7 +36,7 @@
     "autonomous_capabilities": "USVs could operate in manual, vector, or autonomous route-following control modes, following pre-planned waypoint routes without continuous operator steering once a route was set. The MOCU architecture itself is a modular, service-oriented, plug-in-based command-and-control platform capable of interfacing simultaneously with heterogeneous unmanned vehicles across air, land, sea, and undersea domains (already reused across other DoD programs), with mission-relevant status/alarm/route information automatically surfaced via integrated visual and synthetic-speech audio cues rather than requiring manual monitoring of raw sensor streams. USVs in this study's tested configuration carried no obstacle-avoidance hardware/software of their own — collision avoidance depended entirely on the human operator."
   },
   "classification": {
-    "task_environment_v0.8": {
+    "task_environment_v0.10": {
       "task_object_spatiotemporal_dynamics": [
         {
           "code": "Distributed Task Object",
@@ -47,6 +47,11 @@
           "code": "Moving Task Object",
           "justification": "Other vessels and small craft in the vicinity are themselves in transit/motion, requiring continuous tracking to avoid a collision rather than a one-off detection.",
           "condition": null
+        },
+        {
+          "code": "Known Fixed Task Object",
+          "justification": "The transit route/waypoints from the LCS host ship to the mission area are pre-planned and known before the scenario begins ('the USV route has been [pre-planned]'), matching Known Fixed Task Object (3.5, added in codebook v0.9).",
+          "condition": "pre-planned transit route/waypoints"
         }
       ],
       "behavioral_relation_to_task_object": [
@@ -59,6 +64,11 @@
           "code": "Search Task",
           "justification": "Contact Reporting requires detecting and reporting sighted contacts, a search/detection relation rather than avoidance — matching Section 4.2 (Search Task), added in v0.8.",
           "condition": "contact reporting"
+        },
+        {
+          "code": "Move Task",
+          "justification": "Waypoint achievement during transit to the known mission area is a travel-to-known-location event with arrival itself completing that scripted event, no negative consequence for contact, and no further decisive action required, matching Move Task (4.8, added in codebook v0.10).",
+          "condition": "waypoint achievement / transit to mission area"
         }
       ],
       "team_size": [

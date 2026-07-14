@@ -9,10 +9,11 @@
   "extraction_metadata": {
     "date_extracted": "2026-07-10",
     "codebook_versions": {
-      "study_type": "0.3",
-      "task_environment": "0.8"
+      "study_type": "0.4",
+      "task_environment": "0.10"
     },
-    "model": "claude-sonnet-5"
+    "model": "claude-sonnet-5",
+    "notes": "Bumped study_type to v0.4 and task_environment to v0.10 on 2026-07-14: the v0.4 study_type edge case (3.11) doesn't apply (no Modeling/Theoretical Paper code assigned), and none of v0.9/v0.10's task_environment additions (Known Fixed Task Object, Transport/Delivery Task, Move Task, Confined/Enclosed Structure domain, operator-directed-computation Not Applicable) apply to this article's described scenario -- the only task-object described (the Section 2 intrusion scenario) remains Moving/Search/Pursuit as before, and no known-location object, object relocation, confined structure, or operator-attention algorithm is described anywhere in the text. Version stamps updated with no substantive change."
   },
   "study_type": {
     "primary": "System/Architecture Paper",
@@ -24,7 +25,7 @@
     "abstract_summary": "This paper presents a hardware and software platform for building swarms of micro UAVs (quadrocopters), consisting of AirRobot quadrocopters enhanced with an onboard smart-camera processing/communication payload, a generic modular ground control station (AMFIS) for multi-sensor integration and operator control, a four-channel (broadcast/control/data/co-op) wireless communication infrastructure designed for scalable, low-interference swarm networking, and a multi-agent software architecture (Teamleader, Copter, and Sensor agent classes) for implementing team-collaboration strategies. The enhanced UAVs can currently perform basic autonomous maneuvers (take-off, fly-to-position, landing) with manual override always available as a safety fallback, and cooperation strategies are being developed and tested in a game-engine-based simulation environment that shares the same control-command interface as the real hardware, with transfer to validated real-world operation still pending."
   },
   "classification": {
-    "task_environment_v0.8": {
+    "task_environment_v0.10": {
       "task_object_spatiotemporal_dynamics": [
         { "code": "Moving Task Object", "justification": "The paper's own motivating application scenario describes intruders entering a monitored site who move and split up, requiring the swarm to form subgroups and track each individually — a translating, continuously-relocating task-relevant entity, though this is a described application scenario rather than a reported executed run.", "condition": "described perimeter-security application scenario (Section 2), not an executed/reported experiment" }
       ],
@@ -68,8 +69,8 @@
     }
   },
   "flags": [
-    { "dimension": "task_environment_v0.8 / task_object_spatiotemporal_dynamics and behavioral_relation_to_task_object", "type": "Not Described", "note": "These codes are drawn from the paper's Section 2 application scenarios (a bulleted, narratively-described perimeter-intrusion use case) rather than from a reported, executed experiment — the paper's own simulated 'intrusion' scenario (Fig. 7) is mentioned but no details of its object dynamics or outcome are given." },
-    { "dimension": "task_environment_v0.8 / computational_characteristics", "type": "Not Described", "note": "No specific path-planning/motion-control algorithm is named for how an individual UAV computes its own flight path beyond 'autonomous navigation' and GPS-waypoint flight." },
-    { "dimension": "task_environment_v0.8 / level_of_human_control_abstraction", "type": "Not Described", "note": "The granularity of the manual-override control mode (direct stick control vs. augmented/stabilized control) is not specified." }
+    { "dimension": "task_environment_v0.10 / task_object_spatiotemporal_dynamics and behavioral_relation_to_task_object", "type": "Not Described", "note": "These codes are drawn from the paper's Section 2 application scenarios (a bulleted, narratively-described perimeter-intrusion use case) rather than from a reported, executed experiment — the paper's own simulated 'intrusion' scenario (Fig. 7) is mentioned but no details of its object dynamics or outcome are given." },
+    { "dimension": "task_environment_v0.10 / computational_characteristics", "type": "Not Described", "note": "No specific path-planning/motion-control algorithm is named for how an individual UAV computes its own flight path beyond 'autonomous navigation' and GPS-waypoint flight." },
+    { "dimension": "task_environment_v0.10 / level_of_human_control_abstraction", "type": "Not Described", "note": "The granularity of the manual-override control mode (direct stick control vs. augmented/stabilized control) is not specified." }
   ]
 }

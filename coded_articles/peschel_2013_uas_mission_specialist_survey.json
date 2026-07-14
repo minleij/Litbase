@@ -9,11 +9,11 @@
   "extraction_metadata": {
     "date_extracted": "2026-07-10",
     "codebook_versions": {
-      "study_type": "0.3",
-      "task_environment": "0.8"
+      "study_type": "0.4",
+      "task_environment": "0.10"
     },
     "model": "claude-sonnet-5",
-    "notes": "Not a swarm article — a narrative literature survey of single-UAV (not multi-robot) human-machine interface technology across 17 fielded UAS, organized by the 'Mission Specialist' human team role. Because this is a survey of many different systems rather than a report of one system/study, task_environment_v0.8 codes below are applied at an aggregate level across the reviewed systems per the Study-Type codebook's own guidance for Meta-Review/Survey articles (Section 4), rather than to any single described mission; several dimensions are coded Not Applicable where the survey stays at a purely conceptual/interface-classification level."
+    "notes": "Not a swarm article — a narrative literature survey of single-UAV (not multi-robot) human-machine interface technology across 17 fielded UAS, organized by the 'Mission Specialist' human team role. Because this is a survey of many different systems rather than a report of one system/study, task_environment_v0.8 codes below are applied at an aggregate level across the reviewed systems per the Study-Type codebook's own guidance for Meta-Review/Survey articles (Section 4), rather than to any single described mission; several dimensions are coded Not Applicable where the survey stays at a purely conceptual/interface-classification level. Bumped to v0.4/v0.10 on 2026-07-14: no v0.9/v0.10 addition applies -- the survey stays too generic for any specific known-location, object-relocation, or arrival-only behavioral pattern to be attributed at the aggregate level, and computational_characteristics remains Not Described (no algorithm named). study_type's 3.11 edge case doesn't apply (no Secondary code at all). Version stamps updated with no other substantive change."
   },
   "study_type": {
     "primary": "Meta-Review / Survey",
@@ -25,7 +25,7 @@
     "abstract_summary": "This survey characterizes the human-machine interaction technologies used by the 'Mission Specialist' role — one of three human team roles (alongside Flight Director and Pilot) identified across the unmanned aerial systems (UAS) literature — across 17 fielded systems spanning four UAV size/endurance categories (micro, small, MALE, HALE). Drawing on over 40 papers and product documentation, the authors catalog each system's hardware- and software-based interface elements and identify three findings: (1) Mission Specialist and Pilot roles have dedicated, separate interfaces in MALE/HALE systems, but share or mirror the same interface in micro/small systems; (2) larger (MALE/HALE) systems favor sophisticated software-based interfaces while micro/small systems rely predominantly on hardware-based controls (joysticks, buttons, touchscreens); and (3) this shared-interface arrangement in micro/small UAS creates a potential interaction conflict between the Pilot and Mission Specialist roles, since interface design principles call for dedicated interfaces per distinct role, risking suboptimal performance and reduced robustness in small-UAS operations such as urban or wilderness search and rescue."
   },
   "classification": {
-    "task_environment_v0.8": {
+    "task_environment_v0.10": {
       "task_object_spatiotemporal_dynamics": [
         { "code": "Not Applicable", "justification": "As a survey of interface hardware/software across many different systems, the article does not describe a specific mission's task-object dynamics in enough detail to code this dimension; it stays at the level of generic 'reconnaissance imagery' and 'target identification' responsibilities.", "condition": null }
       ],
@@ -69,6 +69,6 @@
     }
   },
   "flags": [
-    { "dimension": "task_environment_v0.8 / task_object_spatiotemporal_dynamics", "type": "Not Applicable", "note": "The survey does not describe task-object dynamics for any single mission in sufficient detail; it stays at the level of general interface/role description across many systems." }
+    { "dimension": "task_environment_v0.10 / task_object_spatiotemporal_dynamics", "type": "Not Applicable", "note": "The survey does not describe task-object dynamics for any single mission in sufficient detail; it stays at the level of general interface/role description across many systems." }
   ]
 }

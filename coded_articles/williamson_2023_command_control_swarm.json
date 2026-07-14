@@ -9,11 +9,11 @@
   "extraction_metadata": {
     "date_extracted": "2026-07-10",
     "codebook_versions": {
-      "study_type": "0.2",
-      "task_environment": "0.8"
+      "study_type": "0.4",
+      "task_environment": "0.10"
     },
     "model": "claude-sonnet-5",
-    "notes": "This is the article both codebooks cite as their own motivating test case for the User Study research-aim priority rule and the Task-Allocation placeholder code (referred to there as 'Williams et al., 2023' — the codebooks' own citation shorthand differs from the paper's actual first author, Williamson; the correct name is used here). Re-coded 2026-07-10 against Task-Environment v0.8: this article is in fact the codebook's own cited source example for both the new Search Task (4.2) and Engagement Task (4.3) codes, which replace the original Unclear / Candidate New Code flag."
+    "notes": "This is the article both codebooks cite as their own motivating test case for the User Study research-aim priority rule and the Task-Allocation placeholder code (referred to there as 'Williams et al., 2023' — the codebooks' own citation shorthand differs from the paper's actual first author, Williamson; the correct name is used here). Re-coded 2026-07-10 against Task-Environment v0.8: this article is in fact the codebook's own cited source example for both the new Search Task (4.2) and Engagement Task (4.3) codes, which replace the original Unclear / Candidate New Code flag. Bumped to v0.4/v0.10 on 2026-07-14: no v0.9/v0.10 addition applies -- all task-objects (civilians, threats, HVTs) are discovered via sweep, not known from the outset, and the Task-Allocation Placeholder coding for robot bidding is correctly robot-directed (this article is its own cited source example), unaffected by the v0.10 operator-directed-computation scope note. study_type's 3.11 edge case doesn't apply (no Modeling/Theoretical Paper code). Version stamps updated with no other substantive change."
   },
   "study_type": {
     "primary": "User Study",
@@ -36,7 +36,7 @@
     "autonomous_capabilities": "The centralized pyc2 server autonomously decomposed operator-issued high-level tactics into robot primitive commands; individual robots then bid amongst themselves on which was best suited to execute a given task, with subsequent execution, status reporting (in-progress/success/fail), and health monitoring handled without further step-by-step operator input. Robots also autonomously scanned for and classified objects of interest via April-tag detection during coverage tasks."
   },
   "classification": {
-    "task_environment_v0.8": {
+    "task_environment_v0.10": {
       "task_object_spatiotemporal_dynamics": [
         {
           "code": "Distributed Task Object",

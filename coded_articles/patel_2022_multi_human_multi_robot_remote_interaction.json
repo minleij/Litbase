@@ -9,11 +9,11 @@
   "extraction_metadata": {
     "date_extracted": "2026-07-10",
     "codebook_versions": {
-      "study_type": "0.3",
-      "task_environment": "0.9"
+      "study_type": "0.4",
+      "task_environment": "0.10"
     },
     "model": "claude-sonnet-5",
-    "notes": "Re-coded task_object_spatiotemporal_dynamics and behavioral_relation_to_task_object on 2026-07-13 using the newly-added Known Fixed Task Object and Transport/Delivery Task codes (v0.9), which this article's own flags had proposed (the latter originating here)."
+    "notes": "Re-coded task_object_spatiotemporal_dynamics and behavioral_relation_to_task_object on 2026-07-13 using the newly-added Known Fixed Task Object and Transport/Delivery Task codes (v0.9), which this article's own flags had proposed (the latter originating here). Bumped to v0.10 (task_environment) and v0.4 (study_type) on 2026-07-14: none of v0.10's additions (Move Task, Confined/Enclosed Structure domain, operator-directed-computation Not Applicable clarification) apply to this article -- object relocation here is already fully covered by Transport/Delivery Task, the arena is open/flat (not confined), and no operator-attention-scheduling algorithm is described -- and study_type v0.4's 3.11 edge case doesn't apply (no Modeling/Theoretical Paper code assigned); version stamps updated with no substantive change."
   },
   "study_type": {
     "primary": "User Study",
@@ -36,7 +36,7 @@
     "autonomous_capabilities": "Robots execute a shared finite-state-machine 'collective transport' behavior once given a goal by an operator: they autonomously organize themselves in a circle around the target object based on team size and distance, approach and make contact with it, then move together at matched speed toward the goal while maintaining formation (re-forming if any robot breaks formation), and can similarly self-organize to rotate an object in place. If an operator assigns a goal to multiple objects at once, robots autonomously distribute themselves across the objects and execute the transport behavior for each, with no further step-by-step operator direction required."
   },
   "classification": {
-    "task_environment_v0.9": {
+    "task_environment_v0.10": {
       "task_object_spatiotemporal_dynamics": [
         { "code": "Known Fixed Task Object", "justification": "The 6 transportable objects are multiple, static, and visible/known to operators from the start of the task (Fig. 10), not discovered via search, matching Known Fixed Task Object (3.5, added in codebook v0.9) in its multi-instance form.", "condition": null }
       ],

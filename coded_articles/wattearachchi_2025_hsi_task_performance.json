@@ -9,11 +9,11 @@
   "extraction_metadata": {
     "date_extracted": "2026-07-10",
     "codebook_versions": {
-      "study_type": "0.2",
-      "task_environment": "0.8"
+      "study_type": "0.4",
+      "task_environment": "0.10"
     },
     "model": "claude-sonnet-5",
-    "notes": "This is the article the Task-Environment codebook's own Section 12.1 Worked Example is built directly from, and one of the two canonical User Study examples cited in the Study-Type codebook's own 3.1 definition. The task-environment classification below directly implements that worked example, expanded with full justifications. No re-coding was needed for the v0.8 update: Avoidance Task already fit cleanly and no flags were raised for this article."
+    "notes": "This is the article the Task-Environment codebook's own Section 12.1 Worked Example is built directly from, and one of the two canonical User Study examples cited in the Study-Type codebook's own 3.1 definition. The task-environment classification below directly implements that worked example, expanded with full justifications. No re-coding was needed for the v0.8 update: Avoidance Task already fit cleanly and no flags were raised for this article. Bumped to v0.4/v0.10 on 2026-07-14: considered whether the search target itself should get a Known Fixed Task Object (v0.9) code, but the codebook's own Section 12.1 worked example -- authoritative for this exact article -- codes only the three hazard conditions under Section 3, with no target-related addition, even in its v0.10 text; deferred to that authoritative worked example rather than adding one unilaterally. No other v0.9/v0.10 addition applies. study_type's 3.11 edge case doesn't apply (no Modeling/Theoretical Paper code). Version stamps updated with no other substantive change."
   },
   "study_type": {
     "primary": "User Study",
@@ -36,7 +36,7 @@
     "autonomous_capabilities": "Each robot autonomously computed its motion via a PSO local-best swarm algorithm, sharing local best positions with neighboring robots within a set radius and updating its own velocity/direction accordingly, producing emergent global search behavior toward the target without the operator directing any individual robot; robots also autonomously performed obstacle avoidance and maintained a minimum sensing distance to react to dynamic marked-hazard cells and other robots. Deactivated robots simply stopped contributing to the swarm's collective PSO computation, altering overall swarm behavior without requiring operator action."
   },
   "classification": {
-    "task_environment_v0.8": {
+    "task_environment_v0.10": {
       "task_object_spatiotemporal_dynamics": [
         {
           "code": "Distributed Task Object",

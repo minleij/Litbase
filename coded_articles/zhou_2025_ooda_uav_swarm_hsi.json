@@ -9,11 +9,11 @@
   "extraction_metadata": {
     "date_extracted": "2026-07-10",
     "codebook_versions": {
-      "study_type": "0.2",
-      "task_environment": "0.8"
+      "study_type": "0.4",
+      "task_environment": "0.10"
     },
     "model": "claude-sonnet-5",
-    "notes": "Confirms two behavioral-relation gaps at once (Engagement Task and the newly-proposed Defend/Block Task) plus the recurring Search Task gap. Also see flags for a borderline modality-flag question: the experimenter verbally narrated simulated UAV outcomes after each command, which is functionally similar to Wizard-of-Oz but openly disclosed to participants rather than hidden, so it was not coded as such (this question remains open; the Study-Type codebook_versions field is left at 0.2 pending a separate re-review). Re-coded 2026-07-10 against Task-Environment v0.8: reconnaissance, pre-emptive strikes, and infrastructure security now map onto the new Search Task (4.2), Engagement Task (4.3), and Defend/Block Task (4.5) codes, replacing the original Unclear / Candidate New Code flags."
+    "notes": "Confirms two behavioral-relation gaps at once (Engagement Task and the newly-proposed Defend/Block Task) plus the recurring Search Task gap. Re-coded 2026-07-10 against Task-Environment v0.8: reconnaissance, pre-emptive strikes, and infrastructure security now map onto the new Search Task (4.2), Engagement Task (4.3), and Defend/Block Task (4.5) codes, replacing the original Unclear / Candidate New Code flags. Resolved the open Wizard-of-Oz modality-flag question on 2026-07-14 while bumping study_type to v0.4: the Study-Type codebook's v0.3 Change Log confirms this exact article motivated broadening the WoZ Study Modality Flag (3.1.3) to explicitly cover a disclosed/transparent form, which had not yet been applied back to this record -- added Wizard-of-Oz (disclosed form) to modality_flags accordingly, and removed the now-resolved flag entry. Also re-coded task_object_spatiotemporal_dynamics on 2026-07-14, bumping task_environment to v0.10: added Known Fixed Task Object (3.5, v0.9) for the Area C road infrastructure -- the article states the mission is to 'secure road infrastructure in Area C,' one of the mission's pre-briefed named areas, known from the outset, previously omitted as a task-object entirely (only the Distributed enemy groupings were coded, even though Defend/Block Task already referenced the infrastructure). No other v0.9/v0.10 addition applies."
   },
   "study_type": {
     "primary": "User Study",
@@ -21,9 +21,9 @@
     "sub_attributes": {
       "setting": "Lab",
       "measured_constructs": ["Other / Not Listed"],
-      "modality_flags": []
+      "modality_flags": ["Wizard-of-Oz (disclosed form)"]
     },
-    "justification": "An informal usability study with 10 participants (SUS questionnaire, semi-structured interviews; explicitly 'a system usability test rather than strict performance benchmarking') reports real human interaction and reactions, so User Study is Primary; the OODA-based HSI framework, six design principles, and the seven-module prototype GCS are described in comparable depth and framed as a generalizable design paradigm, so System/Architecture Paper is Secondary."
+    "justification": "An informal usability study with 10 participants (SUS questionnaire, semi-structured interviews; explicitly 'a system usability test rather than strict performance benchmarking') reports real human interaction and reactions, so User Study is Primary; the OODA-based HSI framework, six design principles, and the seven-module prototype GCS are described in comparable depth and framed as a generalizable design paradigm, so System/Architecture Paper is Secondary. Because both UAVs and targets were simulated, the experimenter verbally described the system-generated UAV behavior after each participant command to ensure participants understood the outcome of their input -- a human standing in for automated behavior generation, but openly disclosed as part of the simulation procedure rather than hidden, matching the disclosed/transparent form of the Wizard-of-Oz Study Modality Flag (3.1.3, broadened in codebook v0.3 specifically motivated by this article)."
   },
   "summary": {
     "template": "user_study",
@@ -36,12 +36,17 @@
     "autonomous_capabilities": "Once a parameterized task template (e.g., rendezvous, patrol, static/dynamic target reconnaissance, 3D structure search) is configured and dispatched, the system's backend planning-algorithm library autonomously handles downstream task assignment, path planning, and command preparation for the assigned UAVs, with each UAV then autonomously transitioning through its assigned mission phases based on defined task conditions without continuous operator intervention; multiple sub-swarms or individual UAVs can run distinct, asynchronously-dispatched task sequences at once. A rule-based filtering mechanism in the Information Pusher module autonomously determines which real-time events (communication dropouts, GPS failures, battery warnings, target detections) are surfaced to the operator as alerts."
   },
   "classification": {
-    "task_environment_v0.8": {
+    "task_environment_v0.10": {
       "task_object_spatiotemporal_dynamics": [
         {
           "code": "Distributed Task Object",
           "justification": "Enemy groupings (infantry, light vehicles, heavy armor) are scattered across two named areas and discovered via reconnaissance, each a separate instance rather than a single tracked entity.",
-          "condition": null
+          "condition": "enemy groupings in Areas A and B"
+        },
+        {
+          "code": "Known Fixed Task Object",
+          "justification": "The road infrastructure to be secured is located in Area C, one of the mission's pre-briefed named areas established from the outset rather than discovered via search, matching Known Fixed Task Object (3.5, added in codebook v0.9).",
+          "condition": "road infrastructure in Area C"
         }
       ],
       "behavioral_relation_to_task_object": [
@@ -155,13 +160,7 @@
   },
   "flags": [
     {
-      "dimension": "study_type",
-      "type": "Unclear / Candidate New Code",
-      "note": "After each participant command, the experimenter verbally described the system-generated (simulated) UAV behavior rather than the system rendering it automatically end-to-end — mechanistically similar to Wizard-of-Oz (a human standing in for automated system behavior), but openly disclosed to participants as part of the simulation rather than hidden or downplayed, so it does not cleanly match the Study Modality Flag's WoZ definition, which specifies 'typically undisclosed.'",
-      "proposed_code": "Consider whether the Wizard-of-Oz flag definition should explicitly address disclosed/transparent human-narrated simulation as a related but distinct pattern, or whether it should remain out of scope. [Not actioned in this pass; the Task-Environment behavioral-relation codes were updated 2026-07-10 but this Study-Type modality-flag question was left open.]"
-    },
-    {
-      "dimension": "computational_characteristics",
+      "dimension": "task_environment_v0.10 / computational_characteristics",
       "type": "Not Described",
       "note": "No specific path-planning algorithm named for the backend planning algorithm library.",
       "proposed_code": null

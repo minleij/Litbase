@@ -9,10 +9,11 @@
   "extraction_metadata": {
     "date_extracted": "2026-07-10",
     "codebook_versions": {
-      "study_type": "0.3",
-      "task_environment": "0.8"
+      "study_type": "0.4",
+      "task_environment": "0.10"
     },
-    "model": "claude-sonnet-5"
+    "model": "claude-sonnet-5",
+    "notes": "Bumped to v0.4/v0.10 on 2026-07-14: no v0.9/v0.10 addition applies -- the hidden ground features remain Distributed Task Object (they're explicitly hidden/undiscovered, not known to the operator from the outset, ruling out Known Fixed), and no object relocation, confined structure, or operator-directed-computation pattern is described (computational_characteristics remains Not Described, no algorithm named). study_type's 3.11 edge case doesn't apply (no Modeling/Theoretical Paper code). Version stamps updated with no other substantive change."
   },
   "study_type": {
     "primary": "User Study",
@@ -35,7 +36,7 @@
     "autonomous_capabilities": "The six Crazyflie micro-UAVs generate their own flight trajectories autonomously and use a decentralized collision-avoidance algorithm (informed by neighbors' known locations) plus altitude separation to avoid collisions without operator intervention; a state machine (turned off, take off, idle, waypoint, deploy, go home, land) coordinates each robot's behavior, with consensus achieved via a distributed database, and a geofence combined with input- and receipt-side distance/time verification (e.g., rejecting destinations unreachable within 5 seconds) provides automatic safety enforcement. In the group self-deployment mode, once given one or two focal points defining a region of interest, the UAVs autonomously and evenly distribute themselves within that region and search it for hidden features without further per-robot operator input."
   },
   "classification": {
-    "task_environment_v0.8": {
+    "task_environment_v0.10": {
       "task_object_spatiotemporal_dynamics": [
         { "code": "Distributed Task Object", "justification": "Up to five simulated hidden ground features are present at multiple scattered locations within the flying area from the start of the mission, each individually static and undiscovered until searched.", "condition": null }
       ],

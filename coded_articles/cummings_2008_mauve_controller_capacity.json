@@ -9,11 +9,11 @@
   "extraction_metadata": {
     "date_extracted": "2026-07-10",
     "codebook_versions": {
-      "study_type": "0.3",
+      "study_type": "0.4",
       "task_environment": "0.10"
     },
     "model": "claude-sonnet-5",
-    "notes": "Re-coded task_object_spatiotemporal_dynamics for mission targets on 2026-07-13 using the newly-added Known Fixed Task Object code (v0.9), which this article's own flag had proposed. Re-coded computational_characteristics again on 2026-07-13 per the new operator-directed-computation scope note (v0.10): the active-LOA decision-support algorithm is now coded Not Applicable rather than Unclear, per the user's decision not to add a dedicated code for this pattern."
+    "notes": "Re-coded task_object_spatiotemporal_dynamics for mission targets on 2026-07-13 using the newly-added Known Fixed Task Object code (v0.9), which this article's own flag had proposed. Re-coded computational_characteristics again on 2026-07-13 per the new operator-directed-computation scope note (v0.10): the active-LOA decision-support algorithm is now coded Not Applicable rather than Unclear, per the user's decision not to add a dedicated code for this pattern. Bumped study_type to v0.4 on 2026-07-14: this article is one of the two (alongside Donmez et al., 2010) that directly motivated the v0.4 edge-case note for Modeling/Theoretical Paper (3.11) — its persistent wait-time/fan-out model is validated empirically (calibrated against the 12-subject experiment) rather than primarily analytically, and is now explicitly confirmed as an accepted 3.11 edge case rather than a forced fit; no other part of the coding changed."
   },
   "study_type": {
     "primary": "User Study",
@@ -23,7 +23,7 @@
       "measured_constructs": ["Performance", "Workload", "Situation Awareness (SA)"],
       "modality_flags": []
     },
-    "justification": "A controlled 12-subject experiment with the MAUVE simulation testbed, a 2x4(3) mixed statistical design, and measured wait-time dependent variables is the article's central validating evidence, making User Study Primary. The article's other major contribution is a formal mathematical extension of the fan-out operator-capacity equation (incorporating queuing, interaction, and situation-awareness wait times), comparably weighted and presented as a generalizable predictive model, warranting Modeling/Theoretical Paper as Secondary."
+    "justification": "A controlled 12-subject experiment with the MAUVE simulation testbed, a 2x4(3) mixed statistical design, and measured wait-time dependent variables is the article's central validating evidence, making User Study Primary. The article's other major contribution is a formal mathematical extension of the fan-out operator-capacity equation (incorporating queuing, interaction, and situation-awareness wait times), comparably weighted and presented as a generalizable predictive model, warranting Modeling/Theoretical Paper as Secondary. Per codebook v0.4's edge-case note, this model is validated empirically (calibrated against the reported experiment's wait-time data) rather than primarily analytically/by closed-form proof, but is accepted as 3.11 since equations/derivations remain its persistent, generalizable contribution — this is one of the two articles (with Donmez et al., 2010) that motivated that edge-case note."
   },
   "summary": {
     "template": "user_study",
