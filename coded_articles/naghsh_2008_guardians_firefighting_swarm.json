@@ -10,9 +10,10 @@
     "date_extracted": "2026-07-10",
     "codebook_versions": {
       "study_type": "0.3",
-      "task_environment": "0.8"
+      "task_environment": "0.10"
     },
-    "model": "claude-sonnet-5"
+    "model": "claude-sonnet-5",
+    "notes": "Re-coded behavioral_relation_to_task_object (exit/scene-of-incident direction guidance) on 2026-07-13 using the newly-added Move Task code (v0.10), which this article's own flag had proposed."
   },
   "study_type": {
     "primary": "Design/Interface Concept Paper",
@@ -35,14 +36,14 @@
     "autonomous_capabilities": "The GUARDIANS robot swarm (about 20 Khepera III robots with IR/ultrasonic/chemical sensors, 3 ERRATIC robots additionally equipped with laser rangefinders and cameras, and 1 RESCUER robot with laser rangefinder, DGPS, inclinometer, gyroscope/magnetic, vision, and olfactory sensors) is designed to autonomously localize and navigate itself, track firefighters (optionally aided by RFID tags on their gear), notify them of hazards, and collectively determine and communicate a 'predominant swarm direction' toward points of interest, relying on auto-organization and emergent group behavior with built-in redundancy across heterogeneous, multimodal-wireless-networked (ZigBee/Bluetooth/WiFi) robots. A base station (mission editor, mission planning/scheduling/execution-monitoring module, mission data recorder, sensor-data-processing module) supports adjustable autonomy, letting operators shift between full swarm autonomy, policy-level requests (e.g. 'explore and report any abnormal event'), and direct step-by-step teleoperation of individual or small groups of robots (and, notably, of human crew members via simple relayed action requests when their own visibility/hearing is compromised)."
   },
   "classification": {
-    "task_environment_v0.8": {
+    "task_environment_v0.10": {
       "task_object_spatiotemporal_dynamics": [
         { "code": "Distributed Task Object", "justification": "Hazards (obstacles, high temperature, chemicals) and victims are described as arising at multiple, scattered, largely static locations throughout the warehouse that the swarm must detect and notify firefighters about, per the paper's own described application scenario rather than a single reported executed run.", "condition": "described firefighting application scenario" }
       ],
       "behavioral_relation_to_task_object": [
         { "code": "Search Task", "justification": "The swarm assists firefighters in searching for and localizing victims within the smoke-filled warehouse, whose location is initially unknown.", "condition": null },
         { "code": "Avoidance Task", "justification": "The swarm notifies firefighters of hazards (obstacles, high temperature, chemicals) so they can be avoided, an explicit negative-consequence-driven behavioral relation.", "condition": null },
-        { "code": "Unclear / Candidate New Code", "justification": "Indicating direction toward the exit point or scene of incident is a navigate-to-a-point behavior, not a Search (location is not unknown to the system), Engagement, or Avoidance relation — the same gap flagged in bashyal_2008_radiation_source_hsi ('Navigate-to-Known-Target Task').", "condition": "exit/scene-of-incident direction guidance" }
+        { "code": "Move Task", "justification": "Indicating direction toward an already-known exit point or scene-of-incident location is a travel-to-a-known-point behavior, with arrival alone completing the guidance task and no negative consequence or further decisive action involved, matching Move Task (4.8, added in codebook v0.10).", "condition": "exit/scene-of-incident direction guidance" }
       ],
       "team_size": [
         { "code": "Multi-human - Multi-robot", "justification": "The GUARDIANS appliance explicitly involves multiple base-station roles (coordinator, operators, sensor-data specialists, commanding-chain stakeholders) and multiple on-field firefighters interacting with a multi-robot swarm.", "condition": null }
@@ -81,7 +82,6 @@
     }
   },
   "flags": [
-    { "dimension": "task_environment_v0.8 / behavioral_relation_to_task_object", "type": "Unclear / Candidate New Code", "note": "Directional guidance toward a known exit/incident-scene point does not fit any existing code; reuses the gap already flagged in bashyal_2008_radiation_source_hsi ('Navigate-to-Known-Target Task')." },
-    { "dimension": "task_environment_v0.8 / computational_characteristics", "type": "Not Described", "note": "The swarming algorithm governing individual robot motion is referenced only by citation to another paper, not described in this article's own text." }
+    { "dimension": "task_environment_v0.10 / computational_characteristics", "type": "Not Described", "note": "The swarming algorithm governing individual robot motion is referenced only by citation to another paper, not described in this article's own text." }
   ]
 }

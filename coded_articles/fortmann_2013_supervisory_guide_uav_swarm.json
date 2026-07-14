@@ -10,9 +10,10 @@
     "date_extracted": "2026-07-10",
     "codebook_versions": {
       "study_type": "0.3",
-      "task_environment": "0.8"
+      "task_environment": "0.10"
     },
-    "model": "claude-sonnet-5"
+    "model": "claude-sonnet-5",
+    "notes": "Re-coded computational_characteristics on 2026-07-13 per the new operator-directed-computation scope note (v0.10): Supervisory Guide's own SA-gap detection/cueing mechanism is now coded Not Applicable rather than Unclear, per the user's decision not to add a dedicated code for this pattern. The separate intruder-classification/deconfliction flag on behavioral_relation_to_task_object was not addressed by this decision and remains open."
   },
   "study_type": {
     "primary": "User Study",
@@ -35,7 +36,7 @@
     "autonomous_capabilities": "The three simulated UAVs are 'highly automated and autonomous,' independently selecting and executing their own fire-fighting tasks (traveling to load water at a water source, unloading it at a fire source, and periodically returning to base to recharge) with no operator input into task selection. Supervisory Guide itself autonomously and continuously infers the operator's subjective situation awareness from real-time eye-tracking data, compares it against a formal objective situation model, computes per-information-element SA-gap criticality, and adapts the HMI (colour-coded highlighting) to guide the operator's attention to detected gaps."
   },
   "classification": {
-    "task_environment_v0.8": {
+    "task_environment_v0.10": {
       "task_object_spatiotemporal_dynamics": [
         { "code": "Not Applicable", "justification": "UAV malfunction events concern the UAV's own internal status rather than an external task-object, so per the codebook's own rule this dimension is Not Applicable whenever Monitoring/Maintenance Task applies.", "condition": "UAV malfunction events" },
         { "code": "Moving Task Object", "justification": "Intruder aircraft (civil or firefighting) fly into and through the mission area at random times and must be classified and, in the civil case, actively redirected in flight ('Detour Flight'), indicating an ongoing, trackable, translating entity rather than a single static one.", "condition": "airspace intruders" }
@@ -65,7 +66,7 @@
       ],
       "computational_characteristics": [
         { "code": "Not Described", "justification": "The article states UAV task selection is 'highly automated and autonomous' and not operator-influenceable, but does not name or describe the underlying algorithm governing how each UAV's motion/task is computed.", "condition": null },
-        { "code": "Unclear / Candidate New Code", "justification": "Supervisory Guide's own mechanism (threshold-based comparison of subjective vs. objective situation-model instances, driving colour-coded HMI cueing) is a computational mechanism directed at guiding the human operator's own attention, not at computing a robot's motion (8.1-8.5) or robot-to-task assignment (8.6) — the same kind of operator-directed-computation gap flagged in jo_2025_awac_mhmr_teams and cummings_2008_mauve_controller_capacity.", "condition": "Supervisory Guide's own SA-gap-detection/guidance mechanism" }
+        { "code": "Not Applicable", "justification": "Supervisory Guide's own mechanism (threshold-based comparison of subjective vs. objective situation-model instances, driving colour-coded HMI cueing) is a computational mechanism directed at guiding the human operator's own attention, not at computing a robot's motion (8.1-8.5) or robot-to-task assignment (8.6). Per the v0.10 operator-directed-computation scope note, Section 8 does not conceptually extend to computation aimed at the operator, so this is coded Not Applicable.", "condition": "Supervisory Guide's own SA-gap-detection/guidance mechanism" }
       ],
       "human_involvement_level": [
         { "code": "Human-on-the-loop (HOnL)", "justification": "UAV fire-fighting task execution delivers its output (fires extinguished) without needing operator input — the operator cannot even influence task selection — while still being visually monitored via the HMI.", "condition": "autonomous UAV fire-fighting/task-selection function" },
@@ -80,9 +81,9 @@
     }
   },
   "flags": [
-    { "dimension": "task_environment_v0.8 / behavioral_relation_to_task_object", "type": "Unclear / Candidate New Code", "note": "Classifying and then integrating ('Allocate Target') or excluding ('Detour Flight') a newly-detected intruder aircraft does not fit any of the six existing behavioral-relation codes.", "proposed_code": "Intruder Classification & Deconfliction Task — classifying a newly-detected non-mission agent and taking an integrative (task-assign) or exclusionary (reroute/detour) action based on that classification, distinct from Avoidance, Engagement, and Defend/Block." },
-    { "dimension": "task_environment_v0.8 / coordination_architecture", "type": "Not Described", "note": "The mechanism by which the three UAVs jointly decide who services which fire source is not described beyond 'autonomous.'" },
-    { "dimension": "task_environment_v0.8 / computational_characteristics", "type": "Not Described", "note": "No specific algorithm is named for how UAV task selection/motion is computed." },
-    { "dimension": "task_environment_v0.8 / computational_characteristics", "type": "Unclear / Candidate New Code", "note": "Supervisory Guide's threshold-based SA-gap detection and HMI-cueing mechanism targets the human operator's attention, not robot control, echoing a recurring gap in Section 8's scope seen in other corpus articles.", "proposed_code": "See cummings_2008_mauve_controller_capacity and jo_2025_awac_mhmr_teams flags for the same proposed 'operator-directed computation' gap." }
+    { "dimension": "task_environment_v0.10 / behavioral_relation_to_task_object", "type": "Unclear / Candidate New Code", "note": "Classifying and then integrating ('Allocate Target') or excluding ('Detour Flight') a newly-detected intruder aircraft does not fit any of the eight existing behavioral-relation codes, including the new Move Task (4.8). Not addressed in the 2026-07-13 codebook update.", "proposed_code": "Intruder Classification & Deconfliction Task — classifying a newly-detected non-mission agent and taking an integrative (task-assign) or exclusionary (reroute/detour) action based on that classification, distinct from Avoidance, Engagement, and Defend/Block." },
+    { "dimension": "task_environment_v0.10 / coordination_architecture", "type": "Not Described", "note": "The mechanism by which the three UAVs jointly decide who services which fire source is not described beyond 'autonomous.'" },
+    { "dimension": "task_environment_v0.10 / computational_characteristics", "type": "Not Described", "note": "No specific algorithm is named for how UAV task selection/motion is computed." },
+    { "dimension": "task_environment_v0.10 / computational_characteristics", "type": "Not Applicable", "note": "Supervisory Guide's threshold-based SA-gap detection and HMI-cueing mechanism targets the human operator's attention, not robot control. Per user review (2026-07-13), no dedicated code will be added for this operator-directed-computation pattern (also seen in cummings_2008_mauve_controller_capacity and frische_2013_sa_tracer_uav_swarm); Section 8's v0.10 scope note now directs this case to Not Applicable.", "proposed_code": null }
   ]
 }

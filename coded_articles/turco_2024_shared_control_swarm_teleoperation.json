@@ -10,9 +10,10 @@
     "date_extracted": "2026-07-10",
     "codebook_versions": {
       "study_type": "0.3",
-      "task_environment": "0.8"
+      "task_environment": "0.10"
     },
-    "model": "claude-sonnet-5"
+    "model": "claude-sonnet-5",
+    "notes": "Re-coded operational_domain on 2026-07-13 using the newly-added Confined/Enclosed Structure code (v0.10), which this article's own flag had proposed (and is the code's own source example)."
   },
   "study_type": {
     "primary": "User Study",
@@ -35,7 +36,7 @@
     "autonomous_capabilities": "In each shared-control condition, the autonomous controller computes the DoFs not assigned to the human user via a proportional control law referenced against the local pipe geometry extracted in real time from point-cloud/depth-sensor data (via Delaunay triangulation, a Voronoi-graph medial-axis central path, and curvature/deformation classification with a Gaussian Mixture Model) — e.g., automatically adjusting swarm deformation to maximize occupied cross-sectional area while avoiding pipe-wall collisions when the human controls position, or automatically centering the swarm's position on the path's medial axis when the human controls deformation — requiring no prior model of the specific environment, so the approach generalizes to any imaged path geometry (e.g., from 3-D or CT scan data)."
   },
   "classification": {
-    "task_environment_v0.8": {
+    "task_environment_v0.10": {
       "task_object_spatiotemporal_dynamics": [
         { "code": "Not Applicable", "justification": "The task is continuous navigation through a fixed, fully-known static environment (the pipe geometry itself), not detection/tracking of a discrete external task-relevant object or event.", "condition": null }
       ],
@@ -72,11 +73,9 @@
         { "code": "Direct (LHCA 1)", "justification": "The haptic interface provides continuous, real-time incremental control that is directly added to the swarm's current state for the user-assigned DoFs.", "condition": null }
       ],
       "operational_domain": [
-        { "code": "Unclear / Candidate New Code", "justification": "The task environment is an enclosed conduit explicitly framed as dual-purpose — either a biological blood vessel (medical microrobotics) or an industrial pipe — which does not fit Air, Land, Maritime, Space, Cyber, or Spectrum as currently defined.", "condition": null }
+        { "code": "Confined/Enclosed Structure", "justification": "The task environment is an enclosed conduit explicitly framed as dual-purpose — either a biological blood vessel (medical microrobotics) or an industrial pipe — matching Confined/Enclosed Structure (added in codebook v0.10; this is the code's own source example).", "condition": null }
       ]
     }
   },
-  "flags": [
-    { "dimension": "task_environment_v0.8 / operational_domain", "type": "Unclear / Candidate New Code", "note": "Navigation within an enclosed conduit (blood vessel or industrial pipe) does not fit any of the six existing Operational Domain codes.", "proposed_code": "Confined/Enclosed Structure — an operational domain covering navigation within an enclosed man-made or biological conduit (pipes, ducts, vessels), distinct from the open-space Air/Land/Maritime/Space domains." }
-  ]
+  "flags": []
 }

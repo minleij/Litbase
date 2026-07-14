@@ -10,10 +10,10 @@
     "date_extracted": "2026-07-10",
     "codebook_versions": {
       "study_type": "0.3",
-      "task_environment": "0.9"
+      "task_environment": "0.10"
     },
     "model": "claude-sonnet-5",
-    "notes": "Re-coded task_object_spatiotemporal_dynamics on 2026-07-13 using the newly-added Known Fixed Task Object code (v0.9), which this article's own flag had proposed."
+    "notes": "Re-coded task_object_spatiotemporal_dynamics on 2026-07-13 using the newly-added Known Fixed Task Object code (v0.9), which this article's own flag had proposed. Re-coded behavioral_relation_to_task_object and operational_domain again on 2026-07-13: the navigate-to-known-target portion now uses the newly-added Move Task code (v0.10) and the confined-environment portion now uses the newly-added Confined/Enclosed Structure code (v0.10), both proposed by this article's own flags. The formation/cohesion-maintenance portion of the behavioral_relation_to_task_object flag is not resolved by either new code and remains open as its own flag entry below."
   },
   "study_type": {
     "primary": "User Study",
@@ -36,12 +36,13 @@
     "autonomous_capabilities": "A fine-tuned YOLO-v5 model continuously processes the overhead camera's video feed in real time to detect the microrobotic swarm's bounding box, track its position, and classify its formation/stability state (e.g., stable vs. spreading) based on its area and aspect ratio, without operator input. This automated state classification autonomously drives two feedback behaviors: amplifying the haptic force-feedback gain when instability is detected, and (in HVF/MMF conditions) updating the visual overlay and, in MMF, triggering an auditory alert — providing closed-loop, system-initiated cueing on top of the operator's continuous manual control of the magnet's position."
   },
   "classification": {
-    "task_environment_v0.9": {
+    "task_environment_v0.10": {
       "task_object_spatiotemporal_dynamics": [
         { "code": "Known Fixed Task Object", "justification": "The start and target points within the vascular phantom are fixed and known to the operator from the outset (a designed navigation path with a known 90-degree turn), not discovered via search, matching Known Fixed Task Object (3.5, added in codebook v0.9).", "condition": null }
       ],
       "behavioral_relation_to_task_object": [
-        { "code": "Unclear / Candidate New Code", "justification": "The operator's task is to navigate the swarm itself to a known target point — the same navigate-to-known-target gap flagged in bashyal_2008_radiation_source_hsi — compounded by a second, distinct requirement to actively maintain the swarm's own aggregated/stable formation throughout, which is a collective-state-integrity management task not equivalent to Monitoring/Maintenance (4.6, which concerns a robot's internal health/status like battery, not an emergent multi-agent formation property) nor any of the other six codes. Left open per user decision (2026-07-13) to defer these one-off proposals for now.", "condition": null }
+        { "code": "Move Task", "justification": "The operator's task is to navigate the swarm itself to a known target point, with arrival at the target completing that portion of the task, matching Move Task (4.8, added in codebook v0.10).", "condition": null },
+        { "code": "Unclear / Candidate New Code", "justification": "Separately from navigating to the target, the operator must actively maintain the swarm's own aggregated/stable formation throughout, which is a collective-state-integrity management task not equivalent to Monitoring/Maintenance (4.6, which concerns a robot's internal health/status like battery, not an emergent multi-agent formation property) nor any of the other seven codes.", "condition": null }
       ],
       "team_size": [
         { "code": "Single-human - Multi-robot", "justification": "A single operator controls the collective microrobotic swarm (many individual microrobots) via one external magnetic actuation source.", "condition": null }
@@ -72,12 +73,11 @@
         { "code": "Direct (LHCA 1)", "justification": "Continuous hand movement on the haptic device is directly mapped, via coordinate transformation, to the exact target position of the robotic arm's end-effector.", "condition": null }
       ],
       "operational_domain": [
-        { "code": "Unclear / Candidate New Code", "justification": "The task environment is a simulated confined vascular phantom, which does not fit Air, Land, Maritime, Space, Cyber, or Spectrum as currently defined — the same gap flagged in turco_2024_shared_control_swarm_teleoperation.", "condition": null }
+        { "code": "Confined/Enclosed Structure", "justification": "The task environment is a simulated confined vascular phantom, an enclosed biological conduit, matching Confined/Enclosed Structure (added in codebook v0.10).", "condition": null }
       ]
     }
   },
   "flags": [
-    { "dimension": "task_environment_v0.9 / behavioral_relation_to_task_object", "type": "Unclear / Candidate New Code", "note": "Navigating to a known target is not covered by any existing code, and separately, maintaining the swarm's own collective formation/stability while doing so is a distinct behavioral relation not covered by Monitoring/Maintenance (which concerns internal robot health, not emergent multi-agent formation state).", "proposed_code": "See bashyal_2008_radiation_source_hsi flag for 'Navigate-to-Known-Target Task'; propose an additional new code, 'Formation/Cohesion Maintenance Task' — the operator's required behavior is to actively preserve a robot team's own collective spatial arrangement or state integrity (e.g., swarm aggregation) during task execution, distinct from Monitoring/Maintenance's focus on a single robot's internal health/status." },
-    { "dimension": "task_environment_v0.9 / operational_domain", "type": "Unclear / Candidate New Code", "note": "Navigation within a confined vascular phantom does not fit any existing Operational Domain code.", "proposed_code": "See turco_2024_shared_control_swarm_teleoperation flag for 'Confined/Enclosed Structure.'" }
+    { "dimension": "task_environment_v0.10 / behavioral_relation_to_task_object", "type": "Unclear / Candidate New Code", "note": "Maintaining the swarm's own collective formation/stability while navigating to the target is a distinct behavioral relation not covered by Monitoring/Maintenance (which concerns internal robot health, not emergent multi-agent formation state) or by the new Move Task code (which covers the separate navigate-to-target portion of this same requirement, now resolved). Not addressed in the 2026-07-13 codebook update.", "proposed_code": "Formation/Cohesion Maintenance Task — the operator's required behavior is to actively preserve a robot team's own collective spatial arrangement or state integrity (e.g., swarm aggregation) during task execution, distinct from Monitoring/Maintenance's focus on a single robot's internal health/status." }
   ]
 }

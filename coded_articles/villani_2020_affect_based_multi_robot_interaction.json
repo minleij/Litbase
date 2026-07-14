@@ -10,10 +10,10 @@
     "date_extracted": "2026-07-10",
     "codebook_versions": {
       "study_type": "0.3",
-      "task_environment": "0.9"
+      "task_environment": "0.10"
     },
     "model": "claude-sonnet-5",
-    "notes": "Re-coded task_object_spatiotemporal_dynamics for Experiments 1-2 on 2026-07-13 using the newly-added Known Fixed Task Object code (v0.9), which this article's own flag had proposed. Article reports four distinct human-subject experiments: (1) a 21-subject HRV-methodology validation test (no robots involved, purely physiological), and three HRI experiments summarized in the article's own Table 2 — Natural Interaction (12 users, physical e-puck ground robots), Affect-Based Adaptation (4 users, physical e-puck robots), and a Complex Realistic Scenario (30 users, VR, simulated aerial-robot swarm). Task-environment coding below focuses primarily on the richest/final VR scenario, with conditions noted for the simpler physical-robot experiments where they diverge."
+    "notes": "Re-coded task_object_spatiotemporal_dynamics for Experiments 1-2 on 2026-07-13 using the newly-added Known Fixed Task Object code (v0.9), which this article's own flag had proposed. Article reports four distinct human-subject experiments: (1) a 21-subject HRV-methodology validation test (no robots involved, purely physiological), and three HRI experiments summarized in the article's own Table 2 — Natural Interaction (12 users, physical e-puck ground robots), Affect-Based Adaptation (4 users, physical e-puck robots), and a Complex Realistic Scenario (30 users, VR, simulated aerial-robot swarm). Task-environment coding below focuses primarily on the richest/final VR scenario, with conditions noted for the simpler physical-robot experiments where they diverge. Re-coded behavioral_relation_to_task_object for Experiments 1-2 again on 2026-07-13 using the newly-added Move Task code (v0.10), which this article's own flag had proposed; the companion task_object_spatiotemporal_dynamics Unclear flag for the same experiments was already resolved by the Known Fixed Task Object assignment above and its stale flag entry removed."
   },
   "study_type": {
     "primary": "User Study",
@@ -36,7 +36,7 @@
     "autonomous_capabilities": "Non-teleoperated robots/sub-teams implement autonomous or semi-autonomous behaviors depending on configuration: predefined-velocity autonomous area exploration, random motion (Experiment 2, simulating exploration), or full sensor-driven autonomous patrol with target (fire/bomb) detection and alerting (Experiment 3, sub-teams presumed equipped with heat sensors). When affect-based adaptation is triggered, previously human-selected non-teleoperated robots either switch to consensus-based following of the currently-teleoperated robot (Experiment 2) or are granted full autonomy to detect and unilaterally act on targets without further user verification (Experiment 3), removing the user's supervisory burden for those elements. The system's own real-time mental-fatigue detection algorithm continuously estimates user cognitive state from a sliding-window mean RR-interval (heart-rate variability) signal via a hysteresis-based rest/stress state-transition rule, and a finite-state machine governs which robots/sub-teams are under direct teleoperation versus autonomous/adapted behavior at any time."
   },
   "classification": {
-    "task_environment_v0.9": {
+    "task_environment_v0.10": {
       "task_object_spatiotemporal_dynamics": [
         { "code": "Distributed Task Object", "justification": "Fires and bombs (targets) appear at multiple scattered locations across four districts over the course of the VR mission, each individually static once detected.", "condition": "Experiment 3 (VR complex scenario)" },
         { "code": "Known Fixed Task Object", "justification": "Target zones/positions (green squares/crosses, yellow areas) are visible and known to the user from the outset of the task, not discovered via search, matching Known Fixed Task Object (3.5, added in codebook v0.9).", "condition": "Experiments 1 and 2 (physical e-puck robots)" }
@@ -44,7 +44,7 @@
       "behavioral_relation_to_task_object": [
         { "code": "Search Task", "justification": "Autonomous sub-teams detect targets (fires, bombs) of initially unknown presence/location within their assigned district, requiring user verification and confirmation.", "condition": "Experiment 3 (VR complex scenario)" },
         { "code": "Engagement Task", "justification": "Once a target is detected and the user switches attention to it, hand gestures are used to extinguish the fire or defuse the bomb, a decisive action on an already-identified target.", "condition": "Experiment 3 (VR complex scenario)" },
-        { "code": "Unclear / Candidate New Code", "justification": "Driving robots to known-location target zones is a navigate-to-known-target behavior, the same gap flagged in bashyal_2008_radiation_source_hsi. Left open per user decision (2026-07-13) to defer this one-off proposal for now.", "condition": "Experiments 1 and 2 (physical e-puck robots)" }
+        { "code": "Move Task", "justification": "Driving robots to known-location target zones is a travel-to-a-known-target behavior, with arrival alone completing the task, matching Move Task (4.8, added in codebook v0.10).", "condition": "Experiments 1 and 2 (physical e-puck robots)" }
       ],
       "team_size": [
         { "code": "Single-human - Multi-robot", "justification": "Each participant individually controls a team of 2-3 e-puck robots (Experiments 1-2) or a 12-drone swarm in four sub-teams (Experiment 3).", "condition": null }
@@ -84,8 +84,5 @@
       ]
     }
   },
-  "flags": [
-    { "dimension": "task_environment_v0.9 / task_object_spatiotemporal_dynamics", "type": "Unclear / Candidate New Code", "note": "Target zones in the simpler physical-robot experiments are known/visible from task start.", "proposed_code": "See bashyal_2008_radiation_source_hsi flag for 'Known Fixed Task Object.'" },
-    { "dimension": "task_environment_v0.9 / behavioral_relation_to_task_object", "type": "Unclear / Candidate New Code", "note": "Navigating to a known target zone is not covered by any existing behavioral-relation code.", "proposed_code": "See bashyal_2008_radiation_source_hsi flag for 'Navigate-to-Known-Target Task.'" }
-  ]
+  "flags": []
 }

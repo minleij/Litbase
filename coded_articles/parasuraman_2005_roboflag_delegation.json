@@ -9,11 +9,11 @@
   "extraction_metadata": {
     "date_extracted": "2026-07-10",
     "codebook_versions": {
-      "study_type": "0.2",
+      "study_type": "0.4",
       "task_environment": "0.8"
     },
     "model": "claude-sonnet-5",
-    "notes": "Contains three separate human-subjects experiments plus a non-human computational (task-network/Monte Carlo) workload model in Section V; the same borderline Study-Type fit issue flagged for Donmez et al. (2010) recurs here for that modeling component (deferred, unresolved). Re-coded 2026-07-10 against Task-Environment v0.8: this article is the codebook's own cited source example for the new Defend/Block Task (4.5) code; flag capture now maps onto Engagement Task (4.3). Both replace the original Unclear / Candidate New Code flags."
+    "notes": "Contains three separate human-subjects experiments plus a non-human computational (task-network/Monte Carlo) workload model in Section V. Re-coded 2026-07-10 against Task-Environment v0.8: this article is the codebook's own cited source example for the new Defend/Block Task (4.5) code; flag capture now maps onto Engagement Task (4.3). Both replace the original Unclear / Candidate New Code flags. Re-coded study_type Secondary again on 2026-07-13 per the new Section 3.11 edge-case note (Study-Type codebook v0.4): the Section V workload model is confirmed as Modeling/Theoretical Paper (Secondary), accepted as an edge case per the user's decision, resolving the prior Unclear / Candidate New Code flag."
   },
   "study_type": {
     "primary": "User Study",
@@ -23,7 +23,7 @@
       "measured_constructs": ["Performance", "Workload", "Situation Awareness (SA)"],
       "modality_flags": []
     },
-    "justification": "Three separate formal within-subjects experiments (18, 9, and 12 paid participants) with extensive performance, NASA-TLX workload, and SART situation-awareness measures are the article's central contribution, so User Study is Primary; a companion task-network/Monte Carlo computational model of operator workload (Section V) is a comparably-weighted persistent contribution, coded as the nearest-fit Secondary (see flags for the same imperfect-fit caveat noted for Donmez et al., 2010)."
+    "justification": "Three separate formal within-subjects experiments (18, 9, and 12 paid participants) with extensive performance, NASA-TLX workload, and SART situation-awareness measures are the article's central contribution, so User Study is Primary; a companion task-network/Monte Carlo computational model of operator workload (Section V) is a comparably-weighted persistent contribution, coded as Modeling/Theoretical Paper Secondary. This is an accepted edge-case fit per the Study-Type codebook's v0.4 note on 3.11, the same pattern noted for Donmez et al. (2010): the model is validated by comparison to empirical human-subjects trends rather than primarily analytically, which 3.11's core definition otherwise requires."
   },
   "summary": {
     "template": "user_study",
@@ -138,12 +138,5 @@
       ]
     }
   },
-  "flags": [
-    {
-      "dimension": "study_type",
-      "type": "Unclear / Candidate New Code",
-      "note": "The Section V computational workload model (task-network decomposition plus Monte Carlo simulation) is closest to Modeling/Theoretical Paper (3.11), but like Donmez et al. (2010), its validation approach (comparison to empirical human-subjects trends) does not cleanly match 3.11's 'validated primarily analytically' framing.",
-      "proposed_code": "Same proposed broadening of 3.11 suggested for Donmez et al. (2010) — this is now a second instance of the pattern. [Deferred by the user 2026-07-10; not yet actioned.]"
-    }
-  ]
+  "flags": []
 }

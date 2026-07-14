@@ -10,10 +10,10 @@
     "date_extracted": "2026-07-10",
     "codebook_versions": {
       "study_type": "0.3",
-      "task_environment": "0.8"
+      "task_environment": "0.10"
     },
     "model": "claude-sonnet-5",
-    "notes": "Uses the same simulated three-UAV fire-fighting scenario (OFFIS, D3CoS project) later reused as the evaluation scenario in fortmann_2013_supervisory_guide_uav_swarm; this paper's formal situation model (Frische & Lüdtke, 2013) is explicitly cited as the theoretical foundation in that companion article."
+    "notes": "Uses the same simulated three-UAV fire-fighting scenario (OFFIS, D3CoS project) later reused as the evaluation scenario in fortmann_2013_supervisory_guide_uav_swarm; this paper's formal situation model (Frische & Lüdtke, 2013) is explicitly cited as the theoretical foundation in that companion article. Re-coded computational_characteristics on 2026-07-13 per the new operator-directed-computation scope note (v0.10): SA-Tracer's own SA-inference mechanism is now coded Not Applicable rather than Unclear, per the user's decision not to add a dedicated code for this pattern."
   },
   "study_type": {
     "primary": "User Study",
@@ -36,7 +36,7 @@
     "autonomous_capabilities": "The three simulated UAVs operate with a high level of autonomy: each independently and continuously cycles through refilling water, extinguishing fire, and recharging energy without any operator input into task selection, and only surfaces a malfunction event for manual operator resolution. Separately, SA-Tracer itself autonomously and continuously infers the operator's subjective environment-state awareness in real time from eye-tracking fixation data, using a Bayesian classifier (informed by the SEEV visual-attention model) to estimate each fixated information element's perceptibility, and a simple time-decay ('forgetting') mechanism to age out stale subjective-state values, producing continuous quantitative SAlevel1 and SAlevel2 traces without requiring any human expert in the loop."
   },
   "classification": {
-    "task_environment_v0.8": {
+    "task_environment_v0.10": {
       "task_object_spatiotemporal_dynamics": [
         { "code": "Not Applicable", "justification": "The operator's only actionable task-relevant event is a UAV malfunction, which concerns the UAV's own internal status rather than an external environmental object, so per the codebook's own rule this dimension is Not Applicable whenever Monitoring/Maintenance Task applies.", "condition": null }
       ],
@@ -64,7 +64,7 @@
       ],
       "computational_characteristics": [
         { "code": "Not Described", "justification": "No specific algorithm is named for how UAV task/goal selection or motion is computed; the article focuses entirely on the SA-assessment tool.", "condition": "UAV task/goal selection and motion" },
-        { "code": "Unclear / Candidate New Code", "justification": "SA-Tracer's own Bayesian-classifier-based perceptibility inference and decay mechanism is a computational mechanism directed at assessing the human operator's cognitive state, not at robot control — the same recurring operator-directed-computation gap flagged in fortmann_2013_supervisory_guide_uav_swarm, jo_2025_awac_mhmr_teams, and cummings_2008_mauve_controller_capacity.", "condition": "SA-Tracer's own SA-inference mechanism" }
+        { "code": "Not Applicable", "justification": "SA-Tracer's own Bayesian-classifier-based perceptibility inference and decay mechanism is a computational mechanism directed at assessing the human operator's cognitive state, not at robot control. Per the v0.10 operator-directed-computation scope note, Section 8 does not conceptually extend to computation aimed at the operator, so this is coded Not Applicable.", "condition": "SA-Tracer's own SA-inference mechanism" }
       ],
       "human_involvement_level": [
         { "code": "Human-on-the-loop (HOnL)", "justification": "The UAV swarm executes its fire-fighting mission (water refill, fire extinguishing, energy recharge) fully autonomously without operator input, while the operator monitors via the HMI.", "condition": "autonomous fire-fighting mission execution" },
@@ -79,7 +79,7 @@
     }
   },
   "flags": [
-    { "dimension": "task_environment_v0.8 / coordination_architecture", "type": "Not Described", "note": "The mechanism by which the three UAVs coordinate/select tasks among themselves is not described beyond 'the operator could not influence UAV task selection.'" },
-    { "dimension": "task_environment_v0.8 / computational_characteristics", "type": "Unclear / Candidate New Code", "note": "SA-Tracer's SA-inference mechanism targets the human operator's cognitive state, not robot control, echoing a recurring gap in Section 8's scope seen in several other corpus articles.", "proposed_code": "See fortmann_2013_supervisory_guide_uav_swarm, jo_2025_awac_mhmr_teams, and cummings_2008_mauve_controller_capacity flags for the same proposed 'operator-directed computation' gap." }
+    { "dimension": "task_environment_v0.10 / coordination_architecture", "type": "Not Described", "note": "The mechanism by which the three UAVs coordinate/select tasks among themselves is not described beyond 'the operator could not influence UAV task selection.'" },
+    { "dimension": "task_environment_v0.10 / computational_characteristics", "type": "Not Applicable", "note": "SA-Tracer's SA-inference mechanism targets the human operator's cognitive state, not robot control. Per user review (2026-07-13), no dedicated code will be added for this operator-directed-computation pattern (also seen in fortmann_2013_supervisory_guide_uav_swarm and cummings_2008_mauve_controller_capacity); Section 8's v0.10 scope note now directs this case to Not Applicable.", "proposed_code": null }
   ]
 }

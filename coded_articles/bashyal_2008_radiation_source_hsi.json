@@ -10,10 +10,10 @@
     "date_extracted": "2026-07-10",
     "codebook_versions": {
       "study_type": "0.3",
-      "task_environment": "0.9"
+      "task_environment": "0.10"
     },
     "model": "claude-sonnet-5",
-    "notes": "Re-coded task_object_spatiotemporal_dynamics for Experiment A on 2026-07-13 using the newly-added Known Fixed Task Object code (v0.9), which this article's own flag had proposed."
+    "notes": "Re-coded task_object_spatiotemporal_dynamics for Experiment A on 2026-07-13 using the newly-added Known Fixed Task Object code (v0.9), which this article's own flag had proposed. Re-coded behavioral_relation_to_task_object for Experiment A again on 2026-07-13 using the newly-added Move Task code (v0.10, added at the user's direction under this name rather than the originally-proposed 'Navigate-to-Known-Target Task'), which this article's own flag had proposed."
   },
   "study_type": {
     "primary": "User Study",
@@ -36,13 +36,13 @@
     "autonomous_capabilities": "The swarm operates fully autonomously via random-walk exploration plus a modified, localized particle swarm optimization (PSO) algorithm: once any robot detects a radiation signal stronger than its neighbors', it shares its position locally (not swarm-wide) to become a local-best (lbest) reference, allowing the swarm to converge on the source without any user input, and to pursue multiple radiation sources in parallel via this local sharing."
   },
   "classification": {
-    "task_environment_v0.9": {
+    "task_environment_v0.10": {
       "task_object_spatiotemporal_dynamics": [
         { "code": "Known Fixed Task Object", "justification": "In the familiarization experiment the radiation source's location is displayed on the map to participants from the outset, so it is single and fixed and its location is already known to the participant rather than discovered via search (Known Fixed Task Object, 3.5, added in codebook v0.9).", "condition": "Experiment A (familiarization)" },
         { "code": "Static/Fixed Task Object", "justification": "The evaluation experiment treats the (possible) radiation source as a single, initially-unknown, non-moving, non-growing entity that must be discovered by covering 7 key-points; no source was actually instantiated in this particular run, but that is the task's designed object structure.", "condition": "Experiment B (user evaluation)" }
       ],
       "behavioral_relation_to_task_object": [
-        { "code": "Unclear / Candidate New Code", "justification": "Participants must navigate the swarm to a known-location radiation region as fast as possible; this is neither Avoidance (no negative consequence to contact) nor Search (location is already known) nor Engagement (no decisive/neutralizing action beyond arrival) as currently defined.", "condition": "Experiment A (familiarization)" },
+        { "code": "Move Task", "justification": "Participants must guide the swarm to a known-location radiation region as fast as possible; arrival alone completes the task, with no negative consequence for contact (rules out Avoidance) and no decisive/neutralizing action beyond arrival (rules out Engagement), matching Move Task (4.8, added in codebook v0.10; this is the code's own source example).", "condition": "Experiment A (familiarization)" },
         { "code": "Search Task", "justification": "Participants must direct robots to 7 key-points to determine whether an unknown-presence radiation source exists in the environment, which is a canonical location/presence-detection task.", "condition": "Experiment B (user evaluation)" }
       ],
       "team_size": [
@@ -82,7 +82,6 @@
     }
   },
   "flags": [
-    { "dimension": "task_environment_v0.9 / behavioral_relation_to_task_object", "type": "Unclear / Candidate New Code", "note": "Experiment A requires participants to navigate the swarm to a known-location target region as quickly as possible, with no negative consequence for contact (rules out Avoidance), no unknown location (rules out Search), and no decisive/neutralizing action beyond arrival (rules out Engagement). Left open per user decision (2026-07-13) to defer this one-off proposal for now.", "proposed_code": "Navigate-to-Known-Target Task — the operator's goal is to move the team into contact with/proximity to a single task-relevant object whose location is already known, as fast as possible, where reaching it (not acting on it further) completes the task." },
-    { "dimension": "task_environment_v0.9 / team_composition", "type": "Not Applicable", "note": "Only one human participant operates the interface at a time in the reported experiments, so human-side homogeneity/heterogeneity does not apply, though the architecture is described as designed to support multiple simultaneous users in principle." }
+    { "dimension": "task_environment_v0.10 / team_composition", "type": "Not Applicable", "note": "Only one human participant operates the interface at a time in the reported experiments, so human-side homogeneity/heterogeneity does not apply, though the architecture is described as designed to support multiple simultaneous users in principle." }
   ]
 }

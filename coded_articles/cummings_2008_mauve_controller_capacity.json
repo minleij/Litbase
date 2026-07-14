@@ -10,10 +10,10 @@
     "date_extracted": "2026-07-10",
     "codebook_versions": {
       "study_type": "0.3",
-      "task_environment": "0.9"
+      "task_environment": "0.10"
     },
     "model": "claude-sonnet-5",
-    "notes": "Re-coded task_object_spatiotemporal_dynamics for mission targets on 2026-07-13 using the newly-added Known Fixed Task Object code (v0.9), which this article's own flag had proposed."
+    "notes": "Re-coded task_object_spatiotemporal_dynamics for mission targets on 2026-07-13 using the newly-added Known Fixed Task Object code (v0.9), which this article's own flag had proposed. Re-coded computational_characteristics again on 2026-07-13 per the new operator-directed-computation scope note (v0.10): the active-LOA decision-support algorithm is now coded Not Applicable rather than Unclear, per the user's decision not to add a dedicated code for this pattern."
   },
   "study_type": {
     "primary": "User Study",
@@ -36,7 +36,7 @@
     "autonomous_capabilities": "The four simulated UAVs launch with a predetermined mission plan (targets, routes, and waypoints already assigned) and autonomously travel to and loiter at targets without operator input, only requiring supervisory monitoring and occasional replanning. In the highest ('superactive') automation condition, the system also autonomously executes arming and firing actions once rules-of-engagement conditions are met (UAV at target, already armed, within the time-on-target window), giving the operator only a 30-second veto window rather than requiring an explicit per-action command; pre-scheduled battle damage assessment is likewise performed automatically by the UAV after firing."
   },
   "classification": {
-    "task_environment_v0.9": {
+    "task_environment_v0.10": {
       "task_object_spatiotemporal_dynamics": [
         { "code": "Known Fixed Task Object", "justification": "Mission targets are a single, fixed, non-growing instance per target, and their location and priority are already assigned and known to the operator at launch ('initial target assignments and routes are already completed'), matching Known Fixed Task Object (3.5, added in codebook v0.9) rather than Static/Fixed (3.4, which requires initially-unknown location).", "condition": "mission targets" },
         { "code": "Distributed Task Object", "justification": "Threat/hazard areas on the map can emerge entirely or disappear at different points during the scenario, matching multiple scattered, intermittently-arising instances.", "condition": "threat/hazard zones" },
@@ -67,7 +67,7 @@
       ],
       "computational_characteristics": [
         { "code": "Predefined / Rule-Based Control", "justification": "Each UAV launches with a predetermined, fixed mission plan (targets, routes, waypoints already assigned) that it follows autonomously (enroute, loiter, return-to-base) rather than computing a path via search or a trained model.", "condition": null },
-        { "code": "Unclear / Candidate New Code", "justification": "The 'active' decision-support algorithm searches for predicted high-workload time periods and recommends schedule changes (e.g., shifting a TOT) to the human operator; this is a scheduling/workload-optimization mechanism aimed at the operator's own task schedule, not at how a robot computes its motion (8.1-8.5) or at which robot performs which task (8.6) — the same kind of human-workload-allocation gap flagged in another corpus article (jo_2025_awac_mhmr_teams).", "condition": "active-LOA decision-support scheduling algorithm" }
+        { "code": "Not Applicable", "justification": "The 'active' decision-support algorithm searches for predicted high-workload time periods and recommends schedule changes (e.g., shifting a TOT) to the human operator; this is a scheduling/workload-optimization mechanism aimed at the operator's own task schedule, not at how a robot computes its motion (8.1-8.5) or at which robot performs which task (8.6). Per the v0.10 operator-directed-computation scope note, Section 8 does not conceptually extend to computation aimed at the operator, so this is coded Not Applicable.", "condition": "active-LOA decision-support scheduling algorithm" }
       ],
       "human_involvement_level": [
         { "code": "Human-in-the-loop (HInL)", "justification": "In the manual, passive, and active decision-support levels, arming and firing require an explicit human command with no automatic execution; the function does not operate as intended without this human intervention.", "condition": "manual / passive / active LOA" },
@@ -83,7 +83,7 @@
     }
   },
   "flags": [
-    { "dimension": "task_environment_v0.9 / computational_characteristics", "type": "Unclear / Candidate New Code", "note": "The active-LOA decision-support algorithm optimizes and recommends changes to the human operator's own interaction schedule (which target to attend to when), not a robot's motion (8.1-8.5) or robot-to-task assignment (8.6) — the same operator-workload/schedule-optimization gap flagged in jo_2025_awac_mhmr_teams. Left open per user decision (2026-07-13) to defer this one-off proposal for now.", "proposed_code": "Operator-Schedule/Workload Optimization (Placeholder) — a computational mechanism that allocates or schedules the human operator's own attention/workload across tasks, distinct from robot motion control (8.1-8.5) and robot task allocation (8.6)." },
-    { "dimension": "task_environment_v0.9 / coordination_architecture", "type": "Not Applicable", "note": "The four UAVs are explicitly designed and described as independent, with no coordination mechanism of any kind between them." }
+    { "dimension": "task_environment_v0.10 / computational_characteristics", "type": "Not Applicable", "note": "The active-LOA decision-support algorithm optimizes and recommends changes to the human operator's own interaction schedule (which target to attend to when), not a robot's motion (8.1-8.5) or robot-to-task assignment (8.6). Per user review (2026-07-13), no dedicated code will be added for this operator-directed-computation pattern (also seen in fortmann_2013_supervisory_guide_uav_swarm and frische_2013_sa_tracer_uav_swarm); Section 8's v0.10 scope note now directs this case to Not Applicable.", "proposed_code": null },
+    { "dimension": "task_environment_v0.10 / coordination_architecture", "type": "Not Applicable", "note": "The four UAVs are explicitly designed and described as independent, with no coordination mechanism of any kind between them." }
   ]
 }

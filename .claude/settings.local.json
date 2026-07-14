@@ -33,7 +33,9 @@
       "Bash(rm articles/Howard_2006_Adapting_Human_Leadership_Approaches_for_Role_Allocation_in_Human-Robot_Navigation_Scenarios.md articles/Paul.md articles/Suzuki_The_Role_of_automation_and_User_Experience_in_Multi_Robot_Systems.md articles/strazdaz.md articles/cushing-et-al-2006-overview-detail-in-a-tomahawk-mission-to-platform-assignment-tool-applying-information-visualization.md)",
       "Bash(rm coded_articles/howard_2006_leadership_role_allocation.json coded_articles/paul_2023_multimodal_hri_framework.json coded_articles/suzuki_2024_multi_presence_automation.json coded_articles/strazdas_2022_rosa_multimodal_hri.json coded_articles/cushing_2006_tomahawk_overview_detail_dss.json)",
       "Bash(python .claude/skills/analytic-coding/scripts/validate_record.py coded_articles/cummings_2008_mauve_controller_capacity.json)",
-      "Bash(python .claude/skills/analytic-coding/scripts/validate_record.py coded_articles/patel_2022_multi_human_multi_robot_remote_interaction.json)"
+      "Bash(python .claude/skills/analytic-coding/scripts/validate_record.py coded_articles/patel_2022_multi_human_multi_robot_remote_interaction.json)",
+      "PowerShell(python \"C:\\\\Users\\\\Minna\\\\Documents\\\\Code\\\\Litbase\\\\analysis\\\\visualize.py\" 2>&1)",
+      "PowerShell(git add analysis/data/corpus_long.csv analysis/data/corpus_wide.csv analysis/visualize.py analysis/figures/counts analysis/figures/pairplot_study_type.png analysis/figures/pairplot_task_environment_v0.8.png analysis/figures/scatter analysis/figures/scatter_combined)"
     ]
   }
 }

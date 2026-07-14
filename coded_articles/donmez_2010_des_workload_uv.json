@@ -9,11 +9,11 @@
   "extraction_metadata": {
     "date_extracted": "2026-07-10",
     "codebook_versions": {
-      "study_type": "0.2",
+      "study_type": "0.4",
       "task_environment": "0.8"
     },
     "model": "claude-sonnet-5",
-    "notes": "This is one of the two articles the Task-Environment codebook's own Section 9.5 Scope note (originally added in v0.7) cites as motivating the broadened LHCA scope — continuous camera pan/zoom during the RESCHU search task is coded Direct/Augmented per that precedent. Also see flags for a borderline Study-Type Secondary code fit (deferred by the user for now). Re-coded 2026-07-10 against Task-Environment v0.8: target search/identification now maps onto the new Search Task (4.2) code, replacing the original Unclear / Candidate New Code flag."
+    "notes": "This is one of the two articles the Task-Environment codebook's own Section 9.5 Scope note (originally added in v0.7) cites as motivating the broadened LHCA scope — continuous camera pan/zoom during the RESCHU search task is coded Direct/Augmented per that precedent. Re-coded 2026-07-10 against Task-Environment v0.8: target search/identification now maps onto the new Search Task (4.2) code, replacing the original Unclear / Candidate New Code flag. Re-coded study_type Secondary again on 2026-07-13 per the new Section 3.11 edge-case note (Study-Type codebook v0.4): the DES workload model is confirmed as Modeling/Theoretical Paper (Secondary), accepted as an edge case per the user's decision, resolving the prior Unclear / Candidate New Code flag."
   },
   "study_type": {
     "primary": "User Study",
@@ -23,7 +23,7 @@
       "measured_constructs": ["Performance", "Workload"],
       "modality_flags": []
     },
-    "justification": "A formal, well-powered between-subjects experiment with 74 online participants using the RESCHU testbed provides substantial live human-subjects data (score, wait times, utilization), so User Study is Primary; the article's persistent generalizable contribution is a queuing-theory discrete-event-simulation (DES) model of operator workload that the experiment is used to calibrate and validate, so Modeling/Theoretical Paper is the nearest-fit Secondary code (see flags for a caveat on this fit)."
+    "justification": "A formal, well-powered between-subjects experiment with 74 online participants using the RESCHU testbed provides substantial live human-subjects data (score, wait times, utilization), so User Study is Primary; the article's persistent generalizable contribution is a queuing-theory discrete-event-simulation (DES) model of operator workload that the experiment is used to calibrate and validate, so Modeling/Theoretical Paper is assigned as Secondary. This is an accepted edge-case fit per the Study-Type codebook's v0.4 note on 3.11: the model is validated empirically (by calibration against this article's own human-subjects data) rather than primarily analytically, which 3.11's core definition otherwise requires."
   },
   "summary": {
     "template": "user_study",
@@ -153,12 +153,5 @@
       ]
     }
   },
-  "flags": [
-    {
-      "dimension": "study_type",
-      "type": "Unclear / Candidate New Code",
-      "note": "The article's persistent contribution (a queuing-theory DES model of operator workload) is closest to Modeling/Theoretical Paper (3.11), which even lists 'queuing models of neglect tolerance' as an example — but 3.11's definition requires validation 'primarily analytically... rather than empirically or through simulation trials,' whereas this model is explicitly validated by fitting distributions to, and checking predictions against, real human experimental data. None of the eleven Study-Type codes cleanly cover a human-performance/queuing simulation model that is empirically calibrated and validated against a human-subjects experiment rather than proven analytically or compared across algorithms.",
-      "proposed_code": "Either broaden 3.11 (Modeling/Theoretical Paper) to explicitly include human-performance/queuing-simulation models validated via empirical calibration against human-subjects data (not only closed-form analytical proofs), or add a distinct code for this pattern if it recurs across more of the corpus's human-supervisory-control-modeling literature. [Deferred by the user 2026-07-10; not yet actioned.]"
-    }
-  ]
+  "flags": []
 }
