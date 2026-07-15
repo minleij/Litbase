@@ -35,7 +35,8 @@
       "Bash(python .claude/skills/analytic-coding/scripts/validate_record.py coded_articles/cummings_2008_mauve_controller_capacity.json)",
       "Bash(python .claude/skills/analytic-coding/scripts/validate_record.py coded_articles/patel_2022_multi_human_multi_robot_remote_interaction.json)",
       "PowerShell(python \"C:\\\\Users\\\\Minna\\\\Documents\\\\Code\\\\Litbase\\\\analysis\\\\visualize.py\" 2>&1)",
-      "PowerShell(git add analysis/data/corpus_long.csv analysis/data/corpus_wide.csv analysis/visualize.py analysis/figures/counts analysis/figures/pairplot_study_type.png analysis/figures/pairplot_task_environment_v0.8.png analysis/figures/scatter analysis/figures/scatter_combined)"
+      "PowerShell(git add analysis/data/corpus_long.csv analysis/data/corpus_wide.csv analysis/visualize.py analysis/figures/counts analysis/figures/pairplot_study_type.png analysis/figures/pairplot_task_environment_v0.8.png analysis/figures/scatter analysis/figures/scatter_combined)",
+      "PowerShell(Set-Location \"C:\\\\Users\\\\Minna\\\\Documents\\\\Code\\\\Litbase\"; git status --short | Select-Object -First 20; Write-Output \"...\"; \\(git status --short\\).Count)"
     ]
   }
 }
