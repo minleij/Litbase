@@ -1,0 +1,47 @@
+{
+  "_source_of_truth": "analysis/visualize.py, SCATTER_DIMENSIONS list and DIMENSION_ORDER dict. This file is a hand-copied snapshot taken 2026-07-16 -- if analysis/visualize.py's DIMENSION_ORDER has been edited since, re-diff this file against it before trusting the color scale (see references/color_coding.md).",
+  "dimensions": {
+    "behavioral_relation_to_task_object": {
+      "abbr": "TASK",
+      "label": "Task Type",
+      "order": ["Monitoring/Maintenance Task", "Transport/Delivery Task", "Search Task",
+                 "Pursuit Task", "Engagement Task", "Defend/Block Task", "Avoidance Task"]
+    },
+    "task_object_spatiotemporal_dynamics": {
+      "abbr": "DYN",
+      "label": "Object Dynamics",
+      "order": ["Known Fixed Task Object", "Static/Fixed Task Object", "Moving Task Object",
+                 "Distributed Task Object", "Spreading Task Object"]
+    },
+    "level_of_human_control_abstraction": {
+      "abbr": "LHCA",
+      "label": "Control Abstraction",
+      "order": ["Direct", "Augmented", "Parametric", "Goal-Oriented", "Mission-Capable"]
+    },
+    "interaction_model": {
+      "abbr": "MODEL",
+      "label": "Interaction Model",
+      "order": ["One-to-one", "One-to-many", "Many-to-many"]
+    },
+    "coordination_architecture": {
+      "abbr": "COORD",
+      "label": "Coordination",
+      "order": ["Strongly Centralized Coordination", "Weakly Centralized Coordination",
+                 "Hierarchical Coordination", "Distributed Coordination", "Hybrid Coordination"]
+    },
+    "communication_proximity": {
+      "abbr": "PROX",
+      "label": "Proximity",
+      "order": ["Remote", "Proximate"]
+    },
+    "computational_characteristics": {
+      "abbr": "COMP",
+      "label": "Computation",
+      "order": ["Predefined / Rule-Based Control", "Classical Geometric / Sampling-Based Control",
+                 "Heuristic Search-Based Control", "Bio-Inspired / Metaheuristic Optimization Control",
+                 "Learning-Based Control", "Task-Allocation"]
+    }
+  },
+  "unclear_code": "Unclear / Candidate New Code",
+  "uninformative_codes": ["Not Applicable", "Not Described"]
+}

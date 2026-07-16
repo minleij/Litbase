@@ -1,0 +1,36 @@
+# Color coding scheme
+
+Each card carries a row of small colored "chips" above its title — one chip per relevant task-environment code assigned to that article. The colors exist to make one specific comparison fast to eyeball on a whiteboard: *where does this article's system sit on each dimension's scale, relative to the others pinned up next to it?*
+
+This is the exact same color scheme as the sibling `figjam-issue-cards` skill (same `dimension_order.json`, same viridis logic, same chip layout) — deliberately kept identical so cards from both skills can be pinned up on the same board and compared using one shared visual language, rather than needing two legends the viewer has to keep straight.
+
+## Which dimensions get a chip
+
+Only the seven dimensions in `dimension_order.json` (copied from `analysis/visualize.py`'s `SCATTER_DIMENSIONS` list): TASK, DYN, LHCA, MODEL, COORD, PROX, COMP. These are the dimensions the project already treats as "the interesting ones" for cross-article comparison of task type, computational design, and interactional qualities — see the docstring at the top of `analysis/visualize.py` for why this particular set was chosen. Deliberately excluded: study type, team size/composition, human-involvement level, operational domain — these describe the *study*, not the *interface*, and aren't part of what this card wall is for.
+
+## Where the codes come from
+
+Pull codes from the article's `classification.task_environment_v<N>` block (whichever version key is present in that article's coded JSON — in practice each article has exactly one). Take codes from every experimental condition listed for a dimension (an article can have multiple entries per dimension, e.g. one per condition) — one chip per distinct code, not one chip per dimension. Drop any code that is exactly `"Not Applicable"` or `"Not Described"` (listed as `uninformative_codes` in `dimension_order.json`) — they carry no comparison-worthy information and would just be visual noise.
+
+## How the color itself is computed
+
+Color = the code's position on that dimension's ordinal scale, via the viridis colormap (dark purple = low end of the scale, yellow = high end):
+
+```
+t = index_of(code, dimension_order) / (len(dimension_order) - 1)
+color = viridis(t)
+```
+
+The seven ordinal scales themselves are hand-copied into `dimension_order.json` from `analysis/visualize.py`'s `DIMENSION_ORDER` dict — **that file is the source of truth, this is a snapshot**. Before relying on this for a new batch of cards, quickly diff `dimension_order.json` against the live `DIMENSION_ORDER` in `analysis/visualize.py` (e.g. `grep -A3 "^DIMENSION_ORDER"` or just eyeball both) — if someone has added a new dimension, reordered a scale, or renamed a code since this snapshot was taken, update `dimension_order.json` to match before generating cards, otherwise the colors will silently misrepresent the scale. If you find this file has drifted, update the copy in **both** `figjam-result-cards/references/` and `figjam-issue-cards/references/` together — they're meant to stay identical (see SKILL.md).
+
+**A code not found in the defined scale** (this happens — the underlying codebooks get new codes added between coding sessions, e.g. `"Move Task"` was added to the TASK codebook after `dimension_order.json`'s TASK scale was last copied) gets appended alphabetically *after* the defined scale and colored by that appended position — this mirrors `_ordered_categories()` in `analysis/visualize.py`, which does the same thing for the project's own plots. Don't treat an unmatched code as an error; it's expected drift, not a bug.
+
+**`"Unclear / Candidate New Code"`** is never part of the ordinal scale — it always renders as a fixed neutral gray (`#9e9e9e`), regardless of dimension. This is a placeholder value the analytic-coding skill uses when a code genuinely couldn't be determined, not a real point on the scale.
+
+## The one thing colors do NOT mean
+
+Colors are only meaningful **within one chip label** — compare a TASK chip's color only to other TASK chips, never to a COORD chip's color, even if they happen to look similar. Each dimension has its own independent 0-to-1 walk across viridis, so "purple" on TASK and "purple" on COORD are unrelated facts. This is exactly why every chip is labeled `ABBR: Code Name` rather than just a bare color swatch — the label is doing real work, not decoration.
+
+## Reference example
+
+Since this skill's color scheme is identical to `figjam-issue-cards`, the fastest way to preview it is `exports/figjam_issue_cards/png/_legend.png` in this repo (from that sibling skill's own run) — the colors and chip design will look exactly the same for result cards. Once this skill has been run at least once, its own copy will also exist at `exports/figjam_result_cards/png/_legend.png`. You can also regenerate either at any time without a full corpus run via `python scripts/generate_cards.py --legend-only`.
